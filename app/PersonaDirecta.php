@@ -6,19 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonaDirecta extends Model
 {
-    protected $table = 'roles';
-    protected $primaryKey = "id";
+    protected $table = 'persona_directa';
+    protected $primaryKey = "id_persona";
 
     protected $fillable = [ //asigna los campos de la tabla de BD
         'ch',
         'documento_persona',
         'nombre',
-        'id_jefe',
+        'id_representante_zonal',
+        'id_representante_jefe',
         'cargo',
         'id_region',
         'id_zona',
         'cargo_go',
         'activo',
+
     ];
 
     public function region ()

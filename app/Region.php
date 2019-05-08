@@ -8,4 +8,10 @@ class Region extends Model
 {
     protected $table = 'regiones';
     protected $primaryKey = "id_region";
+
+    public function  zonas ()
+    {
+        return $this->hasMany('App\Zona', 'id_region');
+    }
+
 }

@@ -21,4 +21,14 @@ class PersonaDirecta extends Model
         'activo',
     ];
 
+    public function region ()
+    {
+        return $this->belongsTo('App\Region', 'id_region');
+    }
+
+    public function zona ()
+    {
+        return $this->belongsTo('App\Zona', 'id_zona');
+    }
+
 }

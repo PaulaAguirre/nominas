@@ -2,8 +2,7 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Listado de Gerencias <a href="gerencias/create">@if(in_array (auth ()->user ()->role_id, [1,2] ))<button class="btn btn-success">Nuevo</button>@endif</a></h3>
-            @include('gerencias.search')
+            <h3>Representantes Canal Directa <a href="personasDirecta/create"><button class="btn btn-success">Nuevo</button></a></h3>
             <br>
         </div>
     </div>
@@ -13,37 +12,28 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead class="text-center" style="background-color: #8eb4cb">
-                        <th>id</th>
+                        <th>CH</th>
                         <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Responsable</th>
-                        <th>telefono</th>
-                        <th>email</th>
-                        @if(in_array (auth ()->user ()->role_id, [1,2] ))
+                        <th>Documento</th>
+                        <th>Representante Zonal</th>
+                        <th>Representante Jefe</th>
+                        <th>Cargo Go</th>
+                        <th>Region</th>
+                        <th>Zona</th>
                         <th class="text-center">Opciones</th>
-                        @endif
 
                     </thead>
-                    @foreach ($gerencias as $gerencia)
+                    @foreach ($personasDirecta as $persona)
                         <tr class="text-uppercase">
-                            <td>{{$gerencia->id}}</td>
-                            <td>{{ $gerencia->nombre}}</td>
-                            <td>{{ $gerencia->descripcion}}</td>
-                            <td>{{$gerencia->user->name}} {{$gerencia->user->lastname}}</td>
-                            <td>{{$gerencia->user->phone}}</td>
-                            <td class="text-lowercase">{{$gerencia->user->email}}</td>
-                            @if(in_array (auth ()->user ()->role_id, [1,2] ))
-                            <td class="text-center">
-                                <a href="{{URL::action('GerenciaController@edit',$gerencia->id)}}"><button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                <a href="" data-target="#modal-delete-{{$gerencia->id}}" data-toggle="modal" data-placement="top" title="Eliminar"><button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
-                            </td>
-                            @endif
+                            <td>{{$persona->ch}}</td>
+                            <td>{{$persona->nombre}}</td>
+                            <td>{{$persona->documento_persona}}</td>
+                            <td>{{$persona->representanteZonal ? $persona->representanteZonal->nombre : '' }}</td>
+                            <td class="text-lowercase">{{$persona->cargo}}</td>
                         </tr>
-                        @include('gerencias.modal')
                     @endforeach
                 </table>
             </div>
-            {{$gerencias->render()}}
         </div>
     </div>
 

@@ -19,11 +19,11 @@ class CreatePersonasDirectaTable extends Migration
             $table->string('documento_persona')->nullable();
             $table->string('nombre');
             $table->integer('id_representante_zonal')->nullable();
-            $table->integer('id_presentante_jefe')->nullable();
+            $table->integer('id_representante_jefe')->nullable();
             $table->string('cargo');
             $table->integer('id_region');
-            $table->integer('id_zona');
-            $table->string('cargo_go');
+            $table->integer('id_zona')->nullable();
+            $table->string('cargo_go')->nullable();
             $table->string('activo')->nullable()->default('A');
             $table->timestamps();
         });

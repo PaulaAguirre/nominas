@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>DocF | DCingeniería </title>
+    <title>NOMINAS | Tigo </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -46,21 +46,10 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Notifications <span class="badge">{{count(Auth::user()->unreadNotifications)}}</span>
-                        </a>
 
                         <ul class="dropdown-menu" role="menu">
                         <!--<li>
-                                @foreach (Auth::user()->unreadNotifications as $notification)
-                                    @if($notification->type == 'App\Notifications\NuevoPendienteNotification')
-                                        <a href="{{$notification->data['link']}}">{{$notification->data['text']}} <button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                    @endif
 
-                                    @if($notification->type == 'App\Notifications\RechazadosNotification')
-                                        <a href="{{$notification->data['link']}}">{{$notification->data['text']}}" <button class="btn btn-danger btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                    @endif
-                                @endforeach
                                 </li>-->
                         </ul>
                     </li>
@@ -79,22 +68,6 @@
                                 <li class="user-header">
 
                                     <p class="text-bold text-uppercase">
-                                            {{ Auth::user()->name }} {{Auth::user ()->lastname}} <br>
-
-                                        @if(in_array (Auth::user ()->role_id, [1,2]))
-                                            <small class="text-yellow">Administrador</small>
-                                        @elseif(Auth::user ()->role_id == 8 && !Auth::user ()->funcionario () && !Auth::user ()->area ())
-                                            <small class="text-yellow">User</small>
-                                        @elseif(Auth::user ()->area || Auth::user ()->funcionario)
-                                            <small class="text-yellow">
-                                                {{Auth::user ()->funcionario ? Auth::user ()->funcionario->departamento->nombre : Auth::user ()->area->nombre}}
-                                            </small>
-                                        @elseif(\Illuminate\Support\Facades\Auth::user ()->role_id == 9)
-                                            <small class="text-yellow">
-                                                Administrativo
-                                            </small>
-                                        @endif
-
                                             <br>
                                                 <span class="fa fa-users"></span>
                                 </li>
@@ -140,9 +113,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        @if(in_array (Auth::user ()->role_id, [1,2,3] ))
                         <li><a href="{{url('roles')}}"><i class="fa fa-book"></i> Roles</a></li>
-                        @endif
                         <li><a href="{{url('users')}}"><i class="fa fa-book"></i> Users</a></li>
                             <li><a href="{{url ('ots')}}"><i class="fa fa-book"></i>OTs</a></li>
                         <li><a href="{{url('gerencias')}}"><i class="fa fa-book"></i> Gerencias</a></li>
@@ -198,7 +169,7 @@
         <!-- /.sidebar -->
         <br>
         <br>
-        <img src="{{URL::asset('/img/logo2.png')}}" class="margin text-center" style="width: 90%">
+        <img src="{{URL::asset('')}}" class="margin text-center" style="width: 90%">
 
     </aside>
 

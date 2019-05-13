@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonaDirecta extends Model
 {
-    protected $table = 'persona_directa';
+    protected $table = 'personas_directa';
     protected $primaryKey = "id_persona";
 
     protected $fillable = [ //asigna los campos de la tabla de BD
@@ -32,5 +32,21 @@ class PersonaDirecta extends Model
     {
         return $this->belongsTo('App\Zona', 'id_zona');
     }
+
+    public function representanteZonal()
+    {
+        return $this->belongsTo('App\PersonaDirecta', 'id_representante_zonal');
+    }
+
+    public function representanteJefe ()
+    {
+        return $this->belongsTo('App\PersonaDirecta', 'id_representante_jefe');
+    }
+
+    public function representantes ()
+    {
+        return $this->hasMany('App\PersonaDirecta', 'id_representante_jefe');
+    }
+
 
 }

@@ -8,13 +8,24 @@ use Illuminate\Http\Request;
 class PersonaDirectaController extends Controller
 {
     /**
+     * PersonaDirectaController constructor.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $personasDirecta =  PersonaDirecta::all();
+
+        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta]);
     }
 
     /**

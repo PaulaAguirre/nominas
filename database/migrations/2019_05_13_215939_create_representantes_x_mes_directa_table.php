@@ -17,6 +17,7 @@ class CreateRepresentantesXMesDirectaTable extends Migration
             $table->increments('id');
             $table->integer('id_representante');
             $table->integer('año_mes');
+            $table->integer('id_representante_zonal');
             $table->integer('id_representante_jefe');
             $table->timestamps();
         });

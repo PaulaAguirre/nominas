@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('representantes', 'PersonaDirectaController');
+Route::resource('nomina_directa', 'NominaDirectaController');
 //Route::resource('aprobacion_representantes_directa', 'RepresentanteMesDirectaController');

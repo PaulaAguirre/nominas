@@ -158,14 +158,17 @@
                     </a>
                 </li>
 
+                <br>
+                <br>
+                <li>
+                    <img src="{{URL::asset('img/logotigo.png')}}" class="center-block">
+                </li>
             </ul>
 
-            
+
+
         </section>
         <!-- /.sidebar -->
-        <br>
-        <br>
-        <img src="{{URL::asset('')}}" class="margin text-center" style="width: 90%">
 
     </aside>
 
@@ -180,7 +183,7 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title text-blue">Planilla de Nóminas</h3>
+                            <h3 class="box-title text-blue">Nómina de Representantes</h3>
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>

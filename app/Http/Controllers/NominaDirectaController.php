@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\NominaDirecta;
+use App\PersonaDirecta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,9 @@ class NominaDirectaController extends Controller
      */
     public function create()
     {
-        $mes = Carbon::now();
+        //$mes = NominaDirecta::all()->first()->mes; //devuelve el último mes de la nómina anterior
+        $personas_directa = PersonaDirecta::where('cargo_go', '<>', 'NULL')->get();
+        return view('nominaDirecta.create', ['personas_directa' => $personas_directa]);
     }
 
     /**
@@ -36,7 +39,20 @@ class NominaDirectaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $personas_id = $request->get('idrepresentante');
+        $consideraciones = $request->get('consideraciones');
+        $cont = 0;
+
+        while ($cont < count($personas_id))
+        {
+            $nomina = new NominaDirecta();
+            $nomina->id_persona_directa = $personas_id[$cont];
+            $nomina->mes = '201905';
+            $nomina->consideraciones = $consideraciones[$cont];
+            $nomina->save();
+            $cont = $cont + 1;
+        }
+        return redirect('nomina_directa');
     }
 
     /**

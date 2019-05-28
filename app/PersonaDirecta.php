@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class PersonaDirecta extends Model
 {
@@ -46,6 +47,26 @@ class PersonaDirecta extends Model
     public function representantes ()
     {
         return $this->hasMany('App\PersonaDirecta', 'id_representante_jefe');
+    }
+
+    /*** Scopes***/
+
+
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeName ($query, $name)
+    {
+        if (trim($name))
+        {
+            $query->where ('nombre', 'like', '%'.$name.'%');
+
+        }
+
+    }
+
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeRepresentantes ($query)
+    {
+        $query->where('')->get();
     }
 
 

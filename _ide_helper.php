@@ -1,9 +1,9 @@
 <?php
-// @formatter:off
+//@formatter:off
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.39 on 2019-05-13 19:37:58.
+ * Generated for Laravel 5.6.39 on 2019-05-23 21:03:35.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *

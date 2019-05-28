@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\NominaDirecta;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class NominaDirectaController extends Controller
@@ -24,7 +25,7 @@ class NominaDirectaController extends Controller
      */
     public function create()
     {
-        //
+        $mes = Carbon::now();
     }
 
     /**

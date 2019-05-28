@@ -2,12 +2,11 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Representantes Canal Directa <a href="representantes/create"><button class="btn btn-success">Nuevo</button></a></h3>
-                @include('personasDirecta.search')
-
+            <h3>Representantes Canal Directa <a href="personasDirecta/create"><button class="btn btn-success">Nuevo</button></a></h3>
+            <br>
         </div>
     </div>
-    <br>
+
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">

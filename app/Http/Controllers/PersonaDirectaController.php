@@ -23,9 +23,12 @@ class PersonaDirectaController extends Controller
      */
     public function index(Request $request)
     {
-        $personasDirecta =  PersonaDirecta::all();
+        $name = ($request->get('name'));
+        $personasDirecta = PersonaDirecta::name($name)->get();
+
 
         return view('personasDirecta.index', ['personasDirecta' => $personasDirecta]);
+
     }
 
     /**
@@ -35,7 +38,8 @@ class PersonaDirectaController extends Controller
      */
     public function create()
     {
-        //
+        $personas = PersonaDirecta::all();
+        dd($personas) ;
     }
 
     /**

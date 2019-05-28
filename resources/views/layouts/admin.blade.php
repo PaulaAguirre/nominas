@@ -115,37 +115,33 @@
                     <ul class="treeview-menu">
                         <li><a href="{{url('roles')}}"><i class="fa fa-book"></i> Roles</a></li>
                         <li><a href="{{url('users')}}"><i class="fa fa-book"></i> Users</a></li>
-                            <li><a href="{{url ('ots')}}"><i class="fa fa-book"></i>OTs</a></li>
-                        <li><a href="{{url('gerencias')}}"><i class="fa fa-book"></i> Gerencias</a></li>
-                        <li><a href="{{url('departamentos')}}"><i class="fa fa-book"></i> Departamentos</a></li>
-                        <li><a href="{{url ('funcionarios')}}"><i class="fa fa-book"></i> Funcionarios</a></li>
-                        <li><a href="{{url('proveedores')}}"><i class="fa fa-book"></i> Proveedores</a></li><li><a href="{{url('tipoexpedientes')}}"><i class="fa fa-book"></i> Tipos de Expedientes</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i>
+                        <span>Representantes</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('expedientes')}}"><i class="fa fa-users"></i>Representantes Directa</a></li>
+                        <li><a href="{{url('expedientes_rechazados/expedientes_rechazados_creador')}}"><i class="fa fa-users"></i>Representantes Tienda</a></li>
+                        <li><a href="{{url ('aprobacion_expedientes/expedientes_pendientes')}}"><i class="fa fa-users"></i>Representantes Indirecta</a></li>
 
                     </ul>
                 </li>
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-archive"></i>
-                        <span>Expedientes</span>
+                        <i class="fa fa-list"></i> <span>Nóminas</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('expedientes')}}"><i class="fa fa-folder"></i>Expedientes Creados</a></li>
-                        <li><a href="{{url('expedientes_rechazados/expedientes_rechazados_creador')}}"><i class="fa fa-folder"></i>Mis Expedientes Rechazados</a></li>
-                            <li><a href="{{url ('aprobacion_expedientes/expedientes_pendientes')}}"><i class="fa fa-folder"></i>Expedientes a Aprobar</a></li>
-                            <li><a href="{{url ('expedientes_por_areas')}}"><i class="fa fa-folder"></i>Expedientes por Areas</a></li>
-                        <li><a href="{{url ('historial_de_expedientes')}}"><i class="fa fa-folder"></i>Historial de Expedientes</a></li>
-                    </ul>
-                </li>
+                        <li><a href="{{url('expedientes')}}"><i class="fa fa-user-plus"></i>Nómina Directa</a></li>
+                        <li><a href="{{url('expedientes')}}"><i class="fa fa-user-plus"></i>Nómina Tiendas</a></li>
+                        <li><a href="{{url('expedientes')}}"><i class="fa fa-user-plus"></i>Nómina Indirecta</a></li>
 
-                <li class="treeview">
-                    <a href="">
-                        <i class="fa fa-folder"></i> <span>Acceso</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href=""><i class="fa fa-user"></i>Mi Cuenta</a></li>
 
                     </ul>
                 </li>

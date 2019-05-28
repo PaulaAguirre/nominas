@@ -17,4 +17,15 @@ class NominaDirecta extends Model
 
     ];
 
+    public function personaDirecta ()
+    {
+        return $this->belongsTo('App\PersonaDirecta', 'id_persona_directa');
+    }
+
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeUltimaNomina ($query, $mes)
+    {
+        //
+    }
+
 }

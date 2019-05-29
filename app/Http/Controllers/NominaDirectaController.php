@@ -6,6 +6,7 @@ use App\NominaDirecta;
 use App\PersonaDirecta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class NominaDirectaController extends Controller
 {
@@ -24,11 +25,17 @@ class NominaDirectaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //$mes = NominaDirecta::all()->first()->mes; //devuelve el último mes de la nómina anterior
-        $personas_directa = PersonaDirecta::where('cargo_go', '<>', 'NULL')->get();
-        return view('nominaDirecta.create', ['personas_directa' => $personas_directa]);
+            $id_rep_zonal = $request->get('id_zonal');
+            $id_rep_jefe = $request->get('id_jefe');
+            $id_rep = $request->get('id_representante');
+
+            $jefes = PersonaDirecta::where('cargo', 'representante jefe')->get();
+            $zonales = PersonaDirecta::where('cargo', '=', 'representante zonal')->get();
+            $personas_directa = PersonaDirecta::representantesdir($id_rep)->zonal($id_rep_zonal)->jefe($id_rep_jefe)->get();
+
+            return view('nominaDirecta.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes, 'zonales'=>$zonales]);
     }
 
     /**

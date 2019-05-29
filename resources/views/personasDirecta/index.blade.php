@@ -30,7 +30,10 @@
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->documento_persona}}</td>
                             <td>{{$persona->representanteZonal ? $persona->representanteZonal->nombre : '' }}</td>
-                            <td class="text-lowercase">{{$persona->cargo}}</td>
+                            <td>{{$persona->representanteJefe ? $persona->representanteJefe->nombre : ''}}</td>
+                            <td>{{$persona->cargo_go}}</td>
+                            <td>{{$persona->region->region}}</td>
+                            <td>{{$persona->zona->zona}}</td>
                         </tr>
                     @endforeach
                 </table>

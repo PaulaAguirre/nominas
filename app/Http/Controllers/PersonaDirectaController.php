@@ -24,7 +24,7 @@ class PersonaDirectaController extends Controller
     public function index(Request $request)
     {
         $name = ($request->get('name'));
-        $personasDirecta = PersonaDirecta::name($name)->get();
+        $personasDirecta = PersonaDirecta::representantesdir('')->name($name)->get();
 
 
         return view('personasDirecta.index', ['personasDirecta' => $personasDirecta]);

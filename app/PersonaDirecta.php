@@ -64,9 +64,32 @@ class PersonaDirecta extends Model
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
-    public function scopeRepresentantes ($query)
+    public function scopeJefe ($query, $id_jefe)
     {
-        $query->where('')->get();
+        if (trim($id_jefe))
+        {
+         $query->where('id_representante_jefe',  $id_jefe);
+        }
+    }
+
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeZonal($query, $id_zonal)
+    {
+        if (trim($id_zonal))
+        {
+            $query->where('id_representante_zonal', $id_zonal);
+        }
+    }
+
+    public function scopeRepresentantesdir ($query, $id_representante)
+    {
+        if ($id_representante)
+        {
+            $query->where('cargo_go', '<>', 'NULL')
+                ->where('id_persona', $id_representante);
+        }
+
+        $query->where('cargo_go', '<>', 'NULL');
     }
 
 

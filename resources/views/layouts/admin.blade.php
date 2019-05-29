@@ -125,9 +125,9 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('expedientes')}}"><i class="fa fa-users"></i>Representantes Directa</a></li>
-                        <li><a href="{{url('expedientes_rechazados/expedientes_rechazados_creador')}}"><i class="fa fa-users"></i>Representantes Tienda</a></li>
-                        <li><a href="{{url ('aprobacion_expedientes/expedientes_pendientes')}}"><i class="fa fa-users"></i>Representantes Indirecta</a></li>
+                        <li><a href="{{url('representantes_directa')}}"><i class="fa fa-users"></i>Representantes Directa</a></li>
+                        <li><a href="{{url('/')}}"><i class="fa fa-users"></i>Representantes Tienda</a></li>
+                        <li><a href="{{url ('/')}}"><i class="fa fa-users"></i>Representantes Indirecta</a></li>
 
                     </ul>
                 </li>
@@ -138,9 +138,9 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('expedientes')}}"><i class="fa fa-user-plus"></i>Nómina Directa</a></li>
-                        <li><a href="{{url('expedientes')}}"><i class="fa fa-user-plus"></i>Nómina Tiendas</a></li>
-                        <li><a href="{{url('expedientes')}}"><i class="fa fa-user-plus"></i>Nómina Indirecta</a></li>
+                        <li><a href="{{url('nominaDirecta')}}"><i class="fa fa-user-plus"></i>Nómina Directa</a></li>
+                        <li><a href="{{url('')}}"><i class="fa fa-user-plus"></i>Nómina Tiendas</a></li>
+                        <li><a href="{{url('')}}"><i class="fa fa-user-plus"></i>Nómina Indirecta</a></li>
 
 
                     </ul>

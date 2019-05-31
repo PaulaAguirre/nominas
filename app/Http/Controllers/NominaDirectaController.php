@@ -35,7 +35,7 @@ class NominaDirectaController extends Controller
             $zonales = PersonaDirecta::where('cargo', '=', 'representante zonal')->get();
             $personas_directa = PersonaDirecta::representantesdir($id_rep)->zonal($id_rep_zonal)->jefe($id_rep_jefe)->get();
 
-            return view('nominaDirecta.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes, 'zonales'=>$zonales]);
+            return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes, 'zonales'=>$zonales]);
     }
 
     /**

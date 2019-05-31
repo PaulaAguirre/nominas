@@ -138,7 +138,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('nominaDirecta')}}"><i class="fa fa-user-plus"></i>Nómina Directa</a></li>
+                        <li><a href="{{url('nomina_directa')}}"><i class="fa fa-user-plus"></i>Nómina Directa</a></li>
                         <li><a href="{{url('')}}"><i class="fa fa-user-plus"></i>Nómina Tiendas</a></li>
                         <li><a href="{{url('')}}"><i class="fa fa-user-plus"></i>Nómina Indirecta</a></li>
 

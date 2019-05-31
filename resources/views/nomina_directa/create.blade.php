@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        @include('nominaDirecta.search')
+        @include('nomina_directa.search')
     </div>
 
     {!!Form::open(array('url'=>'nomina_directa','method'=>'POST','autocomplete'=>'off'))!!}
@@ -39,7 +39,7 @@
                                 <td>{{$persona->ch}}</td>
                                 <td><input type="hidden" name="idrepresentante[]" value="{{$persona->id_persona}}" >{{$persona->nombre}}</td>
                                 <td>
-                                    <select name="consideraciones[]" class="form-control selectpicker" id="activo"  data-live-search="true">
+                                    <select name="consideraciones[]" class="form-control" id="activo">
                                         <option value="no aplica" selected>No aplica</option>
                                         <option value="vacaciones" >Vacaciones</option>
                                         <option value="reposo maternidad">Reposo Maternidad</option>
@@ -50,12 +50,13 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @include('nomina_directa.modal_nomina')
                     </table>
                     <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">
                          <div class="form-group">
                             <input name="_token" value="{{csrf_token()}}" type="hidden">
-                            <button class="btn btn-primary" type="submit">Generar</button>
-                            <button class="btn btn-danger" type="reset">Cancelar</button>
+                             <a href="" data-target="#modal-nomina-create" data-toggle="modal" data-placement="top" title="generar"><button class="btn btn-primary">Generar <i class="fa fa-book" aria-hidden="true"></i></button></a>
+                             <button class="btn btn-danger" type="reset">Cancelar</button>
                          </div>
                     </div>
                 </div>

@@ -36,12 +36,13 @@
                             <td>{{$persona->zona->zona}}</td>
                             <td>
                                 <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
-                                <a href="" data-target="#modal-delete-{{$persona}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
+                                <a href="" data-target="#modal-delete-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
                             </td>
                         </tr>
                     @endforeach
                 </table>
             </div>
+            @include('personasDirecta.modal')
         </div>
     </div>
 

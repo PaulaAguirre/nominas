@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
      role="dialog" tabindex="-1" id="modal-delete-{{$persona->id}}">
-    {{Form::Open(array('action'=>array('PersonaDirectaController@destroy', $persona),'method'=>'delete'))}}
+    {{Form::Open(array('action'=>array('PersonaDirectaController@destroy', $persona->id),'method'=>'delete'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,10 +8,10 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">generar nomina</h4>
+                <h4 class="modal-title">Inactivar Representante: {{$persona->nombre}} CH: {{$persona->ch}}</h4>
             </div>
             <div class="modal-body">
-                <p>Confirme si desea generar la nomina</p>
+                <p>Confirme si desea Inactivar al Representante</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

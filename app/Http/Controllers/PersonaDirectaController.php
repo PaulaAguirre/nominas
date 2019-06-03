@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\PersonaDirecta;
 use Illuminate\Http\Request;
-
+use App\Zona;
+use App\Region;
 class PersonaDirectaController extends Controller
 {
     /**
@@ -38,8 +39,13 @@ class PersonaDirectaController extends Controller
      */
     public function create()
     {
-        $personas = PersonaDirecta::all();
-        dd($personas) ;
+        $zonas = Zona::all();
+        $regiones = Region::all();
+        $jefes = PersonaDirecta::where ('cargo', '=', 'representante jefe')->get();
+        $zonales = PersonaDirecta::where('cargo', '=', 'representante zonal')->get();
+
+        return view('personasDirecta.create', ['zonas'=>$zonas, 'regiones'=>$regiones,
+                                                    'jefes'=>$jefes, 'zonales'=>$zonales]);
     }
 
     /**
@@ -50,7 +56,11 @@ class PersonaDirectaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $persona_directa = new PersonaDirecta($request->all());
+        $persona_directa->activo = 'A';
+        $persona_directa->save();
+
+        return redirect('personasDirecta');
     }
 
     /**
@@ -93,7 +103,7 @@ class PersonaDirectaController extends Controller
      * @param  \App\PersonaDirecta  $persona
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PersonaDirecta $persona)
+    public function destroy($id)
     {
         //
     }

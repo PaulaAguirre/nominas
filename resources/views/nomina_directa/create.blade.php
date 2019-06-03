@@ -1,7 +1,7 @@
 @extends ('layouts.admin')
 @section ('contenido')
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <h3>Nueva Nomina Directa</h3>
             @if (count($errors)>0)
                 <div class="alert alert-danger">
@@ -20,7 +20,6 @@
 
     {!!Form::open(array('url'=>'nomina_directa','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
-
         <div class="row text-uppercase">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="table-responsive">
@@ -37,7 +36,8 @@
                                 <td>{{$persona->region->region.' '.$persona->zona->zona}}</td>
                                 <td>{{$persona->representanteZonal->nombre}} / {{$persona->representanteJefe->nombre}}</td>
                                 <td>{{$persona->ch}}</td>
-                                <td><input type="hidden" name="idrepresentante[]" value="{{$persona->id_persona}}" >{{$persona->nombre}}</td>
+                                <td><input type="hidden" name="idrepresentante[]" value="{{$persona->id_persona}}" >
+                                    <input type="hidden" name="persona_mes[]" value="{{(string)$persona->id_persona.'201906'}}">{{$persona->nombre}}</td>
                                 <td>
                                     <select name="consideraciones[]" class="form-control" id="activo">
                                         <option value="no aplica" selected>No aplica</option>

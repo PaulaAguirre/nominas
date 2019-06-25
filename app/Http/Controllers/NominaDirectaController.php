@@ -32,6 +32,8 @@ class NominaDirectaController extends Controller
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
 
+            $meses = [$mes_actual,$mes_siguiente];
+
             $id_rep_zonal = $request->get('id_zonal');
             $id_rep_jefe = $request->get('id_jefe');
             $id_rep = $request->get('id_representante');
@@ -40,7 +42,7 @@ class NominaDirectaController extends Controller
             $personas_directa = PersonaDirecta::representantesdir($id_rep)->zonal($id_rep_zonal)->jefe($id_rep_jefe)->get();
 
             return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
-                            'zonales'=>$zonales, 'mes'=>$mes]);
+                            'zonales'=>$zonales, 'meses'=>$meses]);
     }
 
     /**
@@ -52,25 +54,31 @@ class NominaDirectaController extends Controller
     public function store(Request $request)
     {
 
+        //dd($request->request);
+        $mes = $request->get('mes');
         $personas_id = $request->get('idrepresentante');
         $consideraciones = $request->get('consideraciones');
         $cont = 0;
-        $persona_mes = $request->get('persona_mes');
+        //$persona_mes = $request->get('persona_mes');
 
-        $rules = [
-            'persona_mes' =>Rule::unique('nomina_directa', 'persona_mes')
-        ];
 
         while ($cont < count($personas_id))
         {
+
             $persona = PersonaDirecta::findOrFail($personas_id[$cont]);
+
+            $rules = [
+                'persona_mes' =>Rule::unique('nomina_directa', 'persona_mes')
+            ];
             $message = ['persona_mes.unique' => 'Representante '.$persona->nombre.'duplicado en el mes'];
             $this->validate($request, $rules, $message);
+
+            $persona_mes = $personas_id[$cont].$mes;
 
             $nomina = new NominaDirecta();
             $nomina->id_persona_directa = $personas_id[$cont];
             $nomina->mes = '201906';
-            $nomina->persona_mes = $persona_mes[$cont] ;
+            $nomina->persona_mes = $persona_mes ;
             $nomina->consideraciones = $consideraciones[$cont];
             $nomina->save();
             $cont = $cont + 1;

@@ -25,7 +25,12 @@ class NominaDirecta extends Model
     /** @var $query \Illuminate\Database\Query\Builder */
     public function scopeUltimaNomina ($query, $mes)
     {
-        //
+        if (trim($mes)){
+            $query->where('mes', $mes);
+        }
     }
+
+
+
 
 }

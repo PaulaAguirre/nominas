@@ -49,8 +49,6 @@ class PersonaDirecta extends Model
         return $this->hasMany('App\PersonaDirecta', 'id_representante_jefe');
     }
 
-    /*** Scopes***/
-
 
     /** @var $query \Illuminate\Database\Query\Builder */
     public function scopeName ($query, $name)

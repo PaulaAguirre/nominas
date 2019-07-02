@@ -31,6 +31,9 @@ class NominaDirectaController extends Controller
     {
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
+            $mes_anterior = Carbon::now()->format('Ym'); //porque en junio se carga lo de julio
+            $mes_nomina = Carbon::now()->addMonth();
+
 
             $meses = [$mes_actual,$mes_siguiente];
 
@@ -41,8 +44,9 @@ class NominaDirectaController extends Controller
             $zonales = PersonaDirecta::where('cargo', '=', 'representante zonal')->get();
             $personas_directa = PersonaDirecta::representantesdir($id_rep)->zonal($id_rep_zonal)->jefe($id_rep_jefe)->get();
 
+
             return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
-                            'zonales'=>$zonales, 'meses'=>$meses]);
+                            'zonales'=>$zonales, 'meses'=>$meses, 'mes_nomina'=>$mes_nomina]);
     }
 
     /**
@@ -53,33 +57,36 @@ class NominaDirectaController extends Controller
      */
     public function store(Request $request)
     {
-
-        //dd($request->request);
-        $mes = $request->get('mes');
         $personas_id = $request->get('idrepresentante');
-        $consideraciones = $request->get('consideraciones');
+        $activo = $request->get('activo');
         $cont = 0;
-        //$persona_mes = $request->get('persona_mes');
+        $mes_nomina = Carbon::now()->addMonth()->format ('Ym');
+        $persona_mes = $request->get('persona_mes');
+
+        /**
+         * Validaciones
+         */
+        $messages = [];
+        $rules = [];
+
+        foreach ($request->get('persona_mes') as $key => $val)
+        {
+            $persona = PersonaDirecta::findOrFail($personas_id[$key]);
+            $rules['persona_mes.'.$key] = 'unique:nomina_directa,persona_mes';
+            $messages['persona_mes.'.$key.'.unique'] = 'Asesor duplicado: '. $persona->nombre;
+        }
+        $this->validate($request, $rules, $messages);
 
 
         while ($cont < count($personas_id))
         {
 
-            $persona = PersonaDirecta::findOrFail($personas_id[$cont]);
-
-            $rules = [
-                'persona_mes' =>Rule::unique('nomina_directa', 'persona_mes')
-            ];
-            $message = ['persona_mes.unique' => 'Representante '.$persona->nombre.'duplicado en el mes'];
-            $this->validate($request, $rules, $message);
-
-            $persona_mes = $personas_id[$cont].$mes;
 
             $nomina = new NominaDirecta();
             $nomina->id_persona_directa = $personas_id[$cont];
-            $nomina->mes = '201906';
-            $nomina->persona_mes = $persona_mes ;
-            $nomina->consideraciones = $consideraciones[$cont];
+            $nomina->mes = $mes_nomina ;
+            $nomina->persona_mes = $persona_mes[$cont] ;
+            $nomina->activo = $activo[$cont];
             $nomina->save();
             $cont = $cont + 1;
         }
@@ -130,6 +137,17 @@ class NominaDirectaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(NominaDirecta $nominaDirecta)
+    {
+        //
+    }
+
+
+    public function agregarConsideraciones (NominaDirecta $nominaDirecta)
+    {
+        //
+    }
+
+    public function storeConsideraciones (Request $request, NominaDirecta $nominaDirecta)
     {
         //
     }

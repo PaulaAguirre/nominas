@@ -19,14 +19,6 @@
 
         <button type="submit" class="btn btn-primary "><span>Buscar </span><i class="fa fa-search" aria-hidden="true"></i></button>
 
-        <label class="col-lg-offset-1 text-info">MES: </label>
-        <div class="form-group col-lg-offset-0">
-            <select name="mes"class="form-control selectpicker" id="mes" title="Selecione el mes a generar" required>
-                <option value="{{$meses[0]}}" >{{$meses[0]}}</option>
-                <option value="{{$meses[1]}}">{{$meses[1]}}</option>
-            </select>
-        </div>
-
     </div>
 
 

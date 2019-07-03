@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class NominaDirecta extends Model
 {
@@ -28,6 +29,19 @@ class NominaDirecta extends Model
         if (trim($mes)){
             $query->where('mes', $mes);
         }
+    }
+
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeMes($query, $mes)
+    {
+        $mes_nomina = NominaDirecta::all()->last()->mes;
+        if($mes)
+        {
+            $query->where('mes', $mes);
+        }
+
+        $query->where('mes', $mes_nomina);
+
     }
 
 

@@ -17,9 +17,12 @@ class NominaDirectaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $mes = $request->get('mes');
+        $personas = NominaDirecta::mes($mes)->get();
+
+        return view('nomina_directa.index', ['personas' => $personas]);
     }
 
     /**

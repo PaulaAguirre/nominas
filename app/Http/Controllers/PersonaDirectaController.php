@@ -76,13 +76,18 @@ class PersonaDirectaController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     *Editar datos de los asesores, no así de los zonales o regionales
      * @param  \App\PersonaDirecta  $persona
      * @return \Illuminate\Http\Response
      */
-    public function edit(PersonaDirecta $persona)
+    public function edit($id)
     {
-        //
+        $persona = PersonaDirecta::findOrFail($id);
+        $jefes = PersonaDirecta::where ('cargo', '=', 'representante jefe')->get();
+        $zonales = PersonaDirecta::where('cargo', '=', 'representante zonal')->get();
+        $cargos_go = ['go1', 'go2', 'go3'];
+
+        return view('personasDirecta.edit', ['jefes'=>$jefes, 'zonales'=>$zonales, 'persona' => $persona, 'cargos_go' => $cargos_go]);
     }
 
     /**
@@ -92,9 +97,34 @@ class PersonaDirectaController extends Controller
      * @param  \App\PersonaDirecta  $persona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PersonaDirecta $persona)
+    public function update(Request $request, $persona)
     {
-        //
+        dd($persona);
+
+        $region = PersonaDirecta::findOrFail($request->get('rep_zonal_id'))->zona->region->region;
+        $zona = PersonaDirecta::findOrFail($request->get('rep_zonal_id'))->zona->zona;
+        //obtenemos la region y zona a la que pertenece el zonal, para asignarle al asesor
+
+        //dd($zona);
+
+        $persona = PersonaDirecta::findOrFail($id);
+
+        $persona->ch = $request->get('ch');
+        $persona->nombre = $request->get('nombre');
+        $persona->documento_persona = $request->get('documento_persona');
+        $persona->id_representante_zonal = $request->get('rep_zonal_id');
+        $persona->id_representante_jefe = $request->get('rep_jefe_id');
+        $persona->cargo_go = $request->get('cargo_go');
+        $persona->activo = $request->get('activo');
+        $persona->region = $region;
+        $persona->zona = $zona;
+        $persona->cargo = 'representante';
+
+        $persona->update();
+
+       // dd('Hecho');
+
+
     }
 
     /**

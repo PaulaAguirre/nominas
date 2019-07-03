@@ -21,7 +21,6 @@
 
                     <div class="panel-body">
                         {!!Form::model ($persona, ['method'=>'PATCH', 'route'=>['representantes_directa.update', $persona]])!!}
-
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">

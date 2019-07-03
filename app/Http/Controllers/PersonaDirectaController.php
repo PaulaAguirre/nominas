@@ -97,18 +97,15 @@ class PersonaDirectaController extends Controller
      * @param  \App\PersonaDirecta  $persona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $persona)
+    public function update(Request $request, $id)
     {
-        dd($persona);
 
-        $region = PersonaDirecta::findOrFail($request->get('rep_zonal_id'))->zona->region->region;
-        $zona = PersonaDirecta::findOrFail($request->get('rep_zonal_id'))->zona->zona;
+        $region = PersonaDirecta::findOrFail($request->get('rep_zonal_id'))->zona->region->id_region;
+        $zona = PersonaDirecta::findOrFail($request->get('rep_zonal_id'))->zona->id_zona;
+        $url = $request->get('url');
         //obtenemos la region y zona a la que pertenece el zonal, para asignarle al asesor
 
-        //dd($zona);
-
         $persona = PersonaDirecta::findOrFail($id);
-
         $persona->ch = $request->get('ch');
         $persona->nombre = $request->get('nombre');
         $persona->documento_persona = $request->get('documento_persona');
@@ -116,14 +113,13 @@ class PersonaDirectaController extends Controller
         $persona->id_representante_jefe = $request->get('rep_jefe_id');
         $persona->cargo_go = $request->get('cargo_go');
         $persona->activo = $request->get('activo');
-        $persona->region = $region;
-        $persona->zona = $zona;
+        $persona->id_region = $region;
+        $persona->id_zona = $zona;
         $persona->cargo = 'representante';
 
         $persona->update();
 
-       // dd('Hecho');
-
+        return redirect($url);
 
     }
 

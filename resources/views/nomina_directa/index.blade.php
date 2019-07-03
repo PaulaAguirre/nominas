@@ -32,7 +32,7 @@
                                 <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                     <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar persona"><i class="fa fa-pencil"></i></button>
                                 </a>
-                                <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
+                                <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta->id_persona)}}">
                                     <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Inactivar persona"><i class="fa fa-user-times"></i></button>
                                 </a>
                             </td>

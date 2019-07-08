@@ -19,7 +19,7 @@ class CreateNominaDirectaTable extends Migration
             $table->integer('mes');
             $table->string('persona_mes')->unique();
             $table->string('aprobacion')->default('pendiente');
-            $table->string('consideraciones')->nullable();
+            $table->integer('id_consideracion')->nullable();
             $table->string('activo')->nullable();
             $table->timestamps();
         });

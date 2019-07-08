@@ -1,7 +1,10 @@
 <?php
+/**
+ * Copyright (c) 2019
+ */
 
 namespace App\Http\Controllers;
-
+use App\Consideracion;
 use App\Http\Requests\NominaRequest;
 use App\NominaDirecta;
 use App\PersonaDirecta;
@@ -20,7 +23,9 @@ class NominaDirectaController extends Controller
     public function index(Request $request)
     {
         $mes = $request->get('mes');
-        $personas = NominaDirecta::mes($mes)->get();
+
+        $id_persona= $request->get('id_persona');
+        $personas = NominaDirecta::representante($id_persona)->mes($mes)->get();
 
         return view('nomina_directa.index', ['personas' => $personas]);
     }
@@ -40,16 +45,20 @@ class NominaDirectaController extends Controller
 
             $meses = [$mes_actual,$mes_siguiente];
 
-            $id_rep_zonal = $request->get('id_zonal');
             $id_rep_jefe = $request->get('id_jefe');
             $id_rep = $request->get('id_representante');
-            $jefes = PersonaDirecta::where('cargo', 'representante jefe')->get();
-            $zonales = PersonaDirecta::where('cargo', '=', 'representante zonal')->get();
-            $personas_directa = PersonaDirecta::representantesdir($id_rep)->zonal($id_rep_zonal)->jefe($id_rep_jefe)->get();
 
+            /**los asesores que ya se encuentran en la nomina que no deben aparecer entre los que estan para agregar**/
+            $representantes_existentes = NominaDirecta::where('mes', $mes_nomina->format('Ym'))
+                ->get()->pluck('id_persona_directa')->toArray();
+
+            $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
+            $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
+            ->representantesdir($id_rep)->jefe($id_rep_jefe)
+                ->get();
 
             return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
-                            'zonales'=>$zonales, 'meses'=>$meses, 'mes_nomina'=>$mes_nomina]);
+                             'meses'=>$meses, 'mes_nomina'=>$mes_nomina]);
     }
 
     /**
@@ -84,7 +93,6 @@ class NominaDirectaController extends Controller
         while ($cont < count($personas_id))
         {
 
-
             $nomina = new NominaDirecta();
             $nomina->id_persona_directa = $personas_id[$cont];
             $nomina->mes = $mes_nomina ;
@@ -93,9 +101,8 @@ class NominaDirectaController extends Controller
             $nomina->save();
             $cont = $cont + 1;
         }
+
         return redirect('nomina_directa');
-
-
 
     }
 
@@ -145,13 +152,24 @@ class NominaDirectaController extends Controller
     }
 
 
-    public function agregarConsideraciones (NominaDirecta $nominaDirecta)
+    public function agregarConsideraciones ($id)
     {
-        //
+        $persona_nomina = NominaDirecta::findOrFail($id); //->personaDirecta;
+        $consideraciones = Consideracion::all();
+
+        return view('nomina_directa.consideracion_nomina',
+            ['persona_nomina' => $persona_nomina,
+            'consideraciones' => $consideraciones ]);
     }
 
-    public function storeConsideraciones (Request $request, NominaDirecta $nominaDirecta)
+    public function storeConsideraciones (Request $request, $id)
     {
-        //
+        $nominaDirecta = NominaDirecta::findOrFail($id);
+        $nominaDirecta->id_consideracion = $request->get('id_consideracion');
+        $nominaDirecta->detalles_consideracion = $request->get('detalles_consideracion');
+
+        $nominaDirecta->update();
+        dd('hecho');
+
     }
 }

@@ -16,12 +16,11 @@ class CreatePersonasDirectaTable extends Migration
         Schema::create('personas_directa', function (Blueprint $table) {
             $table->Increments('id_persona');
             $table->string('ch')->unique();
+            $table->string('fecha_ingreso');
             $table->string('documento_persona')->nullable();
             $table->string('nombre');
-            $table->integer('id_representante_zonal')->nullable();
             $table->integer('id_representante_jefe')->nullable();
             $table->string('cargo');
-            $table->integer('id_region');
             $table->integer('id_zona')->nullable();
             $table->string('cargo_go')->nullable();
             $table->string('activo')->nullable()->default('A');

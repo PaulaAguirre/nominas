@@ -13,31 +13,22 @@ class PersonaDirecta extends Model
     protected $fillable = [ //asigna los campos de la tabla de BD
         'ch',
         'documento_persona',
+        'fecha_ingreso',
         'nombre',
-        'id_representante_zonal',
         'id_representante_jefe',
         'cargo',
-        'id_region',
         'id_zona',
         'cargo_go',
         'activo',
 
     ];
 
-    public function region ()
-    {
-        return $this->belongsTo('App\Region', 'id_region');
-    }
 
     public function zona ()
     {
         return $this->belongsTo('App\Zona', 'id_zona');
     }
 
-    public function representanteZonal()
-    {
-        return $this->belongsTo('App\PersonaDirecta', 'id_representante_zonal');
-    }
 
     public function representanteJefe ()
     {
@@ -71,13 +62,7 @@ class PersonaDirecta extends Model
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
-    public function scopeZonal($query, $id_zonal)
-    {
-        if (trim($id_zonal))
-        {
-            $query->where('id_representante_zonal', $id_zonal);
-        }
-    }
+
 
     public function scopeRepresentantesdir ($query, $id_representante)
     {
@@ -85,7 +70,7 @@ class PersonaDirecta extends Model
         {
             $query->where('cargo_go', '<>', 'NULL')
                 ->where('id_persona', $id_representante)
-                ->where ('activo', 'A');
+                ->where ('activo', 'activo');
         }
 
         $query->where('cargo_go', '<>', 'NULL');

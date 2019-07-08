@@ -2,7 +2,7 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Representantes Canal Directa <a href="representantes/create"><button class="btn btn-success">Nuevo</button></a></h3>
+            <h3>Representantes Canal Directa <a href="representantes_directa/create"><button class="btn btn-success">Nuevo Asesor  <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
                 @include('personasDirecta.search')
 
         </div>
@@ -29,14 +29,14 @@
                             <td>{{$persona->ch}}</td>
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->documento_persona}}</td>
-                            <td>{{$persona->representanteZonal ? $persona->representanteZonal->nombre : '' }}</td>
+                            <td>{{$persona->zona->representante_zonal_nombre ? $persona->zona->representante_zonal_nombre : '' }}</td>
                             <td>{{$persona->representanteJefe ? $persona->representanteJefe->nombre : ''}}</td>
                             <td>{{$persona->cargo_go}}</td>
-                            <td>{{$persona->region->region}}</td>
+                            <td>{{$persona->zona->region->region}}</td>
                             <td>{{$persona->zona->zona}}</td>
                             <td>
                                 <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
-                                <a href="" data-target="#modal-delete-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
+                                <a href="" data-target="#modal-delete-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
                             </td>
                         </tr>
                     @endforeach

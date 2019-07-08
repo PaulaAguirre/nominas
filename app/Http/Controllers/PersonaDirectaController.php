@@ -6,6 +6,8 @@ use App\PersonaDirecta;
 use Illuminate\Http\Request;
 use App\Zona;
 use App\Region;
+use Illuminate\Validation\Rule;
+
 class PersonaDirectaController extends Controller
 {
     /**
@@ -39,13 +41,9 @@ class PersonaDirectaController extends Controller
      */
     public function create()
     {
-        $zonas = Zona::all();
-        $regiones = Region::all();
-        $jefes = PersonaDirecta::where ('cargo', '=', 'representante jefe')->get();
-        $zonales = PersonaDirecta::where('cargo', '=', 'representante zonal')->get();
-
-        return view('personasDirecta.create', ['zonas'=>$zonas, 'regiones'=>$regiones,
-                                                    'jefes'=>$jefes, 'zonales'=>$zonales]);
+        $jefes = PersonaDirecta::where ('cargo', '=', 'representante_jefe')->get();
+        $cargos_go = ['go1', 'go2', 'go3'];
+        return view('personasDirecta.create', ['jefes'=>$jefes, 'cargos_go' => $cargos_go]);
     }
 
     /**
@@ -56,11 +54,21 @@ class PersonaDirectaController extends Controller
      */
     public function store(Request $request)
     {
-        $persona_directa = new PersonaDirecta($request->all());
-        $persona_directa->activo = 'A';
-        $persona_directa->save();
+        $this->validate($request, [
+            'ch' => 'required|unique:personas_directa'
+        ]);
 
-        return redirect('personasDirecta');
+        $id_zona = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id_zona;
+        $id_representante_jefe = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->id_persona;
+        $asesor = new PersonaDirecta($request->all());
+        $asesor->id_representante_jefe = $id_representante_jefe;
+        $asesor->id_zona = $id_zona;
+        $asesor->cargo =  'representante';
+
+        $asesor->save();
+
+        //dd('hecho');
+        return redirect('representantes_directa');
     }
 
     /**
@@ -83,11 +91,10 @@ class PersonaDirectaController extends Controller
     public function edit($id)
     {
         $persona = PersonaDirecta::findOrFail($id);
-        $jefes = PersonaDirecta::where ('cargo', '=', 'representante jefe')->get();
-        $zonales = PersonaDirecta::where('cargo', '=', 'representante zonal')->get();
+        $jefes = PersonaDirecta::where ('cargo', '=', 'representante_jefe')->get();
         $cargos_go = ['go1', 'go2', 'go3'];
 
-        return view('personasDirecta.edit', ['jefes'=>$jefes, 'zonales'=>$zonales, 'persona' => $persona, 'cargos_go' => $cargos_go]);
+        return view('personasDirecta.edit', ['jefes'=>$jefes, 'persona' => $persona, 'cargos_go' => $cargos_go]);
     }
 
     /**
@@ -99,28 +106,17 @@ class PersonaDirectaController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $region = PersonaDirecta::findOrFail($request->get('rep_zonal_id'))->zona->region->id_region;
-        $zona = PersonaDirecta::findOrFail($request->get('rep_zonal_id'))->zona->id_zona;
+        $asesor = PersonaDirecta::findOrFail($id);
         $url = $request->get('url');
-        //obtenemos la region y zona a la que pertenece el zonal, para asignarle al asesor
+        $id_zona = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id_zona;
+        $id_representante_jefe = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->id_persona;
 
-        $persona = PersonaDirecta::findOrFail($id);
-        $persona->ch = $request->get('ch');
-        $persona->nombre = $request->get('nombre');
-        $persona->documento_persona = $request->get('documento_persona');
-        $persona->id_representante_zonal = $request->get('rep_zonal_id');
-        $persona->id_representante_jefe = $request->get('rep_jefe_id');
-        $persona->cargo_go = $request->get('cargo_go');
-        $persona->activo = $request->get('activo');
-        $persona->id_region = $region;
-        $persona->id_zona = $zona;
-        $persona->cargo = 'representante';
-
-        $persona->update();
+        $asesor->fill($request->all());
+        $asesor->id_representante_jefe = $id_representante_jefe;
+        $asesor->id_zona = $id_zona;
+        $asesor->update();
 
         return redirect($url);
-
     }
 
     /**

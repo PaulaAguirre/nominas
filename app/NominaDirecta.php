@@ -14,13 +14,19 @@ class NominaDirecta extends Model
         'id_persona_directa',
         'mes',
         'aprobacion',
-        'consideraciones',
+        'id_cosideracion',
+        'detalles_consideracion'
 
     ];
 
     public function personaDirecta ()
     {
         return $this->belongsTo('App\PersonaDirecta', 'id_persona_directa');
+    }
+
+    public function consideracion ()
+    {
+        return $this->belongsTo('App\Consideracion');
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
@@ -34,7 +40,8 @@ class NominaDirecta extends Model
     /** @var $query \Illuminate\Database\Query\Builder */
     public function scopeMes($query, $mes)
     {
-        $mes_nomina = NominaDirecta::all()->last()->mes;
+       // $mes_nomina = NominaDirecta::all()->last()->mes;
+        $mes_nomina = '201908';
         if($mes)
         {
             $query->where('mes', $mes);
@@ -44,7 +51,14 @@ class NominaDirecta extends Model
 
     }
 
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeRepresentante ($query, $id_persona)
+    {
+        if($id_persona)
+        {
+            $query->where('id_nomina', $id_persona)->first();
+        }
 
-
+    }
 
 }

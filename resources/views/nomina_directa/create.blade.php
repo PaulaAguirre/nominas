@@ -32,8 +32,8 @@
                         </thead>
                         @foreach ($personas_directa as $persona)
                             <tr class="text-uppercase">
-                                <td>{{$persona->region->region.' '.$persona->zona->zona}}</td>
-                                <td>{{$persona->representanteZonal->nombre}}
+                                <td>{{$persona->zona->region->region.' / '.$persona->zona->zona}}</td>
+                                <td>{{$persona->representanteJefe->zona->representante_zonal_nombre}}
                                     / {{$persona->representanteJefe->nombre}}</td>
                                 <td>{{$persona->ch}}</td>
                                 <td><input type="hidden" name="idrepresentante[]" value="{{$persona->id_persona}}" >

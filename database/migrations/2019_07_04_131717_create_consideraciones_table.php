@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTimestamsToPersonasDirectaTable extends Migration
+class CreateConsideracionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class AddTimestamsToPersonasDirectaTable extends Migration
      */
     public function up()
     {
-        Schema::table('personas_directa', function (Blueprint $table) {
+        Schema::create('consideraciones', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nombre');
+            $table->string('descripcion')->nullable();
             $table->timestamps();
         });
     }
@@ -25,8 +28,6 @@ class AddTimestamsToPersonasDirectaTable extends Migration
      */
     public function down()
     {
-        Schema::table('personas_directa', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('consideraciones');
     }
 }

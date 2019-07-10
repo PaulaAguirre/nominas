@@ -20,7 +20,7 @@ class PersonaDirecta extends Model
         'id_zona',
         'cargo_go',
         'activo',
-
+        'agrupacion'
     ];
 
 

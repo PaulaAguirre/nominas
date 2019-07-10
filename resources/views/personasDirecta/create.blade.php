@@ -68,6 +68,14 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group col-md-offset-0 col-md-4">
+                            <label for="">Agrupación</label>
+                            <select name="agrupacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Agrupacion" required>
+                                @foreach($agrupaciones as $agrupacion )
+                                    <option value="{{$agrupacion}}">{{strtoupper ($agrupacion)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="form-group col-md-4 ">
                             <label for="" class="col-md-3">Activo</label>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\NominaDirecta;
 use App\PersonaDirecta;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Zona;
 use App\Region;
@@ -43,7 +45,8 @@ class PersonaDirectaController extends Controller
     {
         $jefes = PersonaDirecta::where ('cargo', '=', 'representante_jefe')->get();
         $cargos_go = ['go1', 'go2', 'go3'];
-        return view('personasDirecta.create', ['jefes'=>$jefes, 'cargos_go' => $cargos_go]);
+        $agrupaciones = ['mobile_pre', 'mobile_pos', 'home', 'b2b'];
+        return view('personasDirecta.create', ['jefes'=>$jefes, 'cargos_go' => $cargos_go, 'agrupaciones'=>$agrupaciones]);
     }
 
     /**
@@ -93,8 +96,9 @@ class PersonaDirectaController extends Controller
         $persona = PersonaDirecta::findOrFail($id);
         $jefes = PersonaDirecta::where ('cargo', '=', 'representante_jefe')->get();
         $cargos_go = ['go1', 'go2', 'go3'];
+        $agrupaciones = ['mobile_pre', 'mobile_pos', 'home', 'b2b'];
 
-        return view('personasDirecta.edit', ['jefes'=>$jefes, 'persona' => $persona, 'cargos_go' => $cargos_go]);
+        return view('personasDirecta.edit', ['jefes'=>$jefes, 'persona' => $persona, 'cargos_go' => $cargos_go, 'agrupaciones'=>$agrupaciones]);
     }
 
     /**
@@ -115,6 +119,11 @@ class PersonaDirectaController extends Controller
         $asesor->id_representante_jefe = $id_representante_jefe;
         $asesor->id_zona = $id_zona;
         $asesor->update();
+
+        $nomina = NominaDirecta::where('id_persona_directa', $asesor->id_persona)->get()->last();
+        $nomina->agrupacion = $asesor->agrupacion;
+        $nomina->update();
+
 
         return redirect($url);
     }

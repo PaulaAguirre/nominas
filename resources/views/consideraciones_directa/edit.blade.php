@@ -77,19 +77,6 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-md-offset-0 col-md-4">
-                            <label for="">Agrupación</label>
-                            <select name="agrupacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Agrupación" required>
-                                @foreach($agrupaciones as $agrupacion )
-                                    @if($persona->agrupacion == $agrupacion)
-                                        <option value="{{$agrupacion}}" selected>{{strtoupper ($agrupacion)}}</option>
-                                    @else
-                                        <option value="{{$agrupacion}}" >{{strtoupper ($agrupacion)}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-
                         <div class="form-group col-md-4 ">
                             <label for="" class="col-md-3">Activo</label>
                             <select name="activo" class="selectpicker form-control text-uppercase" title="Estado">

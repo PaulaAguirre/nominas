@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Consideracion;
+use App\NominaDirecta;
+use App\PersonaDirecta;
 
 class ConsideracionesDirectaController extends Controller
 {
@@ -11,9 +14,14 @@ class ConsideracionesDirectaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $mes_nomina = NominaDirecta::all()->last()->mes;
+        $personas_consideracion = NominaDirecta::where('id_consideracion', '<>', 'NULL')
+            ->where('mes', $mes_nomina)
+            ->get();
+
+        return view('consideraciones_directa.index', ['personas_consideracion' => $personas_consideracion]);
     }
 
     /**

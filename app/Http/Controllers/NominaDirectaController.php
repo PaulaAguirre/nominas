@@ -25,7 +25,7 @@ class NominaDirectaController extends Controller
         $mes = $request->get('mes');
 
         $id_persona= $request->get('id_persona');
-        $personas = NominaDirecta::representante($id_persona)->mes($mes)->get();
+        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->get();
 
         return view('nomina_directa.index', ['personas' => $personas]);
     }
@@ -98,6 +98,7 @@ class NominaDirectaController extends Controller
             $nomina->mes = $mes_nomina ;
             $nomina->persona_mes = $persona_mes[$cont] ;
             $nomina->activo = $activo[$cont];
+            $nomina->agrupacion = PersonaDirecta::findOrFail($personas_id[$cont])->agrupacion;
             $nomina->save();
             $cont = $cont + 1;
         }
@@ -123,9 +124,9 @@ class NominaDirectaController extends Controller
      * @param  \App\NominaDirecta  $nominaDirecta
      * @return \Illuminate\Http\Response
      */
-    public function edit(NominaDirecta $nominaDirecta)
+    public function edit(Request $request)
     {
-        //
+
     }
 
     /**
@@ -169,7 +170,62 @@ class NominaDirectaController extends Controller
         $nominaDirecta->detalles_consideracion = $request->get('detalles_consideracion');
 
         $nominaDirecta->update();
-        dd('hecho');
+        return redirect('nomina_directa');
 
+    }
+
+    public function aprobarNomina (Request $request, $mes)
+    {
+        $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
+
+        $id_rep_jefe = $request->get('id_jefe');
+        $id_rep = $request->get('id_representante');
+
+        /**los asesores que ya se encuentran en la nomina con estado_nomina pendiente**/
+        $mes_anterior = NominaDirecta::all()->last()->mes-1;
+        $mes_actual = NominaDirecta::all()->last()->mes;
+        $id_personas_mes_pasado = NominaDirecta::where('mes', $mes_anterior)->get()->pluck('id_persona_directa');
+        $id_personas_mes_actual = NominaDirecta::where('mes', $mes_actual)->get()->pluck('id_persona_directa');
+        $id_persona_nuevas = $id_personas_mes_actual->diff($id_personas_mes_pasado);
+
+        $personas_directa = NominaDirecta::where('estado_nomina', '=', 'pendiente') //personas a aprobar, solo las nuevas
+        ->whereIn('id_persona_directa', $id_persona_nuevas)->mes($mes)->get();
+
+
+        return view('nomina_directa.aprobacion', ['personas_directa' => $personas_directa, 'jefes' => $jefes, 'mes'=>$mes]);
+    }
+
+
+
+
+    public function aprobarNominaStore (Request $request)
+    {
+        $estado = $request->get('aprobacion');
+        $nomina= $request->get('id_nomina');
+        $cont = 0;
+
+        $mes = Carbon::now()->addMonth()->format ('Ym');
+
+        $asesores_existentes = NominaDirecta::where('mes', $mes)->get();
+
+
+        foreach ($asesores_existentes as $asesor)
+        {
+            $asesor->estado_nomina = 'aprobado';
+            $asesor->update();
+        }
+
+
+
+        while ($cont < count($nomina))
+        {
+
+            $nomina_directa = NominaDirecta::findOrFail($nomina[$cont]);
+            $nomina_directa->estado_nomina = $estado[$cont];
+            $nomina_directa->update();
+            $cont = $cont + 1;
+        }
+
+        return redirect('aprobacion_nomina_directa/'.$mes);
     }
 }

@@ -13,9 +13,10 @@ class NominaDirecta extends Model
     protected $fillable = [
         'id_persona_directa',
         'mes',
-        'aprobacion',
+        'estado_nomina',
         'id_cosideracion',
-        'detalles_consideracion'
+        'detalles_consideracion',
+        'agrupacion'
 
     ];
 
@@ -26,7 +27,7 @@ class NominaDirecta extends Model
 
     public function consideracion ()
     {
-        return $this->belongsTo('App\Consideracion');
+        return $this->belongsTo('App\Consideracion', 'id_consideracion');
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
@@ -40,25 +41,28 @@ class NominaDirecta extends Model
     /** @var $query \Illuminate\Database\Query\Builder */
     public function scopeMes($query, $mes)
     {
-       // $mes_nomina = NominaDirecta::all()->last()->mes;
-        $mes_nomina = '201908';
         if($mes)
         {
             $query->where('mes', $mes);
         }
+        else
+        {
+            $mes = Carbon::now()->addMonth()->format ('Ym');
+            $query->where('mes', $mes);
+        }
 
-        $query->where('mes', $mes_nomina);
 
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
-    public function scopeRepresentante ($query, $id_persona)
+    public function scopeRepresentanteDir ($query, $id_persona)
     {
         if($id_persona)
         {
-            $query->where('id_nomina', $id_persona)->first();
+            $query->where('id_persona_directa', $id_persona)->last();
         }
 
     }
+
 
 }

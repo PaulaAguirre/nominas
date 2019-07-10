@@ -7,7 +7,7 @@
             @endforeach
         </select>
 
-            <input type="text" name="mes" class="form-control text-uppercase" placeholder="MES: YYYYMM">
+            <input type="number" name="mes" class="form-control text-uppercase" placeholder="MES: YYYYMM">
 
     <button type="submit" class="btn btn-primary "><span>Buscar </span><i class="fa fa-search col-lg-2" aria-hidden="true"></i></button>
 

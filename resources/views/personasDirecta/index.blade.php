@@ -19,6 +19,7 @@
                         <th>Representante Zonal</th>
                         <th>Representante Jefe</th>
                         <th>Cargo Go</th>
+                        <th>Agrupación</th>
                         <th>Region</th>
                         <th>Zona</th>
                         <th class="text-center">Opciones</th>
@@ -32,6 +33,7 @@
                             <td>{{$persona->zona->representante_zonal_nombre ? $persona->zona->representante_zonal_nombre : '' }}</td>
                             <td>{{$persona->representanteJefe ? $persona->representanteJefe->nombre : ''}}</td>
                             <td>{{$persona->cargo_go}}</td>
+                            <td>{{$persona->agrupacion}}</td>
                             <td>{{$persona->zona->region->region}}</td>
                             <td>{{$persona->zona->zona}}</td>
                             <td>

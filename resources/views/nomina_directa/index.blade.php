@@ -16,6 +16,7 @@
                     <th>Mes</th>
                     <th>CH</th>
                     <th>Representante</th>
+                    <th>Agrupación</th>
                     <th>Rep Zonal - Rep Jefe</th>
                     <th>Region/Zona</th>
                     <th>Activo</th>
@@ -26,9 +27,16 @@
                             <td>{{$persona->mes}}</td>
                             <td>{{$persona->personaDirecta->ch}}</td>
                             <td>{{$persona->personaDirecta->nombre}}</td>
+                            <td>{{$persona->agrupacion}}</td>
                             <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                             <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
-                            <td>{{$persona->personaDirecta->activo}}</td>
+                            @if($persona->estado_nomina == 'pendiente')
+                                <td class="alert-warning">{{$persona->estado_nomina}}</td>
+                            @elseif ($persona->estado_nomina == 'rechazado')
+                                <td class="alert-danger">{{$persona->estado_nomina}}</td>
+                            @else
+                                <td class="alert-success">{{$persona->estado_nomina}}</td>
+                            @endif
                             <td>
                                 <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                     <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

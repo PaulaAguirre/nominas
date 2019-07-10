@@ -115,8 +115,22 @@
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-book"></i> Roles</a></li>
                         <li><a href="#"><i class="fa fa-book"></i> Users</a></li>
+                        <li><a href="#"><i class="fa fa-book"></i> Consideraciones</a></li>
                     </ul>
                 </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-list-alt" aria-hidden="true"></i>
+                        <span>Aprobaciones</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-book"></i> Aprobar Nomina Directa</a></li>
+                        <li><a href="#"><i class="fa fa-book"></i> Aprobar consideraciones Directa</a></li>
+                    </ul>
+                </li>
+
 
                 <li class="treeview">
                     <a href="#">

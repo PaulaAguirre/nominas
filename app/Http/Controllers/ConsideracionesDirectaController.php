@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Consideracion;
 use App\NominaDirecta;
@@ -88,5 +89,32 @@ class ConsideracionesDirectaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function aprobarConsideraciones ($mes)
+    {
+        $personas_consideracion = NominaDirecta::where('id_consideracion', '<>', 'NULL')
+            ->where('estado_consideracion', '=', 'pendiente')
+            ->where('mes', $mes)
+            ->get();
+        return view('consideraciones_directa.aprobacion', ['personas_consideracion' => $personas_consideracion, 'mes'=>$mes]);
+
+    }
+
+    public function storeConsideraciones (Request $request)
+    {
+        $nomina = $request->get('id_nomina');
+        $estado_consideracion = $request->get('aprobacion');
+        $cont = 0;
+
+        while ($cont < count($nomina))
+        {
+            $nomina_consideracion = NominaDirecta::findOrFail($nomina[$cont]);
+            $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
+            $nomina_consideracion->update();
+            $cont = $cont+1;
+        }
+
+        return redirect()->back();
     }
 }

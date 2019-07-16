@@ -15,9 +15,9 @@
                     <thead class="text-center" style="background-color: #8eb4cb">
                         <th>CH</th>
                         <th>Nombre</th>
-                        <th>Documento</th>
+                        <th>CI</th>
                         <th>Representante Zonal / Jefe</th>
-                        <th>Consideraciones</th>
+                        <th>Motivo</th>
                         <th>Detalles</th>
                         <th>Estado</th>
                         <th class="text-center">Opciones</th>

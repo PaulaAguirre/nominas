@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>NOMINAS | Tigo </title>
+    <title>NÓMINAS - Tigo </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -19,7 +19,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
-    <link rel="shortcut icon" href="{{asset('img/lupa.png')}}" >
+    <link rel="shortcut icon" href="{{asset('img/management-group.png')}}" >
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -107,7 +107,7 @@
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-list-alt" aria-hidden="true"></i>
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
                         <span>Administración</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -120,13 +120,26 @@
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-list-alt" aria-hidden="true"></i>
+                        <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        <span>Objetivos</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Directa</a></li>
+                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Indirecta</a></li>
+                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Tiendas</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-check-square" aria-hidden="true"></i>
                         <span>Aprobaciones</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-book"></i> Aprobar Nomina Directa</a></li>
-                        <li><a href="#"><i class="fa fa-book"></i> Aprobar consideraciones Directa</a></li>
+                        <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nomina Directa</a></li>
+                        <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
                     </ul>
                 </li>
 
@@ -160,7 +173,7 @@
                 </li>
                 <li>
                     <a href="{{url ('/manual')}}">
-                        <i class="fa fa-plus-square"></i> <span>Ayuda</span>
+                        <i class="fa fa-life-ring"></i> <span>Ayuda</span>
                         <small class="label pull-right bg-red">PDF</small>
                     </a>
                 </li>

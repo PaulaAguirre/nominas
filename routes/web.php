@@ -25,13 +25,22 @@ Route::resource('representantes_directa', 'PersonaDirectaController');
  * */
 Route::resource('nomina_directa', 'NominaDirectaController');
 
-Route::get('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@agregarConsideraciones')->name('nomina_directa_consideraciones.agregarconsideraciones');
-Route::patch('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@storeConsideraciones')->name('nomina_directa.storeconsideraciones');
-Route::get('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNomina')->name('nomina_directa.aprobacion');
-Route::patch('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNominaStore')->name('nomina_directa_aprobacion.aprobacion');
+Route::get('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@agregarConsideraciones')
+    ->name('nomina_directa_consideraciones.agregarconsideraciones');
+Route::patch('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@storeConsideraciones')
+    ->name('nomina_directa.storeconsideraciones');
+Route::get('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNomina')
+    ->name('nomina_directa.aprobacion');
+Route::patch('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNominaStore')
+    ->name('nomina_directa_aprobacion.aprobacion');
 
 Route::resource('consideraciones_directa', 'ConsideracionesDirectaController');
-//Route::resource('aprobacion_representantes_directa', 'RepresentanteMesDirectaController');
+Route::get('aprobacion_consideraciones_directa/{mes}', 'ConsideracionesDirectaController@aprobarConsideraciones')
+    ->name('consideraciones_directa.aprobacion');
+Route::patch('aprobacion_consideraciones_directa/{mes}', 'ConsideracionesDirectaController@storeConsideraciones')
+    ->name('consideraciones_directa_aprobacion.aprobacion');
+
+
 
 /**
  * fin Nomina directa

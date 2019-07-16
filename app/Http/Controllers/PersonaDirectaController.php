@@ -17,7 +17,7 @@ class PersonaDirectaController extends Controller
      */
     public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
 
@@ -28,12 +28,11 @@ class PersonaDirectaController extends Controller
      */
     public function index(Request $request)
     {
+        $user = auth()->user();
         $name = ($request->get('name'));
         $personasDirecta = PersonaDirecta::representantesdir('')->name($name)->get();
 
-
-        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta]);
-
+        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'user'=>$user]);
     }
 
     /**

@@ -24,30 +24,59 @@
                     </thead>
                     @foreach ($personas as $persona)
                         <tr class="text-uppercase">
-                            <td>{{$persona->mes}}</td>
-                            <td>{{$persona->personaDirecta->ch}}</td>
-                            <td>{{$persona->personaDirecta->nombre}}</td>
-                            <td>{{$persona->agrupacion}}</td>
-                            <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
-                            <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
-                            @if($persona->estado_nomina == 'pendiente')
-                                <td class="alert-warning">{{$persona->estado_nomina}}</td>
-                            @elseif ($persona->estado_nomina == 'rechazado')
-                                <td class="alert-danger">{{$persona->estado_nomina}}</td>
+                           @if($user->id_zona == $persona->personaDirecta->id_zona)
+                                <td>{{$persona->mes}}</td>
+                                <td>{{$persona->personaDirecta->ch}}</td>
+                                <td>{{$persona->personaDirecta->nombre}}</td>
+                                <td>{{$persona->agrupacion}}</td>
+                                <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
+                                <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
+                                @if($persona->estado_nomina == 'pendiente')
+                                    <td class="alert-warning">{{$persona->estado_nomina}}</td>
+                                @elseif ($persona->estado_nomina == 'rechazado')
+                                    <td class="alert-danger">{{$persona->estado_nomina}}</td>
+                                @else
+                                    <td class="alert-success">{{$persona->estado_nomina}}</td>
+                                @endif
+                                <td>
+                                    <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
+                                        <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                    </a>
+                                    <a href="#">
+                                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Inactivar Asesor"><i class="fa fa-user-times"></i></button>
+                                    </a>
+                                    <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
+                                        <button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
+                                    </a>
+                                </td>
                             @else
-                                <td class="alert-success">{{$persona->estado_nomina}}</td>
+                                @if(!$user->hasRoles(['zonal']))
+                                    <td>{{$persona->mes}}</td>
+                                    <td>{{$persona->personaDirecta->ch}}</td>
+                                    <td>{{$persona->personaDirecta->nombre}}</td>
+                                    <td>{{$persona->agrupacion}}</td>
+                                    <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
+                                    <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
+                                    @if($persona->estado_nomina == 'pendiente')
+                                        <td class="alert-warning">{{$persona->estado_nomina}}</td>
+                                    @elseif ($persona->estado_nomina == 'rechazado')
+                                        <td class="alert-danger">{{$persona->estado_nomina}}</td>
+                                    @else
+                                        <td class="alert-success">{{$persona->estado_nomina}}</td>
+                                    @endif
+                                    <td>
+                                        <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
+                                            <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                        </a>
+                                        <a href="#">
+                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Inactivar Asesor"><i class="fa fa-user-times"></i></button>
+                                        </a>
+                                        <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
+                                            <button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
+                                        </a>
+                                    </td>
+                                @endif
                             @endif
-                            <td>
-                                <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
-                                    <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
-                                </a>
-                                <a href="#">
-                                    <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Inactivar Asesor"><i class="fa fa-user-times"></i></button>
-                                </a>
-                                <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
-                                    <button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
-                                </a>
-                            </td>
                         </tr>
                     @endforeach
                 </table>

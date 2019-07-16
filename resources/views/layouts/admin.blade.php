@@ -53,29 +53,28 @@
                                 </li>-->
                         </ul>
                     </li>
-
+                @if(Auth::check ())
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <small class="bg-aqua">Online</small>
-                            <span class="hidden-xs"></span>
+                        <button class="btn-success"><small class="">Online </small></button>
+
                         </a>
 
                         <ul class="dropdown-menu">
                             <!-- User image -->
-                            @if(Auth::check ())
+
 
                                 <li class="user-header">
 
                                     <p class="text-bold text-uppercase">
-                                            <br>
-                                                <span class="fa fa-users"></span>
+                                        <span class="hidden-xs">{{Auth::user()->name}}</span>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer" style="background-color: #a6e1ec">
 
                                     <div class="pull-right">
-                                        <a class="btn btn-info" href="/users/{{auth ()->id ()}}/edit">Mi cuenta</a>
+                                        <a class="btn btn-info" href="#">Mi cuenta</a>
 
                                         <a class="btn btn-danger" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();

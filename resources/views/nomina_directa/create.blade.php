@@ -22,7 +22,7 @@
         <div class="row text-uppercase">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-condensed table-hover">
+                    <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                         <thead class="text-center" style="background-color: #8eb4cb">
                         <th>Region/Zona</th>
                         <th>Rep Zonal - Rep Jefe</th>
@@ -52,8 +52,8 @@
                     <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">
                          <div class="form-group">
                             <input name="_token" value="{{csrf_token()}}" type="hidden">
-                             <a href="" data-target="#modal-nomina-create" data-toggle="modal" data-placement="top" title="generar"><button class="btn btn-primary">Generar <i class="fa fa-book" aria-hidden="true"></i></button></a>
-                             <button class="btn btn-danger" type="reset">Cancelar</button>
+                             <a href="" data-target="#modal-nomina-create" data-toggle="modal" data-placement="top" title="generar" id="btn_generar" ><button  class="btn btn-primary">Generar <i class="fa fa-book" aria-hidden="true" ></i></button></a>
+                             <button id="btn_cancelar" class="btn btn-danger" type="reset">Cancelar</button>
                          </div>
                     </div>
                 </div>
@@ -63,15 +63,19 @@
 
     @push('scripts')
         <script>
+            $(document).ready(function () {
+                $("#btn_generar").hide();
+                $("#btn_cancelar").hide();
 
-            function setear_mes_persona() {
+                var nfilas = $("#tabla_persona tr").length -1;
 
-                persona = document.getElementById('idrepresentante');
-                persona_mes = document.getElementById('persona_mes');
-                persona_mes.val(persona);
+                if ( nfilas > 0)
+                {
+                    $("#btn_generar").show();
+                    $("#btn_cancelar").show();
+                }
 
-            }
-
+            })
         </script>
     @endpush
 

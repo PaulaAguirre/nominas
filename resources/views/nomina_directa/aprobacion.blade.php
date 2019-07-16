@@ -21,17 +21,17 @@
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-condensed table-hover">
+                <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                     <thead class="text-center" style="background-color: #8eb4cb">
-                    <th>CH</th>
-                    <th>Representante</th>
-                    <th>Region/Zona</th>
-                    <th>Rep Zonal - Rep Jefe</th>
-                    <th>Aprobar</th>
+                        <th>CH</th>
+                        <th>Representante</th>
+                        <th>Region/Zona</th>
+                        <th>Rep Zonal - Rep Jefe</th>
+                        <th>Aprobar</th>
                     </thead>
                     @foreach ($personas_directa as $persona)
-                        <tr class="text-uppercase">
-                            <td>{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
+                        <tr class="text-uppercase" id="td_personas">
+                            <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                             <td>{{$persona->personaDirecta->nombre}}</td>
                             <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                             <td>{{$persona->personaDirecta->representanteJefe->zona->representante_zonal_nombre}}
@@ -49,8 +49,8 @@
                 <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">
                     <div class="form-group">
                         <input name="_token" value="{{csrf_token()}}" type="hidden">
-                        <button class="btn btn-success " type="submit">Enviar <i class="fa fa-send-o"></i></button>
-                       <span class=""><button class="btn btn-danger  " type="reset" >Cancelar</button></span>
+                        <button class="btn btn-success " type="submit" id="btn_enviar">Enviar <i class="fa fa-send-o"></i></button>
+                       <span class=""><button class="btn btn-danger " id="btn_cancelar" type="reset" >Cancelar</button></span>
                     </div>
                 </div>
             </div>
@@ -60,15 +60,19 @@
 
     @push('scripts')
         <script>
+            $(document).ready(function () {
+                $("#btn_enviar").hide();
+                $("#btn_cancelar").hide();
 
-            function setear_mes_persona() {
+                var nfilas = $("#tabla_persona tr").length -1;
 
-                persona = document.getElementById('idrepresentante');
-                persona_mes = document.getElementById('persona_mes');
-                persona_mes.val(persona);
+                if ( nfilas > 0)
+                {
+                    $("#btn_enviar").show();
+                    $("#btn_cancelar").show();
+                }
 
-            }
-
+            })
         </script>
     @endpush
 

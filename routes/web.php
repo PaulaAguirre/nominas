@@ -42,3 +42,5 @@ Route::resource('consideraciones_directa', 'ConsideracionesDirectaController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+

@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','id_zona'
     ];
 
     /**
@@ -26,4 +26,29 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function zona()
+    {
+        return $this->belongsTo('App\Zona', 'id_zona');
+    }
+
+    public function roles ()
+    {
+        return $this->belongsToMany('App\Role', 'user_role')->withTimestamps();
+    }
+
+    public function hasRoles (array $roles)
+    {
+        foreach ($roles as $role)
+        {
+            foreach ($this->roles as $userRole)
+            {
+                if ($userRole->nombre == $role)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

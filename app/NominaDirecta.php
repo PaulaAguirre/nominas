@@ -59,10 +59,11 @@ class NominaDirecta extends Model
     {
         if($id_persona)
         {
-            $query->where('id_persona_directa', $id_persona)->last();
+            $query->where('id_persona_directa', $id_persona);
         }
 
     }
+
 
 
 }

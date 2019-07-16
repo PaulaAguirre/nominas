@@ -22,12 +22,17 @@ class NominaDirectaController extends Controller
      */
     public function index(Request $request)
     {
-        $mes = $request->get('mes');
+        $user = auth()->user();
 
+        $mes = $request->get('mes');
         $id_persona= $request->get('id_persona');
+
         $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->get();
 
-        return view('nomina_directa.index', ['personas' => $personas]);
+
+
+
+        return view('nomina_directa.index', ['personas' => $personas, 'user' =>$user]);
     }
 
     /**
@@ -37,6 +42,8 @@ class NominaDirectaController extends Controller
      */
     public function create(Request $request)
     {
+            $zona = auth()->user()->id_zona;
+
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
             $mes_anterior = Carbon::now()->format('Ym'); //porque en junio se carga lo de julio
@@ -54,7 +61,7 @@ class NominaDirectaController extends Controller
 
             $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
             $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
-            ->representantesdir($id_rep)->jefe($id_rep_jefe)
+            ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($zona)
                 ->get();
 
             return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
@@ -206,7 +213,10 @@ class NominaDirectaController extends Controller
 
         $mes = Carbon::now()->addMonth()->format ('Ym');
 
-        $asesores_existentes = NominaDirecta::where('mes', $mes)->get();
+        $asesores_existentes = NominaDirecta::where('mes', $mes)
+            ->whereNotIn('id_nomina', $nomina)
+            ->get();
+
 
 
         foreach ($asesores_existentes as $asesor)
@@ -214,7 +224,6 @@ class NominaDirectaController extends Controller
             $asesor->estado_nomina = 'aprobado';
             $asesor->update();
         }
-
 
 
         while ($cont < count($nomina))

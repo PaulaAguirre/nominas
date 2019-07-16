@@ -76,5 +76,15 @@ class PersonaDirecta extends Model
         $query->where('cargo_go', '<>', 'NULL');
     }
 
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeZonaDir ($query, $id_zona)
+    {
+        if ($id_zona)
+        {
+            $query->where('id_zona',  $id_zona);
+        }
+    }
+
+
 
 }

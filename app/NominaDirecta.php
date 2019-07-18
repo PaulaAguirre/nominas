@@ -13,9 +13,12 @@ class NominaDirecta extends Model
     protected $fillable = [
         'id_persona_directa',
         'mes',
+        'persona_mes',
         'estado_nomina',
+        'motivo_rechazo',
         'id_cosideracion',
         'detalles_consideracion',
+        'estado_consideracion',
         'agrupacion',
         'motivo_rechazo'
 

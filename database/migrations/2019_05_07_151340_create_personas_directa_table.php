@@ -23,6 +23,7 @@ class CreatePersonasDirectaTable extends Migration
             $table->string('cargo');
             $table->integer('id_zona')->nullable();
             $table->string('cargo_go')->nullable();
+            $table->string('agrupacion')->nullable();
             $table->string('activo')->nullable()->default('A');
             $table->timestamps();
         });

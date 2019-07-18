@@ -2,8 +2,7 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Consideraciones Asesores Directa <a href="nomina_directa"><button class="btn btn-success">Aprobar Consideraciones <i class="fa fa-check-square-o" aria-hidden="true"></i></button></a></h3>
-            <--!include-->
+            <h3>Consideraciones Asesores Directa</h3>
 
         </div>
     </div>
@@ -17,9 +16,10 @@
                         <th>Nombre</th>
                         <th>CI</th>
                         <th>Representante Zonal / Jefe</th>
-                        <th>Motivo</th>
+                        <th>Consideración</th>
                         <th>Detalles</th>
                         <th>Estado</th>
+                        <th>Rechazo</th>
                         <th class="text-center">Opciones</th>
 
                     </thead>
@@ -39,8 +39,9 @@
                             @else
                                 <td class="text-danger">{{$persona->estado_consideracion}}</td>
                             @endif
-                                <td>
-                                <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
+                            <td>{{$persona->motivo_rechazo}}</td>
+                            <td>
+                                <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
                                 <a href="" data-target="#modal-delete-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
                             </td>
                         </tr>

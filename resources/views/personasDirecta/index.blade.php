@@ -27,20 +27,22 @@
                     </thead>
                     @foreach ($personasDirecta as $persona)
                         <tr class="text-uppercase">
-                            @if($persona->id_zona == $user->id_zona)
-                                <td>{{$persona->ch}}</td>
-                                <td>{{$persona->nombre}}</td>
-                                <td>{{$persona->documento_persona}}</td>
-                                <td>{{$persona->zona->representante_zonal_nombre ? $persona->zona->representante_zonal_nombre : '' }}</td>
-                                <td>{{$persona->representanteJefe ? $persona->representanteJefe->nombre : ''}}</td>
-                                <td>{{$persona->cargo_go}}</td>
-                                <td>{{$persona->agrupacion}}</td>
-                                <td>{{$persona->zona->region->region}}</td>
-                                <td>{{$persona->zona->zona}}</td>
-                                <td>
-                                    <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
-                                    <a href="" data-target="#modal-delete-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
-                                </td>
+                            @if(auth()->user()->hasRoles(['zonal']))
+                                @if($zonas->contains($persona->id_zona))
+                                    <td>{{$persona->ch}}</td>
+                                    <td>{{$persona->nombre}}</td>
+                                    <td>{{$persona->documento_persona}}</td>
+                                    <td>{{$persona->zona->representante_zonal_nombre ? $persona->zona->representante_zonal_nombre : '' }}</td>
+                                    <td>{{$persona->representanteJefe ? $persona->representanteJefe->nombre : ''}}</td>
+                                    <td>{{$persona->cargo_go}}</td>
+                                    <td>{{$persona->agrupacion}}</td>
+                                    <td>{{$persona->zona->region->region}}</td>
+                                    <td>{{$persona->zona->zona}}</td>
+                                    <td>
+                                        <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
+                                        <a href="" data-target="#modal-delete-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                    </td>
+                                @endif
                             @else
                                 <td>{{$persona->ch}}</td>
                                 <td>{{$persona->nombre}}</td>

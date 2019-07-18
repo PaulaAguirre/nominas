@@ -22,7 +22,7 @@ class NominaDirectaController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth()->user();
+        $zonas = auth()->user()->zonas->pluck('id');
 
         $mes = $request->get('mes');
         $id_persona= $request->get('id_persona');
@@ -32,7 +32,7 @@ class NominaDirectaController extends Controller
 
 
 
-        return view('nomina_directa.index', ['personas' => $personas, 'user' =>$user]);
+        return view('nomina_directa.index', ['personas' => $personas, 'zonas' =>$zonas]);
     }
 
     /**
@@ -42,8 +42,7 @@ class NominaDirectaController extends Controller
      */
     public function create(Request $request)
     {
-            $zona = auth()->user()->id_zona;
-
+            $zona = auth()->user()->zonas->pluck('id')->toArray();
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
             $mes_anterior = Carbon::now()->format('Ym'); //porque en junio se carga lo de julio
@@ -130,6 +129,7 @@ class NominaDirectaController extends Controller
      *
      * @param  \App\NominaDirecta  $nominaDirecta
      * @return \Illuminate\Http\Response
+     * editar los rechazados.
      */
     public function edit(Request $request)
     {
@@ -209,6 +209,7 @@ class NominaDirectaController extends Controller
     {
         $estado = $request->get('aprobacion');
         $nomina= $request->get('id_nomina');
+        $motivo_rechazo = $request->get('motivo_rechazo');
         $cont = 0;
 
         $mes = Carbon::now()->addMonth()->format ('Ym');
@@ -231,6 +232,7 @@ class NominaDirectaController extends Controller
 
             $nomina_directa = NominaDirecta::findOrFail($nomina[$cont]);
             $nomina_directa->estado_nomina = $estado[$cont];
+            $nomina_directa->motivo_rechazo = $motivo_rechazo[$cont];
             $nomina_directa->update();
             $cont = $cont + 1;
         }

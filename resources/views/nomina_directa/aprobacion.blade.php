@@ -28,21 +28,26 @@
                         <th>Region/Zona</th>
                         <th>Rep Zonal - Rep Jefe</th>
                         <th>Aprobar</th>
+                        <th>Motivo</th>
+
+
                     </thead>
                     @foreach ($personas_directa as $persona)
                         <tr class="text-uppercase" id="td_personas">
+
                             <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                             <td>{{$persona->personaDirecta->nombre}}</td>
                             <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                             <td>{{$persona->personaDirecta->representanteJefe->zona->representante_zonal_nombre}}
                                 / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                             <td>
-                                <select name="aprobacion[]" class="form-control" id="">
+                                <select name="aprobacion[]" class="form-control" id="aprobacion">
                                     <option value="aprobado" >aprobado</option>
                                     <option value="rechazado">rechazado</option>
                                     <option value="pendiente" selected>pendiente</option>
                                 </select>
                             </td>
+                            <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo[]"><input type="hidden" ></td>
                         </tr>
                     @endforeach
                 </table>
@@ -64,6 +69,7 @@
                 $("#btn_enviar").hide();
                 $("#btn_cancelar").hide();
 
+                var cont  = 0;
                 var nfilas = $("#tabla_persona tr").length -1;
 
                 if ( nfilas > 0)
@@ -71,6 +77,12 @@
                     $("#btn_enviar").show();
                     $("#btn_cancelar").show();
                 }
+
+                if ($("#aprobacion").val() != '')
+                {
+                    //
+                }
+
 
             })
         </script>

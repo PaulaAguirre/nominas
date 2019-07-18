@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','id_zona'
+        'name', 'email', 'password'
     ];
 
     /**
@@ -27,9 +27,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function zona()
+    public function zonas()
     {
-        return $this->belongsTo('App\Zona', 'id_zona');
+        return $this->belongsToMany('App\Zona', 'user_zona','user_id', 'zona_id');
     }
 
     public function roles ()
@@ -51,4 +51,5 @@ class User extends Authenticatable
         }
         return false;
     }
+
 }

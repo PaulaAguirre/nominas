@@ -29,6 +29,7 @@
                     <th>Motivo</th>
                     <th>Detalles</th>
                     <th>Aprobar</th>
+                    <th>Motivo</th>
                     </thead>
                     @foreach ($personas_consideracion as $persona)
                         <tr class="text-uppercase">
@@ -44,6 +45,7 @@
                                     <option value="pendiente" selected>pendiente</option>
                                 </select>
                             </td>
+                            <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo" id="motivo_rechazo"><input type="hidden" ></td>
                         </tr>
                     @endforeach
                 </table>

@@ -83,6 +83,8 @@ class PersonaDirecta extends Model
         {
             $query->where('id_zona',  $id_zona);
         }
+
+
     }
 
 

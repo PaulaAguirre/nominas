@@ -17,7 +17,6 @@ class PersonaDirectaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
 
@@ -28,11 +27,11 @@ class PersonaDirectaController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth()->user();
+        $zonas = auth()->user()->zonas->pluck('id');
         $name = ($request->get('name'));
         $personasDirecta = PersonaDirecta::representantesdir('')->name($name)->get();
 
-        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'user'=>$user]);
+        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'zonas'=>$zonas]);
     }
 
     /**
@@ -60,7 +59,7 @@ class PersonaDirectaController extends Controller
             'ch' => 'required|unique:personas_directa'
         ]);
 
-        $id_zona = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id_zona;
+        $id_zona = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id;
         $id_representante_jefe = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->id_persona;
         $asesor = new PersonaDirecta($request->all());
         $asesor->id_representante_jefe = $id_representante_jefe;

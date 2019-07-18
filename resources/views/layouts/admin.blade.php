@@ -71,12 +71,12 @@
                                         <span class="hidden-xs">{{Auth::user()->name}}</span>
                                 </li>
                                 <!-- Menu Footer-->
-                                <li class="user-footer" style="background-color: #a6e1ec">
+                                <li class="user-footer" style="background-color: #d7ebf6">
 
                                     <div class="pull-right">
                                         <a class="btn btn-info" href="#">Mi cuenta</a>
 
-                                        <a class="btn btn-danger" href="{{ route('logout') }}"
+                                        <a class="btn btn-danger " href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                                             Cerrar Sesion
@@ -118,18 +118,6 @@
                     </ul>
                 </li>
 
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-line-chart" aria-hidden="true"></i>
-                        <span>Objetivos</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Directa</a></li>
-                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Tiendas</a></li>
-                    </ul>
-                </li>
 
                 <li class="treeview">
                     <a href="#">
@@ -169,6 +157,32 @@
                         <li><a href="#}"><i class="fa fa-list-ol"></i>Nómina Indirecta</a></li>
 
 
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        <span>Objetivos</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Directa</a></li>
+                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Indirecta</a></li>
+                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Tiendas</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-comment" aria-hidden="true"></i>
+                        <span>Consideraciones</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('consideraciones_directa')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
+                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Indirecta</a></li>
+                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Tiendas</a></li>
                     </ul>
                 </li>
                 <li>

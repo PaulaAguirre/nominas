@@ -11,19 +11,31 @@
     <title>Nómina de Representantes</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="shortcut icon" href="{{asset('img/lupa.png')}}" >
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
+
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
+    <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
+    <link rel="shortcut icon" href="{{asset('img/management-group.png')}}" >
+
+
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-default navbar-static-top" style="background-color: #0d6aad">
+    <nav class="navbar navbar-default navbar-static-top" style="background-color: #2d4373">
 
         <div class="container">
             <div class="navbar-header">
 
                 <!-- Branding Image -->
-                <img src="{{URL::asset('img/logotigo.png')}}" style="width: 60%">
+                <img src="{{URL::asset('img/logotigo.png')}}" style="width: 80%">
 
             </div>
 
@@ -62,6 +74,12 @@
 </div>
 
 
+<!-- Bootstrap 3.3.5 -->
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/bootstrap-select.min.js')}}"></script>
+
+<!-- AdminLTE App -->
+<script src="{{asset('js/app.min.js')}}"></script>
 
 <!-- Scripts -->
 <!--<script src="{{ asset('js/app.js') }}"></script> -->

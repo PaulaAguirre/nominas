@@ -28,25 +28,56 @@
                     <th>Zona</th>
                     <th>Motivo</th>
                     <th>Detalles</th>
+                    <th>Regularización</th>
                     <th>Aprobar</th>
                     <th>Motivo</th>
+                    <th>Enviar</th>
                     </thead>
                     @foreach ($personas_consideracion as $persona)
                         <tr class="text-uppercase">
-                            <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
-                            <td>{{$persona->personaDirecta->nombre}}</td>
-                            <td>{{$persona->personaDirecta->zona->zona}}</td>
-                            <td>{{$persona->consideracion->nombre}}</td>
-                            <td>{{$persona->detalles_consideracion}}</td>
-                            <td>
-                                <select name="aprobacion[]" class="form-control" id="">
-                                    <option value="aprobado" >aprobado</option>
-                                    <option value="rechazado">rechazado</option>
-                                    <option value="pendiente" selected>pendiente</option>
-                                </select>
-                            </td>
-                            <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo" id="motivo_rechazo"><input type="hidden" ></td>
+                            @if (auth()->user()->hasRoles(['tigo_people']))
+                                @if(auth()->user()->zonas->contains($persona->personaDirecta->id_zona))
+                                    <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
+                                    <td>{{$persona->personaDirecta->nombre}}</td>
+                                    <td>{{$persona->personaDirecta->zona->zona}}</td>
+                                    <td>{{$persona->consideracion->nombre}}</td>
+                                    <td>{{$persona->detalles_consideracion}}</td>
+                                    <td>{{$persona->regularizacion_consideracion}}</td>
+                                    <td>
+                                        <select name="aprobacion[]" class="form-control" id="">
+                                            <option value="aprobado" >aprobado</option>
+                                            <option value="rechazado">rechazado</option>
+                                            <option value="pendiente" selected>pendiente</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo[]" id="motivo_rechazo"><input type="hidden" ></td>
+                                    <td class="text-center">
+                                        <input name="_token" value="{{csrf_token()}}" type="hidden">
+                                        <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
+                                    </td>
+                                @endif
+                             @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
+                                <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
+                                <td>{{$persona->personaDirecta->nombre}}</td>
+                                <td>{{$persona->personaDirecta->zona->zona}}</td>
+                                <td>{{$persona->consideracion->nombre}}</td>
+                                <td>{{$persona->detalles_consideracion}}</td>
+                                <td>{{$persona->regularizacion_consideracion}}</td>
+                                <td>
+                                    <select name="aprobacion[]" class="form-control" id="">
+                                        <option value="aprobado" >aprobado</option>
+                                        <option value="rechazado">rechazado</option>
+                                        <option value="pendiente" selected>pendiente</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo[]" id="motivo_rechazo"><input type="hidden" ></td>
+                                <td class="text-center">
+                                    <input name="_token" value="{{csrf_token()}}" type="hidden">
+                                    <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
+                                </td>
+                            @endif
                         </tr>
+
                     @endforeach
                 </table>
                 <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">

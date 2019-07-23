@@ -22,9 +22,12 @@ class CreateNominaDirectaTable extends Migration
             $table->string('motivo_rechazo')->nullable();
             $table->integer('id_consideracion')->nullable();
             $table->string('detalles_consideracion')->nullable();
+            $table->string('motivo_rechazo_consideracion')->nullable();
             $table->string('estado_consideracion')->nullable();
             $table->string('activo')->nullable();
             $table->string('agrupacion')->nullable();
+            $table->string('regularización')->nullable();
+            $table->string('regularizacion_consideracion')->nullable();
             $table->timestamps();
         });
     }

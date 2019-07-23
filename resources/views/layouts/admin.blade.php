@@ -25,10 +25,10 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <header class="main-header">
+    <header class="main-header" >
 
         <!-- Logo -->
-        <a href="{{url ('index_exp')}}" class="logo">
+        <a href="{{url ('index_exp')}}" class="logo" style="background-color: #2d4373">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>PN</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -36,7 +36,7 @@
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-static-top" role="navigation" style="background-color: #2d4373">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Navegación</span>
@@ -128,6 +128,7 @@
                     <ul class="treeview-menu">
                         <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nomina Directa</a></li>
                         <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
+                        <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
                     </ul>
                 </li>
 
@@ -154,7 +155,7 @@
                     <ul class="treeview-menu">
                         <li><a href="{{url('nomina_directa')}}"><i class="fa fa-list-ol"></i>Nómina Directa</a></li>
                         <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Tiendas</a></li>
-                        <li><a href="#}"><i class="fa fa-list-ol"></i>Nómina Indirecta</a></li>
+                        <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Indirecta</a></li>
 
 
                     </ul>

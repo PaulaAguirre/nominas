@@ -15,6 +15,18 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $roles = array_slice(func_get_args(),2);
+
+        foreach ($roles as $role)
+        {
+            if (auth()->user()->hasRoles($role))
+            {
+                return $next($request);
+            }
+        }
+
+
+
+        return redirect('/nomina_directa');
     }
 }

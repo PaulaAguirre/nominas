@@ -13,6 +13,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead class="text-center" style="background-color: #8eb4cb">
+                    <th>ID</th>
                     <th>Mes</th>
                     <th>CH</th>
                     <th>Representante</th>
@@ -23,9 +24,10 @@
                     <th class="text-center">Opciones</th>
                     </thead>
                     @foreach ($personas as $persona)
-                        <tr class="text-uppercase">
-                            @if(auth()->user()->hasRoles(['zonal']))
+                        <tr class="text-uppercase text-sm">
+                            @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
                                 @if($zonas->contains($persona->personaDirecta->id_zona))
+                                    <td>{{$persona->id_persona_directa}}</td>
                                     <td>{{$persona->mes}}</td>
                                     <td>{{$persona->personaDirecta->ch}}</td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
@@ -42,19 +44,20 @@
                                     <td>
                                         <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                             <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
-
+                                        </a>
                                         <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
                                             <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
                                         </a>
                                         </a>
                                         @if($persona->estado_nomina == 'rechazado')
-                                            <a href="#">
+                                            <a href="{{URL::action('NominaDirectaController@edit', $persona)}}">
                                                 <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
                                             </a>
                                         @endif
                                     </td>
                                 @endif
-                            @else
+                            @elseif (auth()->user()->hasRoles(['tigo_people_admin']))
+                                <td>{{$persona->id_persona_directa}}</td>
                                 <td>{{$persona->mes}}</td>
                                 <td>{{$persona->personaDirecta->ch}}</td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
@@ -77,7 +80,7 @@
                                         <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
                                     </a>
                                     @if($persona->estado_nomina == 'rechazado')
-                                        <a href="#">
+                                        <a href="{{URL::action('NominaDirectaController@edit', $persona)}}">
                                             <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
                                         </a>
                                     @endif

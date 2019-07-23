@@ -52,4 +52,19 @@ class User extends Authenticatable
         return false;
     }
 
+    public function hasZonas (array $zonas)
+    {
+        foreach ($zonas as $zona)
+        {
+            foreach ($this->zonas as $userZona)
+            {
+                if ($userZona->zona == $zona)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

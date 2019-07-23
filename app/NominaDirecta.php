@@ -19,8 +19,12 @@ class NominaDirecta extends Model
         'id_cosideracion',
         'detalles_consideracion',
         'estado_consideracion',
+        'motivo_rechazo_consideracion',
+        'activo',
         'agrupacion',
-        'motivo_rechazo'
+        'motivo_rechazo',
+        'regularizacion',
+        'regularizacion_consideracion'
 
     ];
 

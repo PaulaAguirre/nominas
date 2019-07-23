@@ -25,6 +25,9 @@ class CreatePersonasDirectaTable extends Migration
             $table->string('cargo_go')->nullable();
             $table->string('agrupacion')->nullable();
             $table->string('activo')->nullable()->default('A');
+            $table->string('estado_cambio')->nullable()->default('aprobado');
+            $table->string('motivo_rechazo')->nullable();
+            $table->string('regularizacion_cambio')->nullable();
             $table->timestamps();
         });
     }

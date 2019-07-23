@@ -18,7 +18,7 @@ class ConsideracionesDirectaController extends Controller
     public function index(Request $request)
     {
         $mes_nomina = NominaDirecta::all()->last()->mes;
-        $personas_consideracion = NominaDirecta::where('id_consideracion', '<>', 'NULL')
+        $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', 'NULL')
             ->where('mes', $mes_nomina)
             ->get();
 
@@ -65,7 +65,8 @@ class ConsideracionesDirectaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $persona = NominaDirecta::findOrFail($id);
+        return view('consideraciones_directa.regularizar_consideracion', ['persona'=>$persona]);
     }
 
     /**
@@ -77,7 +78,11 @@ class ConsideracionesDirectaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $persona = NominaDirecta::findOrFail($id);
+        $persona->estado_consideracion = 'pendiente';
+        $persona->regularizacion_consideracion = $request->get('regularizacion_consideracion');
+        $persona->update();
+        return redirect('consideraciones_directa');
     }
 
     /**
@@ -105,12 +110,14 @@ class ConsideracionesDirectaController extends Controller
     {
         $nomina = $request->get('id_nomina');
         $estado_consideracion = $request->get('aprobacion');
+        $motivo_rechazo = $request->get('motivo_rechazo');
         $cont = 0;
 
         while ($cont < count($nomina))
         {
             $nomina_consideracion = NominaDirecta::findOrFail($nomina[$cont]);
             $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
+            $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
             $nomina_consideracion->update();
             $cont = $cont+1;
         }

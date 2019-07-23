@@ -17,38 +17,38 @@
         <div class="row">
             <div class="col-md-5 text-uppercase col-md-offset-3">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><span class="text-bold text-info">Regularizar Asesor</span></div>
+                    <div class="panel-heading"><span class="text-bold text-info">Regularizar Consideración</span></div>
 
                     <div class="panel-body">
-                        {!!Form::model ($nomina_directa, ['method'=>'PATCH', 'route'=>['nomina_directa.update', $nomina_directa]])!!}
+                        {!!Form::model ($persona, ['method'=>'PATCH', 'route'=>['consideraciones_directa.update', $persona->id_nomina]])!!}
                         {{Form::token()}}
 
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
 
                         <div class="form-group">
-                                <label for="name" class="text-info">Nombre Asesor - CH </label>
-                                <p>{{$nomina_directa->personaDirecta->nombre}} - {{$nomina_directa->personaDirecta->ch}}</p>
+                            <label for="name" class="text-info">Nombre Asesor - CH </label>
+                            <p>{{$persona->personaDirecta->nombre}} - {{$persona->personaDirecta->ch}}</p>
                         </div>
 
                         <div class="form-group">
-                            <label class="text-info">Representante Zonal</label>
-                            <p>{{$nomina_directa->personaDirecta->zona->representante_zonal_nombre}}</p>
+                            <label class="text-info">Consideración</label>
+                            <p>{{$persona->consideracion->nombre}}</p>
                         </div>
 
                         <div class="form-group">
-                            <label class="text-info">Representante Jefe</label>
-                            <p>{{$nomina_directa->personaDirecta->representanteJefe->nombre}}</p>
+                            <label class="text-info">Detalles</label>
+                            <p>{{$persona->detalles_consideracion}}</p>
                         </div>
 
                         <div class="form-group">
-                            <label class="text-info">Motivo Rechazo</label>
-                            <p>{{$nomina_directa->motivo_rechazo}}</p>
+                            <label class="text-danger">Motivo Rechazo</label>
+                            <p>{{$persona->motivo_rechazo_consideracion}}</p>
                         </div>
 
                         <div class="form-group">
                             <label class="text-info">Regularización</label>
-                            <textarea class="form-control" rows="2" name="regularizacion" id="regularizacion" placeholder="Detalles de la regularización"></textarea>
+                            <textarea class="form-control" rows="2" name="regularizacion_consideracion" id="regularizacion_consideracion" placeholder="Detalles de la regularización" required></textarea>
                         </div>
 
                         <div class="form-group text-center">

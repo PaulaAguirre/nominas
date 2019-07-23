@@ -19,12 +19,12 @@
                         <th>Consideración</th>
                         <th>Detalles</th>
                         <th>Estado</th>
-                        <th>Rechazo</th>
-                        <th class="text-center">Opciones</th>
+                        <th>Motivo Rechazo</th>
+                        <th class="text-center">OPC</th>
 
                     </thead>
                     @foreach ($personas_consideracion as $persona)
-                        <tr class="text-uppercase">
+                        <tr class="text-uppercase text-sm">
                             <td>{{$persona->personaDirecta->ch}}</td>
                             <td>{{$persona->personaDirecta->nombre}}</td>
                             <td>{{$persona->personaDirecta->documento_persona}}</td>
@@ -33,17 +33,21 @@
                             <td>{{$persona->consideracion->nombre}}</td>
                             <td>{{$persona->detalles_consideracion}}</td>
                             @if ($persona->estado_consideracion == 'pendiente')
-                                <td class="text-info">{{$persona->estado_consideracion}}</td>
+                                <td class="alert-warning" >{{$persona->estado_consideracion}}</td>
                             @elseif ($persona->estado_consideracion == 'aprobado')
-                                <td class="text-green">{{$persona->estado_consideracion}}</td>
+                                <td class="alert-success" >{{$persona->estado_consideracion}}</td>
                             @else
-                                <td class="text-danger">{{$persona->estado_consideracion}}</td>
+                                <td class="alert-danger">{{$persona->estado_consideracion}}</td>
                             @endif
-                            <td>{{$persona->motivo_rechazo}}</td>
-                            <td>
-                                <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
-                                <a href="" data-target="#modal-delete-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                            <td>{{$persona->motivo_rechazo_consideracion}}</td>
+                            <td class="text-center">
+                                @if($persona->estado_consideracion == 'rechazado')
+                                    <a href="{{URL::action('ConsideracionesDirectaController@edit', $persona)}}">
+                                        <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
+                                    </a>
+                                @endif
                             </td>
+
                         </tr>
                     @endforeach
                 </table>

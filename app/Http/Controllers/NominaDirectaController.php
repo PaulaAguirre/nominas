@@ -5,13 +5,12 @@
 
 namespace App\Http\Controllers;
 use App\Consideracion;
-use App\Http\Requests\NominaRequest;
 use App\NominaDirecta;
 use App\PersonaDirecta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Validation\Rule;
+use Psr\Log\NullLogger;
+
 
 class NominaDirectaController extends Controller
 {
@@ -27,7 +26,7 @@ class NominaDirectaController extends Controller
         $mes = $request->get('mes');
         $id_persona= $request->get('id_persona');
 
-        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->get();
+        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->orderBy('id_nomina')->get();
 
 
 
@@ -43,6 +42,10 @@ class NominaDirectaController extends Controller
     public function create(Request $request)
     {
             $zona = auth()->user()->zonas->pluck('id')->toArray();
+            if (count($zona) == 0)
+            {
+                $zona = [];
+            }
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
             $mes_anterior = Carbon::now()->format('Ym'); //porque en junio se carga lo de julio
@@ -131,9 +134,10 @@ class NominaDirectaController extends Controller
      * @return \Illuminate\Http\Response
      * editar los rechazados.
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-
+        $nominaDirecta = NominaDirecta::findOrFail($id);
+        return view('nomina_directa.edit', ['nomina_directa'=>$nominaDirecta]);
     }
 
     /**
@@ -143,9 +147,14 @@ class NominaDirectaController extends Controller
      * @param  \App\NominaDirecta  $nominaDirecta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NominaDirecta $nominaDirecta)
+    public function update(Request $request, $id)
     {
-        //
+       $nomina_directa = NominaDirecta::findOrFail($id);
+       $regularizacion = $request->get('regularizacion');
+       $nomina_directa->regularizacion = $regularizacion;
+       $nomina_directa->estado_nomina = 'pendiente';
+       $nomina_directa->update();
+       return redirect('nomina_directa');
     }
 
     /**
@@ -175,6 +184,7 @@ class NominaDirectaController extends Controller
         $nominaDirecta = NominaDirecta::findOrFail($id);
         $nominaDirecta->id_consideracion = $request->get('id_consideracion');
         $nominaDirecta->detalles_consideracion = $request->get('detalles_consideracion');
+        $nominaDirecta->estado_consideracion = 'pendiente';
 
         $nominaDirecta->update();
         return redirect('nomina_directa');
@@ -192,17 +202,15 @@ class NominaDirectaController extends Controller
         $mes_anterior = NominaDirecta::all()->last()->mes-1;
         $mes_actual = NominaDirecta::all()->last()->mes;
         $id_personas_mes_pasado = NominaDirecta::where('mes', $mes_anterior)->get()->pluck('id_persona_directa');
-        $id_personas_mes_actual = NominaDirecta::where('mes', $mes_actual)->get()->pluck('id_persona_directa');
+        $id_personas_mes_actual = NominaDirecta::where('mes', $mes_actual)
+            ->get()->pluck('id_persona_directa');
         $id_persona_nuevas = $id_personas_mes_actual->diff($id_personas_mes_pasado);
 
         $personas_directa = NominaDirecta::where('estado_nomina', '=', 'pendiente') //personas a aprobar, solo las nuevas
         ->whereIn('id_persona_directa', $id_persona_nuevas)->mes($mes)->get();
 
-
         return view('nomina_directa.aprobacion', ['personas_directa' => $personas_directa, 'jefes' => $jefes, 'mes'=>$mes]);
     }
-
-
 
 
     public function aprobarNominaStore (Request $request)
@@ -239,4 +247,6 @@ class NominaDirectaController extends Controller
 
         return redirect('aprobacion_nomina_directa/'.$mes);
     }
+
+
 }

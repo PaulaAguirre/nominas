@@ -17,38 +17,38 @@
         <div class="row">
             <div class="col-md-5 text-uppercase col-md-offset-3">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><span class="text-bold text-info">Regularizar Asesor</span></div>
+                    <div class="panel-heading"><span class="text-bold text-info">Regularizar Estructura</span></div>
 
                     <div class="panel-body">
-                        {!!Form::model ($nomina_directa, ['method'=>'PATCH', 'route'=>['nomina_directa.update', $nomina_directa]])!!}
+                        {!!Form::model ($persona, ['method'=>'PATCH', 'route'=>['representantes_directa.regularizarEstructuraStore', $persona]])!!}
                         {{Form::token()}}
 
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
 
                         <div class="form-group">
-                                <label for="name" class="text-info">Nombre Asesor - CH </label>
-                                <p>{{$nomina_directa->personaDirecta->nombre}} - {{$nomina_directa->personaDirecta->ch}}</p>
+                            <label for="name" class="text-info">Nombre Asesor - CH </label>
+                            <p>{{$persona->nombre}} - {{$persona->ch}}</p>
                         </div>
 
                         <div class="form-group">
-                            <label class="text-info">Representante Zonal</label>
-                            <p>{{$nomina_directa->personaDirecta->zona->representante_zonal_nombre}}</p>
+                            <label class="text-info">Zona Actual - Zona Nueva</label>
+                            <p>{{$persona->zona->zona.' - '.$persona->zona_nuevo->zona}}</p>
                         </div>
 
                         <div class="form-group">
-                            <label class="text-info">Representante Jefe</label>
-                            <p>{{$nomina_directa->personaDirecta->representanteJefe->nombre}}</p>
+                            <label class="text-info">Jefe Actual - Jefe Nuevo</label>
+                            <p>{{$persona->representanteJefe->nombre.' - '.$persona->representanteJefeNuevo->nombre}}</p>
                         </div>
 
                         <div class="form-group">
                             <label class="text-info">Motivo Rechazo</label>
-                            <p>{{$nomina_directa->motivo_rechazo}}</p>
+                            <p>{{$persona->motivo_rechazo}}</p>
                         </div>
 
                         <div class="form-group">
                             <label class="text-info">Regularización</label>
-                            <textarea class="form-control" rows="2" name="regularizacion" id="regularizacion" placeholder="Detalles de la regularización"></textarea>
+                            <textarea class="form-control" rows="2" name="regularizacion_cambio" id="regularizacion_cambio" placeholder="Detalles de la regularización"></textarea>
                         </div>
 
                         <div class="form-group text-center">

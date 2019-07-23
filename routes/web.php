@@ -12,7 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check())
+    {
+        return redirect('nomina_directa');
+    }
+    else
+    {
+        return redirect ('login');
+    }
 });
 
 Auth::routes();
@@ -24,8 +31,17 @@ Route::group (['middleware'=>'auth'], function () {
      * */
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('representantes_directa', 'PersonaDirectaController');
-    Route::resource('nomina_directa', 'NominaDirectaController');
+    Route::get('representantes_directa/aprobacion_estructura/{mes}', 'PersonaDirectaController@aprobarCambioEstructura')
+        ->name('representantes_directa.aprobarCambioEstructura');
+    Route::patch('representantes_directa/aprobacion_estructura/{mes}', 'PersonaDirectaController@aprobarCambioEstructuraStore')
+        ->name('representantes_directa.aprobarCambioEstructuraStore');
+    Route::get('representantes_directa/regularizar_estructura/{persona}', 'PersonaDirectaController@regularizarEstructura')
+    ->name('representantes_directa.regularizar_estructura');
+    Route::patch('representantes_directa/regularizar_estructura/{persona}', 'PersonaDirectaController@regularizarEstructuraStore')
+        ->name('representantes_directa.regularizarEstructuraStore');
 
+
+    Route::resource('nomina_directa', 'NominaDirectaController');
     Route::get('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@agregarConsideraciones')
         ->name('nomina_directa_consideraciones.agregarconsideraciones');
     Route::patch('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@storeConsideraciones')

@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\NominaDirecta;
 use App\PersonaDirecta;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Zona;
-use App\Region;
-use Illuminate\Validation\Rule;
 
 class PersonaDirectaController extends Controller
 {
@@ -17,6 +13,7 @@ class PersonaDirectaController extends Controller
      */
     public function __construct()
     {
+        //$this->middleware(['roles:tigo_people,zonal']);
     }
 
 
@@ -28,8 +25,8 @@ class PersonaDirectaController extends Controller
     public function index(Request $request)
     {
         $zonas = auth()->user()->zonas->pluck('id');
-        $name = ($request->get('name'));
-        $personasDirecta = PersonaDirecta::representantesdir('')->name($name)->get();
+        $id_persona = ($request->get('id_persona'));
+        $personasDirecta = PersonaDirecta::representantesdir($id_persona)->orderBy('nombre')->get();
 
         return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'zonas'=>$zonas]);
     }
@@ -65,10 +62,9 @@ class PersonaDirectaController extends Controller
         $asesor->id_representante_jefe = $id_representante_jefe;
         $asesor->id_zona = $id_zona;
         $asesor->cargo =  'representante';
+        $asesor->estado_cambio = 'aprobado';
 
         $asesor->save();
-
-        //dd('hecho');
         return redirect('representantes_directa');
     }
 
@@ -110,12 +106,14 @@ class PersonaDirectaController extends Controller
     {
         $asesor = PersonaDirecta::findOrFail($id);
         $url = $request->get('url');
-        $id_zona = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id_zona;
-        $id_representante_jefe = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->id_persona;
+        $id_zona_nuevo = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id;
+
+        $id_representante_jefe_nuevo = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->id_persona;
 
         $asesor->fill($request->all());
-        $asesor->id_representante_jefe = $id_representante_jefe;
-        $asesor->id_zona = $id_zona;
+        $asesor->id_representante_jefe_nuevo = $id_representante_jefe_nuevo;
+        $asesor->id_zona_nuevo = $id_zona_nuevo;
+        $asesor->estado_cambio = 'pendiente';
         $asesor->update();
 
         $nomina = NominaDirecta::where('id_persona_directa', $asesor->id_persona)->get()->last();
@@ -135,5 +133,52 @@ class PersonaDirectaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function aprobarCambioEstructura(Request $request, $mes)
+    {
+        $personas = PersonaDirecta::where('estado_cambio', '=', 'pendiente')->get();
+
+        return view('personasDirecta.aprobacion_estructura', ['personas'=>$personas, 'mes' => $mes]);
+    }
+
+    public function aprobarCambioEstructuraStore(Request $request)
+    {
+
+        $estado_cambio = $request->get('aprobacion');
+        $motivo_rechazo = $request->get('motivo_rechazo');
+        $id_persona = $request->get('id_persona');
+        $cont = 0;
+
+        while ($cont < count($id_persona))
+        {
+            $persona = PersonaDirecta::findOrFail($id_persona[$cont]);
+            $persona->estado_cambio = $estado_cambio[$cont];
+            if ($estado_cambio[$cont] == 'aprobado')
+            {
+                $persona->id_representante_jefe = $persona->id_representante_jefe_nuevo;
+                $persona->id_zona = $persona->id_zona_nuevo;
+            }
+            $persona->motivo_rechazo = $motivo_rechazo[$cont];
+            $persona->update();
+            $cont = $cont+1;
+        }
+
+        return redirect()->back();
+    }
+
+    public function regularizarEstructura ($id)
+    {
+        $persona = PersonaDirecta::findOrFail($id);
+        return view('personasDirecta.regularizar_cambio', ['persona' => $persona]);
+    }
+
+    public function regularizarEstructuraStore (Request $request, $id)
+    {
+        $persona = PersonaDirecta::findOrFail($id);
+        $persona->regularizacion_cambio = $request->get('regularizacion_cambio');
+        $persona->estado_cambio = 'pendiente';
+        $persona->update();
+        return redirect('representantes_directa');
     }
 }

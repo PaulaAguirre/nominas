@@ -20,8 +20,10 @@ class CreatePersonasDirectaTable extends Migration
             $table->string('documento_persona')->nullable();
             $table->string('nombre');
             $table->integer('id_representante_jefe')->nullable();
+            $table->integer('id_representante_jefe_nuevo')->nullable();
             $table->string('cargo');
             $table->integer('id_zona')->nullable();
+            $table->integer('id_zona_nuevo')->nullable();
             $table->string('cargo_go')->nullable();
             $table->string('agrupacion')->nullable();
             $table->string('activo')->nullable()->default('A');

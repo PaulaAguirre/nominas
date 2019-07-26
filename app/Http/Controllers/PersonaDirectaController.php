@@ -26,7 +26,8 @@ class PersonaDirectaController extends Controller
     {
         $zonas = auth()->user()->zonas->pluck('id');
         $id_persona = ($request->get('id_persona'));
-        $personasDirecta = PersonaDirecta::representantesdir($id_persona)->orderBy('nombre')->get();
+        $personasDirecta = PersonaDirecta::representantesdir($id_persona)->orderBy('nombre')
+            ->get();
 
         return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'zonas'=>$zonas]);
     }
@@ -40,7 +41,7 @@ class PersonaDirectaController extends Controller
     {
         $jefes = PersonaDirecta::where ('cargo', '=', 'representante_jefe')->get();
         $cargos_go = ['go1', 'go2', 'go3'];
-        $agrupaciones = ['mobile_pre', 'mobile_pos', 'home', 'b2b'];
+        $agrupaciones = ['MOBILE PRE', 'MOBILE POS', 'HOME', 'B2B'];
         return view('personasDirecta.create', ['jefes'=>$jefes, 'cargos_go' => $cargos_go, 'agrupaciones'=>$agrupaciones]);
     }
 

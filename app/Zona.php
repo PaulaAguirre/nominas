@@ -14,4 +14,9 @@ class Zona extends Model
     {
         return $this->belongsTo('App\Region', 'id_region');
     }
+
+    public function familiazona ()
+    {
+        return $this->belongsTo('App\FamiliaZona', 'id_familiazona');
+    }
 }

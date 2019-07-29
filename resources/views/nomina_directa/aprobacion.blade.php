@@ -45,9 +45,9 @@
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                     <td>{{$persona->personaDirecta->representanteJefe->zona->representante_zonal_nombre}}
                                         / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
-                                    @if($persona->regularizacion_nomina <> 'NULL')
-                                        <td class="text-danger">{{$persona->regularizacion_nomina}}</td>
-                                    @elseif($persona->regularizacion_nomina == 'NULL')
+                                    @if($persona->regularizacion_nomina <> '')
+                                        <td class="alert-warning">{{$persona->regularizacion_nomina}}</td>
+                                    @else
                                         <td class="">{{$persona->regularizacion_nomina}}</td>
                                     @endif
                                     <td>
@@ -70,9 +70,9 @@
                                 <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                 <td>{{$persona->personaDirecta->representanteJefe->zona->representante_zonal_nombre}}
                                     / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
-                                @if($persona->regularizacion <> 'NULL')
-                                    <td class="text-danger">{{$persona->regularizacion_nomina}}</td>
-                                @elseif($persona->regularizacion == 'NULL')
+                                @if($persona->regularizacion_nomina <> '')
+                                    <td class="alert-warning">{{$persona->regularizacion_nomina}}</td>
+                                @else
                                     <td class="">{{$persona->regularizacion_nomina}}</td>
                                 @endif
                                 <td>

@@ -33,6 +33,7 @@
                     <th>Motivo</th>
                     <th>Enviar</th>
                     </thead>
+                    {{dd($personas_consideracion)}}
                     @foreach ($personas_consideracion as $persona)
                         <tr class="text-uppercase">
                             @if (auth()->user()->hasRoles(['tigo_people']))
@@ -56,7 +57,7 @@
                                         <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
                                     </td>
                                 @endif
-                             @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
+                            @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->zona}}</td>

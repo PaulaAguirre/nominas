@@ -101,6 +101,7 @@ class ConsideracionesDirectaController extends Controller
         $personas_consideracion = NominaDirecta::where('estado_consideracion', '=', 'pendiente')
             ->where('mes', $mes)
             ->get();
+
         return view('consideraciones_directa.aprobacion', ['personas_consideracion' => $personas_consideracion, 'mes'=>$mes]);
 
     }

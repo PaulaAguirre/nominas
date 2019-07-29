@@ -33,7 +33,6 @@
                     <th>Motivo</th>
                     <th>Enviar</th>
                     </thead>
-                    {{dd($personas_consideracion)}}
                     @foreach ($personas_consideracion as $persona)
                         <tr class="text-uppercase">
                             @if (auth()->user()->hasRoles(['tigo_people']))
@@ -59,9 +58,9 @@
                                 @endif
                             @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
-                                <td>{{$persona->personaDirecta->nombre}}</td>
+                                <td>nombre</td>
                                 <td>{{$persona->personaDirecta->zona->zona}}</td>
-                                <td>{{$persona->consideracion->nombre}}</td>
+                                <td>nombre consideracion</td>
                                 <td>{{$persona->detalles_consideracion}}</td>
                                 <td>{{$persona->regularizacion_consideracion}}</td>
                                 <td>

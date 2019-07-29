@@ -91,7 +91,7 @@ class PersonaDirectaController extends Controller
         $persona = PersonaDirecta::findOrFail($id);
         $jefes = PersonaDirecta::where ('cargo', '=', 'representante_jefe')->get();
         $cargos_go = ['go1', 'go2', 'go3'];
-        $agrupaciones = ['mobile_pre', 'mobile_pos', 'home', 'b2b'];
+        $agrupaciones = ['MOBILE PRE', 'MOBILE POS', 'HOME', 'B2B'];
 
         return view('personasDirecta.edit', ['jefes'=>$jefes, 'persona' => $persona, 'cargos_go' => $cargos_go, 'agrupaciones'=>$agrupaciones]);
     }

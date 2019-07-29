@@ -27,7 +27,7 @@
                         <tr class="text-uppercase text-sm">
                             @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
                                 @if($zonas->contains($persona->personaDirecta->id_zona))
-                                    <td>{{$persona->id_persona_directa}}</td>
+                                    <td>{{$persona->id_nomina}}</td>
                                     <td>{{$persona->mes}}</td>
                                     <td>{{$persona->personaDirecta->ch}}</td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>

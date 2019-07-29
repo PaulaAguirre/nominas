@@ -117,9 +117,12 @@ class PersonaDirectaController extends Controller
         $asesor->estado_cambio = 'pendiente';
         $asesor->update();
 
-        $nomina = NominaDirecta::where('id_persona_directa', $asesor->id_persona)->get()->last();
-        $nomina->agrupacion = $asesor->agrupacion;
-        $nomina->update();
+            $nomina = NominaDirecta::where('id_persona_directa', $asesor->id_persona)->get()->last();
+            if($nomina){
+                $nomina->agrupacion = $asesor->agrupacion;
+                $nomina->update();
+            }
+
 
 
         return redirect($url);

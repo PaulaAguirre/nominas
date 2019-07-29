@@ -45,10 +45,10 @@
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                     <td>{{$persona->personaDirecta->representanteJefe->zona->representante_zonal_nombre}}
                                         / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
-                                    @if($persona->regularizacion <> 'NULL')
-                                        <td class="text-danger">{{$persona->regularizacion}}</td>
-                                    @elseif($persona->regularizacion == 'NULL')
-                                        <td class="">{{$persona->regularizacion}}</td>
+                                    @if($persona->regularizacion_nomina <> 'NULL')
+                                        <td class="text-danger">{{$persona->regularizacion_nomina}}</td>
+                                    @elseif($persona->regularizacion_nomina == 'NULL')
+                                        <td class="">{{$persona->regularizacion_nomina}}</td>
                                     @endif
                                     <td>
                                         <select name="aprobacion[]" class="form-control" id="aprobacion">
@@ -71,9 +71,9 @@
                                 <td>{{$persona->personaDirecta->representanteJefe->zona->representante_zonal_nombre}}
                                     / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                 @if($persona->regularizacion <> 'NULL')
-                                    <td class="text-danger">{{$persona->regularizacion}}</td>
+                                    <td class="text-danger">{{$persona->regularizacion_nomina}}</td>
                                 @elseif($persona->regularizacion == 'NULL')
-                                    <td class="">{{$persona->regularizacion}}</td>
+                                    <td class="">{{$persona->regularizacion_nomina}}</td>
                                 @endif
                                 <td>
                                     <select name="aprobacion[]" class="form-control" id="aprobacion">

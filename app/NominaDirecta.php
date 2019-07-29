@@ -23,7 +23,7 @@ class NominaDirecta extends Model
         'activo',
         'agrupacion',
         'motivo_rechazo',
-        'regularizacion',
+        'regularizacion_nomina',
         'regularizacion_consideracion'
 
     ];

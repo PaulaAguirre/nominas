@@ -151,7 +151,7 @@ class NominaDirectaController extends Controller
     {
        $nomina_directa = NominaDirecta::findOrFail($id);
        $regularizacion = $request->get('regularizacion');
-       $nomina_directa->regularizacion = $regularizacion;
+       $nomina_directa->regularizacion_nomina = $regularizacion;
        $nomina_directa->estado_nomina = 'pendiente';
        $nomina_directa->update();
        return redirect('nomina_directa');

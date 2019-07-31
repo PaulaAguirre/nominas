@@ -83,13 +83,12 @@ class PersonaDirecta extends Model
     {
         if ($id_representante)
         {
-            $query->where('cargo', '=', 'representante')
-                ->where('id_persona', $id_representante)
-                ->where('activo', '=', 'activo')
-                ;
+            $query
+                //->where('cargo', '=', 'representante')
+                ->where('id_persona', $id_representante);
         }
 
-        $query->where('cargo', '=', 'representante')
+       $query->where('cargo', '=', 'representante')
         ->where('activo', '=', 'activo');
     }
 

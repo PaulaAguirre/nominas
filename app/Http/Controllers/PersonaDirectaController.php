@@ -13,7 +13,7 @@ class PersonaDirectaController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware(['roles:tigo_people,zonal']);
+       // $this->middleware('roles:zonal')->except('index');
     }
 
 
@@ -24,11 +24,16 @@ class PersonaDirectaController extends Controller
      */
     public function index(Request $request)
     {
-        $zonas = auth()->user()->zonas->pluck('id');
+        $zonas = auth()->user()->zonas->pluck('id')->toArray();
         $id_persona = ($request->get('id_persona'));
-        $personasDirecta = PersonaDirecta::representantesdir($id_persona)->orderBy('nombre')
-            ->get();
+       $personasDirecta = PersonaDirecta::representantesdir($id_persona)->orderBy('nombre')
+           ->get();
+       //representantesdir($id_persona)->orderBy('nombre')->get();
 
+        //$personasDirecta = PersonaDirecta::all();
+        //$personasDirecta = PersonaDirecta::where('id_zona', '=', '179')
+          //  ->orWhere('id_zona', '=', '183')
+            //->get();
         return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'zonas'=>$zonas]);
     }
 

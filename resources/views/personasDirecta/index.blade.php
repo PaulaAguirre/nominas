@@ -28,7 +28,7 @@
                     @foreach ($personasDirecta as $persona)
                         <tr class="text-uppercase text-sm">
                             @if (auth()->user()->hasRoles(['zonal', 'tigo_people']))
-                                @if(auth()->user()->zonas->contains($persona->id_zona))
+                                @if(in_array($persona->id_zona, $zonas))
                                     <td>{{$persona->id_persona}}</td>
                                     <td>{{$persona->ch}}</td>
                                     <td>{{$persona->nombre}}</td>
@@ -54,6 +54,7 @@
                                             </a>
                                         @endif
                                     </td>
+
                                 @endif
                             @elseif (auth()->user()->hasRoles(['tigo_people_admin']))
                                 <td>{{$persona->id_persona}}</td>

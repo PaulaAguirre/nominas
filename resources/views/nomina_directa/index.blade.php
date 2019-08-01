@@ -2,7 +2,10 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-            <h3>Nómina - Canal: Directa. <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a></h3>
+            <h3>Nómina - Canal: Directa.
+                @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
+                    <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a></h3>
+                @endif
             @include('nomina_directa.search_index')
 
         </div>
@@ -21,7 +24,9 @@
                     <th>Rep Zonal - Rep Jefe</th>
                     <th>Region/Zona</th>
                     <th>Estado</th>
-                    <th class="text-center">Opciones</th>
+                   @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
+                        <th class="text-center">Opciones</th>
+                    @endif
                     </thead>
                     @foreach ($personas as $persona)
                         <tr class="text-uppercase text-sm">
@@ -41,20 +46,22 @@
                                     @else
                                         <td class="alert-success">{{$persona->estado_nomina}}</td>
                                     @endif
-                                    <td>
-                                        <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
-                                            <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
-                                        </a>
-                                        <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
-                                            <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
-                                        </a>
-                                        </a>
-                                        @if($persona->estado_nomina == 'rechazado')
-                                            <a href="{{URL::action('NominaDirectaController@edit', $persona)}}">
-                                                <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
+                                    @if(auth()->user()->hasRoles(['zonal']))
+                                        <td>
+                                            <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
+                                                <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                             </a>
-                                        @endif
-                                    </td>
+                                            <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
+                                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
+                                            </a>
+                                            </a>
+                                            @if($persona->estado_nomina == 'rechazado')
+                                                <a href="{{URL::action('NominaDirectaController@edit', $persona)}}">
+                                                    <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
+                                                </a>
+                                            @endif
+                                        </td>
+                                    @endif
                                 @endif
                             @elseif (auth()->user()->hasRoles(['tigo_people_admin']))
                                 <td>{{$persona->id_persona_directa}}</td>

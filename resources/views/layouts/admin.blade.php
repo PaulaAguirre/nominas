@@ -19,7 +19,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
-    <link rel="shortcut icon" href="{{asset('img/management-group.png')}}" >
+    <link rel="shortcut icon" href="{{asset('img/value.png')}}" >
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -118,20 +118,20 @@
                     </ul>
                 </li>
 
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-check-square" aria-hidden="true"></i>
-                        <span>Aprobaciones</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nomina Directa</a></li>
-                        <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
-                        <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
-                    </ul>
-                </li>
-
+                @if(auth()->user()->hasRoles(['tigo_people', 'tigo_people_admin']))
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <span>Aprobaciones</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nomina Directa</a></li>
+                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
+                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
+                        </ul>
+                    </li>
+                @endif
 
                 <li class="treeview">
                     <a href="#">

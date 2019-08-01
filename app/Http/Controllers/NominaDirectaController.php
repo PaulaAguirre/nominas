@@ -15,6 +15,18 @@ use Psr\Log\NullLogger;
 class NominaDirectaController extends Controller
 {
     /**
+     * NominaDirectaController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('roles:tigo_people,tigo_people_admin')->only(['aprobarNomina']);
+        $this->middleware('roles:zonal,tigo_people_admin')->only(['create', 'edit','agregarConsideraciones']);
+
+
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -98,6 +110,9 @@ class NominaDirectaController extends Controller
         }
         $this->validate($request, $rules, $messages);
 
+        $mes_anterior = Carbon::now()->format('Ym');
+        $asesores_existentes = NominaDirecta::where('mes', $mes_anterior)
+            ->get()->pluck('id_persona_directa');
 
         while ($cont < count($personas_id))
         {
@@ -108,6 +123,11 @@ class NominaDirectaController extends Controller
             $nomina->persona_mes = $persona_mes[$cont] ;
             $nomina->activo = $activo[$cont];
             $nomina->agrupacion = PersonaDirecta::findOrFail($personas_id[$cont])->agrupacion;
+            if ($asesores_existentes->contains( $personas_id[$cont]))
+            {
+                $nomina->estado_nomina = 'aprobado';
+            }
+
             $nomina->save();
             $cont = $cont + 1;
         }
@@ -132,7 +152,7 @@ class NominaDirectaController extends Controller
      *
      * @param  \App\NominaDirecta  $nominaDirecta
      * @return \Illuminate\Http\Response
-     * editar los rechazados.
+     * editar los rechazados en la nómina.
      */
     public function edit($id)
     {

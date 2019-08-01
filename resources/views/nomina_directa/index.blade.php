@@ -20,7 +20,7 @@
                     <th>Agrupación</th>
                     <th>Rep Zonal - Rep Jefe</th>
                     <th>Region/Zona</th>
-                    <th>Activo</th>
+                    <th>Estado</th>
                     <th class="text-center">Opciones</th>
                     </thead>
                     @foreach ($personas as $persona)

@@ -27,7 +27,7 @@ Auth::routes();
 
 Route::group (['middleware'=>'auth'], function () {
     /**
-     * Nomina directa
+     * Persona directa
      * */
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('representantes_directa', 'PersonaDirectaController');
@@ -40,7 +40,9 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('representantes_directa/regularizar_estructura/{persona}', 'PersonaDirectaController@regularizarEstructuraStore')
         ->name('representantes_directa.regularizarEstructuraStore');
 
-
+    /**
+     * Nomina directa
+     * */
     Route::resource('nomina_directa', 'NominaDirectaController');
     Route::get('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@agregarConsideraciones')
         ->name('nomina_directa_consideraciones.agregarconsideraciones');
@@ -51,6 +53,9 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNominaStore')
         ->name('nomina_directa_aprobacion.aprobacion');
 
+    /**
+     * Consideraciones directa
+     * */
     Route::resource('consideraciones_directa', 'ConsideracionesDirectaController');
     Route::get('aprobacion_consideraciones_directa/{mes}', 'ConsideracionesDirectaController@aprobarConsideraciones')//ruta para cargar las consideraciones de un asesor
     ->name('consideraciones_directa.aprobacion');//ruta para mostrar las consideraciones a aprobar

@@ -13,7 +13,8 @@ class PersonaDirectaController extends Controller
      */
     public function __construct()
     {
-       // $this->middleware('roles:zonal')->except('index');
+       $this->middleware('roles:zonal,tigo_people_admin')->only(['edit','create', 'regularizarEstructura', 'update']);
+       $this->middleware('roles:tigo_people,tigo_people_admin')->only(['aprobarCambioEstructura']);
     }
 
 

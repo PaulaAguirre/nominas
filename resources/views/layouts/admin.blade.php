@@ -28,7 +28,7 @@
     <header class="main-header" >
 
         <!-- Logo -->
-        <a href="{{url ('index_exp')}}" class="logo" style="background-color: #2d4373">
+        <a href="#" class="logo" style="background-color: #2d4373">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>PN</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -269,6 +269,13 @@
 
 <!-- AdminLTE App -->
 <script src="{{asset('js/app.min.js')}}"></script>
+
+<!-- Datepicker Files -->
+<link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
+<link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
+<script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
+<!-- Languaje -->
+<script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
 
 </body>
 </html>

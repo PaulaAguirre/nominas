@@ -1,5 +1,12 @@
 @extends ('layouts.admin')
 @section ('contenido')
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
+    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
+    <!-- Languaje -->
+    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+
+
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <h3>{{$persona_nomina->personaDirecta->nombre}}</h3>
@@ -34,6 +41,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="date">Fecha</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker" name="date">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="name">Observaciones</label>
                             <textarea class="form-control" rows="3" id="detalles_consideracion" value="{{old('detalles_consideracion')}}" required name="detalles_consideracion" placeholder="Detalles de la consideración"></textarea>
                         </div>
@@ -52,5 +69,16 @@
     </div>
 
     {!!Form::close()!!}
+
+
+    @push('scripts')
+        <script>
+            $('.datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: "es",
+                autoclose: true
+            });
+        </script>
+    @endpush
 
 @endsection

@@ -15,12 +15,12 @@
 
                     @endif
 
-                    Ya estás logeado!
+                    Cambios Realizados!
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Ingresar<a href="bds/login"> </a>
+                                    Ingresar<a href="http://bds/nomina_directa"> </a>
                                 </button>
                             </div>
                         </div>

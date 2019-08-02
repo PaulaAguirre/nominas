@@ -277,5 +277,6 @@
 <!-- Languaje -->
 <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
 
+
 </body>
 </html>

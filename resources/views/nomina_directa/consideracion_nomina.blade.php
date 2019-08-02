@@ -1,11 +1,5 @@
-@extends ('layouts.admin')
 @section ('contenido')
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
-    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
-    <!-- Languaje -->
-    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
-
+    @extends ('layouts.admin')
 
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -41,12 +35,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="date">Fecha</label>
+                            <label for="">Seleccione Rango de fechas</label>
                             <div class="input-group">
                                 <input type="text" class="form-control datepicker" name="date">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-th"></span>
                                 </div>
+                                <input type="text" class="form-control datepicker" name="date">
                             </div>
                         </div>
 
@@ -70,15 +65,20 @@
 
     {!!Form::close()!!}
 
-
     @push('scripts')
         <script>
-            $('.datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: "es",
-                autoclose: true
-            });
+
+            $(document).ready(function () {
+                $('.datepicker').datepicker({
+                    format: "dd/mm/yyyy",
+                    language: "es",
+                    autoclose: true
+                });
+            })
+
+
+
         </script>
     @endpush
-
 @endsection
+

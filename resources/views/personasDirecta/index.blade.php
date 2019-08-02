@@ -15,6 +15,7 @@
                         <th>ID</th>
                         <th>CH</th>
                         <th>Nombre</th>
+                        <th>Staff</th>
                         <th>CI</th>
                         <th>Representante Zonal</th>
                         <th>Representante Jefe</th>
@@ -30,8 +31,10 @@
                             @if (auth()->user()->hasRoles(['zonal', 'tigo_people']))
                                 @if(in_array($persona->id_zona, $zonas))
                                     <td>{{$persona->id_persona}}</td>
+
                                     <td>{{$persona->ch}}</td>
                                     <td>{{$persona->nombre}}</td>
+                                    <td>{{$persona->staff}}</td>
                                     <td>{{$persona->documento_persona}}</td>
                                     <td>{{$persona->zona->representante_zonal_nombre ? $persona->zona->representante_zonal_nombre : '' }}</td>
                                     <td>{{$persona->representanteJefe ? $persona->representanteJefe->nombre : ''}}</td>
@@ -58,8 +61,10 @@
                                 @endif
                             @elseif (auth()->user()->hasRoles(['tigo_people_admin']))
                                 <td>{{$persona->id_persona}}</td>
+
                                 <td>{{$persona->ch}}</td>
                                 <td>{{$persona->nombre}}</td>
+                                <td>{{$persona->staff}}</td>
                                 <td>{{$persona->documento_persona}}</td>
                                 <td>{{$persona->zona->representante_zonal_nombre ? $persona->zona->representante_zonal_nombre : '' }}</td>
                                 <td>{{$persona->representanteJefe ? $persona->representanteJefe->nombre : ''}}</td>

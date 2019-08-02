@@ -38,10 +38,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">Documento</label>
                                 <input type="text" name="documento_persona" required value="{{$persona->documento_persona}}" class="form-control text-uppercase">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <div class="">
+                                <label for="name">Staff</label>
+                                <input type="number" name="staff" required value="{{$persona->staff}}" class="form-control">
                             </div>
                         </div>
 

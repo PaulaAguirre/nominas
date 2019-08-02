@@ -25,6 +25,7 @@ class PersonaDirecta extends Model
         'estado_cambio',
         'motivo_rechazo',
         'regularizacion_cambio',
+        'staff'
 
     ];
 

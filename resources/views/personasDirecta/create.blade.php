@@ -15,7 +15,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-1">
+            <div class="col-md-7 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading text-bold"><span class="text-info">NUEVO ASESOR</span></div>
 
@@ -38,10 +38,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">Documento</label>
                                 <input type="text" name="documento_persona" required value="{{old('documento_persona')}}" class="form-control text-uppercase">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <div class="">
+                                <label for="name">Staff</label>
+                                <input type="number" name="staff"  value="{{old('staff')}}" class="form-control">
                             </div>
                         </div>
 

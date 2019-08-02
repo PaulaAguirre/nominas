@@ -1,5 +1,5 @@
-@section ('contenido')
-    @extends ('layouts.admin')
+@extends ('layouts.admin')
+    @section ('contenido')
 
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -39,7 +39,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control datepicker" name="date">
                                 <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-th"></span>
+                                    <span class="fa fa-calendar"></span>
                                 </div>
                                 <input type="text" class="form-control datepicker" name="date">
                             </div>

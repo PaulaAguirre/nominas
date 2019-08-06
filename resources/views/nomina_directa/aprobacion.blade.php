@@ -51,13 +51,13 @@
                                         <td class="">{{$persona->regularizacion_nomina}}</td>
                                     @endif
                                     <td>
-                                        <select name="aprobacion[]" class="form-control" id="aprobacion">
+                                        <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
                                             <option value="aprobado" >aprobado</option>
                                             <option value="rechazado">rechazado</option>
                                             <option value="pendiente" selected>pendiente</option>
                                         </select>
                                     </td>
-                                    <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo[]"><input type="hidden" ></td>
+                                    <td><input type="text" style="display:none;" class="form-control text-uppercase" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></td>
                                     <td class="text-center">
                                         <input name="_token" value="{{csrf_token()}}" type="hidden">
                                         <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
@@ -76,13 +76,13 @@
                                     <td class="">{{$persona->regularizacion_nomina}}</td>
                                 @endif
                                 <td>
-                                    <select name="aprobacion[]" class="form-control" id="aprobacion">
+                                    <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
                                         <option value="aprobado" >aprobado</option>
                                         <option value="rechazado">rechazado</option>
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
-                                <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo[]"><input type="hidden" ></td>
+                                <td><input type="text" style="display:none;" class="form-control text-uppercase" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
                                     <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
@@ -119,10 +119,16 @@
                     $("#btn_cancelar").show();
                 }
 
-                if ($("#aprobacion").val() != '')
-                {
-                    //
-                }
+                $('.aprobacion').change(function(){
+                    var id = $(this).prop('id').split('-')[1];
+                    if ($(this).val()=='rechazado')
+                    {
+                        $("#motivo_rechazo-"+id).show();
+                    }else
+                    {
+                        $("#motivo_rechazo-"+id).hide();
+                    }
+                });
 
 
             })

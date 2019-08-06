@@ -26,13 +26,14 @@
                     <th>CH</th>
                     <th>Representante</th>
                     <th>Zona</th>
-                    <th>Motivo</th>
+                    <th>Consideración</th>
                     <th>Detalles</th>
                     <th>Regularización</th>
                     <th>Aprobar</th>
-                    <th>Motivo</th>
+                    <th>Rechazo</th>
                     <th>Enviar</th>
                     </thead>
+                    <tbody id="ajuste">
                     @foreach ($personas_consideracion as $persona)
                         <tr class="text-uppercase">
                             @if (auth()->user()->hasRoles(['tigo_people']))
@@ -43,14 +44,14 @@
                                     <td>{{$persona->consideracion->nombre}}</td>
                                     <td>{{$persona->detalles_consideracion}}</td>
                                     <td>{{$persona->regularizacion_consideracion}}</td>
-                                    <td>
-                                        <select name="aprobacion[]" class="form-control" id="">
+                                    <td id="tdaprobacion">
+                                        <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
                                             <option value="aprobado" >aprobado</option>
                                             <option value="rechazado">rechazado</option>
                                             <option value="pendiente" selected>pendiente</option>
                                         </select>
                                     </td>
-                                    <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo[]" id="motivo_rechazo"><input type="hidden" ></td>
+                                    <td><input type="text" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"><input type="hidden" ></td>
                                     <td class="text-center">
                                         <input name="_token" value="{{csrf_token()}}" type="hidden">
                                         <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
@@ -60,17 +61,17 @@
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->zona}}</td>
-                                <td>{{$persona->consideracion}}</td>
+                                <td>{{$persona->consideracion->nombre}}</td>
                                 <td>{{$persona->detalles_consideracion}}</td>
                                 <td>{{$persona->regularizacion_consideracion}}</td>
-                                <td>
-                                    <select name="aprobacion[]" class="form-control" id="">
+                                <td id="tdaprobacion">
+                                    <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
                                         <option value="aprobado" >aprobado</option>
                                         <option value="rechazado">rechazado</option>
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
-                                <td><input type="text" class="form-control text-uppercase" name="motivo_rechazo[]" id="motivo_rechazo"><input type="hidden" ></td>
+                                <td><input type="text" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"><input type="hidden" ></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
                                     <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
@@ -79,6 +80,8 @@
                         </tr>
 
                     @endforeach
+                    </tbody>
+
                 </table>
                 <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">
                     <div class="form-group">
@@ -106,6 +109,17 @@
                     $("#btn_enviar").show();
                     $("#btn_cancelar").show();
                 }
+
+                $('.aprobacion').change(function(){
+                    var id = $(this).prop('id').split('-')[1];
+                    if ($(this).val()=='rechazado')
+                    {
+                        $("#motivo_rechazo-"+id).show();
+                    }else
+                    {
+                        $("#motivo_rechazo-"+id).hide();
+                    }
+                });
 
             })
         </script>

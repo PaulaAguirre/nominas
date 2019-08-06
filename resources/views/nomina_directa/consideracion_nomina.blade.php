@@ -64,7 +64,6 @@
     </div>
 
     {!!Form::close()!!}
-
     @push('scripts')
         <script>
 

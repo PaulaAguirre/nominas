@@ -48,21 +48,21 @@
                     <li class="dropdown">
 
                         <ul class="dropdown-menu" role="menu">
-                        <!--<li>
+                            <!--<li>
 
-                                </li>-->
+                                    </li>-->
                         </ul>
                     </li>
                 @if(Auth::check ())
                     <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <button class="btn-success"><small class="">Online </small></button>
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <button class="btn-success"><small class="">Online </small></button>
 
-                        </a>
+                            </a>
 
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
 
 
                                 <li class="user-header">
@@ -88,9 +88,9 @@
 
                                     </div>
                                 </li>
-                            @endif
-                        </ul>
-                    </li>
+                                @endif
+                            </ul>
+                        </li>
                 </ul>
             </div>
         </nav>
@@ -235,8 +235,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <!--Contenido-->
-                                    @yield('contenido')
-                                    <!--Fin Contenido-->
+                                @yield('contenido')
+                                <!--Fin Contenido-->
                                 </div>
                             </div>
 

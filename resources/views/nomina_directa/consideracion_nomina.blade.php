@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label for="">Seleccione Rango de fechas</label>
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" name="date">
+                                <input type="text" class="form-control datepicker" name="date" id="date">
                                 <div class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </div>
@@ -63,21 +63,5 @@
     </div>
 
     {!!Form::close()!!}
-
-    @push('scripts')
-        <script>
-
-            $(document).ready(function () {
-                $('.datepicker').datepicker({
-                    format: "dd/mm/yyyy",
-                    language: "es",
-                    autoclose: true
-                });
-            })
-
-
-
-        </script>
-    @endpush
 @endsection
 

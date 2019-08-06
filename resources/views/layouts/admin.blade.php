@@ -21,6 +21,13 @@
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('img/payroll.png')}}" >
 
+    <!-- Datepicker Files -->
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
+    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
+    <!-- Languaje -->
+    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -270,12 +277,6 @@
 <!-- AdminLTE App -->
 <script src="{{asset('js/app.min.js')}}"></script>
 
-<!-- Datepicker Files -->
-<link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
-<link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
-<script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
-<!-- Languaje -->
-<script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
 
 
 </body>

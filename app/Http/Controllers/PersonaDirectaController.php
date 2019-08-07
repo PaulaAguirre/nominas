@@ -27,15 +27,17 @@ class PersonaDirectaController extends Controller
     {
         $zonas = auth()->user()->zonas->pluck('id')->toArray();
         $id_persona = ($request->get('id_persona'));
-       $personasDirecta = PersonaDirecta::representantesdir($id_persona)->orderBy('nombre')
+        $id_rep_jefe = $request->get('id_jefe');
+       $personasDirecta = PersonaDirecta::representantesdir($id_persona)->jefe($id_rep_jefe)->orderBy('nombre')
            ->get();
+        $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
        //representantesdir($id_persona)->orderBy('nombre')->get();
 
         //$personasDirecta = PersonaDirecta::all();
         //$personasDirecta = PersonaDirecta::where('id_zona', '=', '179')
           //  ->orWhere('id_zona', '=', '183')
             //->get();
-        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'zonas'=>$zonas]);
+        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'zonas'=>$zonas, 'jefes'=>$jefes]);
     }
 
     /**

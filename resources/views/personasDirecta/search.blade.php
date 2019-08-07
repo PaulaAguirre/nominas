@@ -7,6 +7,11 @@
                 <option value="{{$persona->id_persona}}">ch: {{$persona->ch}} - {{$persona->nombre}}</option>
             @endforeach
         </select>
+        <select name="id_jefe" class="form-control selectpicker text-uppercase col-lg-3 " id="id_jefe" title="Selecccione Jefe" data-live-search="true">
+            @foreach($jefes as $jefe)
+                <option value="{{$jefe->id_persona}}">{{strtoupper ($jefe->nombre)}}</option>
+            @endforeach
+        </select>
 
         <button type="submit" class="btn btn-primary"><span>Buscar </span><i class="fa fa-search col-lg-2" aria-hidden="true"></i></button>
 

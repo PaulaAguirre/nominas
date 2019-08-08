@@ -4,10 +4,11 @@
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <h3>Nómina - Canal: Directa.
                 @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
-                    <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a></h3>
+                    <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
                 @endif
+            </h3>
+            <div><p>Cantidad: 2</p></div>
             @include('nomina_directa.search_index')
-
         </div>
     </div>
 
@@ -99,5 +100,22 @@
             </div>
         </div>
     </div>
+
+
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                $("#btn_enviar").hide();
+                $("#btn_cancelar").hide();
+
+                var cont  = 0;
+                var nfilas = $("#tabla_persona tr").length -1;
+
+
+
+
+            })
+        </script>
+    @endpush
 
 @endsection

@@ -13,6 +13,17 @@
                 </div>
             @endif
         </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <div class="form-group">
+                <label>Aprobar todos</label>
+                <select name="aprobar_todos" class="form-control text-uppercase col-lg-4" id="aprobar_todos">
+                    <option value="si">si</option>
+                    <option value="no" selected>no</option>
+                </select>
+
+            </div>
+
+        </div>
     </div>
 
     {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['nomina_directa_aprobacion.aprobacion', $mes]])!!}
@@ -129,6 +140,18 @@
                         $("#motivo_rechazo-"+id).hide();
                     }
                 });
+
+
+
+                function aprobar_todos() {
+                    var aprobar_todos = $("#aprobar_todos").val();
+                    if (aprobar_todos == 'si')
+                    {
+                        $("td").each(function () {
+
+                        })
+                    }
+                }
 
 
             })

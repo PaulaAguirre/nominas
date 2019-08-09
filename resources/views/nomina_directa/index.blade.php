@@ -7,7 +7,7 @@
                     <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
                 @endif
             </h3>
-            <div><p>Cantidad: 2</p></div>
+            <div class="form-group"><p id="cantidad">Cantidad<p></div>
             @include('nomina_directa.search_index')
         </div>
     </div>
@@ -15,7 +15,7 @@
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-condensed table-hover">
+                <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                     <thead class="text-center" style="background-color: #8eb4cb">
                     <th>ID</th>
                     <th>Mes</th>
@@ -111,7 +111,7 @@
                 var cont  = 0;
                 var nfilas = $("#tabla_persona tr").length -1;
 
-
+                $("#cantidad").text(nfilas);
 
 
             })

@@ -3,18 +3,24 @@
     <div class="row">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <h3>Nómina - Canal: Directa.
-                @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
-                    <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a></h3>
+                @if(auth()->user()->hasRoles(['tigo_people_admin']))
+                    <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
                 @endif
+                @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(15))
+                        <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
+                    @endif
+                @endif
+            </h3>
+          <p class="text-info" id="cantidad">Cantidad</p>
             @include('nomina_directa.search_index')
-
         </div>
     </div>
 
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-condensed table-hover">
+                <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                     <thead class="text-center" style="background-color: #8eb4cb">
                     <th>ID</th>
                     <th>Mes</th>
@@ -99,5 +105,23 @@
             </div>
         </div>
     </div>
+
+
+
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                $("#btn_enviar").hide();
+                $("#btn_cancelar").hide();
+
+                var cont  = 0;
+                var nfilas = $("#tabla_persona tr").length -1;
+
+                $("#cantidad").text(nfilas);
+
+
+            })
+        </script>
+    @endpush
 
 @endsection

@@ -10,6 +10,7 @@ use App\PersonaDirecta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Psr\Log\NullLogger;
+use App\Zona;
 
 
 class NominaDirectaController extends Controller
@@ -36,14 +37,18 @@ class NominaDirectaController extends Controller
         $zonas = auth()->user()->zonas->pluck('id');
 
         $mes = $request->get('mes');
+        $id_zona = $request->get('id_zona');
         $id_persona= $request->get('id_persona');
+        $id_jefe = $request->get('id_jefe');
+        $estado = $request->get('estado');
+        $zonas_user = Zona::all();
+        $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')->get();
 
-        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->orderBy('id_nomina')->get();
+        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona)
+            ->jefesDirecta($id_jefe)->estado($estado)
+            ->orderBy('id_nomina')->get();
 
-
-
-
-        return view('nomina_directa.index', ['personas' => $personas, 'zonas' =>$zonas]);
+        return view('nomina_directa.index', ['personas' => $personas, 'zonas' =>$zonas, 'zonas_user'=>$zonas_user, 'jefes'=>$jefes]);
     }
 
     /**
@@ -122,6 +127,7 @@ class NominaDirectaController extends Controller
             $nomina->mes = $mes_nomina ;
             $nomina->persona_mes = $persona_mes[$cont] ;
             $nomina->activo = $activo[$cont];
+            //$nomina->activo = 'activo';
             $nomina->agrupacion = PersonaDirecta::findOrFail($personas_id[$cont])->agrupacion;
             if ($asesores_existentes->contains( $personas_id[$cont]))
             {

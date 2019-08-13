@@ -83,6 +83,8 @@ class NominaDirectaController extends Controller
             ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($zona)
                 ->get();
 
+            //dd($mes_nomina = Carbon::now()->addMonth()->format ('Ym'));
+
             return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
                              'meses'=>$meses, 'mes_nomina'=>$mes_nomina]);
     }

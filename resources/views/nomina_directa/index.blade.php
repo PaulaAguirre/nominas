@@ -6,7 +6,7 @@
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
                 @endif
-                @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
+                @if(auth()->user()->hasRoles(['zonal']))
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(15))
                         <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
                     @endif

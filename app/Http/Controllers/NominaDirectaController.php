@@ -103,7 +103,7 @@ class NominaDirectaController extends Controller
         $mes_nomina = Carbon::now()->addMonth()->format ('Ym');
         $persona_mes = $request->get('persona_mes');
 
-        dd($persona_mes);
+        //dd($persona_mes);
 
         /**
          * Validaciones

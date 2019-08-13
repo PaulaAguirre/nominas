@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-8 text-uppercase col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><span class="text-bold text-info">Editar Datos del Asesor</span></div>
+                    <div class="panel-heading"><span class="text-bold text-info">Editar Datos del Asesor - ID: {{$persona->id_persona}}</span></div>
 
                     <div class="panel-body">
                         {!!Form::model ($persona, ['method'=>'PATCH', 'route'=>['representantes_directa.update', $persona]])!!}
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="name">CH</label>
-                                <input type="number" name="ch" required value="{{$persona->ch}}" class="form-control text-uppercase">
+                                <input type="number" name="ch" required value="{{$persona->ch}}" class="form-control text-uppercase" disabled="disabled">
                             </div>
                         </div>
 
@@ -41,7 +41,7 @@
                         <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">Documento</label>
-                                <input type="text" name="documento_persona" required value="{{$persona->documento_persona}}" class="form-control text-uppercase">
+                                <input type="text" name="documento_persona" required value="{{$persona->documento_persona}}" class="form-control text-uppercase" disabled="disabled">
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@
 
                         <div class="form-group">
                             <label class="">Nombre del Asesor</label>
-                            <input type="text" name="nombre" required value="{{$persona->nombre}}" class="form-control text-uppercase">
+                            <input type="text" name="nombre" required value="{{$persona->nombre}}" class="form-control text-uppercase" disabled="disabled">
                         </div>
 
 

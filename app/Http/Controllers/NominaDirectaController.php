@@ -20,8 +20,8 @@ class NominaDirectaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('roles:tigo_people,tigo_people_admin')->only(['aprobarNomina']);
-        $this->middleware('roles:zonal,tigo_people_admin')->only(['create', 'edit','agregarConsideraciones']);
+        $this->middleware('roles:tigo_people,tigo_people_admin')->only(['aprobarNomina', 'aprobarInactivaciones']);
+        $this->middleware('roles:zonal,tigo_people_admin')->only(['create', 'edit','agregarConsideraciones', 'destroy']);
 
 
     }
@@ -189,11 +189,46 @@ class NominaDirectaController extends Controller
      * @param  \App\NominaDirecta  $nominaDirecta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NominaDirecta $nominaDirecta)
+    public function destroy(Request $request, $id)
     {
-        //
+        $persona = NominaDirecta::findOrFail($id);
+        $motivo_inactivacion = $request->get('motivo_inactivacion');
+        $detalles_inactivacion = $request->get('detalles_inactivacion');
+
+        $persona->motivo_inactivacion = $motivo_inactivacion;
+        $persona->detalles_inactivacion = $detalles_inactivacion;
+        $persona->estado_inactivacion = 'pendiente';
+        $persona->update();
+
+        return redirect('nomina_directa');
     }
 
+    public function aprobarInactivaciones(Request $request)
+    {
+        $mes = '201909';
+        $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
+            ->where('mes', '=', $mes)->get();
+        return view('nomina_directa.aprobar_inactivaciones', ['personas' => $personas, 'mes' => $mes]);
+    }
+
+    public function aprobarInactivacionesStore(Request $request)
+    {
+        $estado_inactivacion = $request->get('aprobacion');
+        $nomina = $request->get('id_nomina');
+        $motivo_rechazo = $request->get('motivo_rechazo');
+        $cont = 0;
+
+        while ($cont < count($nomina))
+        {
+            $nomina_directa = NominaDirecta::findOrFail($nomina[$cont]);
+            $nomina_directa->estado_inactivacion = $estado_inactivacion[$cont];
+            $nomina_directa->motivo_rechazo_inactivacion = $motivo_rechazo[$cont];
+            $nomina_directa->update();
+            $cont = $cont+1;
+        }
+
+        return redirect('aprobar_inactivaciones');
+    }
 
     public function agregarConsideraciones ($id)
     {

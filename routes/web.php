@@ -48,10 +48,16 @@ Route::group (['middleware'=>'auth'], function () {
         ->name('nomina_directa_consideraciones.agregarconsideraciones');
     Route::patch('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@storeConsideraciones')
         ->name('nomina_directa.storeconsideraciones');
+
     Route::get('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNomina')
         ->name('nomina_directa.aprobacion');
     Route::patch('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNominaStore')
         ->name('nomina_directa_aprobacion.aprobacion');
+
+    Route::get('aprobar_inactivaciones', 'NominaDirectaController@aprobarInactivaciones')
+        ->name('nomina_directa.inactivacion');
+    Route::patch('aprobar_inactivaciones', 'NominaDirectaController@aprobarInactivacionesStore')
+        ->name('nomina_directa.inactivacion_store');
 
     /**
      * Consideraciones directa

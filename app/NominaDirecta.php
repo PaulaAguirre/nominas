@@ -24,7 +24,11 @@ class NominaDirecta extends Model
         'agrupacion',
         'motivo_rechazo',
         'regularizacion_nomina',
-        'regularizacion_consideracion'
+        'regularizacion_consideracion',
+        'motivo_inactivacion',
+        'detalles_inactivacion',
+        'estado_inactivacion',
+        'regularizacion_inactivacion'
 
     ];
 

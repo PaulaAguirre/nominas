@@ -44,7 +44,7 @@ class NominaDirectaController extends Controller
         $zonas_user = Zona::all();
         $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')->get();
 
-        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona)
+        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona, $id_jefe)
             ->jefesDirecta($id_jefe)->estado($estado)
             ->orderBy('id_nomina')->get();
 
@@ -80,6 +80,7 @@ class NominaDirectaController extends Controller
 
             $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
             $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
+                ->where('activo', '=', 'activo')
             ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($zona)
                 ->get();
 
@@ -126,8 +127,8 @@ class NominaDirectaController extends Controller
             $nomina->id_persona_directa = $personas_id[$cont];
             $nomina->mes = $mes_nomina ;
             $nomina->persona_mes = $persona_mes[$cont] ;
-            $nomina->activo = $activo[$cont];
-            //$nomina->activo = 'activo';
+            //$nomina->activo = $activo[$cont];
+            $nomina->activo = 'activo';
             $nomina->agrupacion = PersonaDirecta::findOrFail($personas_id[$cont])->agrupacion;
             if ($asesores_existentes->contains( $personas_id[$cont]))
             {
@@ -191,21 +192,22 @@ class NominaDirectaController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $persona = NominaDirecta::findOrFail($id);
+        $persona_nomina = NominaDirecta::findOrFail($id);
         $motivo_inactivacion = $request->get('motivo_inactivacion');
         $detalles_inactivacion = $request->get('detalles_inactivacion');
+        //dd($detalles_inactivacion.' '.$motivo_inactivacion);
 
-        $persona->motivo_inactivacion = $motivo_inactivacion;
-        $persona->detalles_inactivacion = $detalles_inactivacion;
-        $persona->estado_inactivacion = 'pendiente';
-        $persona->update();
+        $persona_nomina->motivo_inactivacion = $motivo_inactivacion;
+        $persona_nomina->detalles_inactivacion = $detalles_inactivacion;
+        $persona_nomina->estado_inactivacion = 'pendiente';
+        $persona_nomina->update();
 
         return redirect('nomina_directa');
     }
 
     public function aprobarInactivaciones(Request $request)
     {
-        $mes = '201909';
+        $mes = '201908';
         $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
             ->where('mes', '=', $mes)->get();
         return view('nomina_directa.aprobar_inactivaciones', ['personas' => $personas, 'mes' => $mes]);
@@ -224,6 +226,14 @@ class NominaDirectaController extends Controller
             $nomina_directa->estado_inactivacion = $estado_inactivacion[$cont];
             $nomina_directa->motivo_rechazo_inactivacion = $motivo_rechazo[$cont];
             $nomina_directa->update();
+
+            if ($nomina_directa->estado_inactivacion == 'aprobado')
+            {
+                $persona_directa = PersonaDirecta::findOrFail($nomina_directa->id_persona_directa);
+                $persona_directa->activo = 'inactivo';
+                $persona_directa->update();
+            }
+
             $cont = $cont+1;
         }
 

@@ -77,15 +77,23 @@ class NominaDirecta extends Model
 
     }
     /** @var $query \Illuminate\Database\Query\Builder */
-    public function scopeZonadirecta($query, $id_zona)
+    public function scopeZonadirecta($query, $id_zona, $id_jefe)
     {
-        if ($id_zona)
+        if ($id_zona and $id_jefe)
+        {
+            $query
+                ->join('personas_directa', 'personas_directa.id_persona', '=', 'nomina_directa.id_persona_directa')
+                //->where('id_zona', '=', $id_zona)
+                //->where('id_representante_jefe', '=', $id_jefe)
+                //no olvidar el mes
+            ;
+        }
+        if ($id_zona and !$id_jefe)
         {
             $query
                 ->join('personas_directa', 'personas_directa.id_persona', '=', 'nomina_directa.id_persona_directa')
                 ->where('id_zona', '=', $id_zona)
-                //no olvidar el mes
-            ;
+               ;
         }
     }
 

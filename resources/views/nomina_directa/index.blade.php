@@ -97,7 +97,7 @@
                                             <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
                                         </a>
                                     @endif
-                                    <a href="" data-target="#modal-nomina-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                    <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
                                 </td>
                             @endif
                         </tr>

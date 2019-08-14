@@ -130,8 +130,8 @@ class NominaDirectaController extends Controller
             $nomina->id_persona_directa = $personas_id[$cont];
             $nomina->mes = $mes_nomina ;
             $nomina->persona_mes = $persona_mes[$cont] ;
-            $nomina->activo = $activo[$cont];
-            //$nomina->activo = 'activo';
+            //$nomina->activo = $activo[$cont];
+            $nomina->activo = 'activo';
             $nomina->agrupacion = PersonaDirecta::findOrFail($personas_id[$cont])->agrupacion;
             if ($asesores_existentes->contains( $personas_id[$cont]))
             {

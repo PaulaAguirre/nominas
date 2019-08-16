@@ -3,14 +3,9 @@
     <div class="row">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <h3>Nómina - Canal: Directa.
-                @if(auth()->user()->hasRoles(['tigo_people_admin']))
-                    <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
-                @endif
-                @if(auth()->user()->hasRoles(['zonal']))
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18))
                         <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
                     @endif
-                @endif
             </h3>
           <p class="text-info" id="cantidad">Cantidad</p>
             @include('nomina_directa.search_index')
@@ -66,6 +61,8 @@
                                                     <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
                                                 </a>
                                             @endif
+                                                <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+
                                         </td>
                                     @endif
                                 @endif
@@ -97,9 +94,11 @@
                                             <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
                                         </a>
                                     @endif
+                                    <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
                                 </td>
                             @endif
                         </tr>
+                        @include('nomina_directa.modal_eliminacion')
                     @endforeach
                 </table>
             </div>

@@ -20,8 +20,8 @@ class NominaDirectaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('roles:tigo_people,tigo_people_admin')->only(['aprobarNomina']);
-        $this->middleware('roles:zonal,tigo_people_admin')->only(['create', 'edit','agregarConsideraciones']);
+        $this->middleware('roles:tigo_people,tigo_people_admin')->only(['aprobarNomina', 'aprobarInactivaciones']);
+        $this->middleware('roles:zonal,tigo_people_admin')->only(['create', 'edit','agregarConsideraciones', 'destroy']);
 
 
     }
@@ -44,7 +44,7 @@ class NominaDirectaController extends Controller
         $zonas_user = Zona::all();
         $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')->get();
 
-        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona)
+        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona, $id_jefe)
             ->jefesDirecta($id_jefe)->estado($estado)
             ->orderBy('id_nomina')->get();
 
@@ -80,6 +80,7 @@ class NominaDirectaController extends Controller
 
             $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
             $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
+                ->where('activo', '=', 'activo')
             ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($zona)
                 ->get();
 
@@ -193,11 +194,55 @@ class NominaDirectaController extends Controller
      * @param  \App\NominaDirecta  $nominaDirecta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NominaDirecta $nominaDirecta)
+    public function destroy(Request $request, $id)
     {
-        //
+        $persona_nomina = NominaDirecta::findOrFail($id);
+        $motivo_inactivacion = $request->get('motivo_inactivacion');
+        $detalles_inactivacion = $request->get('detalles_inactivacion');
+        //dd($detalles_inactivacion.' '.$motivo_inactivacion);
+
+        $persona_nomina->motivo_inactivacion = $motivo_inactivacion;
+        $persona_nomina->detalles_inactivacion = $detalles_inactivacion;
+        $persona_nomina->estado_inactivacion = 'pendiente';
+        $persona_nomina->update();
+
+        return redirect('nomina_directa');
     }
 
+    public function aprobarInactivaciones(Request $request)
+    {
+        $mes = '201908';
+        $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
+            ->where('mes', '=', $mes)->get();
+        return view('nomina_directa.aprobar_inactivaciones', ['personas' => $personas, 'mes' => $mes]);
+    }
+
+    public function aprobarInactivacionesStore(Request $request)
+    {
+        $estado_inactivacion = $request->get('aprobacion');
+        $nomina = $request->get('id_nomina');
+        $motivo_rechazo = $request->get('motivo_rechazo');
+        $cont = 0;
+
+        while ($cont < count($nomina))
+        {
+            $nomina_directa = NominaDirecta::findOrFail($nomina[$cont]);
+            $nomina_directa->estado_inactivacion = $estado_inactivacion[$cont];
+            $nomina_directa->motivo_rechazo_inactivacion = $motivo_rechazo[$cont];
+            $nomina_directa->update();
+
+            if ($nomina_directa->estado_inactivacion == 'aprobado')
+            {
+                $persona_directa = PersonaDirecta::findOrFail($nomina_directa->id_persona_directa);
+                $persona_directa->activo = 'inactivo';
+                $persona_directa->update();
+            }
+
+            $cont = $cont+1;
+        }
+
+        return redirect('aprobar_inactivaciones');
+    }
 
     public function agregarConsideraciones ($id)
     {

@@ -130,6 +130,8 @@
                             <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nomina Directa</a></li>
                             <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
                             <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{\Carbon\Carbon::now()->addMonth()->format ('Ym')}}"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
+                            <li><a href="{{url('aprobar_inactivaciones')}}"><i class="fa fa-check-square"></i>Inactivaciones Directa</a></li>
+
                         </ul>
                     </li>
                 @endif
@@ -185,6 +187,19 @@
                         <li><a href="{{url('consideraciones_directa')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
                         <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Indirecta</a></li>
                         <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Tiendas</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-user-times" aria-hidden="true"></i>
+                        <span>Inactivaciones</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('inactivaciones_directa')}}"><i class="fa fa-comment"></i> Inactivaciones Directa</a></li>
+                        <li><a href="#"><i class="fa fa-comment"></i> Inactivaciones Indirecta</a></li>
+                        <li><a href="#"><i class="fa fa-comment"></i> Inctivaciones Tiendas</a></li>
                     </ul>
                 </li>
                 <li>

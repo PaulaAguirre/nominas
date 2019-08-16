@@ -114,6 +114,7 @@ class PersonaDirectaController extends Controller
     public function update(Request $request, $id)
     {
         $asesor = PersonaDirecta::findOrFail($id);
+        $id_zona_anterior = $asesor->id_zona;
         $url = $request->get('url');
         $id_zona_nuevo = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id;
 
@@ -122,16 +123,24 @@ class PersonaDirectaController extends Controller
         $asesor->fill($request->all());
         $asesor->id_representante_jefe_nuevo = $id_representante_jefe_nuevo;
         $asesor->id_zona_nuevo = $id_zona_nuevo;
-        $asesor->estado_cambio = 'pendiente';
+
+        //dd($id_zona_anterior == $id_zona_nuevo);
+        if ($id_zona_anterior == $id_zona_nuevo)
+        {
+            $asesor->estado_cambio = 'aprobado';
+        }
+        else
+        {
+            $asesor->estado_cambio = 'pendiente';
+        }
+
         $asesor->update();
 
-            $nomina = NominaDirecta::where('id_persona_directa', $asesor->id_persona)->get()->last();
-            if($nomina){
-                $nomina->agrupacion = $asesor->agrupacion;
-                $nomina->update();
-            }
-
-
+        $nomina = NominaDirecta::where('id_persona_directa', $asesor->id_persona)->get()->last();
+        if($nomina){
+            $nomina->agrupacion = $asesor->agrupacion;
+            $nomina->update();
+        }
 
         return redirect($url);
     }
@@ -146,6 +155,8 @@ class PersonaDirectaController extends Controller
     {
         //
     }
+
+
 
     public function aprobarCambioEstructura(Request $request, $mes)
     {

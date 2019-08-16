@@ -36,7 +36,7 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('representantes_directa/aprobacion_estructura/{mes}', 'PersonaDirectaController@aprobarCambioEstructuraStore')
         ->name('representantes_directa.aprobarCambioEstructuraStore');
     Route::get('representantes_directa/regularizar_estructura/{persona}', 'PersonaDirectaController@regularizarEstructura')
-    ->name('representantes_directa.regularizar_estructura');
+        ->name('representantes_directa.regularizar_estructura');
     Route::patch('representantes_directa/regularizar_estructura/{persona}', 'PersonaDirectaController@regularizarEstructuraStore')
         ->name('representantes_directa.regularizarEstructuraStore');
 
@@ -48,10 +48,16 @@ Route::group (['middleware'=>'auth'], function () {
         ->name('nomina_directa_consideraciones.agregarconsideraciones');
     Route::patch('nomina_directa_consideraciones/{nomina_directum}', 'NominaDirectaController@storeConsideraciones')
         ->name('nomina_directa.storeconsideraciones');
+
     Route::get('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNomina')
         ->name('nomina_directa.aprobacion');
     Route::patch('aprobacion_nomina_directa/{mes}', 'NominaDirectaController@aprobarNominaStore')
         ->name('nomina_directa_aprobacion.aprobacion');
+
+    Route::get('aprobar_inactivaciones', 'NominaDirectaController@aprobarInactivaciones')
+        ->name('nomina_directa.inactivacion');
+    Route::patch('aprobar_inactivaciones', 'NominaDirectaController@aprobarInactivacionesStore')
+        ->name('nomina_directa.inactivacion_store');
 
     /**
      * Consideraciones directa
@@ -61,6 +67,12 @@ Route::group (['middleware'=>'auth'], function () {
     ->name('consideraciones_directa.aprobacion');//ruta para mostrar las consideraciones a aprobar
     Route::patch('aprobacion_consideraciones_directa/{mes}', 'ConsideracionesDirectaController@storeConsideraciones')
         ->name('consideraciones_directa_aprobacion.aprobacion'); //ruta para guardar estado de consideración
+
+    /**
+     * Inactivaciones directa
+     * */
+    Route::resource('inactivaciones_directa', 'InactivacionesDirectaController');
+
     /**
      * fin Nomina directa
      * */

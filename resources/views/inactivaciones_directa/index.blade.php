@@ -42,13 +42,15 @@
                                 <td class="alert-danger">{{$persona->estado_inactivacion}}</td>
                             @endif
                             <td>{{$persona->motivo_rechazo_inactivacion}}</td>
-                            <td class="text-center">
-                                @if($persona->estado_inactivacion == 'rechazado')
-                                    <a href="{{URL::action('InactivacionesDirectaController@edit', $persona)}}">
-                                        <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Inactivacion"><i class="fa fa-wrench"></i></button>
-                                    </a>
-                                @endif
-                            </td>
+                            @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
+                                <td class="text-center">
+                                    @if($persona->estado_inactivacion == 'rechazado')
+                                        <a href="{{URL::action('InactivacionesDirectaController@edit', $persona)}}">
+                                            <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Inactivacion"><i class="fa fa-wrench"></i></button>
+                                        </a>
+                                    @endif
+                                </td>
+                            @endif
 
                         </tr>
                     @endforeach

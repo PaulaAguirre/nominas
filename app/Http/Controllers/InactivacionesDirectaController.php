@@ -69,7 +69,7 @@ class InactivacionesDirectaController extends Controller
     public function edit($id)
     {
         $persona = NominaDirecta::findOrFail($id);
-        return view('consideraciones_directa.regularizar_consideracion', ['persona'=>$persona]);
+        return view('inactivaciones_directa.regularizar_inactivacion', ['persona'=>$persona]);
     }
 
     /**

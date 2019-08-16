@@ -7,7 +7,7 @@
                     <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
                 @endif
                 @if(auth()->user()->hasRoles(['tigo_people', 'zonal']))
-                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(15))
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18))
                         <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
                     @endif
                 @endif
@@ -66,7 +66,9 @@
                                                     <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
                                                 </a>
                                             @endif
-                                            <a href="" data-target="#modal-nomina-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>                                        </td>
+                                                <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+
+                                        </td>
                                     @endif
                                 @endif
                             @elseif (auth()->user()->hasRoles(['tigo_people_admin']))

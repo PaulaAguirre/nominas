@@ -74,7 +74,7 @@ class PersonaDirectaController extends Controller
         $asesor->estado_cambio = 'aprobado';
 
         $asesor->save();
-        return redirect('representantes_directa');
+        return redirect()->back();
     }
 
     /**

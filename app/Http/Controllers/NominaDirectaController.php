@@ -372,7 +372,11 @@ class NominaDirectaController extends Controller
             $nomina->persona_mes = $agregar[$cont].$mes_nomina ;
             $nomina->activo = 'activo';
             $nomina->agrupacion = PersonaDirecta::findOrFail($agregar[$cont])->agrupacion;
+            $fecha_ingreso = PersonaDirecta::findOrFail($agregar[$cont])->fecha_ingreso;
             $nomina->estado_nomina = 'pendiente';
+            $nomina->id_consideracion=6;
+            $nomina->detalles_consideracion = 'fecha ingreso: '.$fecha_ingreso;
+            $nomina->estado_consideracion= 'aprobado';
             $nomina->save();
             $cont = $cont + 1;
         }

@@ -28,7 +28,6 @@
                         <th>Rep Zonal - Rep Jefe</th>
                         <th>CH</th>
                         <th>Representante</th>
-                        <th>Activo</th>
                         </thead>
                         @foreach ($personas_directa as $persona)
                             <tr class="text-uppercase">
@@ -40,12 +39,7 @@
                                 <td><input type="hidden" name="idrepresentante[]" value="{{$persona->id_persona}}" >
                                     <input type="hidden" name="persona_mes[]" id="persona_mes" value="{{$persona->id_persona.$mes_nomina->format ('Ym')}}">
                                    {{$persona->nombre}}</td>
-                                <td>
-                                    <select name="activo[]" class="form-control" id="activo">
-                                        <option value="activo" selected>Si</option>
-                                        <option value="inactivo" >No</option>
-                                    </select>
-                                </td>
+
                             </tr>
                         @endforeach
                         @include('nomina_directa.modal_nomina')

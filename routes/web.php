@@ -58,6 +58,11 @@ Route::group (['middleware'=>'auth'], function () {
         ->name('nomina_directa.inactivacion');
     Route::patch('aprobar_inactivaciones', 'NominaDirectaController@aprobarInactivacionesStore')
         ->name('nomina_directa.inactivacion_store');
+    Route::get('ingresar_nuevo_asesor', 'NominaDirectaController@ingresarAsesorMesActual')
+        ->name('ingresar_nuevo_asesor');
+    Route::patch('ingresar_nuevo_asesor_store', 'NominaDirectaController@ingresarAsesorMesActualStore')
+        ->name('ingresar_nuevo_asesor_store');
+
 
     /**
      * Consideraciones directa

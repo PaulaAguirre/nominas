@@ -12,14 +12,10 @@
                     </ul>
                 </div>
             @endif
+            @include('nomina_directa.aprobacion_search')
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
             <div class="form-group">
-                <label>Aprobar todos</label>
-                <select name="aprobar_todos" class="form-control text-uppercase col-lg-4" id="aprobar_todos">
-                    <option value="si">si</option>
-                    <option value="no" selected>no</option>
-                </select>
 
             </div>
 
@@ -35,6 +31,7 @@
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                     <thead class="text-center" style="background-color: #8eb4cb">
                         <th>ID</th>
+                        <th>Mes</th>
                         <th>CH</th>
                         <th>Representante</th>
                         <th>Region/Zona</th>
@@ -51,6 +48,7 @@
                             @if(auth()->user()->hasRoles(['tigo_people']))
                                 @if(auth()->user()->zonas->contains($persona->personaDirecta->id_zona))
                                     <td>{{$persona->id_persona_directa}}</td>
+                                    <td>{{$persona->mes}}</td>
                                     <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
@@ -76,6 +74,7 @@
                                 @endif
                             @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
                                 <td>{{$persona->id_persona_directa}}</td>
+                                <td>{{$persona->mes}}</td>
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>

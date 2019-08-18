@@ -1,7 +1,7 @@
 
-    {!! Form::open(array('url'=>'representantes_directa','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="buscar" name="name">
+    {!! Form::open(array('url'=>'consideraciones_directa','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
+    <div class="input-group col-lg-3">
+        <input type="text" class="form-control" placeholder="MES: YYYYMM" name="mes">
         <span class="input-group-btn">
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </span>

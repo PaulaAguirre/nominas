@@ -17,9 +17,9 @@ class ConsideracionesDirectaController extends Controller
      */
     public function index(Request $request)
     {
-        $mes_nomina = NominaDirecta::all()->last()->mes;
+        $mes = $request->get('mes');
         $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', 'NULL')
-            ->where('mes', $mes_nomina)
+            ->mes($mes)
             ->get();
 
         return view('consideraciones_directa.index', ['personas_consideracion' => $personas_consideracion]);

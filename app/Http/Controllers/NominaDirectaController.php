@@ -58,11 +58,20 @@ class NominaDirectaController extends Controller
      */
     public function create(Request $request)
     {
-            $zona = auth()->user()->zonas->pluck('id')->toArray();
-            if (count($zona) == 0)
+            //$zona = auth()->user()->zonas->pluck('id')->toArray();
+            //if (count($zona) == 0)
+            //{
+              //  $zona = [];
+            //}
+            if (auth()->user()->hasRoles(['zonal']))
             {
-                $zona = [];
+              $zonas = auth()->user()->zonas;
             }
+            else
+            {
+                $zonas = Zona::all();
+            }
+
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
             $mes_anterior = Carbon::now()->format('Ym'); //porque en junio se carga lo de julio
@@ -73,6 +82,7 @@ class NominaDirectaController extends Controller
 
             $id_rep_jefe = $request->get('id_jefe');
             $id_rep = $request->get('id_representante');
+            $id_zona = $request->get('id_zona');
 
             /**los asesores que ya se encuentran en la nomina que no deben aparecer entre los que estan para agregar**/
             $representantes_existentes = NominaDirecta::where('mes', $mes_nomina->format('Ym'))
@@ -81,13 +91,13 @@ class NominaDirectaController extends Controller
             $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
             $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
                 ->where('activo', '=', 'activo')
-            ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($zona)
+            ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($id_zona)
                 ->get();
 
             //dd($mes_nomina = Carbon::now()->addMonth()->format ('Ym'));
 
             return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
-                             'meses'=>$meses, 'mes_nomina'=>$mes_nomina]);
+                             'meses'=>$meses, 'mes_nomina'=>$mes_nomina, 'zonas'=>$zonas]);
     }
 
     /**
@@ -323,5 +333,50 @@ class NominaDirectaController extends Controller
         return redirect('aprobacion_nomina_directa/'.$mes);
     }
 
+    public function ingresarAsesorMesActual(Request $request)
+    {
+        $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
+        $mes_nomina=Carbon::now()->format('Ym');
+        $personas_mes_actual = NominaDirecta::where('mes', '=', $mes_nomina)
+            ->pluck('id_persona_directa')->toArray();
+
+        if (count($id_zonas) > 0){
+            $personas_a_ingresar = PersonaDirecta::whereNotIn('id_persona', $personas_mes_actual)
+                ->where('cargo', '=', 'representante')
+                ->whereIn('id_zona', $id_zonas)
+                ->where('activo', '=', 'activo')->get();
+        }
+        else
+        {
+            $personas_a_ingresar = PersonaDirecta::whereNotIn('id_persona', $personas_mes_actual)
+                ->where('cargo', '=', 'representante')
+                ->where('activo', '=', 'activo')->get();
+        }
+
+        return view('nomina_directa.ingresar_nuevo_asesor', ['personas_a_ingresar'=>$personas_a_ingresar,
+            'mes_nomina'=>$mes_nomina]);
+
+    }
+
+    public function ingresarAsesorMesActualStore(Request $request)
+    {
+        $agregar = $request->get('agregar');
+        $cont = 0;
+        $mes_nomina = Carbon::now()->format('Ym');
+
+        while ($cont < count($agregar))
+        {
+            $nomina = new NominaDirecta();
+            $nomina->id_persona_directa = $agregar[$cont];
+            $nomina->mes = $mes_nomina ;
+            $nomina->persona_mes = $agregar[$cont].$mes_nomina ;
+            $nomina->activo = 'activo';
+            $nomina->agrupacion = PersonaDirecta::findOrFail($agregar[$cont])->agrupacion;
+            $nomina->estado_nomina = 'pendiente';
+            $nomina->save();
+            $cont = $cont + 1;
+        }
+        return redirect('nomina_directa');
+    }
 
 }

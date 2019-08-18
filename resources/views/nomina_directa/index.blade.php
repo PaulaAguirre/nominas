@@ -3,9 +3,10 @@
     <div class="row">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <h3>Nómina - Canal: Directa.
-                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18))
-                        <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina</button></a>
-                    @endif
+                @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(22))
+                    <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
+                    <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina  {{\Carbon\Carbon::now()->addMonths(1)->format('Y-m')}}</button></a>
+                @endif
             </h3>
           <p class="text-info" id="cantidad">Cantidad</p>
             @include('nomina_directa.search_index')
@@ -26,7 +27,7 @@
                     <th>Region/Zona</th>
                     <th>Estado</th>
                    @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
-                        <th class="text-center">Opciones</th>
+                        <th class="text-center col-lg-1">Opciones</th>
                     @endif
                     </thead>
                     @foreach ($personas as $persona)

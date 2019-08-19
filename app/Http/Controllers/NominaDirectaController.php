@@ -58,11 +58,7 @@ class NominaDirectaController extends Controller
      */
     public function create(Request $request)
     {
-            //$zona = auth()->user()->zonas->pluck('id')->toArray();
-            //if (count($zona) == 0)
-            //{
-              //  $zona = [];
-            //}
+
             if (auth()->user()->hasRoles(['zonal']))
             {
               $zonas = auth()->user()->zonas;
@@ -75,8 +71,7 @@ class NominaDirectaController extends Controller
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
             $mes_anterior = Carbon::now()->format('Ym'); //porque en junio se carga lo de julio
-            //$mes_nomina = Carbon::now()->addMonth();--esta parte descomentar
-            $mes_nomina = '201908';
+            $mes_nomina = Carbon::now()->addMonth();
 
 
             $meses = [$mes_actual,$mes_siguiente];
@@ -95,10 +90,9 @@ class NominaDirectaController extends Controller
             ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($id_zona)
                 ->get();
 
-            //dd($mes_nomina = Carbon::now()->addMonth()->format ('Ym'));
 
             return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
-                             'meses'=>$meses, 'mes_nomina'=>$mes_nomina, 'zonas'=>$zonas]);
+                             'meses'=>$meses, 'mes_nomina'=>$mes_nomina->format('Ym'), 'zonas'=>$zonas]);
     }
 
     /**
@@ -112,11 +106,9 @@ class NominaDirectaController extends Controller
         $personas_id = $request->get('idrepresentante');
         $activo = $request->get('activo');
         $cont = 0;
-        //$mes_nomina = Carbon::now()->addMonth()->format ('Ym');
-        $mes_nomina=201908;
+        $mes_nomina = Carbon::now()->addMonth()->format ('Ym');
         $persona_mes = $request->get('persona_mes');
 
-        //dd($persona_mes);
 
         /**
          * Validaciones
@@ -125,16 +117,15 @@ class NominaDirectaController extends Controller
         $rules = [];
 
 
-       /* foreach ($request->get('persona_mes') as $key => $val)
+       foreach ($request->get('persona_mes') as $key => $val)
         {
             $persona = PersonaDirecta::findOrFail($personas_id[$key]);
             $rules['persona_mes.'.$key] = 'unique:nomina_directa,persona_mes';
             $messages['persona_mes.'.$key.'.unique'] = 'Asesor duplicado: '. $persona->nombre;
         }
-        $this->validate($request, $rules, $messages);descomentar*/
+        $this->validate($request, $rules, $messages);
 
-        //$mes_anterior = Carbon::now()->format('Ym'); descomentar
-        $mes_anterior=201907;
+        $mes_anterior = Carbon::now()->format('Ym');
         $asesores_existentes = NominaDirecta::where('mes', $mes_anterior)
             ->get()->pluck('id_persona_directa');
 
@@ -143,10 +134,8 @@ class NominaDirectaController extends Controller
 
             $nomina = new NominaDirecta();
             $nomina->id_persona_directa = $personas_id[$cont];
-            //$nomina->mes = $mes_nomina ; --> add despues
             $nomina->mes = $mes_nomina ;
-
-            $nomina->persona_mes = $persona_mes[$cont] ;
+            $nomina->persona_mes = $persona_mes[$cont];
             $nomina->activo = 'activo';
             $nomina->agrupacion = PersonaDirecta::findOrFail($personas_id[$cont])->agrupacion;
             if ($asesores_existentes->contains( $personas_id[$cont]))

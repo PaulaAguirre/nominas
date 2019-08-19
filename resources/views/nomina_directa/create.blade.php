@@ -2,7 +2,7 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            <h3>Nueva Nomina Directa - <span class="text-info">Mes: {{$mes_nomina->format ('Y-m')}}</span> </h3>
+            <h3>Nueva Nomina Directa - <span class="text-info">Mes: {{$mes_nomina}}</span> </h3>
             @include('nomina_directa.search')
             @if (count($errors)>0)
                 <div class="alert alert-danger">

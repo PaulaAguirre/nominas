@@ -33,6 +33,7 @@
                         <th>ID</th>
                         <th>Mes</th>
                         <th>CH</th>
+                        <th>Ingreso</th>
                         <th>Representante</th>
                         <th>Region/Zona</th>
                         <th>Rep Zonal - Rep Jefe</th>
@@ -49,6 +50,8 @@
                                 @if(auth()->user()->zonas->contains($persona->personaDirecta->id_zona))
                                     <td>{{$persona->id_persona_directa}}</td>
                                     <td>{{$persona->mes}}</td>
+                                    <td>{{$persona->personaDirecta->fecha_ingreso}}</td>
+
                                     <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
@@ -76,6 +79,7 @@
                                 <td>{{$persona->id_persona_directa}}</td>
                                 <td>{{$persona->mes}}</td>
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
+                                <td>{{$persona->personaDirecta->fecha_ingreso}}</td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                 <td>{{$persona->personaDirecta->representanteJefe->zona->representante_zonal_nombre}}

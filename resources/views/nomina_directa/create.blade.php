@@ -37,7 +37,7 @@
                                 </td>
                                 <td>{{$persona->ch}}</td>
                                 <td><input type="hidden" name="idrepresentante[]" value="{{$persona->id_persona}}" >
-                                    <input type="hidden" name="persona_mes[]" id="persona_mes" value="{{$persona->id_persona.$mes_nomina->format ('Ym')}}">
+                                    <input type="hidden" name="persona_mes[]" id="persona_mes" value="{{$persona->id_persona.$mes_nomina}}">
                                    {{$persona->nombre}}</td>
 
                             </tr>

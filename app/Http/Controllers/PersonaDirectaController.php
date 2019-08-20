@@ -71,6 +71,7 @@ class PersonaDirectaController extends Controller
         $asesor->id_representante_jefe = $id_representante_jefe;
         $asesor->id_zona = $id_zona;
         $asesor->cargo =  'representante';
+        $asesor->activo='activo';
         $asesor->estado_cambio = 'aprobado';
 
         $asesor->save();

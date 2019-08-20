@@ -86,7 +86,7 @@
 
                         <div class="form-group col-md-4 ">
                             <label for="" class="col-md-3">Activo</label>
-                            <select name="activo" class="selectpicker form-control text-uppercase" title="Estado">
+                            <select name="activo" class="selectpicker form-control text-uppercase" title="Estado" disabled="disabled">
                                     <option value="inactivo" >inactivo</option>
                                     <option value="activo" selected >activo</option>
                             </select>

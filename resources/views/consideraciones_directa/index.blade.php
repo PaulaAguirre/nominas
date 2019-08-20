@@ -26,33 +26,63 @@
 
                     </thead>
                     @foreach ($personas_consideracion as $persona)
-                        <tr class="text-uppercase text-sm">
-                            <td>{{$persona->id_nomina}}</td>
-                            <td>{{$persona->mes}}</td>
-                            <td>{{$persona->personaDirecta->ch}}</td>
-                            <td>{{$persona->personaDirecta->nombre}}</td>
-                            <td>{{$persona->personaDirecta->documento_persona}}</td>
-                            <td>{{$persona->personaDirecta->zona->representante_zonal_nombre ? $persona->personaDirecta->zona->representante_zonal_nombre : '' }} /
-                                {{$persona->personaDirecta->representanteJefe ? $persona->personaDirecta->representanteJefe->nombre : ''}}</td>
-                            <td>{{$persona->consideracion->nombre}}</td>
-                            <td>{{$persona->detalles_consideracion}}</td>
-                            @if ($persona->estado_consideracion == 'pendiente')
-                                <td class="alert-warning" >{{$persona->estado_consideracion}}</td>
-                            @elseif ($persona->estado_consideracion == 'aprobado')
-                                <td class="alert-success" >{{$persona->estado_consideracion}}</td>
-                            @else
-                                <td class="alert-danger">{{$persona->estado_consideracion}}</td>
+                        @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
+                            @if($zonas->contains($persona->personaDirecta->id_zona))
+                                <tr class="text-uppercase text-sm">
+                                    <td>{{$persona->id_nomina}}</td>
+                                    <td>{{$persona->mes}}</td>
+                                    <td>{{$persona->personaDirecta->ch}}</td>
+                                    <td>{{$persona->personaDirecta->nombre}}</td>
+                                    <td>{{$persona->personaDirecta->documento_persona}}</td>
+                                    <td>{{$persona->personaDirecta->zona->representante_zonal_nombre ? $persona->personaDirecta->zona->representante_zonal_nombre : '' }} /
+                                        {{$persona->personaDirecta->representanteJefe ? $persona->personaDirecta->representanteJefe->nombre : ''}}</td>
+                                    <td>{{$persona->consideracion->nombre}}</td>
+                                    <td>{{$persona->detalles_consideracion}}</td>
+                                    @if ($persona->estado_consideracion == 'pendiente')
+                                        <td class="alert-warning" >{{$persona->estado_consideracion}}</td>
+                                    @elseif ($persona->estado_consideracion == 'aprobado')
+                                        <td class="alert-success" >{{$persona->estado_consideracion}}</td>
+                                    @else
+                                        <td class="alert-danger">{{$persona->estado_consideracion}}</td>
+                                    @endif
+                                    <td>{{$persona->motivo_rechazo_consideracion}}</td>
+                                    <td class="text-center">
+                                        @if($persona->estado_consideracion == 'rechazado')
+                                            <a href="{{URL::action('ConsideracionesDirectaController@edit', $persona)}}">
+                                                <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
+                                            </a>
+                                        @endif
+                                    </td>
+                                </tr>
                             @endif
-                            <td>{{$persona->motivo_rechazo_consideracion}}</td>
-                            <td class="text-center">
-                                @if($persona->estado_consideracion == 'rechazado')
-                                    <a href="{{URL::action('ConsideracionesDirectaController@edit', $persona)}}">
-                                        <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
-                                    </a>
+                        @elseif(auth()->user()->hasRoles([ 'tigo_people_admin']))
+                            <tr class="text-uppercase text-sm">
+                                <td>{{$persona->id_nomina}}</td>
+                                <td>{{$persona->mes}}</td>
+                                <td>{{$persona->personaDirecta->ch}}</td>
+                                <td>{{$persona->personaDirecta->nombre}}</td>
+                                <td>{{$persona->personaDirecta->documento_persona}}</td>
+                                <td>{{$persona->personaDirecta->zona->representante_zonal_nombre ? $persona->personaDirecta->zona->representante_zonal_nombre : '' }} /
+                                    {{$persona->personaDirecta->representanteJefe ? $persona->personaDirecta->representanteJefe->nombre : ''}}</td>
+                                <td>{{$persona->consideracion->nombre}}</td>
+                                <td>{{$persona->detalles_consideracion}}</td>
+                                @if ($persona->estado_consideracion == 'pendiente')
+                                    <td class="alert-warning" >{{$persona->estado_consideracion}}</td>
+                                @elseif ($persona->estado_consideracion == 'aprobado')
+                                    <td class="alert-success" >{{$persona->estado_consideracion}}</td>
+                                @else
+                                    <td class="alert-danger">{{$persona->estado_consideracion}}</td>
                                 @endif
-                            </td>
-
-                        </tr>
+                                <td>{{$persona->motivo_rechazo_consideracion}}</td>
+                                <td class="text-center">
+                                    @if($persona->estado_consideracion == 'rechazado')
+                                        <a href="{{URL::action('ConsideracionesDirectaController@edit', $persona)}}">
+                                            <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </table>
             </div>

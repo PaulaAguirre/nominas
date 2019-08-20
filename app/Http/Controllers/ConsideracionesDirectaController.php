@@ -18,11 +18,12 @@ class ConsideracionesDirectaController extends Controller
     public function index(Request $request)
     {
         $mes = $request->get('mes');
+        $zonas = auth()->user()->zonas->pluck('id');
         $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', 'NULL')
             ->mes($mes)
             ->get();
 
-        return view('consideraciones_directa.index', ['personas_consideracion' => $personas_consideracion]);
+        return view('consideraciones_directa.index', ['personas_consideracion' => $personas_consideracion, 'zonas'=>$zonas]);
     }
 
     /**

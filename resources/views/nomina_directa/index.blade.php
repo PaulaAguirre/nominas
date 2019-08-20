@@ -31,9 +31,9 @@
                     @endif
                     </thead>
                     @foreach ($personas as $persona)
-                        <tr class="text-uppercase text-sm">
                             @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
                                 @if($zonas->contains($persona->personaDirecta->id_zona))
+                                <tr class="text-uppercase text-sm">
                                     <td>{{$persona->id_nomina}}</td>
                                     <td>{{$persona->mes}}</td>
                                     <td>{{$persona->personaDirecta->ch}}</td>
@@ -66,8 +66,10 @@
 
                                         </td>
                                     @endif
+                                </tr>
                                 @endif
                             @elseif (auth()->user()->hasRoles(['tigo_people_admin']))
+                            <tr class="text-uppercase text-sm">
                                 <td>{{$persona->id_persona_directa}}</td>
                                 <td>{{$persona->mes}}</td>
                                 <td>{{$persona->personaDirecta->ch}}</td>
@@ -97,8 +99,8 @@
                                     @endif
                                     <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
                                 </td>
+                            </tr>
                             @endif
-                        </tr>
                         @include('nomina_directa.modal_eliminacion')
                     @endforeach
                 </table>

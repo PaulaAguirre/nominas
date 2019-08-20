@@ -23,9 +23,12 @@ class InactivacionesDirectaController extends Controller
      */
     public function index()
     {
-        $inactivaciones = NominaDirecta::where('estado_inactivacion', '<>', 'NULL')->get();
-        return view('inactivaciones_directa.index', ['inactivaciones'=>$inactivaciones]);
+        $zonas = auth()->user()->zonas->pluck('id');
 
+        $inactivaciones = NominaDirecta::where('estado_inactivacion', '<>', 'NULL')
+            ->get();
+
+        return view('inactivaciones_directa.index', ['inactivaciones'=>$inactivaciones, 'zonas'=>$zonas]);
     }
 
     /**

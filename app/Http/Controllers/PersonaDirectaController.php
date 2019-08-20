@@ -124,9 +124,9 @@ class PersonaDirectaController extends Controller
         $asesor->id_representante_jefe_nuevo = $id_representante_jefe_nuevo;
         $asesor->id_zona_nuevo = $id_zona_nuevo;
 
-        //dd($id_zona_anterior == $id_zona_nuevo);
         if ($id_zona_anterior == $id_zona_nuevo)
         {
+            $asesor->id_representante_jefe = $id_representante_jefe_nuevo;
             $asesor->estado_cambio = 'aprobado';
         }
         else

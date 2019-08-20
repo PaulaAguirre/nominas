@@ -16,6 +16,7 @@
                     <select class="form-control" id="motivo_inactivacion" name="motivo_inactivacion">
                         <option value="renuncia" selected>Renuncia</option>
                         <option value="desvinculacion">Desvinculacion</option>
+                        <option value="cambio de canal">Cambio de Canal</option>
                     </select>
                 </div>
 

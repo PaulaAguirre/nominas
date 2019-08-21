@@ -19,7 +19,7 @@ class ConsideracionesDirectaController extends Controller
     {
         $mes = $request->get('mes');
         $zonas = auth()->user()->zonas->pluck('id');
-        $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', 'NULL')
+        $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', NULL)
             ->mes($mes)
             ->get();
 

@@ -27,7 +27,7 @@
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
                         <div class="form-group">
                             <label for="">Consideración</label>
-                            <select name="id_consideracion" class="selectpicker form-control text-uppercase" title="Seleccione Consideración">
+                            <select name="id_consideracion" class="selectpicker form-control text-uppercase" title="Seleccione Consideración" required>
                                 @foreach($consideraciones as $consideracion )
                                     <option value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre)}}</option>
                                 @endforeach

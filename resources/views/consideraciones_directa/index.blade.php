@@ -64,7 +64,7 @@
                                 <td>{{$persona->personaDirecta->zona->representante_zonal_nombre ? $persona->personaDirecta->zona->representante_zonal_nombre : '' }} /
                                     {{$persona->personaDirecta->representanteJefe ? $persona->personaDirecta->representanteJefe->nombre : ''}}</td>
                                 <td>{{$persona->consideracion}}</td>
-                                <td>{{$persona->detalles_consideracion}}</td>
+                                <td>{{$persona->detalles_consideracion->nombre}}</td>
                                 @if ($persona->estado_consideracion == 'pendiente')
                                     <td class="alert-warning" >{{$persona->estado_consideracion}}</td>
                                 @elseif ($persona->estado_consideracion == 'aprobado')

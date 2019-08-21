@@ -5,7 +5,6 @@
             <h3>Consideraciones Asesores Directa</h3>
         </div>
     </div>
-    @include('consideraciones_directa.search')
     <br>
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -64,7 +63,7 @@
                                 <td>{{$persona->personaDirecta->documento_persona}}</td>
                                 <td>{{$persona->personaDirecta->zona->representante_zonal_nombre ? $persona->personaDirecta->zona->representante_zonal_nombre : '' }} /
                                     {{$persona->personaDirecta->representanteJefe ? $persona->personaDirecta->representanteJefe->nombre : ''}}</td>
-                                <td>{{$persona->consideracion->nombre}}</td>
+
                                 <td>{{$persona->detalles_consideracion}}</td>
                                 @if ($persona->estado_consideracion == 'pendiente')
                                     <td class="alert-warning" >{{$persona->estado_consideracion}}</td>

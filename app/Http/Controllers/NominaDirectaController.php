@@ -272,6 +272,14 @@ class NominaDirectaController extends Controller
 
     public function aprobarNomina (Request $request, $mes)
     {
+        if(auth()->user()->hasRoles(['zonal', 'tigo_people'])){
+            $zonas = auth()->user()->zonas;
+        }
+        else
+        {
+            $zonas = Zona::all();
+        }
+
         $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
 
         $id_rep_jefe = $request->get('id_jefe');
@@ -287,8 +295,10 @@ class NominaDirectaController extends Controller
 
         $personas_directa = NominaDirecta::where('estado_nomina', '=', 'pendiente') //personas a aprobar, solo las nuevas
         ->whereIn('id_persona_directa', $id_persona_nuevas)->mes($mes)->get();
+        $mes_search = Carbon::now()->format('Ym');
 
-        return view('nomina_directa.aprobacion', ['personas_directa' => $personas_directa, 'jefes' => $jefes, 'mes'=>$mes]);
+        return view('nomina_directa.aprobacion', ['personas_directa' => $personas_directa,
+            'jefes' => $jefes, 'mes'=>$mes, 'mes_search'=>$mes_search, 'zonas'=>$zonas]);
     }
 
 

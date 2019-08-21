@@ -12,7 +12,6 @@
                     </ul>
                 </div>
             @endif
-            @include('nomina_directa.aprobacion_search')
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
             <div class="form-group">
@@ -24,7 +23,6 @@
 
     {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['nomina_directa_aprobacion.aprobacion', $mes]])!!}
     {{Form::token()}}
-    <br>
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">

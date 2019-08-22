@@ -64,17 +64,19 @@
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                                 <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                             </a>
-                                            <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
-                                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
-                                            </a>
-                                            </a>
+                                            @if(!$persona->id_consideracion)
+                                                <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
+                                                    <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
+                                                </a>
+                                            @endif
                                             @if($persona->estado_nomina == 'rechazado')
                                                 <a href="{{URL::action('NominaDirectaController@edit', $persona)}}">
                                                     <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
                                                 </a>
                                             @endif
+                                            @if(!$persona->motivo_inactivacion)
                                                 <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
-
+                                            @endif
                                         </td>
                                     @endif
                                 </tr>

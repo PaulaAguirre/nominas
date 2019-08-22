@@ -15,11 +15,11 @@
                         <th>Mes</th>
                         <th>CH</th>
                         <th>Nombre</th>
-                        <th>CI</th>
                         <th>Representante Zonal / Jefe</th>
                         <th>Consideración</th>
                         <th>Detalles</th>
                         <th>Estado</th>
+                        <th>Comentarios</th>
                         <th>Motivo Rechazo</th>
                         <th class="text-center">OPC</th>
 
@@ -32,7 +32,6 @@
                                     <td>{{$persona->mes}}</td>
                                     <td>{{$persona->personaDirecta->ch}}</td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
-                                    <td>{{$persona->personaDirecta->documento_persona}}</td>
                                     <td>{{$persona->personaDirecta->zona->representante_zonal_nombre ? $persona->personaDirecta->zona->representante_zonal_nombre : '' }} /
                                         {{$persona->personaDirecta->representanteJefe ? $persona->personaDirecta->representanteJefe->nombre : ''}}</td>
                                     <td>{{$persona->consideracion->nombre}}</td>
@@ -44,6 +43,7 @@
                                     @else
                                         <td class="alert-danger">{{$persona->estado_consideracion}}</td>
                                     @endif
+                                    <td>{{$persona->comentario_consideracion}}</td>
                                     <td>{{$persona->motivo_rechazo_consideracion}}</td>
                                     <td class="text-center">
                                         @if($persona->estado_consideracion == 'rechazado')
@@ -60,7 +60,6 @@
                                 <td>{{$persona->mes}}</td>
                                 <td>{{$persona->personaDirecta->ch}}</td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
-                                <td>{{$persona->personaDirecta->documento_persona}}</td>
                                 <td>{{$persona->personaDirecta->zona->representante_zonal_nombre ? $persona->personaDirecta->zona->representante_zonal_nombre : '' }} /
                                     {{$persona->personaDirecta->representanteJefe ? $persona->personaDirecta->representanteJefe->nombre : ''}}</td>
                                 <td>{{$persona->consideracion->nombre}}</td>
@@ -72,6 +71,7 @@
                                 @else
                                     <td class="alert-danger">{{$persona->estado_consideracion}}</td>
                                 @endif
+                                <td>{{$persona->comentario_consideracion}}</td>
                                 <td>{{$persona->motivo_rechazo_consideracion}}</td>
                                 <td class="text-center">
                                     @if($persona->estado_consideracion == 'rechazado')

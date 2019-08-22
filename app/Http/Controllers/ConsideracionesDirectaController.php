@@ -112,6 +112,7 @@ class ConsideracionesDirectaController extends Controller
         $nomina = $request->get('id_nomina');
         $estado_consideracion = $request->get('aprobacion');
         $motivo_rechazo = $request->get('motivo_rechazo');
+        $comentario_consideracion = $request->get('comentario_consideracion');
         $cont = 0;
 
         while ($cont < count($nomina))
@@ -119,6 +120,7 @@ class ConsideracionesDirectaController extends Controller
             $nomina_consideracion = NominaDirecta::findOrFail($nomina[$cont]);
             $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
             $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
+            $nomina_consideracion->comentario_consideracion = $comentario_consideracion[$cont];
             $nomina_consideracion->update();
             $cont = $cont+1;
         }

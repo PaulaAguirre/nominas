@@ -3,9 +3,20 @@
     <div class="row">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <h3>Nómina - Canal: Directa.
-                @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(22))
+                @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
+                @else
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(14))
+                        <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title={{'hasta:'.$fecha_inicio}}>Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
+                    @endif
+                @endif
+
+                @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina  {{\Carbon\Carbon::now()->addMonths(1)->format('Y-m')}}</button></a>
+                @else
+                    @if($today->between($fecha_inicio, $fecha_fin))
+                        <a href="nomina_directa/create"><button class="btn btn-success" data-toggle="tooltip" data-placement="top" title={{'hasta:'.$fecha_fin}}>Generar Nomina  {{\Carbon\Carbon::now()->addMonths(1)->format('Y-m')}}</button></a>
+                    @endif
                 @endif
             </h3>
           <p class="text-info" id="cantidad">Cantidad</p>

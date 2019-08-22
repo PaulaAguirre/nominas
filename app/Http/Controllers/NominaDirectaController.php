@@ -43,12 +43,18 @@ class NominaDirectaController extends Controller
         $estado = $request->get('estado');
         $zonas_user = Zona::all();
         $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')->get();
+        $fecha_inicio = (new Carbon('first day of this month'))->addDays(14);
+        $fecha_fin = new Carbon('first day of next month');
+        $today = Carbon::today();
+
 
         $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona, $id_jefe)
             ->jefesDirecta($id_jefe)->estado($estado)
             ->orderBy('id_nomina')->get();
 
-        return view('nomina_directa.index', ['personas' => $personas, 'zonas' =>$zonas, 'zonas_user'=>$zonas_user, 'jefes'=>$jefes]);
+        return view('nomina_directa.index', ['personas' => $personas,
+            'zonas' =>$zonas, 'zonas_user'=>$zonas_user, 'jefes'=>$jefes,
+            'fecha_inicio'=>$fecha_inicio, 'fecha_fin'=>$fecha_fin, 'today'=>$today]);
     }
 
     /**

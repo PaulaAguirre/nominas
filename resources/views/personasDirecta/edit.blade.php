@@ -99,7 +99,7 @@
 
                         <div class="form-group col-md-4 ">
                             <label for="" class="col-md-3">Activo</label>
-                            <select name="activo" class="selectpicker form-control text-uppercase" title="Estado">
+                            <select name="activo" class="selectpicker form-control text-uppercase" title="Estado" disabled>
                                 @if($persona->activo == 'activo')
                                     <option value="activo" selected>ACTIVO</option>
                                     <option value="inactivo" >INACTIVO</option>

@@ -386,7 +386,7 @@ class NominaDirectaController extends Controller
             $nomina->estado_nomina = 'pendiente';
             $nomina->id_consideracion=6;
             $nomina->detalles_consideracion = 'fecha ingreso: '.$fecha_ingreso;
-            $nomina->estado_consideracion= 'aprobado';
+            $nomina->estado_consideracion= 'pendiente';
             $nomina->save();
             $cont = $cont + 1;
         }

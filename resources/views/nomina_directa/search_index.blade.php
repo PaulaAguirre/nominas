@@ -15,7 +15,7 @@
 
         <select name="id_zona" class="form-control selectpicker text-uppercase col-lg-4" id="id_zona" title="Seleccione Zona" data-live-search="true">
             @foreach($zonas_user as $zona)
-                <option value="{{$zona->id}}">{{$zona->id}} - {{$zona->zona}}</option>
+                <option value="{{$zona->id}}">{{$zona->representante_zonal_nombre}} - {{$zona->zona}}</option>
             @endforeach
         </select>
     <select name="estado" class="form-control selectpicker text-uppercase col-lg-4" id="estado" title="estado" data-live-search="true">

@@ -14,7 +14,7 @@
             @endif
         </div>
     </div>
-    <br>
+    @include('consideraciones_directa.search_aprobacion')
     {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['consideraciones_directa_aprobacion.aprobacion', $mes]])!!}
     {{Form::token()}}
 
@@ -26,6 +26,7 @@
                     <th>CH</th>
                     <th>Representante</th>
                     <th>Zona</th>
+                    <th>Rep Zonal / jefe</th>
                     <th>Consideración</th>
                     <th>Detalles</th>
                     <th>Regularización</th>
@@ -42,6 +43,7 @@
                                     <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->zona}}</td>
+                                    <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                     <td>{{$persona->consideracion->nombre}}</td>
                                     <td>{{$persona->detalles_consideracion}}</td>
                                     <td>{{$persona->regularizacion_consideracion}}</td>
@@ -63,6 +65,8 @@
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->zona}}</td>
+                                <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
+
                                 <td>{{$persona->consideracion->nombre}}</td>
                                 <td>{{$persona->detalles_consideracion}}</td>
                                 <td>{{$persona->regularizacion_consideracion}}</td>

@@ -1,4 +1,4 @@
-{!! Form::open(array('url'=>'aprobacion_consideraciones_directa/201908','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
+{!! Form::open(array('url'=>'aprobacion_consideraciones_directa/'.$mes,'method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group form-inline">
 
     <select name="id_persona" class="form-control selectpicker text-uppercase col-lg-4" id="id_representante" title="Seleccione Representante" data-live-search="true">

@@ -37,6 +37,7 @@
                     <th>Rep Zonal - Rep Jefe</th>
                     <th>Region/Zona</th>
                     <th>Estado</th>
+                    <th>Inactivación</th>
                    @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
                         <th class="text-center col-lg-1">Opciones</th>
                     @endif
@@ -59,6 +60,7 @@
                                     @else
                                         <td class="alert-success">{{$persona->estado_nomina}}</td>
                                     @endif
+                                    <td>{{$persona->estado_inactivacion ? $persona->estado_inactivacion : 'ACTIVO'}}</td>
                                     @if(auth()->user()->hasRoles(['zonal']))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
@@ -97,6 +99,7 @@
                                 @else
                                     <td class="alert-success">{{$persona->estado_nomina}}</td>
                                 @endif
+                                <td>{{$persona->estado_inactivacion ? $persona->estado_inactivacion : 'ACTIVO'}}</td>
                                 <td>
                                     <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

@@ -7,7 +7,6 @@
         @endforeach
     </select>
 
-
     <select name="id_consideracion" class="form-control selectpicker text-uppercase col-lg-4" id="id_consideracion" title="Seleccione consideracion" data-live-search="true">
         @foreach($consideraciones as $consideracion)
             <option value="{{$consideracion->id}}">{{$consideracion->nombre}}</option>
@@ -20,17 +19,6 @@
     </select>
 
     <select name="id_zona" class="form-control selectpicker text-uppercase col-lg-4" id="id_zona" title="Seleccione Zona" data-live-search="true">
-        @foreach($zonas_user as $zona)
-            <option value="{{$zona->id}}">{{$zona->id}} - {{$zona->zona}}</option>
-        @endforeach
-    </select>
-    <select name="estado" class="form-control selectpicker text-uppercase col-lg-4" id="estado" title="estado" data-live-search="true">
-        <option value="aprobado">aprobado</option>
-        <option value="rechazado">rechazado</option>
-        <option value="pendiente">pendiente</option>
-    </select>
-
-    <input type="number" name="mes" class="form-control text-uppercase" placeholder="MES: YYYYMM">
         @foreach($zonas as $zona)
             <option value="{{$zona->id}}">{{$zona->representante_zonal_nombre}} - {{$zona->zona}}</option>
         @endforeach

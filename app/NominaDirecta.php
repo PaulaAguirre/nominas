@@ -122,5 +122,14 @@ class NominaDirecta extends Model
         }
 
     }
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeConsideracion ($query, $id_consideracion)
+    {
+        if($id_consideracion)
+        {
+            $query->where('id_consideracion', $id_consideracion);
+        }
+
+    }
 
 }

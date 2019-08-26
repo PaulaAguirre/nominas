@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Zona;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Consideracion;
@@ -19,9 +20,11 @@ class ConsideracionesDirectaController extends Controller
     {
         $mes = $request->get('mes');
         $zonas = auth()->user()->zonas->pluck('id');
+
         $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', NULL)
             ->mes($mes)
             ->get();
+
 
         return view('consideraciones_directa.index', ['personas_consideracion' => $personas_consideracion, 'zonas'=>$zonas]);
     }
@@ -97,13 +100,21 @@ class ConsideracionesDirectaController extends Controller
         //
     }
 
-    public function aprobarConsideraciones ($mes)
+    public function aprobarConsideraciones (Request $request, $mes)
     {
-        $personas_consideracion = NominaDirecta::where('estado_consideracion', '=', 'pendiente')
-            ->where('mes', $mes)
+        $zonas = Zona::all();
+        $consideraciones = Consideracion::all();
+        $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')->get();
+        $id_consideracion = $request->get('id_consideracion');
+        $id_persona = $request->get('id_persona');
+        $id_zona = $request->get('id_zona');
+        $id_jefe= $request->get('id_jefe');
+        $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', NULL)
+            ->mes($mes)->representanteDir($id_persona)->zonadirecta($id_zona, $id_jefe)->consideracion($id_consideracion)
             ->get();
 
-        return view('consideraciones_directa.aprobacion', ['personas_consideracion' => $personas_consideracion, 'mes'=>$mes]);
+        return view('consideraciones_directa.aprobacion', ['personas_consideracion' => $personas_consideracion, 'mes'=>$mes,
+            'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'jefes'=>$jefes]);
 
     }
 

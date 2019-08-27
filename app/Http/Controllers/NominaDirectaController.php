@@ -74,6 +74,8 @@ class NominaDirectaController extends Controller
                 $zonas = Zona::all();
             }
 
+            //dd($zonas[0]);
+
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
             $mes_anterior = Carbon::now()->format('Ym'); //porque en junio se carga lo de julio

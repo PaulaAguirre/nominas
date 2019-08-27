@@ -48,7 +48,7 @@
                         <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">Staff</label>
-                                <input type="number" name="staff" required value="{{$persona->staff}}" class="form-control">
+                                <input type="number" name="staff"  value="{{$persona->staff}}" class="form-control">
                             </div>
                         </div>
 

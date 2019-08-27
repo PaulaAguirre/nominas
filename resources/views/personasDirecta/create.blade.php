@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="name">Fecha Ingreso</label>
-                                <input type="text" name="fecha_ingreso"  value="{{old('ch')}}" class="form-control text-uppercase" placeholder="DD/MM/YYYY">
+                                <input type="text" name="fecha_ingreso"  value="{{old('ch')}}" required class="form-control text-uppercase" placeholder="DD/MM/YYYY">
                             </div>
                         </div>
 

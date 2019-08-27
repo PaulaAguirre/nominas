@@ -109,7 +109,7 @@ class ConsideracionesDirectaController extends Controller
         $id_persona = $request->get('id_persona');
         $id_zona = $request->get('id_zona');
         $id_jefe= $request->get('id_jefe');
-        $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', NULL)
+        $personas_consideracion = NominaDirecta::where('estado_consideracion', '=', 'pendiente')
             ->mes($mes)->representanteDir($id_persona)->zonadirecta($id_zona, $id_jefe)->consideracion($id_consideracion)
             ->get();
 

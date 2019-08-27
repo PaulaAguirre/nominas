@@ -223,7 +223,8 @@ class NominaDirectaController extends Controller
 
     public function aprobarInactivaciones(Request $request)
     {
-        $mes = '201908';
+
+        $mes = Carbon::today()->format('Ym');
         $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
             ->where('mes', '=', $mes)->get();
         return view('nomina_directa.aprobar_inactivaciones', ['personas' => $personas, 'mes' => $mes]);

@@ -48,8 +48,9 @@ class NominaDirectaController extends Controller
         {
             $zonas_user = Zona::all();
             $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')->get();
-            $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona, $id_jefe)
-                ->jefesDirecta($id_jefe)->estado($estado)
+            $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->jefesDirecta($id_jefe)
+                ->zonadirecta($id_zona, $id_jefe)
+                ->estado($estado)
                 ->orderBy('id_nomina')->get();
         }
         else

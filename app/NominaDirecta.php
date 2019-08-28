@@ -96,6 +96,7 @@ class NominaDirecta extends Model
                 ->where('id_zona', '=', $id_zona)
                ;
         }
+
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
@@ -131,5 +132,7 @@ class NominaDirecta extends Model
         }
 
     }
+
+
 
 }

@@ -34,23 +34,41 @@ class NominaDirectaController extends Controller
      */
     public function index(Request $request)
     {
-        $zonas = auth()->user()->zonas->pluck('id');
+
+        $zonas = auth()->user()->zonas->pluck('id')->toArray();
+       // dd($zonas);
 
         $mes = $request->get('mes');
         $id_zona = $request->get('id_zona');
         $id_persona= $request->get('id_persona');
         $id_jefe = $request->get('id_jefe');
         $estado = $request->get('estado');
-        $zonas_user = Zona::all();
-        $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')->get();
+
+        if(auth()->user()->hasRoles(['tigo_people_admin']))
+        {
+            $zonas_user = Zona::all();
+            $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')->get();
+            $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona, $id_jefe)
+                ->jefesDirecta($id_jefe)->estado($estado)
+                ->orderBy('id_nomina')->get();
+        }
+        else
+        {
+          $zonas_user = Zona::whereIn('id', $zonas)->get();
+          $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')
+              ->whereIn('id_zona', $zonas)->get();
+          $id_personas = PersonaDirecta::where('cargo', '=', 'representante')
+              ->whereIn('id_zona', $zonas)->get()->pluck('id_persona')->toArray();
+          $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona, $id_jefe)
+            ->jefesDirecta($id_jefe)->estado($estado)->whereIn('id_persona_directa', $id_personas)
+            ->orderBy('id_nomina')->get();
+        }
+
+
+
         $fecha_inicio = (new Carbon('first day of this month'))->addDays(14);
         $fecha_fin = new Carbon('first day of next month');
         $today = Carbon::today();
-
-
-        $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona, $id_jefe)
-            ->jefesDirecta($id_jefe)->estado($estado)
-            ->orderBy('id_nomina')->get();
 
         return view('nomina_directa.index', ['personas' => $personas,
             'zonas' =>$zonas, 'zonas_user'=>$zonas_user, 'jefes'=>$jefes,

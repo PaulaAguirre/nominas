@@ -26,7 +26,7 @@ class ConsideracionesDirectaController extends Controller
             ->get();
 
 
-        return view('consideraciones_directa.index', ['personas_consideracion' => $personas_consideracion, 'zonas'=>$zonas]);
+        return view('consideraciones_directa.index', ['personanas_consideracion' => $personas_consideracion, 'zonas'=>$zonas]);
     }
 
     /**

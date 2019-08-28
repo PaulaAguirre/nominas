@@ -40,7 +40,7 @@
                     </thead>
                     @foreach ($personas as $persona)
                             @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
-                                @if($zonas->contains($persona->personaDirecta->id_zona))
+                                @if(in_array($persona->personaDirecta->id_zona, $zonas))
                                 <tr class="text-uppercase text-sm">
                                     <td>{{$persona->id_nomina}}</td>
                                     <td>{{$persona->mes}}</td>

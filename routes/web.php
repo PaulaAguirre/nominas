@@ -88,4 +88,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//todo esto debe ir al controller
+use App\Exports\NominaDirectaExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+Route::get('/excel', function () {
+    return Excel::download(new NominaDirectaExport, 'nomina.xlsx');
+});
+
 

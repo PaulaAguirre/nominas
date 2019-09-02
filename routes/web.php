@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\ExcelController;
+
 Route::get('/', function () {
     if (Auth::check())
     {
@@ -89,11 +91,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //todo esto debe ir al controller
-use App\Exports\NominaDirectaExport;
-use Maatwebsite\Excel\Facades\Excel;
+//use App\Exports\NominaDirectaExport;
+//use Maatwebsite\Excel\Facades\Excel;
 
-Route::get('/excel', function () {
-    return Excel::download(new NominaDirectaExport, 'nomina.xlsx');
-});
+//Route::get('/excel', function () {
+  //  return Excel::download(new NominaDirectaExport, 'nomina.xlsx');
+//});
+ Route::get('/excel', 'ExcelController@exportNominaDirecta');
+ Route::get('/generar', 'ExcelController@index');
 
 

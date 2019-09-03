@@ -97,7 +97,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/excel', function () {
   //  return Excel::download(new NominaDirectaExport, 'nomina.xlsx');
 //});
- Route::get('/excel', 'ExcelController@exportNominaDirecta');
+ Route::get('/excel', 'ExcelController@exportNominaDirecta'); //Descarga las Consideraciones
+Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //descarga los nuevos ingresos
  Route::get('/generar', 'ExcelController@index');
 
 

@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
+use Carbon\Carbon;
 
 class NominaDirectaExport implements FromView
 {
@@ -16,21 +17,26 @@ class NominaDirectaExport implements FromView
     /**
      * NominaDirectaExport constructor.
      */
-    public function __construct($mes)
-    {
-        $this->mes = $mes;
-    }
+    public $fecha_inicial;
+    public $fecha_final;
 
+    public function __construct($fecha_inicial, $fecha_final)
+    {
+        $this->fecha_inicial = Carbon::createFromFormat('d/m/Y', $fecha_inicial);
+        $this->fecha_final = Carbon::createFromFormat('d/m/Y', $fecha_final);
+    }
 
     /**
     * @return \Illuminate\Support\Collection
     */
     public function view():View
     {
-        return view('excel.exportar', ['personas'=>NominaDirecta::all()->where('mes', '=', $this->mes)]);
+        $personas = NominaDirecta::where('estado_consideracion', '=', 'aprobado')
+            ->whereBetween('updated_at', [$this->fecha_inicial, $this->fecha_final])->get();
 
-        //$nominas= NominaDirecta::all()->where('mes', '=', $this->mes);
-        //return $nominas;
+        return view('excel.exportar', ['personas'=>$personas]);
+
+
     }
 
 }

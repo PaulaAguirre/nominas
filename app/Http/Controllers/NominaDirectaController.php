@@ -288,6 +288,10 @@ class NominaDirectaController extends Controller
 
     public function storeConsideraciones (Request $request, $id)
     {
+        $date = $request->get('date');
+        $fecha = Carbon::createFromFormat('d/m/Y', $date);
+        //dd($fecha);
+
         $nominaDirecta = NominaDirecta::findOrFail($id);
         $nominaDirecta->id_consideracion = $request->get('id_consideracion');
         $nominaDirecta->detalles_consideracion = $request->get('detalles_consideracion');

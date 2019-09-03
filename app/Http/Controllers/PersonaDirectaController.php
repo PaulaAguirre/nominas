@@ -68,6 +68,7 @@ class PersonaDirectaController extends Controller
         $id_zona = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id;
         $id_representante_jefe = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->id_persona;
         $asesor = new PersonaDirecta($request->all());
+        $asesor->nombre = strtoupper($request->get('nombre'));
         $asesor->id_representante_jefe = $id_representante_jefe;
         $asesor->id_zona = $id_zona;
         $asesor->cargo =  'representante';

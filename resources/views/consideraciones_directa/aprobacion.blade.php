@@ -14,7 +14,9 @@
             @endif
         </div>
     </div>
+
     @include('consideraciones_directa.search_aprobacion')
+
     {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['consideraciones_directa_aprobacion.aprobacion', $mes]])!!}
     {{Form::token()}}
 

@@ -12,6 +12,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead class="text-center" style="background-color: #8eb4cb">
+                        <th>mes</th>
                         <th>ID</th>
                         <th>CH</th>
                         <th>Nombre</th>
@@ -29,6 +30,7 @@
                         @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
                             @if($zonas->contains($persona->personaDirecta->id_zona))
                                 <tr class="text-uppercase text-sm">
+                                    <td>{{$persona->mes}}</td>
                                     <td>{{$persona->id_nomina}}</td>
                                     <td>{{$persona->personaDirecta->ch}}</td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
@@ -59,6 +61,7 @@
                             @endif
                         @elseif(auth()->user()->hasRoles([ 'tigo_people_admin']))
                             <tr class="text-uppercase text-sm">
+                                <td>{{$persona->mes}}</td>
                                 <td>{{$persona->id_nomina}}</td>
                                 <td>{{$persona->personaDirecta->ch}}</td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>

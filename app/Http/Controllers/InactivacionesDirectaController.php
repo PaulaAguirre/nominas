@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\NominaDirecta;
 use App\PersonaDirecta;
@@ -24,8 +25,10 @@ class InactivacionesDirectaController extends Controller
     public function index()
     {
         $zonas = auth()->user()->zonas->pluck('id');
+        $mes = Carbon::now()->format('Ym');
 
         $inactivaciones = NominaDirecta::where('estado_inactivacion', '<>', 'NULL')
+            ->where('mes', '=', $mes )
             ->get();
 
         return view('inactivaciones_directa.index', ['inactivaciones'=>$inactivaciones, 'zonas'=>$zonas]);

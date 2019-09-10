@@ -202,6 +202,16 @@
                         <li><a href="#"><i class="fa fa-comment"></i> Inctivaciones Tiendas</a></li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <span>Reportes</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('/generar')}}"><i class="fa fa-book"></i>Reportes Directa</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="{{url ('/manual')}}">
                         <i class="fa fa-life-ring"></i> <span>Ayuda</span>

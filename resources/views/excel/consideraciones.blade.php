@@ -1,8 +1,7 @@
 
 <div class="form-group">
-    {!! Form::open(array('url'=>'/excel','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
+    {!! Form::open(array('url'=>'/exportar_consideraciones','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
     <div class="form-group form-inline">
-        <label for="">Seleccione Rango de fechas</label>
         <div class="input-group">
             <input type="text" class="form-control datepicker" name="fecha_inicial">
             <div class="input-group-addon">
@@ -10,12 +9,13 @@
             </div>
             <input type="text" class="form-control datepicker" name="fecha_final">
         </div>
+        <div class="form-group">
+            <a href="{{URL::action('ExcelController@exportConsideracionesController')}}">
+                <button class="btn btn-bitbucket">exportar consideraciones</button>
+            </a>
+        </div>
     </div>
-    <div class="form-group">
-        <a href="{{URL::action('ExcelController@exportNominaDirecta')}}">
-            <button class="btn btn-bitbucket">Consideraciones</button>
-        </a>
-    </div>
+
 
 
 </div>

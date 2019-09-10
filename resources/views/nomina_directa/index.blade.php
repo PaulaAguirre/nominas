@@ -5,6 +5,7 @@
             <h3>Nómina - Canal: Directa.
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
+                    <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(29))
                         <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title={{'hasta:'.$fecha_inicio}}>Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
@@ -14,6 +15,8 @@
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina  {{\Carbon\Carbon::now()->addMonths(1)->format('Y-m')}}</button></a>
                 @endif
+
+
             </h3>
           <p class="text-info" id="cantidad">Cantidad</p>
             @include('nomina_directa.search_index')

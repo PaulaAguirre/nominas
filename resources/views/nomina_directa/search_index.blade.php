@@ -23,9 +23,9 @@
             <option value="rechazado">rechazado</option>
             <option value="pendiente">pendiente</option>
     </select>
-
+    @if(auth()->user()->hasRoles(['tigo_people_admin']))
         <input type="number" name="mes" class="form-control text-uppercase" placeholder="MES: YYYYMM">
-
+    @endif
     <button type="submit" class="btn btn-primary "><span>Buscar </span><i class="fa fa-search col-lg-2" aria-hidden="true"></i></button>
 
 </div>

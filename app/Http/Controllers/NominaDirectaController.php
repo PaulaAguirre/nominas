@@ -97,8 +97,19 @@ class NominaDirectaController extends Controller
 
             $mes_actual= Carbon::now()->format('Ym');
             $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
-            $mes_anterior = Carbon::now()->format('Ym'); //porque en junio se carga lo de julio
-            $mes_nomina = Carbon::now()->addMonth();
+
+
+            $fecha_actual = Carbon::today();
+            $fecha_fin = (new Carbon('first day of this month'))->addDays(24);
+
+            if ($fecha_actual < $fecha_fin)
+            {
+                $mes_nomina = $fecha_actual->format('Ym');
+            }
+            else
+            {
+                $mes_nomina = Carbon::now()->addMonth()->format ('Ym');
+            }
 
 
             $meses = [$mes_actual,$mes_siguiente];
@@ -108,7 +119,7 @@ class NominaDirectaController extends Controller
             $id_zona = $request->get('id_zona');
 
             /**los asesores que ya se encuentran en la nomina que no deben aparecer entre los que estan para agregar**/
-            $representantes_existentes = NominaDirecta::where('mes', $mes_nomina->format('Ym'))
+            $representantes_existentes = NominaDirecta::where('mes', $mes_nomina)
                 ->get()->pluck('id_persona_directa')->toArray();
 
             $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
@@ -119,7 +130,7 @@ class NominaDirectaController extends Controller
 
 
             return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
-                             'meses'=>$meses, 'mes_nomina'=>$mes_nomina->format('Ym'), 'zonas'=>$zonas]);
+                             'meses'=>$meses, 'mes_nomina'=>$mes_nomina, 'zonas'=>$zonas]);
     }
 
     /**
@@ -133,11 +144,21 @@ class NominaDirectaController extends Controller
         $personas_id = $request->get('idrepresentante');
         $activo = $request->get('activo');
         $cont = 0;
-        $mes_nomina = Carbon::now()->addMonth()->format ('Ym');
         $persona_mes = $request->get('persona_mes');
 
+        $fecha_actual = Carbon::today();
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(24);
 
-        /**
+        if ($fecha_actual < $fecha_fin)
+        {
+            $mes_nomina = $fecha_actual->format('Ym');
+        }
+        else
+        {
+            $mes_nomina = Carbon::now()->addMonth()->format ('Ym');
+        }
+
+         /**
          * Validaciones
          */
         $messages = [];
@@ -162,7 +183,7 @@ class NominaDirectaController extends Controller
             $nomina = new NominaDirecta();
             $nomina->id_persona_directa = $personas_id[$cont];
             $nomina->mes = $mes_nomina ;
-            $nomina->persona_mes = $persona_mes[$cont];
+            $nomina->persona_mes = $personas_id[$cont].$mes_nomina;
             $nomina->activo = 'activo';
             $nomina->agrupacion = PersonaDirecta::findOrFail($personas_id[$cont])->agrupacion;
             if ($asesores_existentes->contains( $personas_id[$cont]))

@@ -20,9 +20,11 @@ class NominaDirectaExport implements FromView
     */
     public function view():View
     {
+        $fecha_actual = Carbon::today();
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(25);
+
         $mes = Carbon::now()->format('Ym');
         $personas = NominaDirecta::where('mes', '=', $mes)
-            //->whereBetween('updated_at', [$this->fecha_inicial, $this->fecha_final])
             ->get();
 
         return view('excel.exportar', ['personas'=>$personas]);

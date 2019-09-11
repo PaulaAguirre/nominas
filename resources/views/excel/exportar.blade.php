@@ -17,11 +17,12 @@
         <th>F INGRESO</th>
         <th>OBS</th>
         <th>Comentarios</th>
+        <th>Estado</th>
     </tr>
     </thead>
     <tbody>
     @foreach($personas as $persona)
-        @if($persona->estado_inactivacion  != 'aprobado' and $persona->personaDirecta )
+        @if($persona->estado_nomina == 'aprobado' )
             <tr>
                 <td>{{$persona->id_nomina}}</td>
                 <td>{{$persona->mes}}</td>
@@ -39,6 +40,7 @@
                 <td>{{$persona->id_consideracion == 6 ? $persona->personaDirecta->fecha_ingreso : ''}}</td>
                 <td>{{$persona->estado_consideracion == 'aprobado' ? $persona->consideracion->nombre : 'OK'}}</td>
                 <td>{{$persona->estado_consideracion == 'aprobado' ? $persona->comentario_consideracion : ''}}</td>
+                <td>{{$persona->estado_inactivacion == 'aprobado' ? 'inactivo': 'activo'}}</td>
             </tr>
         @endif
     @endforeach

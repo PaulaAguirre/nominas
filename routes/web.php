@@ -101,5 +101,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //descarga los nuevos ingresos
  Route::get('/generar', 'ExcelController@index');
  Route::get('/exportar_consideraciones', 'ExcelController@exportConsideracionesController');
+ Route::get('/nomina_x_zona', 'ExcelController@exportarNominaXZonalController');
 
 

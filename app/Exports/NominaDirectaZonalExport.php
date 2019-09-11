@@ -19,8 +19,9 @@ class NominaDirectaZonalExport implements FromView
     {
         $mes = Carbon::now()->format('Ym');
         $zonas = auth()->user()->zonas->pluck('id')->toArray();
-        $personas = NominaDirecta::where('mes', $mes)->get();
+        $personas = NominaDirecta::where('mes', $mes)
+            ->get();
 
-        return view('excel.nomina_directa_zonal', ['zonas'=>$zonas, 'personas'=>$personas]);
+        return view('excel.exportar_x_zona', ['zonas'=>$zonas, 'personas'=>$personas]);
     }
 }

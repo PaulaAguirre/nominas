@@ -10,6 +10,7 @@ use App\Exports\NominaDirectaExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\NuevosIngresosDirectaExport;
 use App\Exports\ConsideracionesExport;
+use App\Exports\NominaDirectaZonalExport;
 
 class ExcelController extends Controller
 {
@@ -54,6 +55,11 @@ class ExcelController extends Controller
         $fecha_inicial = $request->get('fecha_inicial');
         $fecha_final = $request->get('fecha_final');
 
+    }
+
+    public function exportarNominaXZonalController(Request $request)
+    {
+        return Excel::download(new NominaDirectaZonalExport(), 'nomina_x_zona.xlsx');
     }
 
 }

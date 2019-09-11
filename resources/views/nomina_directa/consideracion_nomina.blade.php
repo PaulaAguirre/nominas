@@ -34,7 +34,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label for="">Seleccione Rango de fechas</label>
                             <div class="input-group">
                                 <input type="text" class="form-control datepicker" name="date">
@@ -43,7 +43,7 @@
                                 </div>
                                 <input type="text" class="form-control datepicker" name="date2">
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="form-group">
                             <label for="name">Observaciones</label>

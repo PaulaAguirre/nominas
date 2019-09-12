@@ -23,6 +23,7 @@
                         <th>Detalles</th>
                         <th>Estado</th>
                         <th>Motivo Rechazo</th>
+                        <th>Comentarios</th>
                         <th class="text-center">OPC</th>
 
                     </thead>
@@ -57,6 +58,7 @@
                                             @endif
                                         </td>
                                     @endif
+                                    <td>{{$persona->comentario_inactivacion}}</td>
                                 </tr>
                             @endif
                         @elseif(auth()->user()->hasRoles([ 'tigo_people_admin']))
@@ -88,6 +90,7 @@
                                         @endif
                                     </td>
                                 @endif
+                                <td>{{$persona->comentario_inactivacion}}</td>
                             </tr>
                         @endif
                     @endforeach

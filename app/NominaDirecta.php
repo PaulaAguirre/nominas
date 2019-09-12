@@ -29,7 +29,7 @@ class NominaDirecta extends Model
         'detalles_inactivacion',
         'estado_inactivacion',
         'regularizacion_inactivacion',
-        'comentario_consideracion'
+        'comentario_inactivacion'
 
     ];
 

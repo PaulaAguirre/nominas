@@ -31,6 +31,7 @@
                     <th>Detalles</th>
                     <th>Regularización</th>
                     <th>Aprobar</th>
+                    <th>Comentarios</th>
                     <th>Rechazo</th>
                     <th>Enviar</th>
                     </thead>
@@ -74,6 +75,7 @@
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
+                                <td><input type="text" class="form-control text-uppercase"  name="comentario_inactivacion[]"></td>
                                 <td><input type="text" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"><input type="hidden" ></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">

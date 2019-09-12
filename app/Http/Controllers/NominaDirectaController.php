@@ -275,6 +275,9 @@ class NominaDirectaController extends Controller
         $estado_inactivacion = $request->get('aprobacion');
         $nomina = $request->get('id_nomina');
         $motivo_rechazo = $request->get('motivo_rechazo');
+        $comentario_inactivacion = $request->get('comentario_inactivacion');
+
+        //dd($comentario_inactivacion);
         $cont = 0;
 
         while ($cont < count($nomina))
@@ -282,7 +285,9 @@ class NominaDirectaController extends Controller
             $nomina_directa = NominaDirecta::findOrFail($nomina[$cont]);
             $nomina_directa->estado_inactivacion = $estado_inactivacion[$cont];
             $nomina_directa->motivo_rechazo_inactivacion = $motivo_rechazo[$cont];
+            $nomina_directa->comentario_inactivacion = $comentario_inactivacion[$cont];
             $nomina_directa->update();
+
 
             if ($nomina_directa->estado_inactivacion == 'aprobado')
             {

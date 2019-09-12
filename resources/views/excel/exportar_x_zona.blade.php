@@ -16,7 +16,9 @@
         <th>TERRITORIO</th>
         <th>F INGRESO</th>
         <th>OBS</th>
-        <th>Comentarios</th>
+        <th>Comentarios Zonal</th>
+        <th>Comentarios Canales</th>
+        <th>Activo</th>
     </tr>
     </thead>
     <tbody>
@@ -39,7 +41,9 @@
                     <td>{{$persona->personaDirecta->zona->region->region }}</td>
                     <td>{{$persona->id_consideracion == 6 ? $persona->personaDirecta->fecha_ingreso : ''}}</td>
                     <td>{{$persona->estado_consideracion == 'aprobado' ? $persona->consideracion->nombre : 'OK'}}</td>
+                    <td>{{$persona->detalles_consideracion}}</td>
                     <td>{{$persona->estado_consideracion == 'aprobado' ? $persona->comentario_consideracion : ''}}</td>
+                    <td>{{$persona->estado_inactivacion == 'aprobado' ? 'inactivo': 'activo'}}</td>
                 </tr>
             @endif
         @endif

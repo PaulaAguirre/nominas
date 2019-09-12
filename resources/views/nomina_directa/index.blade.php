@@ -7,10 +7,11 @@
                     <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
-                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(29))
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(10))
                         <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title={{'hasta:'.$fecha_inicio}}>Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
-                        <a href="/nomina_x_zona"><button class="btn btn-github">Exportar Nómina</button></a>
+
                     @endif
+                        <a href="/nomina_x_zona"><button class="btn btn-github">Exportar Nómina</button></a>
                 @endif
 
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
@@ -67,7 +68,7 @@
                                     @else
                                         <td class="text-success">Activo</td>
                                     @endif
-                                    @if(auth()->user()->hasRoles(['zonal']))
+                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(10)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                                 <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

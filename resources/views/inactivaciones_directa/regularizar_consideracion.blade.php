@@ -45,6 +45,14 @@
                             <label class="text-danger">Motivo Rechazo</label>
                             <p>{{$persona->motivo_rechazo_consideracion}}</p>
                         </div>
+                        <div class="form-group">
+                            <label class="text-danger">seleccione consideracion</label>
+                            <select name="id_consideracion" class="selectpicker form-control text-uppercase" title="Seleccione Consideración" required>
+                                @foreach($consideraciones as $consideracion )
+                                    <option value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="form-group">
                             <label class="text-info">Regularización</label>

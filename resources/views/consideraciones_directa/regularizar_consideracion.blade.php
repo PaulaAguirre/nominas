@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="text-info">Consideración</label>
+                            <label class="text-info">Consideración nomina</label>
                             <p>{{$persona->consideracion->nombre}}</p>
                         </div>
 

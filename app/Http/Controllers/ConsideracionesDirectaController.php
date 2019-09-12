@@ -69,8 +69,9 @@ class ConsideracionesDirectaController extends Controller
      */
     public function edit($id)
     {
+        $consideraciones = Consideracion::all();
         $persona = NominaDirecta::findOrFail($id);
-        return view('inactivaciones_directa.regularizar_consideracion', ['persona'=>$persona]);
+        return view('inactivaciones_directa.regularizar_consideracion', ['persona'=>$persona, 'consideraciones'=>$consideraciones]);
     }
 
     /**
@@ -85,8 +86,9 @@ class ConsideracionesDirectaController extends Controller
         $persona = NominaDirecta::findOrFail($id);
         $persona->estado_consideracion = 'pendiente';
         $persona->regularizacion_consideracion = $request->get('regularizacion_consideracion');
+        $persona->id_consideracion = $request->get('id_consideracion');
         $persona->update();
-        return redirect('inactivaciones_directa');
+        return redirect('consideraciones_directa');
     }
 
     /**

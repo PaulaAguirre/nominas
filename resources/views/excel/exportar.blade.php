@@ -19,6 +19,7 @@
         <th>Comentarios Zonal</th>
         <th>Comentarios canales</th>
         <th>Estado</th>
+        <th>Obs inactivacion canales</th>
     </tr>
     </thead>
     <tbody>
@@ -43,6 +44,7 @@
                 <td>{{$persona->detalles_consideracion}}</td>
                 <td>{{$persona->estado_consideracion == 'aprobado' ? $persona->comentario_consideracion : ''}}</td>
                 <td>{{$persona->estado_inactivacion == 'aprobado' ? 'inactivo': 'activo'}}</td>
+                <td>{{$persona->comentario_inactivacion}}</td>
             </tr>
         @endif
     @endforeach

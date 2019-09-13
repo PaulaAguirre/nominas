@@ -23,6 +23,13 @@
             <option value="rechazado">rechazado</option>
             <option value="pendiente">pendiente</option>
     </select>
+
+    <select name="activo" class="form-control selectpicker text-uppercase col-lg-4"  title="activo" data-live-search="true">
+        <option value="activo">Activo</option>
+        <option value="pendiente">pendiente inactivación</option>
+        <option value="aprobado">inactivo</option>
+
+    </select>
     @if(auth()->user()->hasRoles(['tigo_people_admin']))
         <input type="number" name="mes" class="form-control text-uppercase" placeholder="MES: YYYYMM">
     @endif

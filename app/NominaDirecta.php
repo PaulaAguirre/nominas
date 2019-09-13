@@ -129,6 +129,27 @@ class NominaDirecta extends Model
 
     }
 
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeInactivo ($query, $activo)
+    {
+        $mes = Carbon::now()->format('Ym');
+        if($activo)
+        {
+            if ($activo == 'activo')
+            {
+                $query->whereNull('estado_inactivacion')
+                ->where('mes', '=', $mes);
+
+            }
+            else{
+                $query->where('estado_inactivacion', $activo)
+                    ->where('mes', '=', $mes);
+            }
+
+        }
+
+    }
+
 
 
 

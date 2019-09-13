@@ -43,6 +43,7 @@ class NominaDirectaController extends Controller
         $id_persona= $request->get('id_persona');
         $id_jefe = $request->get('id_jefe');
         $estado = $request->get('estado');
+        $activo = $request->get('activo');
 
         if(auth()->user()->hasRoles(['tigo_people_admin']))
         {
@@ -51,6 +52,7 @@ class NominaDirectaController extends Controller
             $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->jefesDirecta($id_jefe)
                 ->zonadirecta($id_zona, $id_jefe)
                 ->estado($estado)
+                ->inactivo($activo)
                 ->orderBy('id_nomina')->get();
         }
         else

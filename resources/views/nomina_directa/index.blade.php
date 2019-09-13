@@ -92,7 +92,7 @@
                                 @endif
                             @elseif (auth()->user()->hasRoles(['tigo_people_admin']))
                             <tr class="text-uppercase text-sm">
-                                <td>{{$persona->id_persona_directa}}</td>
+                                <td>{{$persona->id_nomina}}</td>
                                 <td>{{$persona->mes}}</td>
                                 <td>{{$persona->personaDirecta->ch}}</td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>

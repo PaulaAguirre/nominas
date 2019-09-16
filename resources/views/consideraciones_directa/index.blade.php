@@ -80,7 +80,9 @@
                                             <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
                                         </a>
                                     @endif
+                                    @if(in_array($persona->estado_consideracion, ['aprobado', 'rechazado']))
                                         <a href="" data-target="#modal-nomina-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn-xs btn-file" title="editar"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
+                                    @endif
                                 </td>
                             </tr>
                         @endif

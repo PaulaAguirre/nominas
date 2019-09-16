@@ -151,6 +151,22 @@ class ConsideracionesDirectaController extends Controller
     public function updateEstado(Request $request, $id)
     {
         $persona = NominaDirecta::findOrFail($id);
+        $estado_consideracion = $request->get('estado_consideracion');
+        $comentarios = $request->get('comentario_consideracion');
+
+        if ($estado_consideracion == 'aprobado')
+        {
+            $persona->estado_consideracion = 'aprobado';
+            $persona->comentario_consideracion = $comentarios;
+        }
+        elseif ($estado_consideracion == 'rechazado')
+        {
+            $persona->estado_consideracion = 'rechazado';
+            $persona->motivo_rechazo_consideracion = $comentarios;
+        }
+
+        $persona->update();
+
         return redirect('consideraciones_directa');
 
     }

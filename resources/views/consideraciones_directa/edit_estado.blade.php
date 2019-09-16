@@ -29,8 +29,9 @@
 
                 <div class="form-group">
                     <label class="text-blue">comentarios</label>
-                    <input type="text" name="comentario_consideracion" required value="{{$persona->comentario_consideracion}}" class="form-control" placeholder="detalles de la inactivación">
+                    <input type="text" name="comentario_consideracion" required value="{{$persona->estado_consideracion=='aprobado' ? $persona->comentario_consideracion : $persona->motivo_rechazo_consideracion}}" class="form-control" placeholder="detalles de la inactivación">
                 </div>
+
 
             </div>
             <div class="modal-footer">

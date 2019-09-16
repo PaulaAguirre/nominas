@@ -23,6 +23,7 @@
                         <th>Region</th>
                         <th>Zona</th>
                         <th>Estructura</th>
+                        <th>Estado</th>
                         <th class="text-center">Opciones</th>
 
                     </thead>
@@ -48,6 +49,7 @@
                                     @else
                                         <td class="alert-danger">{{$persona->estado_cambio}}</td>
                                     @endif
+                                    <td>{{$persona->activo}}</td>
                                     <td>
                                         <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
                                         <a href="" data-target="#modal-delete-{{$persona->id_persona}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
@@ -78,6 +80,7 @@
                                 @else
                                     <td class="alert-danger">{{$persona->estado_cambio}}</td>
                                 @endif
+                                <td>{{$persona->activo}}</td>
                                 <td>
                                     <a href="{{URL::action ('PersonaDirectaController@edit', $persona)}}"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
                                     <a href="" data-target="#modal-delete-{{$persona->id_persona}}" data-toggle="modal" data-placement="top" title="Inactivar"><button class="btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
@@ -87,6 +90,7 @@
                                         </a>
                                     @endif
                                 </td>
+
                             @endif
 
                         </tr>

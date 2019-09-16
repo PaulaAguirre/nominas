@@ -86,53 +86,55 @@ class NominaDirectaController extends Controller
     public function create(Request $request)
     {
 
-            if (auth()->user()->hasRoles(['zonal']))
-            {
-              $zonas = auth()->user()->zonas;
-            }
-            else
-            {
-                $zonas = Zona::all();
-            }
+        if (auth()->user()->hasRoles(['zonal']))
+        {
+          $zonas = auth()->user()->zonas;
+        }
+        else
+        {
+            $zonas = Zona::all();
+        }
 
-            //dd($zonas[0]);
+        $id_rep_jefe = $request->get('id_jefe');
+        $id_rep = $request->get('id_representante');
+        $id_zona = $request->get('id_zona');
 
-            $mes_actual= Carbon::now()->format('Ym');
-            $mes_siguiente = Carbon::now()->addMonth()->format ('Ym');
+        $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
 
+        $fecha_actual = Carbon::today();
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(13);
 
-            $fecha_actual = Carbon::today();
-            $fecha_fin = (new Carbon('first day of this month'))->addDays(24);
-
-            if ($fecha_actual < $fecha_fin)
-            {
-                $mes_nomina = $fecha_actual->format('Ym');
-            }
-            else
-            {
-                $mes_nomina = Carbon::now()->addMonth()->format ('Ym');
-            }
-
-
-            $meses = [$mes_actual,$mes_siguiente];
-
-            $id_rep_jefe = $request->get('id_jefe');
-            $id_rep = $request->get('id_representante');
-            $id_zona = $request->get('id_zona');
-
+        if ($fecha_actual < $fecha_fin)
+        {
+            $mes_nomina = $fecha_actual->format('Ym');
             /**los asesores que ya se encuentran en la nomina que no deben aparecer entre los que estan para agregar**/
             $representantes_existentes = NominaDirecta::where('mes', $mes_nomina)
                 ->get()->pluck('id_persona_directa')->toArray();
 
-            $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
             $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
                 ->where('activo', '=', 'activo')
-            ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($id_zona)
+                ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($id_zona)
+                ->get();
+        }
+        else
+        {
+            $mes_anterior = $fecha_actual->format('Ym');
+            $mes_nomina = Carbon::now()->addMonth()->format ('Ym');
+            /**los asesores que ya se encuentran en la nomina que no deben aparecer entre los que estan para agregar**/
+            $representantes_existentes = NominaDirecta::where('mes', $mes_nomina)
+                ->get()->pluck('id_persona_directa')->toArray();
+
+            $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
+                ->where('activo', '=', 'activo')
+                ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($id_zona)
                 ->get();
 
+            //dd($personas_directa->count());
+        }
 
-            return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
-                             'meses'=>$meses, 'mes_nomina'=>$mes_nomina, 'zonas'=>$zonas]);
+
+        return view('nomina_directa.create', ['personas_directa' => $personas_directa, 'jefes' => $jefes,
+                          'mes_nomina'=>$mes_nomina, 'zonas'=>$zonas]);
     }
 
     /**
@@ -149,7 +151,7 @@ class NominaDirectaController extends Controller
         $persona_mes = $request->get('persona_mes');
 
         $fecha_actual = Carbon::today();
-        $fecha_fin = (new Carbon('first day of this month'))->addDays(24);
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(13);
 
         if ($fecha_actual < $fecha_fin)
         {

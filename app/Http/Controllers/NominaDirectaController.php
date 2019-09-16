@@ -102,7 +102,7 @@ class NominaDirectaController extends Controller
         $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
 
         $fecha_actual = Carbon::today();
-        $fecha_fin = (new Carbon('first day of this month'))->addDays(13);
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(18);
 
         if ($fecha_actual < $fecha_fin)
         {
@@ -151,7 +151,7 @@ class NominaDirectaController extends Controller
         $persona_mes = $request->get('persona_mes');
 
         $fecha_actual = Carbon::today();
-        $fecha_fin = (new Carbon('first day of this month'))->addDays(13);
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(18);
 
         if ($fecha_actual < $fecha_fin)
         {

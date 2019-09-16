@@ -49,6 +49,7 @@
                                         <td class="alert-danger">{{$persona->estado_inactivacion}}</td>
                                     @endif
                                     <td>{{$persona->motivo_rechazo_inactivacion}}</td>
+                                    <td>{{$persona->comentario_inactivacion}}</td>
                                     @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
                                         <td class="text-center">
                                             @if($persona->estado_inactivacion == 'rechazado')
@@ -58,7 +59,6 @@
                                             @endif
                                         </td>
                                     @endif
-                                    <td>{{$persona->comentario_inactivacion}}</td>
                                 </tr>
                             @endif
                         @elseif(auth()->user()->hasRoles([ 'tigo_people_admin']))
@@ -81,7 +81,8 @@
                                     <td class="alert-danger">{{$persona->estado_inactivacion}}</td>
                                 @endif
                                 <td>{{$persona->motivo_rechazo_inactivacion}}</td>
-                                @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
+                                <td>{{$persona->comentario_inactivacion}}</td>
+                                @if(auth()->user()->hasRoles(['zonal', 'tigo_people_admin']))
                                     <td class="text-center">
                                         @if($persona->estado_inactivacion == 'rechazado')
                                             <a href="{{URL::action('InactivacionesDirectaController@edit', $persona)}}">
@@ -90,7 +91,6 @@
                                         @endif
                                     </td>
                                 @endif
-                                <td>{{$persona->comentario_inactivacion}}</td>
                             </tr>
                         @endif
                     @endforeach

@@ -134,10 +134,41 @@ class ConsideracionesDirectaController extends Controller
             $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
             $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
             $nomina_consideracion->comentario_consideracion = $comentario_consideracion[$cont];
+
+            if (in_array($nomina_consideracion->id_consideracion, [6,12]) and
+                $nomina_consideracion->estado_consideracion == 'aprobado')
+            {
+                $nomina_consideracion->estado_nomina = 'aprobado';
+            }
+
             $nomina_consideracion->update();
             $cont = $cont+1;
         }
 
         return redirect()->back();
     }
+
+    public function updateEstado(Request $request, $id)
+    {
+        $persona = NominaDirecta::findOrFail($id);
+        $estado_consideracion = $request->get('estado_consideracion');
+        $comentarios = $request->get('comentario_consideracion');
+
+        if ($estado_consideracion == 'aprobado')
+        {
+            $persona->estado_consideracion = 'aprobado';
+            $persona->comentario_consideracion = $comentarios;
+        }
+        elseif ($estado_consideracion == 'rechazado')
+        {
+            $persona->estado_consideracion = 'rechazado';
+            $persona->motivo_rechazo_consideracion = $comentarios;
+        }
+
+        $persona->update();
+
+        return redirect('consideraciones_directa');
+
+    }
+
 }

@@ -72,14 +72,6 @@
                         </div>
 
                         <div class="form-group col-md-offset-0 col-md-4">
-                            <label for="">Cargo GO</label>
-                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Cargo" required>
-                                @foreach($cargos_go as $cargo )
-                                        <option value="{{$cargo}}">{{strtoupper ($cargo)}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-offset-0 col-md-4">
                             <label for="">Agrupación</label>
                             <select name="agrupacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Agrupacion" required>
                                 @foreach($agrupaciones as $agrupacion )
@@ -88,12 +80,23 @@
                             </select>
                         </div>
 
+                        <div class="form-group col-md-offset-0 col-md-4">
+                            <label for="">consideración</label>
+                            <select name="id_consideracion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Consideracion" required>
+                                <option  value="6">Nuevo Ingreso</option>
+                                <option value="12">Cambio de canal</option>
+
+                            </select>
+                        </div>
+
+
                         <div class="form-group col-md-4 ">
-                            <label for="" class="col-md-3">Activo</label>
-                            <select name="activo" class="selectpicker form-control text-uppercase" title="Estado" disabled="disabled">
+                            <label for="" class="col-md-3">Observaciones</label>
+                            <textarea class="form-control" rows="2" name="detalles_consideracion"></textarea>
+                            <!--<select name="activo" class="selectpicker form-control text-uppercase" title="Estado" disabled="disabled">
                                     <option value="inactivo" >inactivo</option>
                                     <option value="activo" selected >activo</option>
-                            </select>
+                            </select>-->
                         </div>
 
 

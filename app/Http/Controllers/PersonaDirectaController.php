@@ -69,8 +69,12 @@ class PersonaDirectaController extends Controller
         $asesor->cargo =  'representante';
         $asesor->activo='activo';
         $asesor->estado_cambio = 'aprobado';
-
         $asesor->save();
+
+        /**
+         * ingresar en nomina con estado pendiente
+        */
+
         return redirect()->back();
     }
 

@@ -147,4 +147,12 @@ class ConsideracionesDirectaController extends Controller
 
         return redirect()->back();
     }
+
+    public function updateEstado(Request $request, $id)
+    {
+        $persona = NominaDirecta::findOrFail($id);
+        return redirect('consideraciones_directa');
+
+    }
+
 }

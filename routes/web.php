@@ -75,6 +75,9 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('aprobacion_consideraciones_directa/{mes}', 'ConsideracionesDirectaController@storeConsideraciones')
         ->name('consideraciones_directa_aprobacion.aprobacion'); //ruta para guardar estado de consideración
 
+    Route::patch('consideraciones_directa_edit/{id}', 'ConsideracionesDirectaController@updateEstado')
+        ->name('consideraciones_directa_edit'); //ruta para editar el estado
+
     /**
      * Inactivaciones directa
      * */

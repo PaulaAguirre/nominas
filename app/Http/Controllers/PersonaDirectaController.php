@@ -71,6 +71,8 @@ class PersonaDirectaController extends Controller
         $asesor->cargo =  'representante';
         $asesor->activo='activo';
         $asesor->estado_cambio = 'aprobado';
+        $asesor->id_consideracion = $id_consideracion;
+        $asesor->detalles_consideracion = $detalles_consideracion;
         $asesor->save();
 
 

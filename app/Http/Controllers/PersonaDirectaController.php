@@ -60,6 +60,8 @@ class PersonaDirectaController extends Controller
             'ch' => 'required|unique:personas_directa'
         ]);
 
+        $id_consideracion = $request->get('id_consideracion');
+        $detalles_consideracion = $request->get('detalles_consideracion');
         $id_zona = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id;
         $id_representante_jefe = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->id_persona;
         $asesor = new PersonaDirecta($request->all());
@@ -69,8 +71,9 @@ class PersonaDirectaController extends Controller
         $asesor->cargo =  'representante';
         $asesor->activo='activo';
         $asesor->estado_cambio = 'aprobado';
-
         $asesor->save();
+
+
         return redirect()->back();
     }
 

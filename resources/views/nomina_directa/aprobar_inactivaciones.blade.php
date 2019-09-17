@@ -75,8 +75,8 @@
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
-                                <td><input type="text" class="form-control text-uppercase" style="display: none;" name="comentario_inactivacion[]" id="comentario_inactivacion-{{$persona->id_nomina}}"></td>
-                                <td><input type="text" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"><input type="hidden" ></td>
+                                <td><textarea rows="3" class="form-control text-uppercase" style="display: none;" name="comentario_inactivacion[]" id="comentario_inactivacion-{{$persona->id_nomina}}"></textarea></td>
+                                <td><textarea rows="3" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
                                     <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>

@@ -21,6 +21,8 @@
         <th>Comentarios canales</th>
         <th>Estado</th>
         <th>Obs inactivacion canales</th>
+        <th>Fecha aprobación Consideración</th>
+        <th>Fecha aprobación inactivación</th>
     </tr>
     </thead>
     <tbody>
@@ -53,6 +55,8 @@
                 @endif
                 <td>{{$persona->estado_inactivacion == 'aprobado' ? 'inactivo': 'activo'}}</td>
                 <td>{{$persona->comentario_inactivacion}}</td>
+                <td>{{$persona->fecha_aprobacion_consideracion}}</td>
+                <td>{{$persona->fecha_aprobacion_inactivacion}}</td>
             </tr>
         @endif
     @endforeach

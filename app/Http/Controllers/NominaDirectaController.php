@@ -290,16 +290,18 @@ class NominaDirectaController extends Controller
             $nomina_directa->estado_inactivacion = $estado_inactivacion[$cont];
             $nomina_directa->motivo_rechazo_inactivacion = $motivo_rechazo[$cont];
             $nomina_directa->comentario_inactivacion = $comentario_inactivacion[$cont];
-            $nomina_directa->update();
+
 
 
             if ($nomina_directa->estado_inactivacion == 'aprobado')
             {
                 $persona_directa = PersonaDirecta::findOrFail($nomina_directa->id_persona_directa);
                 $persona_directa->activo = 'inactivo';
+                $nomina_directa->fecha_aprobacion_inactivacion = Carbon::now()->format('d/m/Y');
                 $persona_directa->update();
             }
 
+            $nomina_directa->update();
             $cont = $cont+1;
         }
 

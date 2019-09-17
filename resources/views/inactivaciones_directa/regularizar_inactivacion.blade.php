@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-5 text-uppercase col-md-offset-3">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><span class="text-bold text-info">Regularizar Consideración</span></div>
+                    <div class="panel-heading"><span class="text-bold text-info">Regularizar Inactivación</span></div>
 
                     <div class="panel-body">
                         {!!Form::model ($persona, ['method'=>'PATCH', 'route'=>['inactivaciones_directa.update', $persona->id_nomina]])!!}
@@ -32,8 +32,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="text-info">Consideración</label>
-                            <p>{{$persona->motivo_inactivacion}}</p>
+                            <label class="text-danger">Motivo</label>
+                            <select name="rep_jefe_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Representante Jefe">
+                                @foreach($motivos as $motivo )
+                                    @if($persona->motivo_inactivacion == $motivo)
+                                        <option value="{{$motivo}}" selected>{{$motivo}}</option>
+                                    @else
+                                        <option value="{{$motivo}}">{{$motivo}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">

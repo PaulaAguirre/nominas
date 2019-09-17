@@ -5,7 +5,7 @@
             <h3>Consideraciones Asesores Directa</h3>
         </div>
     </div>
-
+    @include('consideraciones_directa.search_aprobacion_index')
     <br>
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

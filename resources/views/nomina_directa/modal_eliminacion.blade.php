@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label class="text-danger">Detalles de la inactivación</label>
-                    <input type="text" name="detalles_inactivacion" required value="{{old('detalles_inactivacion')}}" class="form-control" placeholder="detalles de la inactivación">
+                    <textarea rows="2" name="detalles_inactivacion" required value="{{old('detalles_inactivacion')}}" class="form-control" placeholder="detalles de la inactivación"></textarea>
                 </div>
 
             </div>

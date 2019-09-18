@@ -91,6 +91,7 @@
                             <td class="text-center">
                                 <input name="_token" value="{{csrf_token()}}" type="hidden">
                                 <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
+
                             </td>
                             @endif
                         </tr>

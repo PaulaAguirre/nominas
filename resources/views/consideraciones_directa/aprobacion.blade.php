@@ -82,10 +82,11 @@
                                 <td><textarea rows="3" class="form-control text-uppercase" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
 
                                 <td><textarea rows="3"  class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
-                                <td class="text-center">
+                                <td>
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
 
-                                <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
+                                    <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
+                                    <a href=""><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
                                 </td>
                             @endif
                         </tr>

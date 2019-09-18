@@ -25,14 +25,16 @@
 
                     <div class="panel-body text-uppercase">
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label for="">Consideración</label>
                             <select name="id_consideracion" class="selectpicker form-control text-uppercase" title="Seleccione Consideración" required>
                                 @foreach($consideraciones as $consideracion )
                                     <option value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre)}}</option>
                                 @endforeach
                             </select>
+
                         </div>
+
 
                         <!--<div class="form-group">
                             <label for="">Seleccione Rango de fechas</label>
@@ -49,7 +51,10 @@
                             <label for="name">Observaciones</label>
                             <textarea class="form-control" rows="3" id="detalles_consideracion" value="{{old('detalles_consideracion')}}" required name="detalles_consideracion" placeholder="Detalles de la consideración"></textarea>
                         </div>
-
+                        <div class="form-group">
+                            <label for="">adjuntar</label>
+                            <input type="file" name="archivo">
+                        </div>
 
                         <div class="form-group text-center">
                             <br>

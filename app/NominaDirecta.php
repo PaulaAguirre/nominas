@@ -63,7 +63,7 @@ class NominaDirecta extends Model
         else
         {
             //$mes = Carbon::now()->addMonth()->format ('Ym');
-            $mes = Carbon::now()->format ('Ym');
+            $mes = Carbon::now()->addMonth(1)->format ('Ym');
             $query->where('mes', $mes);
         }
 

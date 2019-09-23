@@ -52,6 +52,10 @@
                                                 <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
                                             </a>
                                         @endif
+                                            @if($persona->archivos->where('tipo', '=', 'consideracion')->first())
+
+                                                <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                            @endif
                                     </td>
                                 </tr>
                             @endif
@@ -75,6 +79,10 @@
                                 <td>{{$persona->comentario_consideracion}}</td>
                                 <td>{{$persona->motivo_rechazo_consideracion}}</td>
                                 <td class="text-center">
+                                    @if($persona->archivos->where('tipo', '=', 'consideracion')->first())
+
+                                        <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                    @endif
                                     @if($persona->estado_consideracion == 'rechazado')
                                         <a href="{{URL::action('ConsideracionesDirectaController@edit', $persona)}}">
                                             <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
@@ -87,6 +95,7 @@
                             </tr>
                         @endif
                         @include('consideraciones_directa.edit_estado')
+                        @include('consideraciones_directa.archivo_modal')
                     @endforeach
                 </table>
             </div>

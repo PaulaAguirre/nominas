@@ -4,6 +4,7 @@
  */
 
 namespace App\Http\Controllers;
+use App\Archivo;
 use App\Consideracion;
 use App\NominaDirecta;
 use App\PersonaDirecta;
@@ -255,11 +256,21 @@ class NominaDirectaController extends Controller
         $persona_nomina = NominaDirecta::findOrFail($id);
         $motivo_inactivacion = $request->get('motivo_inactivacion');
         $detalles_inactivacion = $request->get('detalles_inactivacion');
-        //dd($detalles_inactivacion.' '.$motivo_inactivacion);
 
         $persona_nomina->motivo_inactivacion = $motivo_inactivacion;
         $persona_nomina->detalles_inactivacion = $detalles_inactivacion;
         $persona_nomina->estado_inactivacion = 'pendiente';
+
+        if ($request->hasFile('archivo'))
+        {
+            $archivo = new Archivo();
+            $archivo->id_nomina_directa = $persona_nomina->id_nomina;
+            $ruta = $request->file('archivo')->store('public');
+            $archivo->nombre = explode('/',$ruta)[1];
+            $archivo->tipo = 'inactivacion';
+            $archivo->save();
+        }
+
         $persona_nomina->update();
 
         return redirect('nomina_directa');
@@ -267,8 +278,20 @@ class NominaDirectaController extends Controller
 
     public function aprobarInactivaciones(Request $request)
     {
+        $fecha1 = new Carbon('first day of this month');
+        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $mes_actual = Carbon::now();
 
-        $mes = Carbon::today()->format('Ym');
+        if ($mes_actual->between($fecha1, $fecha2))
+        {
+            $mes=Carbon::now()->format('Ym');
+        }
+        else
+        {
+            $mes= Carbon::now()->addMonth(1)->format('Ym');
+        }
+
+        //$mes = Carbon::today()->format('Ym');
         $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
             ->where('mes', '=', $mes)->get();
         return view('nomina_directa.aprobar_inactivaciones', ['personas' => $personas, 'mes' => $mes]);
@@ -320,15 +343,23 @@ class NominaDirectaController extends Controller
 
     public function storeConsideraciones (Request $request, $id)
     {
-        //$date = $request->get('date');
-        //$fecha = Carbon::createFromFormat('d/m/Y', $date);
-        //dd($fecha);
 
         $nominaDirecta = NominaDirecta::findOrFail($id);
         $nominaDirecta->id_consideracion = $request->get('id_consideracion');
         $nominaDirecta->detalles_consideracion = $request->get('detalles_consideracion');
         $nominaDirecta->estado_consideracion = 'pendiente';
 
+
+        if ($request->hasFile('archivo'))
+        {
+            $archivo = new Archivo();
+            $archivo->id_nomina_directa = $nominaDirecta->id_nomina;
+            $ruta = $request->file('archivo')->store('public');
+            $archivo->nombre = explode('/',$ruta)[1];
+            //dd($archivo->nombre);
+            $archivo->tipo = 'consideracion';
+            $archivo->save();
+        }
         $nominaDirecta->update();
         return redirect('nomina_directa');
 
@@ -403,8 +434,25 @@ class NominaDirectaController extends Controller
 
     public function ingresarAsesorMesActual(Request $request)
     {
+        $fecha1 = new Carbon('first day of this month');
+        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $mes = Carbon::now();
+
+        if ($mes->between($fecha1, $fecha2))
+        {
+            $mes_nomina=Carbon::now()->format('Ym');
+        }
+        else
+        {
+            $mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
+        }
+
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
+
         $mes_nomina=Carbon::now()->addMonth(1)->format('Ym');
+
+        //$mes_nomina=Carbon::now()->format('Ym');
+
         $personas_mes_actual = NominaDirecta::where('mes', '=', $mes_nomina)
             ->pluck('id_persona_directa')->toArray();
 
@@ -428,9 +476,26 @@ class NominaDirectaController extends Controller
 
     public function ingresarAsesorMesActualStore(Request $request)
     {
+        $fecha1 = new Carbon('first day of this month');
+        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $mes = Carbon::now();
+
+        if ($mes->between($fecha1, $fecha2))
+        {
+            $mes_nomina=Carbon::now()->format('Ym');
+        }
+        else
+        {
+            $mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
+        }
+
         $agregar = $request->get('agregar');
         $cont = 0;
+
         $mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
+
+        //$mes_nomina = Carbon::now()->format('Ym');
+
 
         while ($cont < count($agregar))
         {

@@ -40,6 +40,11 @@ class NominaDirecta extends Model
         return $this->belongsTo('App\PersonaDirecta', 'id_persona_directa');
     }
 
+    public function archivos()
+    {
+        return $this->hasMany('App\Archivo', 'id_nomina_directa');
+    }
+
     public function consideracion ()
     {
         return $this->belongsTo('App\Consideracion', 'id_consideracion');
@@ -62,9 +67,25 @@ class NominaDirecta extends Model
         }
         else
         {
+
             //$mes = Carbon::now()->addMonth()->format ('Ym');
             $mes = Carbon::now()->addMonth(1)->format ('Ym');
             $query->where('mes', $mes);
+
+            $fecha1 = new Carbon('first day of this month');
+            $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+            $mes = Carbon::now();
+            if ($mes->between($fecha1, $fecha2))
+            {
+                $mes_format = $mes->format('Ym');
+            }
+            else
+            {
+                $mes_format = $mes->addMonth(1)->format('Ym');
+            }
+
+            $query->where('mes', $mes_format);
+
         }
 
 

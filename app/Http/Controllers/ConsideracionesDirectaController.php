@@ -18,7 +18,21 @@ class ConsideracionesDirectaController extends Controller
      */
     public function index(Request $request)
     {
-        $mes = $request->get('mes');
+        $fecha1 = new Carbon('first day of this month');
+        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $fecha_actual = Carbon::now();
+
+        if ($fecha_actual->between($fecha1, $fecha2))
+        {
+            $mes = Carbon::now()->format('Ym');
+
+        }
+        else
+        {
+            $mes = Carbon::now()->addMonth(1)->format('Ym');
+
+        }
+
         $id_persona = $request->get('id_persona');
         $id_consideracion = $request->get('id_consideracion');
         $zonas = auth()->user()->zonas->pluck('id');
@@ -115,6 +129,7 @@ class ConsideracionesDirectaController extends Controller
         $id_persona = $request->get('id_persona');
         $id_zona = $request->get('id_zona');
         $id_jefe= $request->get('id_jefe');
+
         $personas_consideracion = NominaDirecta::where('estado_consideracion', '=', 'pendiente')
             ->mes($mes)->representanteDir($id_persona)->zonadirecta($id_zona, $id_jefe)->consideracion($id_consideracion)
             ->get();

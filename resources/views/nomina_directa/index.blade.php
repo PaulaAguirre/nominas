@@ -7,8 +7,13 @@
                     <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->addMonth(1)->format('Y-m')}}</button></a>
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
+
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(25))
                         <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title={{'hasta:'.$fecha_inicio}}>Ingresos Mes Actual {{\Carbon\Carbon::now()->addMonth(1)->format('Y-m')}}</button></a>
+
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(23))
+                        <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title={{'hasta:'.$fecha_inicio}}>Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
+
 
                     @endif
                         <a href="/nomina_x_zona"><button class="btn btn-github">Exportar Nómina</button></a>

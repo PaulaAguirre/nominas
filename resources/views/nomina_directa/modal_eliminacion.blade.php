@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
      role="dialog" tabindex="-1" id="modal-nomina-delete-{{$persona->id_nomina}}">
-    {{Form::Open(array('action'=>array('NominaDirectaController@destroy', $persona->id_nomina),'method'=>'delete'))}}
+    {{Form::Open(array('action'=>array('NominaDirectaController@destroy', $persona->id_nomina),'method'=>'delete', 'enctype'=>'multipart/form-data'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -23,6 +23,11 @@
                 <div class="form-group">
                     <label class="text-danger">Detalles de la inactivación</label>
                     <textarea rows="2" name="detalles_inactivacion" required value="{{old('detalles_inactivacion')}}" class="form-control" placeholder="detalles de la inactivación"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="">adjuntar</label>
+                    <input type="file" name="archivo">
                 </div>
 
             </div>

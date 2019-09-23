@@ -17,10 +17,24 @@ class NominaDirectaZonalExport implements FromView
     */
     public function view():View
     {
-        $mes = Carbon::now()->format('Ym');
         $zonas = auth()->user()->zonas->pluck('id')->toArray();
-        $personas = NominaDirecta::where('mes', $mes)
-            ->get();
+        $fecha1 = new Carbon('first day of this month');
+        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $fecha_actual = Carbon::now();
+
+        if ($fecha_actual->between($fecha1, $fecha2))
+        {
+            $mes = Carbon::now()->format('Ym');
+            $personas = NominaDirecta::where('mes', '=', $mes)
+                ->get();
+        }
+        else
+        {
+            $mes = Carbon::now()->addMonth(1)->format('Ym');
+            $personas = NominaDirecta::where('mes', '=', $mes)
+                ->get();
+        }
+
 
         return view('excel.exportar_x_zona', ['zonas'=>$zonas, 'personas'=>$personas]);
     }

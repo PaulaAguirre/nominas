@@ -25,7 +25,20 @@ class InactivacionesDirectaController extends Controller
     public function index()
     {
         $zonas = auth()->user()->zonas->pluck('id');
-        $mes = Carbon::now()->format('Ym');
+        $fecha1 = new Carbon('first day of this month');
+        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $mes_actual = Carbon::now();
+
+        if ($mes_actual->between($fecha1, $fecha2))
+        {
+            $mes=Carbon::now()->format('Ym');
+        }
+        else
+        {
+            $mes= Carbon::now()->addMonth(1)->format('Ym');
+        }
+
+       // $mes = Carbon::now()->format('Ym');
 
         $inactivaciones = NominaDirecta::where('estado_inactivacion', '<>', 'NULL')
             ->where('mes', '=', $mes )

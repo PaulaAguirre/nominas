@@ -4,19 +4,14 @@
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <h3>Nómina - Canal: Directa.
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
-                    <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->addMonth(1)->format('Y-m')}}</button></a>
+                    <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
-
-                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(25))
-                        <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title={{'hasta:'.$fecha_inicio}}>Ingresos Mes Actual {{\Carbon\Carbon::now()->addMonth(1)->format('Y-m')}}</button></a>
-
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(23))
                         <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title={{'hasta:'.$fecha_inicio}}>Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
 
-
                     @endif
-                        <a href="/nomina_x_zona"><button class="btn btn-github">Exportar Nómina</button></a>
+                    <a href="/nomina_x_zona"><button class="btn btn-github">Exportar Nómina</button></a>
                 @endif
 
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
@@ -25,7 +20,7 @@
 
 
             </h3>
-          <p class="text-info" id="cantidad">Cantidad</p>
+            <p class="text-info" id="cantidad">Cantidad</p>
             @include('nomina_directa.search_index')
         </div>
     </div>
@@ -44,13 +39,13 @@
                     <th>Region/Zona</th>
                     <th>Estado</th>
                     <th>Inactivación</th>
-                   @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
+                    @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
                         <th class="text-center col-lg-1">Opciones</th>
                     @endif
                     </thead>
                     @foreach ($personas as $persona)
-                            @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
-                                @if(in_array($persona->personaDirecta->id_zona, $zonas))
+                        @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
+                            @if(in_array($persona->personaDirecta->id_zona, $zonas))
                                 <tr class="text-uppercase text-sm">
                                     <td>{{$persona->id_nomina}}</td>
                                     <td>{{$persona->mes}}</td>
@@ -73,7 +68,7 @@
                                     @else
                                         <td class="text-success">Activo</td>
                                     @endif
-                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(24)))
+                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(16)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                                 <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
@@ -94,8 +89,8 @@
                                         </td>
                                     @endif
                                 </tr>
-                                @endif
-                            @elseif (auth()->user()->hasRoles(['tigo_people_admin']))
+                            @endif
+                        @elseif (auth()->user()->hasRoles(['tigo_people_admin']))
                             <tr class="text-uppercase text-sm">
                                 <td>{{$persona->id_nomina}}</td>
                                 <td>{{$persona->mes}}</td>
@@ -137,7 +132,7 @@
                                     @endif
                                 </td>
                             </tr>
-                            @endif
+                        @endif
                         @include('nomina_directa.modal_eliminacion')
                     @endforeach
                 </table>

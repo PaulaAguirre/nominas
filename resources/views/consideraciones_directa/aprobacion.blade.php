@@ -25,6 +25,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                     <thead class="text-center" style="background-color: #8eb4cb">
+                    <th>id</th>
                     <th>CH</th>
                     <th>Representante</th>
                     <th>Zona</th>
@@ -36,12 +37,14 @@
                     <th>Comentarios</th>
                     <th>Rechazo</th>
                     <th>Enviar</th>
+                    <th>ver</th>
                     </thead>
                     <tbody id="ajuste">
                     @foreach ($personas_consideracion as $persona)
                         <tr class="text-uppercase">
                             @if (auth()->user()->hasRoles(['tigo_people']))
                                 @if(auth()->user()->zonas->contains($persona->personaDirecta->id_zona))
+                                    <td>{{$persona->id_nomina}}</td>
                                     <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->zona}}</td>
@@ -64,6 +67,7 @@
                                     </td>
                                 @endif
                             @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
+                                <td>{{$persona->id_nomina}}</td>
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->zona}}</td>
@@ -86,10 +90,19 @@
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
 
                                     <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
-                                    <a href=""><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                    @if($persona->archivos->where('tipo', '=', 'consideracion')->first())
+
+                                     <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                    @endif
                                 </td>
+                                @if($persona->archivos)
+                                    <td>{{$persona->archivos->pluck('nombre')}}</td>
+                                @else
+                                    <td></td>
+                                @endif
                             @endif
                         </tr>
+                        @include('consideraciones_directa.archivo_modal')
 
                     @endforeach
                     </tbody>

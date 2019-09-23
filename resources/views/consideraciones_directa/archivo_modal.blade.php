@@ -1,6 +1,5 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-     role="dialog" tabindex="-1" id="modal-delete-{{$persona->id}}">
-    {{Form::Open(array('action'=>array('PersonaDirectaController@destroy', $persona->id),'method'=>'delete'))}}
+     role="dialog" tabindex="-1" id="modal-delete-{{$persona->id_persona_directa}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,18 +7,15 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title"><span class="text-danger">Inactivar Asesor:</span></h4>
+                <h4 class="modal-title"><span class="text-danger"> {{'Asesor: '.$persona->personaDirecta->nombre.' - '.'CH: '.$persona->personaDirecta->ch}}</span></h4>
             </div>
             <div class="modal-body">
-                <p>Confirme si desea Inactivar al Representante:</p>
-                <p><span class="text-bold">{{$persona->nombre}}</span>  CH: {{$persona->ch}}</p>
+                <img style="width: 200px" src={{ asset('storage/'.$persona->archivos->pluck('nombre')->first()) }}>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Confirmar</button>
             </div>
         </div>
     </div>
-    {{Form::Close()}}
 
 </div>

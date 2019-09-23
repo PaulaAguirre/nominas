@@ -4,6 +4,7 @@
  */
 
 namespace App\Http\Controllers;
+use App\Archivo;
 use App\Consideracion;
 use App\NominaDirecta;
 use App\PersonaDirecta;
@@ -324,11 +325,27 @@ class NominaDirectaController extends Controller
         //$fecha = Carbon::createFromFormat('d/m/Y', $date);
         //dd($fecha);
 
+       // $file = $request->file('archivo')->store('public');
+        //dd($request->file('archivo')->getClientOriginalName());
+
+
+
         $nominaDirecta = NominaDirecta::findOrFail($id);
         $nominaDirecta->id_consideracion = $request->get('id_consideracion');
         $nominaDirecta->detalles_consideracion = $request->get('detalles_consideracion');
         $nominaDirecta->estado_consideracion = 'pendiente';
 
+
+        if ($request->hasFile('archivo'))
+        {
+            $archivo = new Archivo();
+            $archivo->id_nomina_directa = $nominaDirecta->id_nomina;
+            $ruta = $request->file('archivo')->store('public');
+            $archivo->nombre = explode('/',$ruta)[1];
+            //dd($archivo->nombre);
+            $archivo->tipo = 'consideracion';
+            $archivo->save();
+        }
         $nominaDirecta->update();
         return redirect('nomina_directa');
 

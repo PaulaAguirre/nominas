@@ -40,6 +40,11 @@ class NominaDirecta extends Model
         return $this->belongsTo('App\PersonaDirecta', 'id_persona_directa');
     }
 
+    public function archivos()
+    {
+        return $this->hasMany('App\Archivo', 'id_nomina_directa');
+    }
+
     public function consideracion ()
     {
         return $this->belongsTo('App\Consideracion', 'id_consideracion');

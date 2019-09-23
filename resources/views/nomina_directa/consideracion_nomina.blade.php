@@ -15,7 +15,7 @@
             @endif
         </div>
     </div>
-    {!!Form::model ($persona_nomina, ['method'=>'PATCH', 'route'=>['nomina_directa.storeconsideraciones', $persona_nomina]])!!}
+    {!!Form::model ($persona_nomina, ['method'=>'PATCH','files'=>true, 'route'=>['nomina_directa.storeconsideraciones', $persona_nomina]])!!}
     {{Form::token()}}
     <div class="container">
         <div class="row">

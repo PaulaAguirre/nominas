@@ -256,11 +256,21 @@ class NominaDirectaController extends Controller
         $persona_nomina = NominaDirecta::findOrFail($id);
         $motivo_inactivacion = $request->get('motivo_inactivacion');
         $detalles_inactivacion = $request->get('detalles_inactivacion');
-        //dd($detalles_inactivacion.' '.$motivo_inactivacion);
 
         $persona_nomina->motivo_inactivacion = $motivo_inactivacion;
         $persona_nomina->detalles_inactivacion = $detalles_inactivacion;
         $persona_nomina->estado_inactivacion = 'pendiente';
+
+        if ($request->hasFile('archivo'))
+        {
+            $archivo = new Archivo();
+            $archivo->id_nomina_directa = $persona_nomina->id_nomina;
+            $ruta = $request->file('archivo')->store('public');
+            $archivo->nombre = explode('/',$ruta)[1];
+            $archivo->tipo = 'inactivacion';
+            $archivo->save();
+        }
+
         $persona_nomina->update();
 
         return redirect('nomina_directa');

@@ -24,6 +24,7 @@
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                     <thead class="text-center" style="background-color: #8eb4cb">
                     <th>Mes</th>
+                    <th>ID</th>
                     <th>CH</th>
                     <th>Representante</th>
                     <th>Zona</th>
@@ -41,6 +42,7 @@
                             @if (auth()->user()->hasRoles(['tigo_people']))
                                 @if(auth()->user()->zonas->contains($persona->personaDirecta->id_zona))
                                     <td>{{$persona->mes}}</td>
+                                    <td>{{$persona->id_nomina}}</td>
                                     <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->zona}}</td>
@@ -56,12 +58,14 @@
                                     </td>
                                     <td><input type="text" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"><input type="hidden" ></td>
                                     <td class="text-center">
-                                        <input name="_token" value="{{csrf_token()}}" type="hidden">
+
+                                            <input name="_token" value="{{csrf_token()}}" type="hidden">
                                         <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
                                     </td>
                                 @endif
                             @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
                                 <td>{{$persona->mes}}</td>
+                                <td>{{$persona->id_nomina}}</td>
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->zona}}</td>
@@ -79,11 +83,14 @@
                                 <td><textarea rows="3" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
-                                    <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
+                                    @if($persona->archivos->where('tipo', '=', 'inactivacion')->first())
+                                        <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                    @endif
+                                        <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
                                 </td>
                             @endif
                         </tr>
-
+                    @include('inactivaciones_directa.archivo_modal_inactivacion')
                     @endforeach
                     </tbody>
 

@@ -10,12 +10,11 @@
                 <h4 class="modal-title"><span class="text-danger"> {{'Asesor: '.$persona->personaDirecta->nombre.' - '.'CH: '.$persona->personaDirecta->ch}}</span></h4>
             </div>
             <div class="modal-body">
-                <img style="width: 600px" src={{ asset('storage/'.$persona->archivos->where('tipo', '=', 'consideracion')->pluck('nombre')->first()) }}>
+                <img style="width: 600px" src={{ asset('storage/'.$persona->archivos->where('tipo', '=', 'inactivacion')->pluck('nombre')->first()) }}>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
-
 </div>

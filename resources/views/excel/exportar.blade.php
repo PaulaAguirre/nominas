@@ -27,7 +27,7 @@
     </thead>
     <tbody>
     @foreach($personas as $persona)
-        @if($persona->estado_nomina == 'aprobado' )
+        @if($persona->estado_nomina == 'aprobado' or $persona->estado_nomina == 'pendiente')
             <tr>
                 <td>{{$persona->id_nomina}}</td>
                 <td>{{$persona->mes}}</td>

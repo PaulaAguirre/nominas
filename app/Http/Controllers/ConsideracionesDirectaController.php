@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Archivo;
 use App\Zona;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -193,6 +194,45 @@ class ConsideracionesDirectaController extends Controller
 
         return redirect('consideraciones_directa');
 
+    }
+
+
+    /**
+     * Editar una consideracion ya creada, antes de que se apruebe o se rechace
+     * */
+    public function updateConsideracion(Request $request, $id)
+    {
+        $persona = NominaDirecta::findOrFail($id);
+
+        //dd($request->file('archivo'));
+
+        if ($request->hasFile('archivo'))
+        {
+
+
+            if ($persona->archivos->where('tipo', '=', 'consideracion')->first())
+            {
+                $archivo = Archivo::where('id_nomina_directa', $persona->id_nomina)
+                    ->where('tipo', 'consideracion')->get()->first();
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->update();
+            }
+            else
+            {
+                $archivo = new Archivo();
+                $archivo->id_nomina_directa = $persona->id_nomina;
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->tipo = 'consideracion';
+                $archivo->save();
+            }
+
+        }
+
+        $persona->fill($request->all());
+        $persona->update();
+        return redirect('consideraciones_directa');
     }
 
 }

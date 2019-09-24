@@ -78,6 +78,9 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('consideraciones_directa_edit/{id}', 'ConsideracionesDirectaController@updateEstado')
         ->name('consideraciones_directa_edit'); //ruta para editar el estado
 
+    Route::patch('consideraciones_directa_update_consideracion/{id}', 'ConsideracionesDirectaController@updateConsideracion')
+        ->name('consideraciones_directa_edit_consideracion'); //ruta para editar el estado
+
     /**
      * Inactivaciones directa
      * */

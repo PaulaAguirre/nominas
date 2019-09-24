@@ -56,6 +56,9 @@
 
                                                 <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
                                             @endif
+                                            @if(in_array($persona->estado_consideracion, ['pendiente']))
+                                                <a href="" data-target="#modal-consideracion-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="editar consideración"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
+                                            @endif
                                     </td>
                                 </tr>
                             @endif
@@ -89,13 +92,17 @@
                                         </a>
                                     @endif
                                     @if(in_array($persona->estado_consideracion, ['aprobado', 'rechazado']))
-                                        <a href="" data-target="#modal-nomina-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn-xs btn-file" title="editar"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
+                                        <a href="" data-target="#modal-nomina-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
+                                    @endif
+                                    @if(in_array($persona->estado_consideracion, ['pendiente']))
+                                        <a href="" data-target="#modal-consideracion-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="editar consideración"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
                                     @endif
                                 </td>
                             </tr>
                         @endif
                         @include('consideraciones_directa.edit_estado')
                         @include('consideraciones_directa.archivo_modal')
+                        @include('consideraciones_directa.modal_edit_consideracion')
                     @endforeach
                 </table>
             </div>

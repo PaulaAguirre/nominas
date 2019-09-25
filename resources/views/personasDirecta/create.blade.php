@@ -85,6 +85,7 @@
                             <select name="id_consideracion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Consideracion" required>
                                 <option  value="6">Nuevo Ingreso</option>
                                 <option value="12">Cambio de canal</option>
+                                <option value="14">De acting a Asesor</option>
 
                             </select>
                         </div>

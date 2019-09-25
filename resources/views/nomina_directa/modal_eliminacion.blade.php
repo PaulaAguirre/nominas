@@ -17,6 +17,7 @@
                         <option value="renuncia" selected>Renuncia</option>
                         <option value="desvinculacion">Desvinculacion</option>
                         <option value="cambio de canal">Cambio de Canal</option>
+                        <option value="pasa a acting">Cambio de Asesor a Acting</option>
                     </select>
                 </div>
 

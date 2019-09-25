@@ -5,9 +5,10 @@
         <th>Mes</th>
         <th>EH_JEFE</th>
         <th>NOMBRE_JEFE</th>
-        <th>CEDULA</th>
+        <th>CEDULA Jefe</th>
         <th>CH</th>
         <th>NOMBRE</th>
+        <th>Cedula</th>
         <th>NEW PERFIL</th>
         <th>ZONA</th>
         <th>ID ZONA</th>
@@ -36,6 +37,7 @@
                 <td>{{$persona->personaDirecta->representanteJefe->documento_persona }}</td>
                 <td>{{$persona->personaDirecta->ch }}</td>
                 <td>{{$persona->personaDirecta->nombre }}</td>
+                <td>{{$persona->personaDirecta->documento_persona}}</td>
                 <td>{{$persona->personaDirecta->agrupacion }}</td>
                 <td>{{$persona->personaDirecta->zona->familiazona ? $persona->personaDirecta->zona->familiazona->nombre : '' }}</td>
                 <td>{{$persona->personaDirecta->zona->id_familiazona }}</td>

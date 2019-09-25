@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <label class="text-blue">comentarios</label>
-                    <input  type="text" name="detalles_consideracion" required value="{{$persona->detalles_consideracion}}" class="form-control text-uppercase" placeholder="detalles de la inactivación">
+                    <textarea name="detalles_consideracion" required value="{{$persona->detalles_consideracion}}" class="form-control text-uppercase">{{$persona->detalles_consideracion}}</textarea>
                 </div>
 
                 <div class="form-group">

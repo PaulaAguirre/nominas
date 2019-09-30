@@ -103,6 +103,29 @@ class ConsideracionesDirectaController extends Controller
     public function update(Request $request, $id)
     {
         $persona = NominaDirecta::findOrFail($id);
+
+        if ($request->hasFile('archivo'))
+        {
+            if ($persona->archivos->where('tipo', '=', 'consideracion')->first())
+            {
+                $archivo = Archivo::where('id_nomina_directa', $persona->id_nomina)
+                    ->where('tipo', 'consideracion')->get()->first();
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->update();
+            }
+            else
+            {
+                $archivo = new Archivo();
+                $archivo->id_nomina_directa = $persona->id_nomina;
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->tipo = 'consideracion';
+                $archivo->save();
+            }
+
+        }
+
         $persona->estado_consideracion = 'pendiente';
         $persona->regularizacion_consideracion = $request->get('regularizacion_consideracion');
         $persona->id_consideracion = $request->get('id_consideracion');

@@ -20,7 +20,7 @@
                     <div class="panel-heading"><span class="text-bold text-info">Regularizar Consideración</span></div>
 
                     <div class="panel-body">
-                        {!!Form::model ($persona, ['method'=>'PATCH', 'route'=>['consideraciones_directa.update', $persona->id_nomina]])!!}
+                        {!!Form::model ($persona, ['method'=>'PATCH','files'=> true, 'route'=>['consideraciones_directa.update', $persona->id_nomina]])!!}
                         {{Form::token()}}
 
 
@@ -57,6 +57,11 @@
                         <div class="form-group">
                             <label class="text-info">Regularización</label>
                             <textarea class="form-control" rows="2" name="regularizacion_consideracion" id="regularizacion_consideracion" placeholder="Detalles de la regularización" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">adjuntar</label>
+                            <input type="file" name="archivo">
                         </div>
 
                         <div class="form-group text-center">

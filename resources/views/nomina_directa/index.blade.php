@@ -4,7 +4,7 @@
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <h3>Nómina - Canal: Directa.
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
-                    <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->addMonth(1)->format('Y-m')}}</button></a>
+                    <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual {{\Carbon\Carbon::now()->format('Y-m')}}</button></a>
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(28))

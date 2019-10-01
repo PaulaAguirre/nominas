@@ -20,7 +20,7 @@
 
         </div>
     </div>
-    @include('excel.nuevos_ingresos')
+
     {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['nomina_directa_aprobacion.aprobacion', $mes]])!!}
     {{Form::token()}}
     <div class="row text-uppercase">

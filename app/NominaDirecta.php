@@ -67,11 +67,6 @@ class NominaDirecta extends Model
         }
         else
         {
-
-            //$mes = Carbon::now()->addMonth()->format ('Ym');
-            $mes = Carbon::now()->addMonth(1)->format ('Ym');
-            $query->where('mes', $mes);
-
             $fecha1 = new Carbon('first day of this month');
             $fecha2 = (new Carbon('first day of this month'))->addDays(22);
             $mes = Carbon::now();

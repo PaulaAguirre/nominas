@@ -206,6 +206,7 @@ class ConsideracionesDirectaController extends Controller
             $persona->estado_consideracion = 'aprobado';
             $persona->comentario_consideracion = $comentarios;
             $persona->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
+            $persona->motivo_rechazo_consideracion = NULL;
         }
         elseif ($estado_consideracion == 'rechazado')
         {

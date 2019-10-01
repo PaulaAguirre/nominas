@@ -71,18 +71,6 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-md-offset-0 col-md-4">
-                            <label for="">Cargo GO</label>
-                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Cargo" required>
-                                @foreach($cargos_go as $cargo )
-                                    @if($persona->cargo_go == $cargo)
-                                        <option value="{{$cargo}}" selected>{{strtoupper ($cargo)}}</option>
-                                    @else
-                                        <option value="{{$cargo}}" >{{strtoupper ($cargo)}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
 
                         <div class="form-group col-md-offset-0 col-md-4">
                             <label for="">Agrupación</label>

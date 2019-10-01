@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\NominaDirecta;
 use App\PersonaDirecta;
+use App\Zona;
 use Illuminate\Http\Request;
 
 class PersonaDirectaController extends Controller
@@ -28,11 +29,15 @@ class PersonaDirectaController extends Controller
         $zonas = auth()->user()->zonas->pluck('id')->toArray();
         $id_persona = ($request->get('id_persona'));
         $id_rep_jefe = $request->get('id_jefe');
-       $personasDirecta = PersonaDirecta::representantesdir($id_persona)->jefe($id_rep_jefe)->orderBy('nombre')
+        $id_zona = $request->get('id_zona');
+       $personasDirecta = PersonaDirecta::representantesdir($id_persona)->jefe($id_rep_jefe)
+           ->zona($id_zona)->orderBy('nombre')
            ->get();
         $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
+        $zonas_user = Zona::all();
 
-        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'zonas'=>$zonas, 'jefes'=>$jefes]);
+        return view('personasDirecta.index', ['personasDirecta' => $personasDirecta, 'zonas'=>$zonas,
+            'jefes'=>$jefes, 'zonas_user'=>$zonas_user]);
     }
 
     /**
@@ -141,6 +146,7 @@ class PersonaDirectaController extends Controller
         else
         {
             $asesor->estado_cambio = 'pendiente';
+            $asesor->id_responsable_cambio = auth()->user()->id;
         }
 
         $asesor->update();

@@ -27,7 +27,8 @@ class PersonaDirecta extends Model
         'regularizacion_cambio',
         'staff',
         'id_consideracion',
-        'detalles_consideracion'
+        'detalles_consideracion',
+        'id_responsable_cambio'
 
     ];
 
@@ -48,9 +49,9 @@ class PersonaDirecta extends Model
         return $this->belongsTo('App\PersonaDirecta', 'id_representante_jefe');
     }
 
-    public function representanteJefeNuevo ()
+    public function responsable_cambio ()
     {
-        return $this->belongsTo('App\PersonaDirecta', 'id_representante_jefe_nuevo');
+        return $this->belongsTo('App\User', 'id_responsable_cambio');
     }
 
     public function representantes ()
@@ -95,7 +96,7 @@ class PersonaDirecta extends Model
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
-    public function scopeZonaDir ($query, $id_zona)
+    public function scopeZona ($query, $id_zona)
     {
         if ($id_zona)
         {

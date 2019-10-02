@@ -29,7 +29,6 @@
                     <th>Zona Actual</th>
                     <th>Zona Nueva</th>
                     <th>Jefe Actual</th>
-                    <th>Jefe Nuevo</th>
                     <th>Regularización</th>
                     <th class="">Aprobar</th>
                     <th class="">Motivo Rechazo</th>
@@ -47,7 +46,6 @@
                                     <td>{{$persona->zona->zona}}</td>
                                     <td>{{$persona->zona_nuevo->zona}}</td>
                                     <td>{{$persona->representanteJefe->nombre}}</td>
-                                    <td>{{$persona->representanteJefeNuevo->nombre}}</td>
                                     @if($persona->regularizacion_cambio)
                                         <td class="text-danger">{{$persona->regularizacion_cambio}}</td>
                                     @else
@@ -74,7 +72,6 @@
                             <td>{{$persona->zona->zona}}</td>
                             <td>{{$persona->zona_nuevo->zona}}</td>
                             <td>{{$persona->representanteJefe->nombre ? $persona->representanteJefe->nombre : ''}}</td>
-                            <td>{{$persona->representanteJefeNuevo->nombre ? $persona->representanteJefeNuevo->nombre : '' }}</td>
                             @if($persona->regularizacion_cambio)
                                 <td class="text-danger">{{$persona->regularizacion_cambio}}</td>
                             @else

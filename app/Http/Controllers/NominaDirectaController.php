@@ -449,9 +449,9 @@ class NominaDirectaController extends Controller
 
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
 
-        $mes_nomina=Carbon::now()->addMonth(1)->format('Ym');
+        //$mes_nomina=Carbon::now()->addMonth(1)->format('Ym');
+            $mes_nomina = 201910;
 
-        //$mes_nomina=Carbon::now()->format('Ym');
 
         $personas_mes_actual = NominaDirecta::where('mes', '=', $mes_nomina)
             ->pluck('id_persona_directa')->toArray();
@@ -492,9 +492,9 @@ class NominaDirectaController extends Controller
         $agregar = $request->get('agregar');
         $cont = 0;
 
-        $mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
+        //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
 
-        //$mes_nomina = Carbon::now()->format('Ym');
+        $mes_nomina = 201910;
 
 
         while ($cont < count($agregar))

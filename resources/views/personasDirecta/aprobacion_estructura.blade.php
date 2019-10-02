@@ -70,11 +70,11 @@
                             @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
                             <td>{{$persona->id_persona}}</td>
                             <td >{{$persona->ch}}<input type="hidden" name="id_persona[]" value="{{$persona->id_persona}}"></td>
-                            <td>{{$persona->nombre}}</td>
+                            <td>{{$persona->nombre ? $persona->nombre : ''}}</td>
                             <td>{{$persona->zona->zona}}</td>
                             <td>{{$persona->zona_nuevo->zona}}</td>
-                            <td>{{$persona->representanteJefe->nombre}}</td>
-                            <td>{{$persona->representanteJefeNuevo->nombre}}</td>
+                            <td>{{$persona->representanteJefe->nombre ? $persona->representanteJefe->nombre : ''}}</td>
+                            <td>{{$persona->representanteJefeNuevo->nombre ? $persona->representanteJefeNuevo->nombre : '' }}</td>
                             @if($persona->regularizacion_cambio)
                                 <td class="text-danger">{{$persona->regularizacion_cambio}}</td>
                             @else

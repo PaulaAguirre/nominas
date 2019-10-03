@@ -60,6 +60,9 @@
                                                     <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Inactivacion"><i class="fa fa-wrench"></i></button>
                                                 </a>
                                             @endif
+                                                @if($persona->estado_inactivacion == 'pendiente')
+                                                    <a href="" data-target="#modal-inactivacion-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="editar inactivacion"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
+                                                @endif
                                         </td>
                                     @endif
                                 </tr>
@@ -87,6 +90,7 @@
                                 <td>{{$persona->comentario_inactivacion}}</td>
                                 @if(auth()->user()->hasRoles(['zonal', 'tigo_people_admin']))
                                     <td class="text-center">
+
                                         @if($persona->archivos->where('tipo', '=', 'inactivacion')->first())
                                             <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
                                         @endif
@@ -95,11 +99,19 @@
                                                 <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Inactivacion"><i class="fa fa-wrench"></i></button>
                                             </a>
                                         @endif
+                                        @if($persona->estado_inactivacion == 'pendiente')
+                                            <a href="" data-target="#modal-inactivacion-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="editar inactivacion"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
+                                        @endif
+                                            @if(in_array($persona->estado_inactivacion, ['aprobado', 'rechazado']))
+                                                <a href="" data-target="#modal-inactivacion_estado-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
+                                            @endif
+
                                     </td>
                                 @endif
                             </tr>
                         @endif
-
+                        @include('inactivaciones_directa.modal_editar_estado')
+                        @include('inactivaciones_directa.modal_editar_inactivacion')
                         @include('inactivaciones_directa.archivo_modal_inactivacion')
                     @endforeach
                 </table>

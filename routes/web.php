@@ -85,6 +85,10 @@ Route::group (['middleware'=>'auth'], function () {
      * Inactivaciones directa
      * */
     Route::resource('inactivaciones_directa', 'InactivacionesDirectaController');
+    Route::patch('inactivaciones_directa_update/{id}', 'InactivacionesDirectaController@updateInactivacion')
+        ->name('inactivaciones_directa_edit_inactivacion'); //ruta para editar la inactivacion
+    Route::patch('inactivaciones_directa_edit_estado/{id}', 'InactivacionesDirectaController@updateEstado')
+        ->name('inactivaciones_directa_edit'); //ruta para editar el estado
 
     /**
      * fin Nomina directa

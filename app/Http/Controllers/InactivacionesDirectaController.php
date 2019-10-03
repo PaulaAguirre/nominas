@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Archivo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\NominaDirecta;
@@ -117,5 +118,65 @@ class InactivacionesDirectaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function updateInactivacion(Request $request, $id)
+    {
+        $persona = NominaDirecta::findOrFail($id);
+
+        if ($request->hasFile('archivo'))
+        {
+
+            if ($persona->archivos->where('tipo', '=', 'inactivacion')->first())
+            {
+                $archivo = Archivo::where('id_nomina_directa', $persona->id_nomina)
+                    ->where('tipo', 'inactivacion')->get()->first();
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->update();
+            }
+            else
+            {
+                $archivo = new Archivo();
+                $archivo->id_nomina_directa = $persona->id_nomina;
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->tipo = 'inactivacion';
+                $archivo->save();
+            }
+
+        }
+
+        $persona->fill($request->all());
+        $persona->update();
+        return redirect()->back();
+
+    }
+
+    public function updateEstado(Request $request, $id)
+    {
+        $persona = NominaDirecta::findOrFail($id);
+
+        $estado_inactivacion = $request->get('estado_inactivacion');
+        $comentarios = $request->get('comentario_inactivacion');
+
+        if ($estado_inactivacion == 'aprobado')
+        {
+            $persona->estado_inactivacion = 'aprobado';
+            $persona->comentario_inactivacion = $comentarios;
+            $persona->fecha_aprobacion_inactivacion = Carbon::now()->format('d/m/Y');
+            $persona->motivo_rechazo_inactivacion = NULL;
+        }
+        elseif ($estado_inactivacion == 'rechazado')
+        {
+            $persona->estado_inactivacion = 'rechazado';
+            $persona->motivo_rechazo_inactivacion = $comentarios;
+            $persona->comentario_inactivacion = NULL;
+        }
+
+        $persona->update();
+
+        return redirect()->back();
+
     }
 }

@@ -14,7 +14,12 @@ use Psr\Log\NullLogger;
 use App\Zona;
 
 
-class NominaDirectaController extends Controller
+class
+
+
+
+
+NominaDirectaController extends Controller
 {
     /**
      * NominaDirectaController constructor.

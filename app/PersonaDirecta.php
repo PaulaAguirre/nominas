@@ -59,6 +59,11 @@ class PersonaDirecta extends Model
         return $this->hasMany('App\PersonaDirecta', 'id_representante_jefe');
     }
 
+    public function jefeNuevo()
+    {
+        return $this->belongsTo('App\PersonaDirecta', 'id_representante_jefe_nuevo');
+    }
+
 
     /** @var $query \Illuminate\Database\Query\Builder */
     public function scopeName ($query, $name)

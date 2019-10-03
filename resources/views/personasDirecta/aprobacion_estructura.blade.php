@@ -29,6 +29,7 @@
                     <th>Zona Actual</th>
                     <th>Zona Nueva</th>
                     <th>Jefe Actual</th>
+                    <th>Jefe Cambio</th>
                     <th>Regularización</th>
                     <th class="">Aprobar</th>
                     <th class="">Motivo Rechazo</th>
@@ -72,6 +73,7 @@
                             <td>{{$persona->zona->zona}}</td>
                             <td>{{$persona->zona_nuevo->zona}}</td>
                             <td>{{$persona->representanteJefe->nombre ? $persona->representanteJefe->nombre : ''}}</td>
+                            <td>{{$persona->jefeNuevo->nombre ? $persona->jefeNuevo->nombre : ''}}</td>
                             @if($persona->regularizacion_cambio)
                                 <td class="text-danger">{{$persona->regularizacion_cambio}}</td>
                             @else

@@ -96,8 +96,7 @@ class PersonaDirecta extends Model
                 ->where('id_persona', $id_representante);
         }
 
-       $query->where('cargo', '=', 'representante')
-        ;
+       $query->where('cargo', '=', 'representante');
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */

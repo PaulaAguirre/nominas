@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserZonatiendaTable extends Migration
+class CreateJefesTiendaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUserZonatiendaTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_zonatienda', function (Blueprint $table) {
+        Schema::create('jefes_tienda', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('zonatienda_id');
+            $table->integer('ch');
+            $table->string('cedula')->nullable();
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateUserZonatiendaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_zonatienda');
+        Schema::dropIfExists('jefes_tienda');
     }
 }

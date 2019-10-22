@@ -13,6 +13,12 @@
         @endforeach
     </select>
 
+    <select name="estado" class="form-control selectpicker text-uppercase col-lg-4" title="estado" data-live-search="true">
+        <option value="aprobado">aprobado</option>
+        <option value="rechazado">rechazado</option>
+        <option value="pendiente">pendiente</option>
+    </select>
+
     <button type="submit" class="btn btn-primary "><span>Buscar </span><i class="fa fa-search col-lg-2" aria-hidden="true"></i></button>
 
 </div>

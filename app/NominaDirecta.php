@@ -59,6 +59,14 @@ class NominaDirecta extends Model
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeEstadoConsideracion ($query, $estado)
+    {
+        if (trim($estado)){
+            $query->where('estado_consideracion', $estado);
+        }
+    }
+
+    /** @var $query \Illuminate\Database\Query\Builder */
     public function scopeMes($query, $mes)
     {
         if($mes)

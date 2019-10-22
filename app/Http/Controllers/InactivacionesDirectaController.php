@@ -23,12 +23,14 @@ class InactivacionesDirectaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $zonas = auth()->user()->zonas->pluck('id');
         $fecha1 = new Carbon('first day of this month');
         $fecha2 = (new Carbon('first day of this month'))->addDays(22);
         $mes_actual = Carbon::now();
+        $id_persona = $request->get('id_persona');
+        $estado_inactivacion = $request->get('estado');
 
         if ($mes_actual->between($fecha1, $fecha2))
         {
@@ -43,6 +45,7 @@ class InactivacionesDirectaController extends Controller
 
         $inactivaciones = NominaDirecta::where('estado_inactivacion', '<>', 'NULL')
             ->where('mes', '=', $mes )
+            ->representanteDir($id_persona)->estadoInactivacion($estado_inactivacion)
             ->get();
 
         return view('inactivaciones_directa.index', ['inactivaciones'=>$inactivaciones, 'zonas'=>$zonas]);

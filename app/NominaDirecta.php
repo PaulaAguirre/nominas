@@ -84,7 +84,7 @@ class NominaDirecta extends Model
         else
         {
             $fecha1 = new Carbon('first day of this month');
-            $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+            $fecha2 = (new Carbon('first day of this month'))->addDays(20);
             $mes = Carbon::now();
             if ($mes->between($fecha1, $fecha2))
             {

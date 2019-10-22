@@ -119,7 +119,7 @@ NominaDirectaController extends Controller
 
             $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
                 ->where('activo', '=', 'activo')
-                ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($id_zona)
+                ->representantesdir($id_rep)->jefe($id_rep_jefe)->zona($id_zona)
                 ->get();
         }
         else
@@ -132,7 +132,7 @@ NominaDirectaController extends Controller
 
             $personas_directa = PersonaDirecta::whereNotIn('id_persona', $representantes_existentes)
                 ->where('activo', '=', 'activo')
-                ->representantesdir($id_rep)->jefe($id_rep_jefe)->zonaDir($id_zona)
+                ->representantesdir($id_rep)->jefe($id_rep_jefe)->zona($id_zona)
                 ->get();
 
             //dd($personas_directa->count());

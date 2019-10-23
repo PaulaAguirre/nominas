@@ -2,8 +2,11 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Representantes Canal Directa (todas las zonas) <a href="representantes_directa/create"><button class="btn btn-success">Nuevo Asesor  <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
-                @include('personasDirecta.search')
+            <h3>Representantes Canal Directa (todas las zonas)
+                @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(30))
+                    <a href="representantes_directa/create"><button class="btn btn-success">Nuevo Asesor  <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
+                @endif
+            @include('personasDirecta.search')
 
         </div>
     </div>

@@ -49,7 +49,7 @@
                                     <td>{{$persona->personaDirecta->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->zona}}</td>
                                     <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
-                                    <td>{{$persona->consideracion->nombre}}</td>
+                                    <td>{{$persona->consideracion ? $persona->consideracion->nombre : ''}}</td>
                                     <td>{{$persona->detalles_consideracion}}</td>
                                     <td>{{$persona->regularizacion_consideracion}}</td>
                                     <td id="tdaprobacion">
@@ -73,7 +73,7 @@
                                 <td>{{$persona->personaDirecta->zona->zona}}</td>
                                 <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
 
-                                <td>{{$persona->consideracion->nombre}}</td>
+                                <td>{{$persona->consideracion ? $persona->consideracion->nombre : ''}}</td>
                                 <td>{{$persona->detalles_consideracion}}</td>
                                 <td>{{$persona->regularizacion_consideracion}}</td>
                                 <td id="tdaprobacion">

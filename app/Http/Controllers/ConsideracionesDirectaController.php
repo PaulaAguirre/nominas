@@ -19,8 +19,9 @@ class ConsideracionesDirectaController extends Controller
      */
     public function index(Request $request)
     {
+
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(21);
         $fecha_actual = Carbon::now();
 
         if ($fecha_actual->between($fecha1, $fecha2))
@@ -37,9 +38,10 @@ class ConsideracionesDirectaController extends Controller
         $id_persona = $request->get('id_persona');
         $id_consideracion = $request->get('id_consideracion');
         $zonas = auth()->user()->zonas->pluck('id');
+        $estado_consideracion = $request->get('estado');
 
         $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', NULL)
-            ->mes($mes)->representanteDir($id_persona)->consideracion($id_consideracion)
+            ->mes($mes)->representanteDir($id_persona)->consideracion($id_consideracion)->estadoConsideracion($estado_consideracion)
             ->get();
         $consideraciones = Consideracion::all();
 

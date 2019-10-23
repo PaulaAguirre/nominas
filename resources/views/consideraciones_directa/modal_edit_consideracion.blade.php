@@ -16,9 +16,9 @@
                     <select class="form-control" id="id_consideracion" name="id_consideracion">
                         @foreach($consideraciones as $consideracion)
                             @if ($consideracion->id==$persona->id_consideracion)
-                                <option value="{{$consideracion->id}}" selected>{{strtoupper ($consideracion->nombre)}}</option>
+                                <option value="{{$consideracion->id}}" selected>{{strtoupper ($consideracion->nombre ? $consideracion->nombre : '')}}</option>
                             @else
-                                <option value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre)}}</option>
+                                <option value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre ? $consideracion->nombre : '')}}</option>
                             @endif
                         @endforeach
                     </select>

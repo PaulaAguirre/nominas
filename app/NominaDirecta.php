@@ -59,6 +59,22 @@ class NominaDirecta extends Model
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeEstadoConsideracion ($query, $estado)
+    {
+        if (trim($estado)){
+            $query->where('estado_consideracion', $estado);
+        }
+    }
+
+    /** @var $query \Illuminate\Database\Query\Builder */
+    public function scopeEstadoInactivacion ($query, $estado)
+    {
+        if (trim($estado)){
+            $query->where('estado_inactivacion', $estado);
+        }
+    }
+
+    /** @var $query \Illuminate\Database\Query\Builder */
     public function scopeMes($query, $mes)
     {
         if($mes)
@@ -68,7 +84,7 @@ class NominaDirecta extends Model
         else
         {
             $fecha1 = new Carbon('first day of this month');
-            $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+            $fecha2 = (new Carbon('first day of this month'))->addDays(20);
             $mes = Carbon::now();
             if ($mes->between($fecha1, $fecha2))
             {

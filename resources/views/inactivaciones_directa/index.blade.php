@@ -3,10 +3,9 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <h3>Asesores Inactivados</h3>
-
         </div>
     </div>
-    <br>
+    @include('inactivaciones_directa.search_index')
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">

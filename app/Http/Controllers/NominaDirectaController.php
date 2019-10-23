@@ -284,7 +284,7 @@ NominaDirectaController extends Controller
     public function aprobarInactivaciones(Request $request)
     {
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(21);
         $mes_actual = Carbon::now();
 
         if ($mes_actual->between($fecha1, $fecha2))
@@ -440,7 +440,7 @@ NominaDirectaController extends Controller
     public function ingresarAsesorMesActual(Request $request)
     {
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(21);
         $mes = Carbon::now();
 
         if ($mes->between($fecha1, $fecha2))
@@ -499,7 +499,7 @@ NominaDirectaController extends Controller
 
         //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
 
-        $mes_nomina = 201910;
+        $mes_nomina = 201911;
 
 
         while ($cont < count($agregar))

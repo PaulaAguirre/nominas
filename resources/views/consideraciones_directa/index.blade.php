@@ -48,9 +48,11 @@
                                     <td>{{$persona->motivo_rechazo_consideracion}}</td>
                                     <td class="text-center">
                                         @if($persona->estado_consideracion == 'rechazado')
-                                            <a href="{{URL::action('ConsideracionesDirectaController@edit', $persona)}}">
-                                                <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
-                                            </a>
+
+                                                <a href="{{URL::action('ConsideracionesDirectaController@edit', $persona)}}">
+                                                    <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
+                                                </a>
+
                                         @endif
                                         @if($persona->archivos->where('tipo', '=', 'consideracion')->first())
 

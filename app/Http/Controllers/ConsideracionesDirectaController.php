@@ -21,7 +21,7 @@ class ConsideracionesDirectaController extends Controller
     {
 
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(25);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(21);
         $fecha_actual = Carbon::now();
 
         if ($fecha_actual->between($fecha1, $fecha2))

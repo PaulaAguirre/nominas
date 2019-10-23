@@ -34,6 +34,7 @@
                     <th>Detalles</th>
                     <th>Regularización</th>
                     <th>Aprobar</th>
+                    <th>%</th>
                     <th>Comentarios</th>
                     <th>Rechazo</th>
                     <th>Enviar</th>
@@ -59,6 +60,7 @@
                                             <option value="pendiente" selected>pendiente</option>
                                         </select>
                                     </td>
+                                    <td>%</td>
                                     <td><input type="text" class="form-control text-uppercase" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"><input type="hidden" ></td>
                                     <td><input type="text" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"><input type="hidden" ></td>
                                     <td class="text-center">
@@ -81,6 +83,17 @@
                                         <option value="aprobado" >aprobado</option>
                                         <option value="rechazado">rechazado</option>
                                         <option value="pendiente" selected>pendiente</option>
+                                    </select>
+                                </td>
+                                <td id="td_objetivo">
+                                    <select class="form-control text-uppercase" style="display:none;" name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
+                                        <option value="100%">100%</option>
+                                        <option value="75% nuevo">75% nuevo</option>
+                                        <option value="75%">75%</option>
+                                        <option value="50%">50%</option>
+                                        <option value="prorrateado">prorrateado%</option>
+                                        <option value="25%">25%</option>
+                                        <option value="sin objetivos">Sin objetivos</option>
                                     </select>
                                 </td>
                                 <td><textarea rows="3" class="form-control text-uppercase" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
@@ -138,17 +151,20 @@
                     {
                         $("#motivo_rechazo-"+id).show();
                         $("#comentario_cosideracion-"+id).hide();
+                        $("#objetivo-"+id).hidde();
 
                     }
                     else if ($(this).val()=='aprobado')
                     {
                         $("#motivo_rechazo-"+id).hide();
                         $("#comentario_cosideracion-"+id).show();
+                        $("#objetivo-"+id).show();
                     }
                     else
                     {
                         $("#motivo_rechazo-"+id).hide();
                         $("#comentario_cosideracion-"+id).hide();
+                        $("#objetivo-"+id).hide();
                     }
 
                 });

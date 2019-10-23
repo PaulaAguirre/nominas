@@ -171,6 +171,8 @@ class ConsideracionesDirectaController extends Controller
         $estado_consideracion = $request->get('aprobacion');
         $motivo_rechazo = $request->get('motivo_rechazo');
         $comentario_consideracion = $request->get('comentario_consideracion');
+        $objetivo = $request->get('objetivo');
+
         $cont = 0;
 
         while ($cont < count($nomina))
@@ -188,6 +190,7 @@ class ConsideracionesDirectaController extends Controller
             if ($nomina_consideracion->estado_consideracion == 'aprobado')
             {
                 $nomina_consideracion->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
+                $nomina_consideracion->porcentaje_objetivo = $objetivo[$cont];
             }
 
             $nomina_consideracion->update();

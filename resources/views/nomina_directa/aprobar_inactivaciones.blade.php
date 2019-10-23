@@ -32,6 +32,7 @@
                     <th>Detalles</th>
                     <th>Regularización</th>
                     <th>Aprobar</th>
+                    <th>%</th>
                     <th>Comentarios</th>
                     <th>Rechazo</th>
                     <th>Enviar</th>
@@ -77,6 +78,17 @@
                                         <option value="aprobado" >aprobado</option>
                                         <option value="rechazado">rechazado</option>
                                         <option value="pendiente" selected>pendiente</option>
+                                    </select>
+                                </td>
+                                <td id="td_objetivo">
+                                    <select class="form-control text-uppercase" style="display:none;" name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
+                                        <option value="100%">100%</option>
+                                        <option value="75% nuevo">75% nuevo</option>
+                                        <option value="75%">75%</option>
+                                        <option value="50%">50%</option>
+                                        <option value="prorrateado">prorrateado%</option>
+                                        <option value="25%">25%</option>
+                                        <option value="sin objetivos">Sin objetivos</option>
                                     </select>
                                 </td>
                                 <td><textarea rows="3" class="form-control text-uppercase" style="display: none;" name="comentario_inactivacion[]" id="comentario_inactivacion-{{$persona->id_nomina}}"></textarea></td>
@@ -128,14 +140,17 @@
                     {
                         $("#motivo_rechazo-"+id).show();
                         $("#comentario_inactivacion-"+id).hide();
+                        $("#objetivo-"+id).hidde();
                     }else if ($(this).val()=='aprobado')
                     {
                         $("#comentario_inactivacion-"+id).show();
                         $("#motivo_rechazo-"+id).hide();
+                        $("#objetivo-"+id).show();
                     }
                     else {
                         $("#comentario_inactivacion-"+id).hide();
                         $("#motivo_rechazo-"+id).hide();
+                        $("#objetivo-"+id).hide();
                     }
                 });
 

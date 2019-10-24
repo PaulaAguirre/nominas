@@ -31,7 +31,7 @@
                     <th class>Zona</th>
                     <th>Rep Zonal / jefe</th>
                     <th>Consideración</th>
-                    <th>Detalles</th>
+                    <th class="col-lg-2">Detalles</th>
                     <th>Regularizar</th>
                     <th>Aprobar</th>
                     <th >Porc%</th>

@@ -79,14 +79,14 @@
                                 <td>{{$persona->detalles_consideracion}}</td>
                                 <td>{{$persona->regularizacion_consideracion}}</td>
                                 <td id="tdaprobacion">
-                                    <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
+                                    <select name="aprobacion[]" class="form-control aprobacion selectpicker" id="aprobacion-{{$persona->id_nomina}}">
                                         <option value="aprobado" >aprobado</option>
                                         <option value="rechazado">rechazado</option>
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
                                 <td id="td_objetivo">
-                                    <select class="form-control text-uppercase" style="display:none;" name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
+                                    <select class="form-control text-uppercase selectpicker" style="display:none;" name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
                                         <option value="100%">100%</option>
                                         <option value="75% nuevo">75% nuevo</option>
                                         <option value="75%">75%</option>
@@ -94,7 +94,7 @@
                                         <option value="prorrateado">prorrateado%</option>
                                         <option value="25%">25%</option>
                                         <option value="sin objetivos">Sin objetivos</option>
-                                    </select>
+                                        </select>
                                 </td>
                                 <td><textarea rows="3" class="form-control text-uppercase" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
 

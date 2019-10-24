@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label class="text-blue">porcentaje</label>
-                    <select class="form-control text-uppercase" name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
+                    <select class="form-control text-uppercase " name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
                         <option value="100%">100%</option>
                         <option value="75% nuevo">75% nuevo</option>
                         <option value="75%">75%</option>

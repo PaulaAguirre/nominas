@@ -58,7 +58,7 @@
 
                         <div class="form-group">
                                 <label class="">Nombre del Asesor</label>
-                                <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
+                                 <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
                         </div>
 
 

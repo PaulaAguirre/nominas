@@ -34,7 +34,7 @@
                     <th>Detalles</th>
                     <th>Regularización</th>
                     <th>Aprobar</th>
-                    <th>%</th>
+                    <th class="col-md-1">Porc%</th>
                     <th>Comentarios</th>
                     <th>Rechazo</th>
                     <th>Enviar</th>
@@ -86,7 +86,7 @@
                                     </select>
                                 </td>
                                 <td id="td_objetivo">
-                                    <select class="form-control text-uppercase selectpicker" style="display:none;" name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
+                                    <select name="objetivo[]" class="form-control text-uppercase" style="display:none;"  id="objetivo-{{$persona->id_nomina}}">
                                         <option value="100%">100%</option>
                                         <option value="75% nuevo">75% nuevo</option>
                                         <option value="75%">75%</option>
@@ -151,7 +151,7 @@
                     {
                         $("#motivo_rechazo-"+id).show();
                         $("#comentario_cosideracion-"+id).hide();
-                        $("#objetivo-"+id).hidde();
+                        $("#objetivo-"+id).hide();
 
                     }
                     else if ($(this).val()=='aprobado')

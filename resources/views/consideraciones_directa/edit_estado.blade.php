@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="text-blue">Estado</label>
-                    <select class="form-control" id="estado_consideracion" name="estado_consideracion">
+                    <select class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}" name="estado_consideracion">
                         @if($persona->estado_consideracion=='aprobado')
                             <option value="aprobado" selected >Aprobado</option>
                             <option value="rechazado">rechazado</option>
@@ -53,6 +53,32 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                $('.aprobacion').change(function(){
+                    var id = $(this).prop('id').split('-')[1];
+                    if ($(this).val()=='rechazado')
+                    {
+                        $("#objetivo-"+id).hide();
+
+                    }
+                    else if ($(this).val()=='aprobado')
+                    {
+                        $("#objetivo-"+id).show();
+                    }
+                    else
+                    {
+
+                        $("#objetivo-"+id).hide();
+                    }
+
+                });
+
+            })
+        </script>
+    @endpush
     {{Form::Close()}}
 
 </div>

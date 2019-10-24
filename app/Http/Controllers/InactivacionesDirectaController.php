@@ -31,6 +31,7 @@ class InactivacionesDirectaController extends Controller
         $mes_actual = Carbon::now();
         $id_persona = $request->get('id_persona');
         $estado_inactivacion = $request->get('estado');
+        $porcentajes = ['100%', '75% nuevo', '75%', '50%', 'prorrateado', '25%', 'sin objetivos'];
 
         if ($mes_actual->between($fecha1, $fecha2))
         {
@@ -48,7 +49,7 @@ class InactivacionesDirectaController extends Controller
             ->representanteDir($id_persona)->estadoInactivacion($estado_inactivacion)
             ->get();
 
-        return view('inactivaciones_directa.index', ['inactivaciones'=>$inactivaciones, 'zonas'=>$zonas]);
+        return view('inactivaciones_directa.index', ['inactivaciones'=>$inactivaciones, 'zonas'=>$zonas, 'porcentajes'=>$porcentajes    ]);
     }
 
     /**
@@ -162,6 +163,7 @@ class InactivacionesDirectaController extends Controller
 
         $estado_inactivacion = $request->get('estado_inactivacion');
         $comentarios = $request->get('comentario_inactivacion');
+        $objetivo = $request->get('objetivo');
 
         if ($estado_inactivacion == 'aprobado')
         {
@@ -169,12 +171,14 @@ class InactivacionesDirectaController extends Controller
             $persona->comentario_inactivacion = $comentarios;
             $persona->fecha_aprobacion_inactivacion = Carbon::now()->format('d/m/Y');
             $persona->motivo_rechazo_inactivacion = NULL;
+            $persona->porcentaje_objetivo = $objetivo[0];
         }
         elseif ($estado_inactivacion == 'rechazado')
         {
             $persona->estado_inactivacion = 'rechazado';
             $persona->motivo_rechazo_inactivacion = $comentarios;
             $persona->comentario_inactivacion = NULL;
+            $persona->porcentaje_objetivo = '100%';
         }
 
         $persona->update();

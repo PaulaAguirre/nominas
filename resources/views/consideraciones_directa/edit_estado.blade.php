@@ -28,13 +28,13 @@
                 <div class="form-group">
                     <label class="text-blue">porcentaje</label>
                     <select class="form-control text-uppercase " name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
-                        <option value="100%">100%</option>
-                        <option value="75% nuevo">75% nuevo</option>
-                        <option value="75%">75%</option>
-                        <option value="50%">50%</option>
-                        <option value="prorrateado">prorrateado%</option>
-                        <option value="25%">25%</option>
-                        <option value="sin objetivos">Sin objetivos</option>
+                        @foreach($porcentajes as $porcentaje)
+                            @if($persona->porcentaje_objetivo == $porcentaje)
+                                <option value="{{$porcentaje}}" selected>{{$porcentaje}}</option>
+                            @else
+                                <option value="{{$porcentaje}}" >{{$porcentaje}}</option>
+                            @endif
+                        @endforeach
                     </select>
                 </div>
 

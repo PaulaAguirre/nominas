@@ -456,7 +456,7 @@ NominaDirectaController extends Controller
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
 
         //$mes_nomina=Carbon::now()->addMonth(1)->format('Ym');
-            $mes_nomina = 201910;
+            //$mes_nomina = 201910;
 
 
         $personas_mes_actual = NominaDirecta::where('mes', '=', $mes_nomina)

@@ -24,24 +24,25 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
-                    <thead class="text-center" style="background-color: #8eb4cb">
+                    <thead class="text-center text-sm" style="background-color: #8eb4cb" >
                     <th>id</th>
                     <th>CH</th>
                     <th>Representante</th>
-                    <th>Zona</th>
+                    <th class>Zona</th>
                     <th>Rep Zonal / jefe</th>
                     <th>Consideración</th>
-                    <th>Detalles</th>
-                    <th>Regularización</th>
+                    <th class="col-lg-2">Detalles</th>
+                    <th>Regularizar</th>
                     <th>Aprobar</th>
+                    <th >Porc%</th>
                     <th>Comentarios</th>
-                    <th>Rechazo</th>
-                    <th>Enviar</th>
+                    <th>Rechazado</th>
+                    <th>Opc</th>
 
                     </thead>
                     <tbody id="ajuste">
                     @foreach ($personas_consideracion as $persona)
-                        <tr class="text-uppercase">
+                        <tr class="text-uppercase text-sm">
                             @if (auth()->user()->hasRoles(['tigo_people']))
                                 @if(auth()->user()->zonas->contains($persona->personaDirecta->id_zona))
                                     <td>{{$persona->id_nomina}}</td>
@@ -53,12 +54,13 @@
                                     <td>{{$persona->detalles_consideracion}}</td>
                                     <td>{{$persona->regularizacion_consideracion}}</td>
                                     <td id="tdaprobacion">
-                                        <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
+                                        <select name="aprobacion[]" class="form-control aprobacion text-sm" id="aprobacion-{{$persona->id_nomina}}">
                                             <option value="aprobado" >aprobado</option>
                                             <option value="rechazado">rechazado</option>
                                             <option value="pendiente" selected>pendiente</option>
                                         </select>
                                     </td>
+                                    <td>%</td>
                                     <td><input type="text" class="form-control text-uppercase" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"><input type="hidden" ></td>
                                     <td><input type="text" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"><input type="hidden" ></td>
                                     <td class="text-center">
@@ -77,15 +79,26 @@
                                 <td>{{$persona->detalles_consideracion}}</td>
                                 <td>{{$persona->regularizacion_consideracion}}</td>
                                 <td id="tdaprobacion">
-                                    <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
+                                    <select name="aprobacion[]" class="form-control aprobacion selectpicker text-sm" id="aprobacion-{{$persona->id_nomina}}">
                                         <option value="aprobado" >aprobado</option>
                                         <option value="rechazado">rechazado</option>
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
-                                <td><textarea rows="3" class="form-control text-uppercase" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
+                                <td id="td_objetivo">
+                                    <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$persona->id_nomina}}">
+                                        <option value="100%">100%</option>
+                                        <option value="75% nuevo">75% nuevo</option>
+                                        <option value="75%">75%</option>
+                                        <option value="50%">50%</option>
+                                        <option value="prorrateado">prorrateado%</option>
+                                        <option value="25%">25%</option>
+                                        <option value="sin objetivos">Sin objetivos</option>
+                                        </select>
+                                </td>
+                                <td><textarea rows="3" class="form-control text-uppercase text-sm" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
 
-                                <td><textarea rows="3"  class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
+                                <td><textarea rows="3"  class="form-control text-uppercase text-sm" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
 
@@ -138,17 +151,20 @@
                     {
                         $("#motivo_rechazo-"+id).show();
                         $("#comentario_cosideracion-"+id).hide();
+                        $("#objetivo-"+id).hide();
 
                     }
                     else if ($(this).val()=='aprobado')
                     {
                         $("#motivo_rechazo-"+id).hide();
                         $("#comentario_cosideracion-"+id).show();
+                        $("#objetivo-"+id).show();
                     }
                     else
                     {
                         $("#motivo_rechazo-"+id).hide();
                         $("#comentario_cosideracion-"+id).hide();
+                        $("#objetivo-"+id).hide();
                     }
 
                 });

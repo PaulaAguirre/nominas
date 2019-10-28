@@ -21,8 +21,9 @@
                         <th>Consideración</th>
                         <th>Detalles</th>
                         <th>Estado</th>
-                        <th>Motivo Rechazo</th>
                         <th>Comentarios</th>
+                        <th>Motivo Rechazo</th>
+
                         <th class="text-center">OPC</th>
 
                     </thead>
@@ -47,8 +48,9 @@
                                     @else
                                         <td class="alert-danger">{{$persona->estado_inactivacion}}</td>
                                     @endif
+                                    <td>{{$persona->comentario_inactivacion ? $persona->comentario_inactivacion.' -OBJ:'.$persona->porcentaje_objetivo : ''}}</td>
                                     <td>{{$persona->motivo_rechazo_inactivacion}}</td>
-                                    <td>{{$persona->comentario_inactivacion}}</td>
+
                                     @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
                                         <td class="text-center">
                                             @if($persona->archivos->where('tipo', '=', 'inactivacion')->first())
@@ -85,8 +87,8 @@
                                 @else
                                     <td class="alert-danger">{{$persona->estado_inactivacion}}</td>
                                 @endif
+                                <td>{{$persona->comentario_inactivacion ? $persona->comentario_inactivacion.' -OBJ:'.$persona->porcentaje_objetivo : ''}}</td>
                                 <td>{{$persona->motivo_rechazo_inactivacion}}</td>
-                                <td>{{$persona->comentario_inactivacion}}</td>
                                 @if(auth()->user()->hasRoles(['zonal', 'tigo_people_admin']))
                                     <td class="text-center">
 

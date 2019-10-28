@@ -127,9 +127,9 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos Dir</a></li>
-                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
-                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
+                            <li><a href="{{url('aprobacion_nomina_directa')}}/201911"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos Dir</a></li>
+                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/201911"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
+                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/201911"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
                             <li><a href="{{url('aprobar_inactivaciones')}}"><i class="fa fa-check-square"></i>Inactivaciones Directa</a></li>
 
                         </ul>
@@ -144,8 +144,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('representantes_directa')}}"><i class="fa fa-users"></i>Representantes Directa</a></li>
-                        <li><a href="#"><i class="fa fa-users"></i>Representantes Tienda</a></li>
-                        <li><a href="#"><i class="fa fa-users"></i>Representantes Indirecta</a></li>
+                       <!-- <li><a href="#"><i class="fa fa-users"></i>Representantes Tienda</a></li>
+                        <li><a href="#"><i class="fa fa-users"></i>Representantes Indirecta</a></li>-->
 
                     </ul>
                 </li>
@@ -157,8 +157,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('nomina_directa')}}"><i class="fa fa-list-ol"></i>Nómina Directa</a></li>
-                        <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Tiendas</a></li>
-                        <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Indirecta</a></li>
+                       <!-- <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Tiendas</a></li>
+                        <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Indirecta</a></li>-->
 
 
                     </ul>
@@ -172,8 +172,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Directa</a></li>
-                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Tiendas</a></li>
+                       <!-- <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Indirecta</a></li>
+                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Tiendas</a></li>-->
                     </ul>
                 </li>
 
@@ -185,8 +185,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('consideraciones_directa')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Tiendas</a></li>
+                       <!-- <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Indirecta</a></li>
+                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Tiendas</a></li>-->
                     </ul>
                 </li>
 
@@ -198,8 +198,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('inactivaciones_directa')}}"><i class="fa fa-comment"></i> Inactivaciones Directa</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Inactivaciones Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Inctivaciones Tiendas</a></li>
+                        <!--<li><a href="#"><i class="fa fa-comment"></i> Inactivaciones Indirecta</a></li>
+                        <li><a href="#"><i class="fa fa-comment"></i> Inctivaciones Tiendas</a></li>-->
                     </ul>
                 </li>
                 <li class="treeview">
@@ -225,7 +225,6 @@
                     </a>
                 </li>
 
-                <br>
                 <br>
                 <li>
                     <img src="{{URL::asset('img/logotigo.png')}}" class="center-block">

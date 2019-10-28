@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="text-blue">Estado</label>
-                    <select class="form-control" id="estado_consideracion" name="estado_consideracion">
+                    <select class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}" name="estado_consideracion">
                         @if($persona->estado_consideracion=='aprobado')
                             <option value="aprobado" selected >Aprobado</option>
                             <option value="rechazado">rechazado</option>
@@ -23,9 +23,22 @@
                             <option value="rechazado" selected>rechazado</option>
                             <option value="pendiente">pendiente</option>
                         @endif
-
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="text-blue">porcentaje</label>
+                    <select class="form-control text-uppercase " name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
+                        @foreach($porcentajes as $porcentaje)
+                            @if($persona->porcentaje_objetivo == $porcentaje)
+                                <option value="{{$porcentaje}}" selected>{{$porcentaje}}</option>
+                            @else
+                                <option value="{{$porcentaje}}" >{{$porcentaje}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+
+
 
                 <div class="form-group">
                     <label class="text-blue">comentarios</label>
@@ -40,6 +53,32 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                $('.aprobacion').change(function(){
+                    var id = $(this).prop('id').split('-')[1];
+                    if ($(this).val()=='rechazado')
+                    {
+                        $("#objetivo-"+id).hide();
+
+                    }
+                    else if ($(this).val()=='aprobado')
+                    {
+                        $("#objetivo-"+id).show();
+                    }
+                    else
+                    {
+
+                        $("#objetivo-"+id).hide();
+                    }
+
+                });
+
+            })
+        </script>
+    @endpush
     {{Form::Close()}}
 
 </div>

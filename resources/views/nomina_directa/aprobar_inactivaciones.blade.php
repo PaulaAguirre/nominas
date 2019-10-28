@@ -22,7 +22,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
-                    <thead class="text-center" style="background-color: #8eb4cb">
+                    <thead class="text-center text-sm" style="background-color: #8eb4cb">
                     <th>Mes</th>
                     <th>ID</th>
                     <th>CH</th>
@@ -32,13 +32,14 @@
                     <th>Detalles</th>
                     <th>Regularización</th>
                     <th>Aprobar</th>
+                    <th>%</th>
                     <th>Comentarios</th>
                     <th>Rechazo</th>
-                    <th>Enviar</th>
+                    <th>Opc</th>
                     </thead>
                     <tbody id="ajuste">
                     @foreach ($personas as $persona)
-                        <tr class="text-uppercase">
+                        <tr class="text-uppercase text-sm">
                             @if (auth()->user()->hasRoles(['tigo_people']))
                                 @if(auth()->user()->zonas->contains($persona->personaDirecta->id_zona))
                                     <td>{{$persona->mes}}</td>
@@ -50,7 +51,7 @@
                                     <td>{{$persona->detalles_inactivacion}}</td>
                                     <td>{{$persona->regularizacion_inactivacion}}</td>
                                     <td id="tdaprobacion">
-                                        <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
+                                        <select name="aprobacion[]" class="form-control aprobacion text-sm" id="aprobacion-{{$persona->id_nomina}}">
                                             <option value="aprobado" >aprobado</option>
                                             <option value="rechazado">rechazado</option>
                                             <option value="pendiente" selected>pendiente</option>
@@ -73,14 +74,25 @@
                                 <td>{{$persona->detalles_inactivacion}}</td>
                                 <td>{{$persona->regularizacion_inactivacion}}</td>
                                 <td id="tdaprobacion">
-                                    <select name="aprobacion[]" class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}">
+                                    <select name="aprobacion[]" class="form-control aprobacion text-sm" id="aprobacion-{{$persona->id_nomina}}">
                                         <option value="aprobado" >aprobado</option>
                                         <option value="rechazado">rechazado</option>
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
-                                <td><textarea rows="3" class="form-control text-uppercase" style="display: none;" name="comentario_inactivacion[]" id="comentario_inactivacion-{{$persona->id_nomina}}"></textarea></td>
-                                <td><textarea rows="3" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
+                                <td id="td_objetivo">
+                                    <select class="form-control text-uppercase text-sm" style="display:none;" name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
+                                        <option value="100%">100%</option>
+                                        <option value="75% nuevo">75% nuevo</option>
+                                        <option value="75%">75%</option>
+                                        <option value="50%">50%</option>
+                                        <option value="prorrateado">prorrateado%</option>
+                                        <option value="25%">25%</option>
+                                        <option value="sin objetivos">Sin objetivos</option>
+                                    </select>
+                                </td>
+                                <td><textarea rows="3" class="form-control text-uppercase text-sm" style="display: none;" name="comentario_inactivacion[]" id="comentario_inactivacion-{{$persona->id_nomina}}"></textarea></td>
+                                <td><textarea rows="3" class="form-control text-uppercase text-sm" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
                                     @if($persona->archivos->where('tipo', '=', 'inactivacion')->first())
@@ -128,14 +140,17 @@
                     {
                         $("#motivo_rechazo-"+id).show();
                         $("#comentario_inactivacion-"+id).hide();
+                        $("#objetivo-"+id).hide();
                     }else if ($(this).val()=='aprobado')
                     {
                         $("#comentario_inactivacion-"+id).show();
                         $("#motivo_rechazo-"+id).hide();
+                        $("#objetivo-"+id).show();
                     }
                     else {
                         $("#comentario_inactivacion-"+id).hide();
                         $("#motivo_rechazo-"+id).hide();
+
                     }
                 });
 

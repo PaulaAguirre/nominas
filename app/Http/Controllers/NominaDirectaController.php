@@ -308,6 +308,7 @@ NominaDirectaController extends Controller
         $nomina = $request->get('id_nomina');
         $motivo_rechazo = $request->get('motivo_rechazo');
         $comentario_inactivacion = $request->get('comentario_inactivacion');
+        $objetivo = $request->get('objetivo');
 
         //dd($comentario_inactivacion);
         $cont = 0;
@@ -318,7 +319,7 @@ NominaDirectaController extends Controller
             $nomina_directa->estado_inactivacion = $estado_inactivacion[$cont];
             $nomina_directa->motivo_rechazo_inactivacion = $motivo_rechazo[$cont];
             $nomina_directa->comentario_inactivacion = $comentario_inactivacion[$cont];
-
+            $nomina_directa->porcentaje_objetivo = $objetivo[$cont];
 
 
             if ($nomina_directa->estado_inactivacion == 'aprobado')
@@ -455,7 +456,7 @@ NominaDirectaController extends Controller
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
 
         //$mes_nomina=Carbon::now()->addMonth(1)->format('Ym');
-            $mes_nomina = 201910;
+            //$mes_nomina = 201910;
 
 
         $personas_mes_actual = NominaDirecta::where('mes', '=', $mes_nomina)

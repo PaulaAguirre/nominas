@@ -23,6 +23,7 @@ class ConsideracionesDirectaController extends Controller
         $fecha1 = new Carbon('first day of this month');
         $fecha2 = (new Carbon('first day of this month'))->addDays(21);
         $fecha_actual = Carbon::now();
+        $porcentajes = ['50%', '75%','75% nuevo','prorrateado', '25%', 'sin objetivos'];
 
         if ($fecha_actual->between($fecha1, $fecha2))
         {
@@ -47,7 +48,7 @@ class ConsideracionesDirectaController extends Controller
 
 
         return view('consideraciones_directa.index', ['personas_consideracion' => $personas_consideracion,
-            'zonas'=>$zonas, 'consideraciones'=>$consideraciones]);
+            'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'porcentajes'=>$porcentajes]);
     }
 
     /**
@@ -171,6 +172,8 @@ class ConsideracionesDirectaController extends Controller
         $estado_consideracion = $request->get('aprobacion');
         $motivo_rechazo = $request->get('motivo_rechazo');
         $comentario_consideracion = $request->get('comentario_consideracion');
+        $objetivo = $request->get('objetivo');
+
         $cont = 0;
 
         while ($cont < count($nomina))
@@ -188,6 +191,7 @@ class ConsideracionesDirectaController extends Controller
             if ($nomina_consideracion->estado_consideracion == 'aprobado')
             {
                 $nomina_consideracion->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
+                $nomina_consideracion->porcentaje_objetivo = $objetivo[$cont];
             }
 
             $nomina_consideracion->update();
@@ -199,9 +203,12 @@ class ConsideracionesDirectaController extends Controller
 
     public function updateEstado(Request $request, $id)
     {
+
         $persona = NominaDirecta::findOrFail($id);
         $estado_consideracion = $request->get('estado_consideracion');
         $comentarios = $request->get('comentario_consideracion');
+        $objetivo = $request->get('objetivo');
+
 
         if ($estado_consideracion == 'aprobado')
         {
@@ -209,11 +216,15 @@ class ConsideracionesDirectaController extends Controller
             $persona->comentario_consideracion = $comentarios;
             $persona->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
             $persona->motivo_rechazo_consideracion = NULL;
+            $persona->porcentaje_objetivo = $objetivo[0];
+
         }
         elseif ($estado_consideracion == 'rechazado')
         {
             $persona->estado_consideracion = 'rechazado';
             $persona->motivo_rechazo_consideracion = $comentarios;
+            $persona->comentario_consideracion = NULL;
+            $persona->porcentaje_objetivo = NULL;
         }
 
         $persona->update();

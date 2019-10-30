@@ -9,8 +9,8 @@ class Tienda extends Model
     protected $table = 'tiendas';
     protected $primaryKey = "id";
 
-    public function zona ()
+    public function zona()
     {
-        $this->belongsTo('App\ZonaTienda', 'zona_id');
+        return $this->belongsTo('App\ZonaTienda', 'zona_id');
     }
 }

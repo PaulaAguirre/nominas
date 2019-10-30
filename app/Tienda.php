@@ -13,4 +13,9 @@ class Tienda extends Model
     {
         return $this->belongsTo('App\ZonaTienda', 'zona_id');
     }
+
+    public function jefetienda()
+    {
+        return $this->belongsTo('App\JefeTienda', 'jefe_tienda_id');
+    }
 }

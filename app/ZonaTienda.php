@@ -1,17 +1,13 @@
 <?php
-/**
- * Copyright (c) 2019
- */
 
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Zona extends Model
+class ZonaTienda extends Model
 {
     protected $table = 'zonas_tiendas';
     protected $primaryKey = "id";
-
 
     public function region()
     {
@@ -22,4 +18,5 @@ class Zona extends Model
     {
         return $this->belongsTo('App\FamiliaZona', 'id_familiazona');
     }
+
 }

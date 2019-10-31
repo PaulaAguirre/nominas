@@ -453,7 +453,8 @@ NominaDirectaController extends Controller
         }
         else
         {
-            $mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
+            //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
+            $mes_nomina = 201911;
         }
 
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();

@@ -32,7 +32,8 @@ class ConsideracionesDirectaController extends Controller
         }
         else
         {
-            $mes = Carbon::now()->addMonth(1)->format('Ym');
+            $mes=291911;
+            //$mes = Carbon::now()->addMonth(1)->format('Ym');
 
         }
 

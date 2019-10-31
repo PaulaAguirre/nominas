@@ -93,9 +93,9 @@ class NominaDirecta extends Model
             }
             else
             {
-                //$mes_format = $mes->addMonth(1)->format('Ym');
+               // $mes_format = $mes->addMonth(1)->format('Ym');
                 $mes_format = 201911;
-                dd($mes);
+                //dd($mes);
             }
 
             $query->where('mes', $mes_format);

@@ -293,7 +293,10 @@ NominaDirectaController extends Controller
         }
         else
         {
-            $mes= Carbon::now()->addMonth(1)->format('Ym');
+            $mes=201911;
+            //$mes= Carbon::now()->addMonth(1)->format('Ym');
+
+
         }
 
         //$mes = Carbon::today()->format('Ym');

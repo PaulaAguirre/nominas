@@ -34,7 +34,8 @@
                     <th>Mes</th>
                     <th>CH</th>
                     <th>Representante</th>
-                    <th>Agrupación</th>
+                    <th>Perfil Actual</th>
+                    <th>Perfil Anterior</th>
                     <th>Rep Zonal - Rep Jefe</th>
                     <th>Region/Zona</th>
                     <th>Estado</th>
@@ -52,6 +53,7 @@
                                     <td>{{$persona->personaDirecta->ch}}</td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
                                     <td>{{$persona->agrupacion}}</td>
+                                    <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
                                     <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                     @if($persona->estado_nomina == 'pendiente')
@@ -97,6 +99,7 @@
                                 <td>{{$persona->personaDirecta->ch}}</td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
                                 <td>{{$persona->agrupacion}}</td>
+                                <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
                                 <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                 @if($persona->estado_nomina == 'pendiente')

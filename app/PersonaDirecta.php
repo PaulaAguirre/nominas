@@ -22,6 +22,7 @@ class PersonaDirecta extends Model
         'cargo_go',
         'activo',
         'agrupacion',
+        'agrupacion_anterior',
         'estado_cambio',
         'motivo_rechazo',
         'regularizacion_cambio',

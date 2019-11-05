@@ -120,7 +120,7 @@
                                     <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                     </a>
-                                    @if(!$persona->id_consideracion)
+                                    @if(!$persona->estado_consideracion)
                                         <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
                                             <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
                                         </a>

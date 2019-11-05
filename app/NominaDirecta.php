@@ -85,7 +85,7 @@ class NominaDirecta extends Model
         else
         {
             $fecha1 = new Carbon('first day of this month');
-            $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+            $fecha2 = (new Carbon('first day of this month'))->addDays(27);
             $mes = Carbon::now();
             if ($mes->between($fecha1, $fecha2))
             {
@@ -127,6 +127,7 @@ class NominaDirecta extends Model
             $query
                 ->join('personas_directa', 'personas_directa.id_persona', '=', 'nomina_directa.id_persona_directa')
                 ->where('id_zona', '=', $id_zona)
+
             ;
         }
 
@@ -140,6 +141,7 @@ class NominaDirecta extends Model
             $query
                 ->join('personas_directa', 'personas_directa.id_persona', '=', 'nomina_directa.id_persona_directa')
                 ->where('id_representante_jefe', '=', $id_jefe)
+
                 //no olvidar el mes
             ;
         }

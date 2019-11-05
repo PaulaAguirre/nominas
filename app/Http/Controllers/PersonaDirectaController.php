@@ -131,6 +131,9 @@ class PersonaDirectaController extends Controller
         $id_zona_anterior = $asesor->id_zona;
         $url = $request->get('url');
         $id_zona_nuevo = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id;
+        $perfil_nuevo = $request->get('agrupacion');
+        $perfil_anterior = $request->get('perfil_anterior');
+        $detalles_consideracion = $request->get('detalles_consideracion');
 
         $id_representante_jefe_nuevo = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->id_persona;
 
@@ -153,9 +156,27 @@ class PersonaDirectaController extends Controller
 
         $nomina = NominaDirecta::where('id_persona_directa', $asesor->id_persona)->get()->last();
         if($nomina){
-            $nomina->agrupacion = $asesor->agrupacion;
+            $nomina->agrupacion = $asesor->agrupacion; //cambia el perfil tambien en nomina
+
+            if ($perfil_nuevo != $perfil_anterior) //comprueba que no haya una consideracion cargada.
+            {
+                if ($nomina->id_consideracion)
+                {
+                    $nomina->detalles_consideracion = $nomina->detalles_consideracion.' *cambio perfil: '.$detalles_consideracion;
+                    $nomina->estado_consideracion = 'pendiente';
+                }
+                else
+                {
+                    $nomina->id_consideracion = 11;
+                    $nomina->detalles_consideracion = $detalles_consideracion;
+                    $nomina->estado_consideracion = 'pendiente';
+                }
+            }
+
             $nomina->update();
         }
+
+
 
         return redirect($url);
     }

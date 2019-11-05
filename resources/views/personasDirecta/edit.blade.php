@@ -60,6 +60,7 @@
 
                         <div class="form-group">
                             <label for="">Representante Jefe</label>
+
                             <select name="rep_jefe_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Representante Jefe">
                                 @foreach($jefes as $jefe )
                                     @if($persona->id_representante_jefe == $jefe->id_persona)
@@ -73,8 +74,9 @@
 
 
                         <div class="form-group col-md-offset-0 col-md-4">
+                            <input type="hidden" value="{{$persona->agrupacion}}" id="perfil_anterior" name="perfil_anterior">
                             <label for="">Agrupación</label>
-                            <select name="agrupacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Agrupación" required>
+                            <select name="agrupacion" id="agrupacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Agrupación" required>
                                 @foreach($agrupaciones as $agrupacion )
                                     @if($persona->agrupacion == $agrupacion)
                                         <option value="{{$agrupacion}}" selected>{{strtoupper ($agrupacion)}}</option>
@@ -83,6 +85,11 @@
                                     @endif
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group col-md-4" style="display: none" id="comentarios">
+                            <label for="" class="col-md-2">Comentarios</label>
+                            <textarea class="form-control" rows="2" placeholder="Comentarios por cambio de perfil" name="detalles_consideracion"></textarea>
+
                         </div>
 
                         <div class="form-group col-md-4 ">
@@ -111,4 +118,31 @@
         </div>
         {!!Form::close()!!}
     </div>
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+
+            $('#agrupacion').change(function() {
+                anterior = $('#perfil_anterior').prop('value');
+
+                actual = $('#agrupacion').prop('value');
+
+                console.log(anterior)
+                console.log(actual)
+
+                if (anterior != actual) {
+                    $("#comentarios").show();
+                }else if(anterior == actual) {
+                    $("#comentarios").hide();
+                }
+
+            });
+
+        });
+
+
+    </script>
+@endpush
 @endsection

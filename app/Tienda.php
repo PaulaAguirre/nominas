@@ -18,4 +18,9 @@ class Tienda extends Model
     {
         return $this->belongsTo('App\JefeTienda', 'jefe_tienda_id');
     }
+
+    public function teamleaders ()
+    {
+        return $this->belongsToMany('App\Teamleader');
+    }
 }

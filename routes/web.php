@@ -93,6 +93,17 @@ Route::group (['middleware'=>'auth'], function () {
     /**
      * fin Nomina directa
      * */
+
+    /**
+     * Tiendas
+     * todo lo referente a tiendas desde acá
+     */
+
+    Route::resource('asesores_tienda', 'AsesorTiendaController');
+
+
+
+
 });
 
 
@@ -112,5 +123,6 @@ Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //
  Route::get('/generar', 'ExcelController@index');
  Route::get('/exportar_consideraciones', 'ExcelController@exportConsideracionesController');
  Route::get('/nomina_x_zona', 'ExcelController@exportarNominaXZonalController');
+
 
 

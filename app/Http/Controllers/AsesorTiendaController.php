@@ -27,7 +27,7 @@ class AsesorTiendaController extends Controller
      */
     public function create()
     {
-        $asesores =
+        //
     }
 
     /**

@@ -29,15 +29,15 @@
     <header class="main-header" >
 
         <!-- Logo -->
-        <a href="#" class="logo" style="background-color: #2d4373">
+        <a href="#" class="logo" style="background-color: #3d9970">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>PN</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>NÓMINAS</b></span>
+            <span class="logo-lg"><b>NÓMINA Tienda</b></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation" style="background-color: #0d6aad" >
+        <nav class="navbar navbar-static-top" role="navigation" style="background-color: #3d9970" >
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Navegación</span>
@@ -250,7 +250,7 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title text-blue">Nómina de Representantes</h3>
+                            <h3 class="box-title text-success">Nómina de Representantes</h3>
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>

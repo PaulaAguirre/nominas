@@ -1,9 +1,8 @@
-@extends ('layouts.admin')
+@extends ('layouts.admin_tienda')
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            <h3>Nueva Nomina Directa - <span class="text-info">Mes: {{$mes_nomina}}</span> </h3>
-            @include('nomina_directa.search')
+            <h3>Nueva Nomina Tiendas - <span class="text-info">Mes: {{$mes_nomina}}</span> </h3>
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -23,26 +22,21 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
-                        <thead class="text-center" style="background-color: #8eb4cb">
+                        <thead class="text-center" style="background-color: #2ab27b">
                         <th>Region/Zona</th>
                         <th>Rep Zonal - Rep Jefe</th>
                         <th>CH</th>
                         <th>Representante</th>
                         </thead>
-                        @foreach ($personas_directa as $persona)
+                        @foreach ($asesores as $asesor)
                             <tr class="text-uppercase">
-                                <td>{{$persona->zona->region->region.' / '.$persona->zona->zona}}</td>
-                                <td>{{$persona->representanteJefe->zona->representante_zonal_nombre ? $persona->representanteJefe->zona->representante_zonal_nombre : '' }} -
-                                    {{$persona->representanteJefe ? $persona->representanteJefe->nombre : ''}}
-                                </td>
-                                <td>{{$persona->ch}}</td>
-                                <td><input type="hidden" name="idrepresentante[]" value="{{$persona->id_persona}}" >
-                                    <input type="hidden" name="persona_mes[]" id="persona_mes" value="{{$persona->id_persona.$mes_nomina}}">
-                                   {{$persona->nombre}}</td>
-
+                                <td>{{$asesor->tienda->zona->zona}}</td>
+                                <td>{{$asesor->tienda->zona->representante_zonal_nombre}}</td>
+                                <td>{{$asesor->ch}}</td>
+                                <td><input type="hidden" name="id_asesro[]" value="{{$asesor->id}}" >
+                                    <input type="hidden" name="persona_mes[]" id="persona_mes" value="{{$asesor->id.$mes_nomina}}">{{$asesor->nombre}}</td>
                             </tr>
                         @endforeach
-                        @include('nomina_directa.modal_nomina')
                     </table>
                     <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">
                          <div class="form-group">

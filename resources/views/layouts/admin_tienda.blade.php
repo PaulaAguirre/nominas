@@ -287,10 +287,12 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('jquery.tablesorter.js')}}"></script>
 <!-- Datepicker Files -->
 <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
 <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
 <script type="text/javascript" src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
+
 <!-- Languaje -->
 <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
 @stack('scripts')
@@ -298,6 +300,7 @@
 <!-- Bootstrap 3.3.5 -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
+
 
 <!-- AdminLTE App -->
 <script src="{{asset('js/app.min.js')}}"></script>

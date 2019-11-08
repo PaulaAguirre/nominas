@@ -35,4 +35,6 @@ class AsesorTienda extends Model
             return AsesorTienda::findOrFail($asesor_id)->tienda->zona;
         }
     }
+
+
 }

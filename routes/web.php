@@ -100,7 +100,7 @@ Route::group (['middleware'=>'auth'], function () {
      */
 
     Route::resource('asesores_tienda', 'AsesorTiendaController');
-
+    Route::resource('nomina_tienda', 'NominaTiendaController');
 
 
 

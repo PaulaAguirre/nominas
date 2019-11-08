@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    {!!Form::open(array('url'=>'nomina_directa','method'=>'POST','autocomplete'=>'off'))!!}
+    {!!Form::open(array('url'=>'nomina_tienda','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
 
         <div class="row text-uppercase">
@@ -23,8 +23,9 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                         <thead class="text-center" style="background-color: #2ab27b">
-                        <th>Region/Zona</th>
-                        <th>Rep Zonal - Rep Jefe</th>
+                        <th>Zona</th>
+                        <th>Rep Zonal</th>
+                        <th>Jefe Tienda</th>
                         <th>CH</th>
                         <th>Representante</th>
                         </thead>
@@ -32,16 +33,17 @@
                             <tr class="text-uppercase">
                                 <td>{{$asesor->tienda->zona->zona}}</td>
                                 <td>{{$asesor->tienda->zona->representante_zonal_nombre}}</td>
+                                <td>{{$asesor->tienda->jefetienda ? $asesor->tienda->jefetienda->nombre : ''}}</td>
                                 <td>{{$asesor->ch}}</td>
-                                <td><input type="hidden" name="id_asesro[]" value="{{$asesor->id}}" >
-                                    <input type="hidden" name="persona_mes[]" id="persona_mes" value="{{$asesor->id.$mes_nomina}}">{{$asesor->nombre}}</td>
+                                <td><input type="hidden" name="id_asesor[]" value="{{$asesor->id}}" >
+                                    <input type="hidden" name="asesor_mes[]" id="persona_mes" value="{{$asesor->id.$mes_nomina}}">{{$asesor->nombre}}</td>
                             </tr>
                         @endforeach
                     </table>
                     <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">
                          <div class="form-group">
                             <input name="_token" value="{{csrf_token()}}" type="hidden">
-                             <a href="" data-target="#modal-nomina-create" data-toggle="modal" data-placement="top" title="generar" id="btn_generar" ><button  class="btn btn-primary">Generar <i class="fa fa-book" aria-hidden="true" ></i></button></a>
+                             <button class="btn btn-primary" type="submit">Generar</button>
                              <button id="btn_cancelar" class="btn btn-danger" type="reset">Cancelar</button>
                          </div>
                     </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AsesorTienda;
+use App\Teamleader;
+use App\Tienda;
 use Illuminate\Http\Request;
 
 class AsesorTiendaController extends Controller
@@ -27,7 +29,9 @@ class AsesorTiendaController extends Controller
      */
     public function create()
     {
-        //
+        $tiendas = Tienda::all();
+
+        return view('tiendas.asesores.create', ['tiendas'=>$tiendas]);
     }
 
     /**
@@ -38,7 +42,7 @@ class AsesorTiendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tienda_tl = $request->get('tienda_teamleader_id');
     }
 
     /**

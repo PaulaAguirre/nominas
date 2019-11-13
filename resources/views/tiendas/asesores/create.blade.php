@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.admin_tienda')
 @section ('contenido')
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -20,7 +20,7 @@
                     <div class="panel-heading text-bold"><span class="text-info">NUEVO ASESOR</span></div>
 
                     <div class="panel-body text-uppercase">
-                        {!!Form::open(array('url'=>'representantes_directa','method'=>'POST','autocomplete'=>'off'))!!}
+                        {!!Form::open(array('url'=>'asesores_tienda','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
@@ -63,30 +63,23 @@
 
 
                         <div class="form-group">
-                            <label for="">Representante Jefe</label>
-                            <select name="rep_jefe_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Representante Jefe">
-                                @foreach($jefes as $jefe )
-                                        <option value="{{$jefe->id_persona}}">{{strtoupper ($jefe->nombre)}}-->{{$jefe->zona->zona}}</option>
+                            <label for="">Team Leader</label>
+                            <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
+                                @foreach($tiendas as $tienda )
+                                    @foreach($tienda->teamleaders as $teamleader)
+                                        <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
+                                    @endforeach
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="form-group col-md-offset-0 col-md-4">
-                            <label for="">Agrupación</label>
-                            <select name="agrupacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Agrupacion" required>
-                                @foreach($agrupaciones as $agrupacion )
-                                    <option value="{{$agrupacion}}">{{strtoupper ($agrupacion)}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
 
                         <div class="form-group col-md-offset-0 col-md-4">
                             <label for="">consideración</label>
                             <select name="id_consideracion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Consideracion" required>
                                 <option  value="6">Nuevo Ingreso</option>
                                 <option value="12">Cambio de canal</option>
-                                <option value="14">De acting a Asesor</option>
-
                             </select>
                         </div>
 

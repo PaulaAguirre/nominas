@@ -12,22 +12,36 @@
 */
 
 use App\Http\Controllers\ExcelController;
-
+/*
 Route::get('/', function () {
     if (Auth::check())
     {
-        return redirect('nomina_directa');
+        if (Auth::user()->hasRoles(['admin']))
+        {
+            return redirect('index');
+        }
+        else
+        {
+            return redirect('nomina_directa');
+        }
+
     }
     else
     {
         return redirect ('login');
     }
-});
+});*/
 
 Auth::routes();
 
 
 Route::group (['middleware'=>'auth'], function () {
+
+    Route::get('index', function ()
+    {
+        return view('sys.index');
+    })->name('sys.index');
+
     /**
      * Persona directa
      * */

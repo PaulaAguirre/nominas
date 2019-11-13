@@ -32,6 +32,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Zona', 'user_zona','user_id', 'zona_id');
     }
 
+    public function canales ()
+    {
+        return $this->belongsToMany('App\Canal');
+    }
+
+
+
     public function roles ()
     {
         return $this->belongsToMany('App\Role', 'user_role')->withTimestamps();
@@ -59,6 +66,21 @@ class User extends Authenticatable
             foreach ($this->zonas as $userZona)
             {
                 if ($userZona->zona == $zona)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function hasCanales (array $canales)
+    {
+        foreach ($canales as $canal)
+        {
+            foreach ($this->canales as $userCanal)
+            {
+                if ($userCanal->canal == $canal)
                 {
                     return true;
                 }

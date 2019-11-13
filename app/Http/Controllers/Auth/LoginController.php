@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,28 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/nomina_directa';
+    //protected $redirectTo = '/index';
+
+    /**
+     * Get the path the user should be redirected to.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string
+     */
+    protected function redirectTo()
+    {
+        if (Auth::user()->hasRoles(['tigo_people_admin']))
+        {
+
+            return route('sys.index');
+        }
+        else
+        {
+            return route('nomina_directa.index');
+        }
+    }
+
+
 
     /**
      * Create a new controller instance.

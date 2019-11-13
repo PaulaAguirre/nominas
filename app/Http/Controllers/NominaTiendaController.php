@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ZonaTienda;
 use Illuminate\Http\Request;
 use App\NominaTienda;
 use App\AsesorTienda;
@@ -9,13 +10,35 @@ use App\AsesorTienda;
 class NominaTiendaController extends Controller
 {
     /**
+     * NominaTiendaController constructor.
+     */
+    public function __construct()
+    {
+
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $zona_id = $request->get('zona_id');
+        $activo = $request->get('activo');
+        $tienda_id = $request->get('tienda_id');
+        $jefe_tienda_id = $request->get('jefe_tienda_id');
+        $teamleader_id =$request->get('teamleader_id');
+        $asesor_id = $request->get('asesor_id');
+        $mes_nomina = 201911;
+        $asesores = NominaTienda::where('mes', '=', $mes_nomina)
+            ->zona($zona_id)->tienda($tienda_id)->activo($activo)
+            ->get();
+
+
+
+        return view('tiendas.nomina.index', ['mes_nomina'=>$mes_nomina, 'asesores'=>$asesores]);
+
     }
 
     /**
@@ -23,14 +46,20 @@ class NominaTiendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $zona_id = $request->get('zona_id');
+        $zonas_tienda = ZonaTienda::all();
         $mes_nomina = 201911;
         $asesores_existentes = NominaTienda::where('mes', '=', $mes_nomina)->get()->pluck('id_asesor')->toArray();
-        $asesores = AsesorTienda::where('activo', '=', 'activo')
-            ->whereNotIn('id_asesor', $asesores_existentes)
-            ->get();
-        return view('tiendas.nomina.create', ['asesores'=>$asesores, 'mes_nomina'=>$mes_nomina]);
+        $asesores = AsesorTienda::whereNotIn('asesores_tienda.id', $asesores_existentes)
+            ->where('asesores_tienda.activo', '=', 'ACTIVO')->get();
+
+
+
+
+        return view('tiendas.nomina.create', ['asesores'=>$asesores, 'mes_nomina'=>$mes_nomina,
+            'zonas_tienda'=>$zonas_tienda]);
     }
 
     /**
@@ -42,6 +71,7 @@ class NominaTiendaController extends Controller
     public function store(Request $request)
     {
         $asesores_id = $request->get('id_asesor');
+
         $cont = 0;
         $asesor_mes = $request->get('asesor_mes');
         $mes_nomina = '201911';
@@ -57,7 +87,7 @@ class NominaTiendaController extends Controller
             $cont = $cont+1;
         }
 
-        dd('ok');
+        return redirect('nomina_tienda/create');
 
     }
 

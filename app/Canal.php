@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Canal extends Model
 {
     protected $table = 'canales';
-    protected $primaryKey = "id_canal";
+    protected $primaryKey = "id";
 }

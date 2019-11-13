@@ -29,11 +29,12 @@
     <header class="main-header" >
 
         <!-- Logo -->
-        <a href="#" class="logo" style="background-color: #2d4373">
+        <a href="index" class="logo" style="background-color: #2d4373">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>PN</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>NÓMINAS</b></span>
+
+            <span class="logo-lg"><i class="fa fa-home"></i><b>NÓMINAS Directa</b></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->

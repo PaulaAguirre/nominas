@@ -29,11 +29,11 @@
     <header class="main-header" >
 
         <!-- Logo -->
-        <a href="#" class="logo" style="background-color: #3d9970">
+        <a href="/index" class="logo" style="background-color: #3d9970">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>PN</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>NÓMINA Tienda</b></span>
+            <span class="logo-lg"><i class="fa fa-home"></i><b>NÓMINA Tienda</b></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -127,10 +127,10 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos Dir</a></li>
-                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
-                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
-                            <li><a href="{{url('aprobar_inactivaciones')}}"><i class="fa fa-check-square"></i>Inactivaciones Directa</a></li>
+                            <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos </a></li>
+                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones</a></li>
+                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-check-square"></i>Cambios Estructura</a></li>
+                            <li><a href="{{url('aprobar_inactivaciones')}}"><i class="fa fa-check-square"></i>Inactivaciones Tienda</a></li>
 
                         </ul>
                     </li>
@@ -143,9 +143,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('representantes_directa')}}"><i class="fa fa-users"></i>Representantes Directa</a></li>
-                        <li><a href="#"><i class="fa fa-users"></i>Representantes Tienda</a></li>
-                        <li><a href="#"><i class="fa fa-users"></i>Representantes Indirecta</a></li>
+                        <li><a href="{{url('asesores_tienda')}}"><i class="fa fa-users"></i>Asesores Tienda x Zona</a></li>
+
 
                     </ul>
                 </li>
@@ -156,9 +155,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('nomina_directa')}}"><i class="fa fa-list-ol"></i>Nómina Directa</a></li>
-                        <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Tiendas</a></li>
-                        <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Indirecta</a></li>
+                        <li><a href="{{url('nomina_tienda')}}"><i class="fa fa-list-ol"></i>Nómina Tienda</a></li>
 
 
                     </ul>
@@ -171,8 +168,6 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Directa</a></li>
-                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Indirecta</a></li>
                         <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Tiendas</a></li>
                     </ul>
                 </li>
@@ -184,9 +179,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('consideraciones_directa')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Tiendas</a></li>
+                        <li><a href="{{url('consideraciones_tienda')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
                     </ul>
                 </li>
 
@@ -197,9 +190,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('inactivaciones_directa')}}"><i class="fa fa-comment"></i> Inactivaciones Directa</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Inactivaciones Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Inctivaciones Tiendas</a></li>
+                        <li><a href="{{url('inactivaciones_tienda')}}"><i class="fa fa-comment"></i> Inactivaciones Tienda</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

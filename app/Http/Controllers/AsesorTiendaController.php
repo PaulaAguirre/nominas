@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ArchivoTienda;
 use App\AsesorTienda;
 use App\NominaTienda;
 use App\Teamleader;
@@ -11,6 +12,14 @@ use Illuminate\Http\Response;
 
 class AsesorTiendaController extends Controller
 {
+    /**
+     * AsesorTiendaController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('canales:tiendas');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -150,8 +159,43 @@ class AsesorTiendaController extends Controller
      * @param AsesorTienda $asesor
      * @return void
      */
-    public function destroy(AsesorTienda $asesor)
+    public function destroy(Request $request, $id)
     {
-        //
+        $asesor = NominaTienda::findOrFail($id);
+        $asesor->motivo_inactivacion = $request->get('motivo_inactivacion');
+        $asesor->detalles_inactivacion = $request->get('detalles_inactivacion');
+        $asesor->estado_inactivacion = 'pendiente';
+
+        if($request->hasFile('archivo'))
+        {
+            $archivo = new ArchivoTienda();
+            $archivo->nomina_tienda_id = $asesor->id;
+            $ruta = $request->file('archivo')->store('public');
+            $archivo->nombre = explode('/',$ruta)[1];
+            $archivo->tipo = 'inactivacion';
+            $archivo->save();
+        }
+        $asesor->update();
+        return redirect()->back();
+    }
+    public function agregarConsideracion(Request $request, $id)
+    {
+        $asesor = NominaTienda::findOrFail($id);
+        $asesor->id_consideracion = $request->get('id_consideracion');
+        $asesor->detalles_consideracion = $request->get('detalles_consideracion');
+        $asesor->estado_consideracion = 'pendiente';
+
+        if($request->hasFile('archivo'))
+        {
+            $archivo = new ArchivoTienda();
+            $archivo->nomina_tienda_id = $asesor->id;
+            $ruta = $request->file('archivo')->store('public');
+            $archivo->nombre = explode('/',$ruta)[1];
+            $archivo->tipo = 'consideracion';
+            $archivo->save();
+        }
+
+        $asesor->update();
+        return redirect()->back();
     }
 }

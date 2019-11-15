@@ -52,7 +52,7 @@
                             <td>{{$asesor->asesor->tienda->tienda_nombre}} / {{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe'}}</td>
                             <td>{{$asesor->asesor->teamleader->nombre}}</td>
                             @if($asesor->estado_inactivacion == 'pendiente')
-                                <td>pendiente</td>
+                                <td class="text-warning">pendiente</td>
                             @elseif($asesor->estado_inactivacion == 'aprobado')
                                 <td class="text-danger">Inactivo</td>
                             @else
@@ -62,10 +62,18 @@
                                 <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
                                     <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                 </a>
+                                @if(!$asesor->estado_consideracion)
+                                    <a href="" data-target="#modal-consideracion-store-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+                                @endif
+                                @if(!$asesor->estado_inactivacion)
+                                    <a href="" data-target="#modal-nomina-delete-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                @endif
                             </td>
                         </tr>
-
+                            @include('tiendas.asesores.modal_eliminacion')
+                            @include('tiendas.consideraciones.crear_consideracion_modal')
                     @endforeach
+
                 </table>
             </div>
         </div>

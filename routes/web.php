@@ -114,7 +114,11 @@ Route::group (['middleware'=>'auth'], function () {
      */
 
     Route::resource('asesores_tienda', 'AsesorTiendaController');
+    Route::patch('asesores_tienda_consideracion/{id}', 'AsesorTiendaController@agregarConsideracion')
+    ->name('asesores_tienda.consideracion');
     Route::resource('nomina_tienda', 'NominaTiendaController');
+
+
 
 
 

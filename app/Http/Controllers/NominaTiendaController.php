@@ -6,6 +6,7 @@ use App\ZonaTienda;
 use Illuminate\Http\Request;
 use App\NominaTienda;
 use App\AsesorTienda;
+use App\Consideracion;
 
 class NominaTiendaController extends Controller
 {
@@ -14,7 +15,7 @@ class NominaTiendaController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware('canales:tiendas');
     }
 
     /**
@@ -30,6 +31,7 @@ class NominaTiendaController extends Controller
         $jefe_tienda_id = $request->get('jefe_tienda_id');
         $teamleader_id =$request->get('teamleader_id');
         $asesor_id = $request->get('asesor_id');
+        $consideraciones = Consideracion::all();
         $mes_nomina = 201911;
         $asesores = NominaTienda::where('mes', '=', $mes_nomina)
             ->zona($zona_id)->tienda($tienda_id)->activo($activo)
@@ -37,7 +39,8 @@ class NominaTiendaController extends Controller
 
 
 
-        return view('tiendas.nomina.index', ['mes_nomina'=>$mes_nomina, 'asesores'=>$asesores]);
+        return view('tiendas.nomina.index', ['mes_nomina'=>$mes_nomina, 'asesores'=>$asesores,
+            'consideraciones'=>$consideraciones]);
 
     }
 
@@ -131,8 +134,8 @@ class NominaTiendaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request ,$id)
     {
-        //
+       //
     }
 }

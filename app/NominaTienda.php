@@ -11,6 +11,12 @@ class NominaTienda extends Model
     protected $table = 'nominas_tienda';
     protected $primaryKey = "id";
 
+    protected $fillable = [
+      'id_asesor', 'mes', 'asesor_mes', 'id_consideracion', 'detalles_consideracion', 'estado_consideracion',
+        'motivo_inactivacion', 'detalles_inactivacion', 'estado_inactivacion', 'comentarios_inactivacion', 'regularizacion_consideracion',
+        'regularizacion_inactivacion', 'fecha_aprobacion_consideracion', 'fecha_aprobacion_inactivacion', 'porcentaje_objetivo'
+    ];
+
     public function asesor ()
     {
         return $this->belongsTo('App\AsesorTienda', 'id_asesor');
@@ -68,7 +74,9 @@ class NominaTienda extends Model
 
     public function scopeActivo($query, $activo)
     {
-        $query->where('estado_inactivacion', $activo);
+        if ($activo) {
+            $query->where('estado_inactivacion', $activo);
+        }
     }
 
 

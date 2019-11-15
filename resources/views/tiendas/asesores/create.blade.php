@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-7 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading text-bold"><span class="text-info">NUEVO ASESOR</span></div>
+                    <div class="panel-heading text-bold"><span class="text-green">NUEVO ASESOR</span></div>
 
                     <div class="panel-body text-uppercase">
                         {!!Form::open(array('url'=>'asesores_tienda','method'=>'POST','autocomplete'=>'off'))!!}
@@ -45,7 +45,7 @@
                         <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">Documento</label>
-                                <input type="text" name="documento_persona" required value="{{old('documento_persona')}}" class="form-control text-uppercase">
+                                <input type="text" name="documento" required value="{{old('documento')}}" class="form-control text-uppercase">
                             </div>
                         </div>
 
@@ -73,11 +73,18 @@
                             </select>
                         </div>
 
-
+                        <div class="form-group col-md-offset-0 col-md-4">
+                            <label for="">Cargo GO</label>
+                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione Cargo" required>
+                               @foreach($cargos as $cargo)
+                                    <option  value="$cargo">{{$cargo}}</option>
+                               @endforeach
+                            </select>
+                        </div>
 
                         <div class="form-group col-md-offset-0 col-md-4">
                             <label for="">consideración</label>
-                            <select name="id_consideracion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Consideracion" required>
+                            <select name="consideracion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Consideracion" required>
                                 <option  value="6">Nuevo Ingreso</option>
                                 <option value="12">Cambio de canal</option>
                             </select>

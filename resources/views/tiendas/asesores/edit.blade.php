@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.admin_tienda')
 @section ('contenido')
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -15,95 +15,87 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 text-uppercase col-md-offset-1">
+            <div class="col-md-7 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><span class="text-bold text-info">Editar Datos del Asesor - ID: {{$persona->id_persona}}</span></div>
+                    <div class="panel-heading text-bold"><span class="text-green">Editar Asesor</span></div>
 
-                    <div class="panel-body">
-                        {!!Form::model ($persona, ['method'=>'PATCH', 'route'=>['representantes_directa.update', $persona]])!!}
+                    <div class="panel-body text-uppercase">
+                        {!!Form::model ($asesor, ['method'=>'PATCH', 'route'=>['asesores_tienda.update', $asesor]])!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="name">CH</label>
-                                <input type="number" name="ch" required value="{{$persona->ch}}" class="form-control text-uppercase" disabled="disabled">
-                            </div>
-                        </div>
+                                @if(auth()->user()->hasRoles(['tigo_people_admin']))
+                                    <input type="number" name="ch" required value="{{$asesor->ch}}" class="form-control text-uppercase">
+                                @else
+                                    <input type="number" name="ch" required value="{{$asesor->ch}}" class="form-control text-uppercase" disabled="disabled">
 
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="name">Fecha Ingreso</label>
-                                <input type="text" name="fecha_ingreso" required value="{{$persona->fecha_ingreso}}" class="form-control text-uppercase" placeholder="DD/MM/YYYY">
+                                @endif
                             </div>
                         </div>
 
                         <div class="form-group col-md-3">
+                            <label for="name">Fecha ingreso</label>
+                            <div class="input-group">
+                                <input type="text" value="{{$asesor->fecha_ingreso}}" class="form-control text-uppercase" disabled="disabled">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">Documento</label>
-                                <input type="text" name="documento_persona" required value="{{$persona->documento_persona}}" class="form-control text-uppercase" disabled="disabled">
+                                <input type="text" name="documento" required value="{{$asesor->documento}}" class="form-control text-uppercase">
                             </div>
                         </div>
 
                         <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">Staff</label>
-                                <input type="number" name="staff"  value="{{$persona->staff}}" class="form-control">
+                                <input type="number" name="staff"  value="{{$asesor->staff}}" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="">Nombre del Asesor</label>
-                            <input type="text" name="nombre" required value="{{$persona->nombre}}" class="form-control text-uppercase" disabled="disabled">
+                            @if(auth()->user()->hasRoles(['tigo_people_admin']))
+                                <input type="text" name="nombre" required value="{{$asesor->nombre}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
+                            @else
+                                <input type="text" name="nombre" required value="{{$asesor->nombre}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES" disabled="disabled">
+                            @endif
                         </div>
 
 
                         <div class="form-group">
-                            <label for="">Representante Jefe</label>
-
-                            <select name="rep_jefe_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Representante Jefe">
-                                @foreach($jefes as $jefe )
-                                    @if($persona->id_representante_jefe == $jefe->id_persona)
-                                        <option value="{{$jefe->id_persona}}" selected>{{strtoupper ($jefe->nombre)}}-->{{$jefe->zona->zona}}</option>
-                                    @else
-                                        <option value="{{$jefe->id_persona}}">{{strtoupper ($jefe->nombre)}}-->{{$jefe->zona->zona}}</option>
-                                    @endif
+                            <label for="">Team Leader</label>
+                            <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
+                                @foreach($tiendas as $tienda )
+                                    @foreach($tienda->teamleaders as $teamleader)
+                                        @if($asesor->id_teamleader == $teamleader->id and $asesor->id_tienda == $tienda->id)
+                                            <option selected value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
+                                        @else
+                                            <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
+                                        @endif
+                                    @endforeach
                                 @endforeach
                             </select>
                         </div>
-
 
                         <div class="form-group col-md-offset-0 col-md-4">
-                            <input type="hidden" value="{{$persona->agrupacion}}" id="perfil_anterior" name="perfil_anterior">
-                            <label for="">Agrupación</label>
-                            <select name="agrupacion" id="agrupacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="Agrupación" required>
-                                @foreach($agrupaciones as $agrupacion )
-                                    @if($persona->agrupacion == $agrupacion)
-                                        <option value="{{$agrupacion}}" selected>{{strtoupper ($agrupacion)}}</option>
+                            <label for="">Cargo GO</label>
+                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione Cargo" required>
+                                @foreach($cargos as $cargo)
+                                    @if($asesor->cargo_go == $cargo)
+                                        <option selected value="{{$cargo}}">{{$cargo}}</option>
                                     @else
-                                        <option value="{{$agrupacion}}" >{{strtoupper ($agrupacion)}}</option>
+                                        <option  value="{{$cargo}}">{{$cargo}}</option>
                                     @endif
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-4" style="display: none" id="comentarios">
-                            <label for="" class="col-md-2">Comentarios</label>
-                            <textarea class="form-control" rows="2" placeholder="Comentarios por cambio de perfil" name="detalles_consideracion"></textarea>
 
-                        </div>
-
-                        <div class="form-group col-md-4 ">
-                            <label for="" class="col-md-3">Activo</label>
-                            <select name="activo" class="selectpicker form-control text-uppercase" title="Estado" disabled>
-                                @if($persona->activo == 'activo')
-                                    <option value="activo" selected>ACTIVO</option>
-                                    <option value="inactivo" >INACTIVO</option>
-                                @else
-                                    <option value="activo" >ACTIVO</option>
-                                    <option value="inactivo" selected>INACTIVO</option>
-                                @endif
-                            </select>
-                        </div>
 
 
                         <div class="form-group text-center col-md-offset-2 col-md-6">
@@ -120,29 +112,16 @@
     </div>
 
 
-@push('scripts')
-    <script>
-        $(document).ready(function () {
+    @push('scripts')
+        <script>
 
-            $('#agrupacion').change(function() {
-                anterior = $('#perfil_anterior').prop('value');
-
-                actual = $('#agrupacion').prop('value');
-
-                console.log(anterior)
-                console.log(actual)
-
-                if (anterior != actual) {
-                    $("#comentarios").show();
-                }else if(anterior == actual) {
-                    $("#comentarios").hide();
-                }
-
-            });
-
-        });
-
-
-    </script>
-@endpush
+            $(document).ready(function () {
+                $('.datepicker').datepicker({
+                    format: "dd/mm/yyyy",
+                    language: "es",
+                    autoclose: true
+                });
+            })
+        </script>
+    @endpush
 @endsection

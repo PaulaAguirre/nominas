@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\AsesorTienda;
+use App\NominaTienda;
 use App\Teamleader;
 use App\Tienda;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AsesorTiendaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(Request $request)
     {
@@ -25,33 +27,63 @@ class AsesorTiendaController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
         $tiendas = Tienda::all();
+        $cargos = ['GO1', 'GO2', 'GO3', 'GO3 PlUS', 'ASESOR DE VENTAS SMART',
+            'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS'];
 
-        return view('tiendas.asesores.create', ['tiendas'=>$tiendas]);
+        return view('tiendas.asesores.create', ['tiendas'=>$tiendas, 'cargos'=>$cargos]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
-        $tienda_tl = $request->get('tienda_teamleader_id');
+        $mes_nomina = 201911;
+        $tienda_tl = explode('-',$request->get('tienda_teamleader_id'));
+        $tienda_id = $tienda_tl[0];
+        $teamleader_id = $tienda_tl[1];
+        $consideracion_id = $request->get('consideracion_id');
+        $detalles_consideracion = $request->get('detalles_consideracion');
+        $cargo_go = $request->get('cargo_go');
+
+        $asesor = new AsesorTienda();
+        $asesor->id_teamleader = $teamleader_id;
+        $asesor->ch = $request->get('ch');
+        $asesor->documento = $request->get('documento');
+        $asesor->nombre = strtoupper($request->get('nombre'));
+        $asesor->fecha_ingreso = $request->get('fecha_ingreso');
+        $asesor->staff = $request->get('staff');
+        $asesor->id_tienda = $tienda_id;
+        $asesor->cargo_go = $cargo_go;
+        $asesor->save();
+
+        $nomina = new NominaTienda();
+        $nomina->id_asesor = $asesor->id;
+        $nomina->mes = $mes_nomina;
+        $nomina->asesor_mes = $asesor->id.$mes_nomina;
+        $nomina->id_consideracion = $consideracion_id;
+        $nomina->estado_consideracion = 'pendiente';
+        $nomina->estado_consideracion = $detalles_consideracion;
+        $nomina->save();
+
+        return redirect('asesores_tienda/create');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\AsesorTienda  $asesorTienda
-     * @return \Illuminate\Http\Response
+     * @param  AsesorTienda $asesor
+     * @return Response
      */
-    public function show(AsesorTienda $asesorTienda)
+    public function show(AsesorTienda $asesor)
     {
         //
     }
@@ -59,33 +91,66 @@ class AsesorTiendaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\AsesorTienda  $asesorTienda
-     * @return \Illuminate\Http\Response
+     * @param  $id
+     * @return Response
      */
-    public function edit(AsesorTienda $asesorTienda)
+    public function edit($id)
     {
-        //
+        $asesor = AsesorTienda::findOrFail($id);
+        $tiendas = Tienda::all();
+        $cargos = ['GO1', 'GO2', 'GO3', 'GO3 PlUS', 'ASESOR DE VENTAS SMART',
+            'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS'];
+
+        return view('tiendas.asesores.edit', ['asesor'=>$asesor, 'tiendas'=>$tiendas, 'cargos'=>$cargos]);
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AsesorTienda  $asesorTienda
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, AsesorTienda $asesorTienda)
+
+    public function update(Request $request, $id)
     {
-        //
+        $asesor = AsesorTienda::findOrFail($id);
+        $teamleader_anterior = $asesor->id_teamleader;
+        $tienda_anterior = $asesor->id_tienda;
+        $cargo_anterior = $asesor->cargo_go;
+        $tienda_tl = explode('-',$request->get('tienda_teamleader_id'));
+
+
+        $asesor->ch = $request->get('ch');
+        $asesor->documento = $request->get('documento');
+        $asesor->nombre = strtoupper($request->get('nombre'));
+        $asesor->fecha_ingreso = $request->get('fecha_ingreso');
+        $asesor->staff = $request->get('staff');
+
+
+        if ($teamleader_anterior <> $tienda_tl[1] )
+        {
+            $asesor->id_anterior_teamleader = $teamleader_anterior;
+            $asesor->id_teamleader = $tienda_tl[1];
+        }
+        if ($cargo_anterior <> $request->get('cargo_go'))
+        {
+
+            $asesor->cargo_go = $request->get('cargo_go');
+            $asesor->cargo_anterior = $cargo_anterior;
+
+        }
+        if ($tienda_anterior <> $tienda_tl[0])
+        {
+            $asesor->id_tienda_anterior = $tienda_anterior;
+            $asesor->id_tienda = $tienda_tl[0];
+        }
+        $asesor->user_id = \Auth::user()->id;
+        $asesor->update();
+        return redirect($request->get('url'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AsesorTienda  $asesorTienda
-     * @return \Illuminate\Http\Response
+     * @param AsesorTienda $asesor
+     * @return void
      */
-    public function destroy(AsesorTienda $asesorTienda)
+    public function destroy(AsesorTienda $asesor)
     {
         //
     }

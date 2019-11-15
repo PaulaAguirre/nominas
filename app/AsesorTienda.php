@@ -4,10 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class AsesorTienda extends Model
 {
     protected $table = 'asesores_tienda';
     protected $primaryKey = "id";
+
+    protected $fillable = [
+        'id_teamleader', 'id_anterior_teamleader', 'ch', 'documento', 'nombre', 'cargo_go', 'staff'
+    ];
 
     public function teamleader()
     {

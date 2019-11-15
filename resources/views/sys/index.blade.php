@@ -28,7 +28,7 @@
                                <button class="btn btn-block btn-facebook">DIRECTA</button>
                            </a>
                             <br>
-                            <a>
+                            <a href="{{url('nomina_tienda')}}">
                                 <button class="btn btn-block btn-success">TIENDAS</button>
                             </a>
 

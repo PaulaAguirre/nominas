@@ -182,7 +182,9 @@ class ConsideracionesDirectaController extends Controller
         {
             $nomina_consideracion = NominaDirecta::findOrFail($nomina[$cont]);
             $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
-            $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
+            if ($motivo_rechazo[$cont]){
+                $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
+            }
             $nomina_consideracion->comentario_consideracion = $comentario_consideracion[$cont];
 
             if (in_array($nomina_consideracion->id_consideracion, [6,12]) and

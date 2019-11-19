@@ -34,7 +34,7 @@
                     <th class="col-lg-2">Detalles</th>
                     <th>Regularizar</th>
                     <th>Aprobar</th>
-                    <th >Porc%</th>
+                    <th class="col-lg-1">Porc%</th>
                     <th>Comentarios</th>
                     <th>Rechazado</th>
                     <th>Opc</th>

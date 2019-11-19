@@ -177,30 +177,34 @@ class ConsideracionesDirectaController extends Controller
         $objetivo = $request->get('objetivo');
 
         $cont = 0;
+        $cantidad_registros = count($estado_consideracion);
+
+        //dd($cantidad_registros);
 
         foreach ($nomina as $id)
         {
-            $nomina_consideracion = NominaDirecta::findOrFail($id);
-            $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
-            $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
-            $nomina_consideracion->comentario_consideracion = $comentario_consideracion[$cont];
+            if ($cont < $cantidad_registros)
+            {
+                $nomina_consideracion = NominaDirecta::findOrFail($id);
+                $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
+                $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
+                $nomina_consideracion->comentario_consideracion = $comentario_consideracion[$cont];
 
-            if (in_array($nomina_consideracion->id_consideracion, [6,12]) and
-                $nomina_consideracion->estado_consideracion == 'aprobado')
-            {
-                $nomina_consideracion->estado_nomina = 'aprobado';
-            }
-            if ($nomina_consideracion->estado_consideracion == 'aprobado')
-            {
-                $nomina_consideracion->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
-                $nomina_consideracion->porcentaje_objetivo = $objetivo[$cont];
+                if (in_array($nomina_consideracion->id_consideracion, [6,12]) and
+                    $nomina_consideracion->estado_consideracion == 'aprobado')
+                {
+                    $nomina_consideracion->estado_nomina = 'aprobado';
+                }
+                if ($nomina_consideracion->estado_consideracion == 'aprobado')
+                {
+                    $nomina_consideracion->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
+                    $nomina_consideracion->porcentaje_objetivo = $objetivo[$cont];
+                }
+
+                $nomina_consideracion->update();
             }
             $cont = $cont+1;
-            $nomina_consideracion->update();
         }
-
-
-
        /* while ($cont < count($nomina))
         {
             $nomina_consideracion = NominaDirecta::findOrFail($nomina[$cont]);

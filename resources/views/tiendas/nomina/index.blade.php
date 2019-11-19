@@ -59,14 +59,28 @@
                                 <td class="text-success">Activo</td>
                             @endif
                             <td>
-                                <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
-                                    <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
-                                </a>
-                                @if(!$asesor->estado_consideracion)
-                                    <a href="" data-target="#modal-consideracion-store-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
-                                @endif
-                                @if(!$asesor->estado_inactivacion)
-                                    <a href="" data-target="#modal-nomina-delete-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                @if(auth()->user()->hasRoles(['zonal']))
+                                    @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(5)))
+                                    <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
+                                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                    </a>
+                                    @if(!$asesor->estado_consideracion)
+                                        <a href="" data-target="#modal-consideracion-store-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+                                    @endif
+                                    @if(!$asesor->estado_inactivacion)
+                                        <a href="" data-target="#modal-nomina-delete-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                    @endif
+                                    @endif
+                                @else
+                                    <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
+                                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                    </a>
+                                    @if(!$asesor->estado_consideracion)
+                                        <a href="" data-target="#modal-consideracion-store-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+                                    @endif
+                                    @if(!$asesor->estado_inactivacion)
+                                        <a href="" data-target="#modal-nomina-delete-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                    @endif
                                 @endif
                             </td>
                         </tr>

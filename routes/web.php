@@ -114,9 +114,16 @@ Route::group (['middleware'=>'auth'], function () {
      */
 
     Route::resource('asesores_tienda', 'AsesorTiendaController');
-    Route::patch('asesores_tienda_consideracion/{id}', 'AsesorTiendaController@agregarConsideracion')
-    ->name('asesores_tienda.consideracion');
     Route::resource('nomina_tienda', 'NominaTiendaController');
+
+    /**consideraciones tienda*/
+    Route::patch('asesores_tienda_consideracion/{id}', 'AsesorTiendaController@agregarConsideracion')
+        ->name('asesores_tienda.consideracion');
+    Route::resource('consideraciones_tienda', 'ConsideracionTiendaController');
+    Route::get('aprobacion_consideraciones_tienda', 'ConsideracionTiendaController@aprobarConsideraciones')//ruta para cargar las consideraciones de un asesor
+    ->name('consideraciones_tienda.aprobacion');//ruta para mostrar las consideraciones a aprobar
+    Route::patch('aprobacion_consideraciones_tienda', 'ConsideracionTiendaController@storeConsideraciones')
+        ->name('consideraciones_tienda_aprobacion.aprobacion'); //ruta para guardar estado de consideración
 
 
 

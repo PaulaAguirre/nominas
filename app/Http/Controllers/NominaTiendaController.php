@@ -33,11 +33,22 @@ class NominaTiendaController extends Controller
         $asesor_id = $request->get('asesor_id');
         $consideraciones = Consideracion::all();
         $mes_nomina = 201911;
-        $asesores = NominaTienda::where('mes', '=', $mes_nomina)
-            ->zona($zona_id)->tienda($tienda_id)->activo($activo)
-            ->get();
 
+        if (\Auth::user()->hasRoles(['zonal']))
+        {
+            $zonas = \Auth::user()->zonasTienda->pluck('id')->toArray();
+            $asesores = NominaTienda::mes($mes_nomina)
+                ->tiendas($zonas)
+                ->zona($zona_id)->tienda($tienda_id)->activo($activo)
+                ->get();
 
+        }
+        else
+        {
+            $asesores = NominaTienda::mes($mes_nomina)
+                ->zona($zona_id)->tienda($tienda_id)->activo($activo)
+                ->get();
+        }
 
         return view('tiendas.nomina.index', ['mes_nomina'=>$mes_nomina, 'asesores'=>$asesores,
             'consideraciones'=>$consideraciones]);

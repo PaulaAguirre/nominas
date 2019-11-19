@@ -37,6 +37,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Canal');
     }
 
+    public function zonasTienda()
+    {
+        return $this->belongsToMany('App\ZonaTienda', 'user_zonatienda');
+    }
 
 
     public function roles ()

@@ -27,6 +27,11 @@ class NominaTienda extends Model
         return $this->belongsTo('App\Consideracion', 'id_consideracion');
     }
 
+    public function archivos ()
+    {
+        return $this->hasMany('App\ArchivoTienda', 'nomina_tienda_id');
+    }
+
     /**
      * @param $query
      * @param $zona_id
@@ -72,11 +77,45 @@ class NominaTienda extends Model
         }
     }
 
+    public function scopeTiendas($query, array $zonas)
+    {
+        return
+        $query->whereHas('asesor', function ($q1) use ($zonas)
+        {
+           $q1->whereHas('tienda', function ($q2) use ($zonas)
+           {
+               $q2->whereIn('zona_id', $zonas);
+           });
+        });
+    }
+
     public function scopeActivo($query, $activo)
     {
         if ($activo) {
             $query->where('estado_inactivacion', $activo);
         }
+    }
+
+    public function scopeAsesor($query, $asesor_id)
+    {
+        if ($asesor_id)
+        {
+            $query->where('id_asesor', '=', $asesor_id);
+        }
+    }
+
+    public function scopeMes($query, $mes_nomina)
+    {
+        $query->where('mes', '=', $mes_nomina);
+    }
+
+    public function scopeConsideracion($query, $id_consideracion)
+    {
+        if ($id_consideracion)
+        {
+            $query->where('id_consideracion', $id_consideracion);
+        }
+
     }
 
 

@@ -123,13 +123,12 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
-                            <span>Aprobaciones Dir</span>
+                            <span>Aprobaciones Tienda</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos </a></li>
-                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones</a></li>
-                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-check-square"></i>Cambios Estructura</a></li>
+                            <li><a href="{{url('aprobacion_consideraciones_tienda')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones</a></li>
                             <li><a href="{{url('aprobar_inactivaciones')}}"><i class="fa fa-check-square"></i>Inactivaciones Tienda</a></li>
 
                         </ul>
@@ -179,7 +178,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('consideraciones_tienda')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
+                        <li><a href="{{url('consideraciones_tienda')}}"><i class="fa fa-comment"></i> Consideraciones Tienda</a></li>
                     </ul>
                 </li>
 

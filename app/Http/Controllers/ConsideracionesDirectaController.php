@@ -178,6 +178,8 @@ class ConsideracionesDirectaController extends Controller
 
         $cont = 0;
 
+        dd($motivo_rechazo);
+
         while ($cont < count($nomina))
         {
             $nomina_consideracion = NominaDirecta::findOrFail($nomina[$cont]);

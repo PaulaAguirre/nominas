@@ -43,9 +43,12 @@
                             <td>{{$asesor->comentarios_consideracion}}</td>
                             <td>{{$asesor->porcentaje_objetivo}}</td>
                             <td class="text-center">
-
+                                @if($asesor->archivos->where('tipo', '=', 'consideracion')->first())
+                                    <a href="" data-target="#modal-delete-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                @endif
                             </td>
                         </tr>
+                        @include('tiendas.consideraciones.archivo_modal')
                     @endforeach
                 </table>
             </div>

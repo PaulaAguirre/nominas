@@ -129,7 +129,7 @@
                         <ul class="treeview-menu">
                             <li><a href="{{url('aprobacion_nomina_directa')}}/{{\Carbon\Carbon::now()->format ('Ym')}}"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos </a></li>
                             <li><a href="{{url('aprobacion_consideraciones_tienda')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones</a></li>
-                            <li><a href="{{url('aprobar_inactivaciones')}}"><i class="fa fa-check-square"></i>Inactivaciones Tienda</a></li>
+                            <li><a href="{{url('aprobar_inactivaciones_tienda')}}"><i class="fa fa-check-square"></i>Inactivaciones Tienda</a></li>
 
                         </ul>
                     </li>

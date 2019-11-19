@@ -118,5 +118,12 @@ class NominaTienda extends Model
 
     }
 
+    public function scopeEstadoInactivacion($query, $estado)
+    {
+        if ($estado)
+        {
+            $query->where('estado_inactivacion', '=', $estado);
+        }
+    }
 
 }

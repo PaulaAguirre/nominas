@@ -12,42 +12,20 @@ class InactivacionTiendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $id_asesor = $request->get('id_persona');
+        $estado_inactivacion = $request->get('estado');
+        $porcentajes = ['100%', '75% nuevo', '75%', '50%', 'prorrateado', '25%', 'sin objetivos'];
+        $mes = 201911;
+        $asesores_inactivos = NominaTienda::where('estado_inactivacion', '=', 'pendiente')
+            ->mes($mes)->asesor($id_asesor)->estadoInactivacion($estado_inactivacion)->get();
+
+        return view('tiendas.inactivaciones.index', ['asesores_inactivos'=>$asesores_inactivos,
+            'porcentajes'=>$porcentajes, 'mes'=>$mes]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -72,14 +50,4 @@ class InactivacionTiendaController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

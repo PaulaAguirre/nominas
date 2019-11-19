@@ -39,6 +39,7 @@
                     <th>Tienda / Jefe Tienda </th>
                     <th>Team Leader</th>
                     <th>Inactivación</th>
+                    <th>%OBJ</th>
                     <th class="text-center col-lg-1">Opciones</th>
                     </thead>
                     @foreach ($asesores as $asesor)
@@ -58,6 +59,7 @@
                             @else
                                 <td class="text-success">Activo</td>
                             @endif
+                            <td>{{$asesor->porcentaje_objetivo}}</td>
                             <td>
                                 @if(auth()->user()->hasRoles(['zonal']))
                                     @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(5)))

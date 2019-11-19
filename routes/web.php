@@ -80,9 +80,7 @@ Route::group (['middleware'=>'auth'], function () {
         ->name('ingresar_nuevo_asesor_store');
 
 
-    /**
-     * Consideraciones directa
-     * */
+    /**Consideraciones directa* */
     Route::resource('consideraciones_directa', 'ConsideracionesDirectaController');
     Route::get('aprobacion_consideraciones_directa/{mes}', 'ConsideracionesDirectaController@aprobarConsideraciones')//ruta para cargar las consideraciones de un asesor
     ->name('consideraciones_directa.aprobacion');//ruta para mostrar las consideraciones a aprobar
@@ -105,13 +103,12 @@ Route::group (['middleware'=>'auth'], function () {
         ->name('inactivaciones_directa_edit'); //ruta para editar el estado
 
     /**
-     * fin Nomina directa
+     * fin Nomina directa-----------------------------------------------------------------------------------------------
+     * ----------------------------------------------------------------------------------------------------------------
      * */
 
-    /**
-     * Tiendas
-     * todo lo referente a tiendas desde acá
-     */
+    /*** Tiendas
+     * todo lo referente a tiendas desde acá */
 
     Route::resource('asesores_tienda', 'AsesorTiendaController');
     Route::resource('nomina_tienda', 'NominaTiendaController');
@@ -124,6 +121,9 @@ Route::group (['middleware'=>'auth'], function () {
     ->name('consideraciones_tienda.aprobacion');//ruta para mostrar las consideraciones a aprobar
     Route::patch('aprobacion_consideraciones_tienda', 'ConsideracionTiendaController@storeConsideraciones')
         ->name('consideraciones_tienda_aprobacion.aprobacion'); //ruta para guardar estado de consideración
+
+    /**Inactivaciones Tienda*/
+    Route::resource('inactivaciones_tienda', 'InactivacionTiendaController');
 
 
 

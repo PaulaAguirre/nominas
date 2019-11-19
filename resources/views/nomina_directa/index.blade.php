@@ -39,6 +39,7 @@
                     <th>Rep Zonal - Rep Jefe</th>
                     <th>Region/Zona</th>
                     <th>Estado</th>
+                    <th>%OBJ</th>
                     <th>Inactivación</th>
                     @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
                         <th class="text-center col-lg-1">Opciones</th>
@@ -70,6 +71,7 @@
                                     @else
                                         <td class="text-success">Activo</td>
                                     @endif
+                                    <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
                                     @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(10)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
@@ -109,6 +111,7 @@
                                 @else
                                     <td class="alert-success">{{$persona->estado_nomina}}</td>
                                 @endif
+                                <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
                                 @if($persona->estado_inactivacion == 'pendiente')
                                     <td>pendiente</td>
                                 @elseif($persona->estado_inactivacion == 'aprobado')

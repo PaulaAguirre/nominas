@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\NominaTiendaZonalExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
@@ -11,6 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\NuevosIngresosDirectaExport;
 use App\Exports\ConsideracionesExport;
 use App\Exports\NominaDirectaZonalExport;
+use App\Exports\NominaTiendaExport;
 
 class ExcelController extends Controller
 {
@@ -62,4 +64,13 @@ class ExcelController extends Controller
         return Excel::download(new NominaDirectaZonalExport(), 'nomina_x_zona.xlsx');
     }
 
+    public function exportNominaTienda(Request $request)
+    {
+        return Excel::download(new NominaTiendaExport(), 'nomina_tienda.xlsx');
+    }
+
+    public function exportNominaTiendaxZona(Request $request)
+    {
+        return Excel::download(new NominaTiendaZonalExport(), 'nomina_zona.xlsx');
+    }
 }

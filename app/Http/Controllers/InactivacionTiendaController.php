@@ -19,7 +19,7 @@ class InactivacionTiendaController extends Controller
      */
     public function index(Request $request)
     {
-        $id_asesor = $request->get('id_asesor');
+        $id_asesor = $request->get('asesor_id');
         $estado_inactivacion = $request->get('estado');
         $porcentajes = ['100%', '75% nuevo', '75%', '50%', 'prorrateado', '25%', 'sin objetivos'];
         $mes = 201911;

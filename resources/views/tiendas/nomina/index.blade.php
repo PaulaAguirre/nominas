@@ -5,12 +5,12 @@
             <h3>Nómina - Canal: Tiendas.
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="{{url('asesores_tienda/create')}}"><button class="btn btn-success">Nuevo Ingreso</button></a>
-                    <a href="/excel"><button class="btn btn-github">Exportar excel</button></a>
+                    <a href="{{url('/excel_tienda')}}"><button class="btn btn-github">Exportar excel</button></a>
                 @else
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(27))
                         <a href="{{url('asesores_tienda/create')}}"><button class="btn btn-facebook">Nuevo Ingreso</button></a>
                     @endif
-                    <a href="/nomina_x_zona"><button class="btn btn-github">Exportar Nómina</button></a>
+                    <a href="{{url('/excel_tienda_x_zona')}}"><button class="btn btn-github">Exportar Nómina</button></a>
                 @endif
 
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-
+    @include('tiendas.nomina.search_index')
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">

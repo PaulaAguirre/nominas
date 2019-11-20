@@ -77,7 +77,7 @@
                             <label for="">Cargo GO</label>
                             <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione Cargo" required>
                                @foreach($cargos as $cargo)
-                                    <option  value="$cargo">{{$cargo}}</option>
+                                    <option  value="cargo">{{$cargo}}</option>
                                @endforeach
                             </select>
                         </div>

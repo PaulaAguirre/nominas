@@ -66,7 +66,7 @@
                                 <!-- User image -->
 
 
-                                <li class="user-header">
+                                <li class="user-header" style="background-color: #2ab27b">
 
                                     <p class="text-bold text-uppercase">
                                         <span class="hidden-xs">{{Auth::user()->name}}</span>
@@ -138,7 +138,7 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-users"></i>
-                        <span>Representantes</span>
+                        <span>Representantes (todos)</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">

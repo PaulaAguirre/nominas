@@ -5,7 +5,7 @@
             <h3>Consideraciones Asesores Tienda</h3>
         </div>
     </div>
-    <br>
+    @include('tiendas.consideraciones.search_index')
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
@@ -18,10 +18,11 @@
                     <th>Representante Zonal</th>
                     <th>Consideración</th>
                     <th>Detalles</th>
+                    <th>Regularización</th>
                     <th>Estado</th>
                     <th>Comentario Canales</th>
                     <th>%</th>
-                    <th class="text-center">OPC</th>
+                    <th>OPC</th>
 
                     </thead>
                     @foreach ($asesores as $asesor)
@@ -33,6 +34,7 @@
                             <td>{{$asesor->asesor->tienda->zona->zona.' / '.$asesor->asesor->tienda->zona->representante_zonal_nombre }}</td>
                             <td>{{$asesor->consideracion ? $asesor->consideracion->nombre : '' }}</td>
                             <td>{{$asesor->detalles_consideracion}}</td>
+                            <td>{{$asesor->regularizacion_consideracion}}</td>
                             @if ($asesor->estado_consideracion == 'pendiente')
                                 <td class="alert-warning" >{{$asesor->estado_consideracion}}</td>
                             @elseif ($asesor->estado_consideracion == 'aprobado')
@@ -42,13 +44,28 @@
                             @endif
                             <td>{{$asesor->comentarios_consideracion}}</td>
                             <td>{{$asesor->porcentaje_objetivo}}</td>
-                            <td class="text-center">
+                            <td>
                                 @if($asesor->archivos->where('tipo', '=', 'consideracion')->first())
                                     <a href="" data-target="#modal-delete-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
                                 @endif
+                                @if(in_array($asesor->estado_consideracion, ['pendiente']))
+                                    <a href="" data-target="#modal-consideracion-update-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="editar consideración"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
+                                @endif
+                                @if($asesor->estado_consideracion == 'rechazado')
+                                    <a href="{{URL::action('ConsideracionTiendaController@edit', $asesor)}}">
+                                        <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
+                                    </a>
+                                @endif
+                                @if(auth()->user()->hasRoles(['tigo_people_admin']))
+                                        @if(in_array($asesor->estado_consideracion, ['aprobado', 'rechazado']))
+                                            <a href="" data-target="#modal-nomina-update-{{$asesor->id}}" data-toggle="modal" data-placement="top" ><button class="btn btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
+                                        @endif
+                                @endif
                             </td>
                         </tr>
+                        @include('tiendas.consideraciones.modal_edit_consideracion')
                         @include('tiendas.consideraciones.archivo_modal')
+                        @include('tiendas.consideraciones.edit_estado')
                     @endforeach
                 </table>
             </div>

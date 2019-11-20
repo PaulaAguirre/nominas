@@ -5,7 +5,7 @@
             <h3>Asesores Inactivados</h3>
         </div>
     </div>
-
+    @include('tiendas.inactivaciones.search_index')
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">

@@ -121,6 +121,11 @@ Route::group (['middleware'=>'auth'], function () {
     ->name('consideraciones_tienda.aprobacion');//ruta para mostrar las consideraciones a aprobar
     Route::patch('aprobacion_consideraciones_tienda', 'ConsideracionTiendaController@storeConsideraciones')
         ->name('consideraciones_tienda_aprobacion.aprobacion'); //ruta para guardar estado de consideración
+    Route::patch('consideraciones_tienda_update_consideracion/{id}', 'ConsideracionTiendaController@updateConsideracion')
+        ->name('consideraciones_tienda_edit_consideracion'); //ruta para editar la consideracion
+    Route::patch('consideraciones_tienda_edit/{id}', 'ConsideracionTiendaController@updateEstado')
+        ->name('consideraciones_tienda_edit'); //ruta para editar el estado
+
 
     /**Inactivaciones Tienda*/
     Route::resource('inactivaciones_tienda', 'InactivacionTiendaController');
@@ -155,6 +160,10 @@ Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //
  Route::get('/generar', 'ExcelController@index');
  Route::get('/exportar_consideraciones', 'ExcelController@exportConsideracionesController');
  Route::get('/nomina_x_zona', 'ExcelController@exportarNominaXZonalController');
+
+ /**excel tiendas*/
+Route::get('/excel_tienda', 'ExcelController@exportNominaTienda');
+Route::get('/excel_tienda_x_zona', 'ExcelController@exportNominaTiendaxZona');
 
 
 

@@ -72,6 +72,7 @@ class AsesorTiendaController extends Controller
         $asesor->staff = $request->get('staff');
         $asesor->id_tienda = $tienda_id;
         $asesor->cargo_go = $cargo_go;
+        $asesor->activo = 'ACTIVO';
         $asesor->save();
 
         $nomina = new NominaTienda();
@@ -80,7 +81,7 @@ class AsesorTiendaController extends Controller
         $nomina->asesor_mes = $asesor->id.$mes_nomina;
         $nomina->id_consideracion = $consideracion_id;
         $nomina->estado_consideracion = 'pendiente';
-        $nomina->estado_consideracion = $detalles_consideracion;
+        $nomina->detalles_consideracion = $detalles_consideracion;
         $nomina->save();
 
         return redirect('asesores_tienda/create');

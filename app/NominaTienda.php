@@ -126,4 +126,12 @@ class NominaTienda extends Model
         }
     }
 
+    public function scopeEstadoConsideracion($query, $estado)
+    {
+        if ($estado)
+        {
+            $query->where('estado_consideracion', '=', $estado);
+        }
+    }
+
 }

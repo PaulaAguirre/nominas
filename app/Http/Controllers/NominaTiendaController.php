@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Tienda;
 use App\ZonaTienda;
 use Illuminate\Http\Request;
 use App\NominaTienda;
 use App\AsesorTienda;
 use App\Consideracion;
+use App\JefeTienda;
+use App\Teamleader;
 
 class NominaTiendaController extends Controller
 {
@@ -28,30 +31,34 @@ class NominaTiendaController extends Controller
         $zona_id = $request->get('zona_id');
         $activo = $request->get('activo');
         $tienda_id = $request->get('tienda_id');
-        $jefe_tienda_id = $request->get('jefe_tienda_id');
         $teamleader_id =$request->get('teamleader_id');
         $asesor_id = $request->get('asesor_id');
         $consideraciones = Consideracion::all();
         $mes_nomina = 201911;
+        $teamleaders = Teamleader::all();
 
         if (\Auth::user()->hasRoles(['zonal']))
         {
             $zonas = \Auth::user()->zonasTienda->pluck('id')->toArray();
+            $tiendas = Tienda::whereIn('zona_id', $zonas)->get();
+            $zonas_tienda = ZonaTienda::where('id', $zonas)->get();
             $asesores = NominaTienda::mes($mes_nomina)
                 ->tiendas($zonas)
-                ->zona($zona_id)->tienda($tienda_id)->activo($activo)
+                ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)
                 ->get();
 
         }
         else
         {
+            $tiendas=Tienda::all();
+            $zonas_tienda = ZonaTienda::all();
             $asesores = NominaTienda::mes($mes_nomina)
-                ->zona($zona_id)->tienda($tienda_id)->activo($activo)
+                ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)
                 ->get();
         }
 
         return view('tiendas.nomina.index', ['mes_nomina'=>$mes_nomina, 'asesores'=>$asesores,
-            'consideraciones'=>$consideraciones]);
+            'consideraciones'=>$consideraciones, 'zonas_tienda'=>$zonas_tienda, 'tiendas'=>$tiendas, 'teamleaders'=>$teamleaders]);
 
     }
 

@@ -121,7 +121,7 @@ class AsesorTiendaController extends Controller
         $teamleader_anterior = $asesor->id_teamleader;
         $tienda_anterior = $asesor->id_tienda;
         $cargo_anterior = $asesor->cargo_go;
-        $tienda_tl = explode('-',$request->get('tienda_teamleader_id'));
+        $tienda_tl = explode('-', $request->get('tienda_teamleader_id'));
 
 
         $asesor->ch = $request->get('ch');
@@ -131,24 +131,22 @@ class AsesorTiendaController extends Controller
         $asesor->staff = $request->get('staff');
 
 
-        if ($teamleader_anterior <> $tienda_tl[1] )
-        {
+        if ($teamleader_anterior <> $tienda_tl[1]) {
             $asesor->id_anterior_teamleader = $teamleader_anterior;
             $asesor->id_teamleader = $tienda_tl[1];
         }
-        if ($cargo_anterior <> $request->get('cargo_go'))
-        {
+        if ($cargo_anterior <> $request->get('cargo_go')) {
 
             $asesor->cargo_go = $request->get('cargo_go');
             $asesor->cargo_anterior = $cargo_anterior;
 
         }
-        if ($tienda_anterior <> $tienda_tl[0])
-        {
+        if ($tienda_anterior <> $tienda_tl[0]) {
             $asesor->id_tienda_anterior = $tienda_anterior;
             $asesor->id_tienda = $tienda_tl[0];
         }
         $asesor->user_id = \Auth::user()->id;
+
         $asesor->update();
         return redirect($request->get('url'));
     }

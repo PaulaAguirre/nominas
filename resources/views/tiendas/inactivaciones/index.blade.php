@@ -18,6 +18,7 @@
                         <th>Zona</th>
                         <th>Motivo</th>
                         <th>Detalles</th>
+                        <th>Regularización</th>
                         <th>Estado</th>
                         <th>Comentarios</th>
                         <th>%OBJ</th>
@@ -33,6 +34,7 @@
                             <td>{{$asesor->asesor->tienda->zona->zona.' / '.$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>
                             <td>{{$asesor->motivo_inactivacion}}</td>
                             <td>{{$asesor->detalles_inactivacion}}</td>
+                            <td>{{$asesor->regularizacion_inactivacion}}</td>
                             @if ($asesor->estado_inactivacion == 'pendiente')
                                 <td class="alert-warning" >{{$asesor->estado_inactivacion}}</td>
                             @elseif ($asesor->estado_inactivacion == 'aprobado')
@@ -44,21 +46,24 @@
                             <td>{{$asesor->porcentaje_objetivo}}</td>
                                 <td class="text-center">
                                     @if($asesor->archivos->where('tipo', '=', 'inactivacion')->first())
-                                        <a href="" data-target="#modal-delete-{{$asesor->id_asesor_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                        <a href="" data-target="#modal-delete-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
                                     @endif
                                     @if($asesor->estado_inactivacion == 'rechazado')
-                                        <a href="{{URL::action('InactivacionesDirectaController@edit', $asesor)}}">
+                                        <a href="{{URL::action('InactivacionTiendaController@edit', $asesor)}}">
                                             <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Inactivacion"><i class="fa fa-wrench"></i></button>
                                         </a>
                                     @endif
                                     @if($asesor->estado_inactivacion == 'pendiente')
-                                        <a href="" data-target="#modal-inactivacion-update-{{$asesor->id_nomina}}" data-toggle="modal" data-placement="top" title="editar inactivacion"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
+                                        <a href="" data-target="#modal-inactivacion-update-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="editar inactivacion"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
                                     @endif
                                     @if(in_array($asesor->estado_inactivacion, ['aprobado', 'rechazado']))
-                                        <a href="" data-target="#modal-inactivacion_estado-update-{{$asesor->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
+                                        <a href="" data-target="#modal-inactivacion_estado-update-{{$asesor->id}}" data-toggle="modal" data-placement="top" ><button class="btn btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
                                     @endif
                                 </td>
                             </tr>
+                        @include('tiendas.inactivaciones.archivo_modal_inactivacion')
+                        @include('tiendas.inactivaciones.modal_editar_inactivacion')
+                        @include('tiendas.inactivaciones.modal_editar_estado')
                     @endforeach
                 </table>
             </div>

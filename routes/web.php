@@ -124,7 +124,14 @@ Route::group (['middleware'=>'auth'], function () {
 
     /**Inactivaciones Tienda*/
     Route::resource('inactivaciones_tienda', 'InactivacionTiendaController');
-
+    Route::get('aprobar_inactivaciones_tienda', 'InactivacionTiendaController@aprobarInactivaciones')
+        ->name('nomina_tienda.inactivacion');
+    Route::patch('aprobar_inactivaciones_tienda', 'InactivacionTiendaController@aprobarInactivacionesStore')
+        ->name('nomina_tienda.inactivacion_store');
+    Route::patch('inactivaciones_tienda_update/{id}', 'InactivacionTiendaController@updateInactivacion')
+        ->name('inactivaciones_tienda_edit_inactivacion'); //ruta para editar la inactivacion
+    Route::patch('inactivaciones_tienda_edit_estado/{id}', 'InactivacionTiendaController@updateEstado')
+        ->name('inactivaciones_tienda_edit'); //ruta para editar el estado
 
 
 

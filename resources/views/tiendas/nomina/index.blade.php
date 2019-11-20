@@ -2,7 +2,7 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-            <h3>Nómina - Canal: Directa.
+            <h3>Nómina - Canal: Tiendas.
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="{{url('asesores_tienda/create')}}"><button class="btn btn-success">Nuevo Ingreso</button></a>
                     <a href="/excel"><button class="btn btn-github">Exportar excel</button></a>
@@ -62,7 +62,7 @@
                             <td>{{$asesor->porcentaje_objetivo}}</td>
                             <td>
                                 @if(auth()->user()->hasRoles(['zonal']))
-                                    @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(5)))
+                                    @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(21)))
                                     <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                     </a>

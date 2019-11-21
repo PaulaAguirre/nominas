@@ -27,7 +27,7 @@ class InactivacionesDirectaController extends Controller
     {
         $zonas = auth()->user()->zonas->pluck('id');
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(22);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(19);
         $mes_actual = Carbon::now();
         $id_persona = $request->get('id_persona');
         $estado_inactivacion = $request->get('estado');
@@ -40,7 +40,7 @@ class InactivacionesDirectaController extends Controller
         else
         {
 
-            $mes = 201911;
+            $mes = 201912;
             //$mes= Carbon::now()->addMonth(1)->format('Ym');
 
         }

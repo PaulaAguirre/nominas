@@ -21,7 +21,7 @@ class NominaDirectaExport implements FromView
     public function view():View
     {
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(21);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(19);
         $fecha_actual = Carbon::now();
 
         if ($fecha_actual->between($fecha1, $fecha2))
@@ -33,7 +33,7 @@ class NominaDirectaExport implements FromView
         else
         {
             //$mes = Carbon::now()->addMonth(1)->format('Ym');
-            $mes = 201911;
+            $mes = 201912;
             $personas = NominaDirecta::where('mes', '=', $mes)
                 ->get();
         }

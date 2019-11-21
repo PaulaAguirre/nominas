@@ -26,9 +26,9 @@
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <h3>Representantes Canal Tiendas (todas las zonas)
                     <a href="asesores_tienda/create"><button class="btn btn-success">Nuevo Asesor  <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
-
         </div>
     </div>
+    @include('tiendas.asesores.search_index')
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">

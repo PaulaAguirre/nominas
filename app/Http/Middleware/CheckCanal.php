@@ -15,12 +15,21 @@ class CheckCanal
      */
     public function handle($request, Closure $next)
     {
-        $canales = array_slice(func_get_args(),2);
-        if (auth()->user()->hasCanales($canales))
+        if (auth()->user()->hasRoles(['tigo_people_admin']))
         {
-            //dd('si');
             return $next($request);
         }
-        return redirect()->back();
+        else
+        {
+            $canales = array_slice(func_get_args(),2);
+            if (auth()->user()->hasCanales($canales))
+            {
+                //dd('si');
+                return $next($request);
+            }
+            return redirect()->back();
+        }
+
+
     }
 }

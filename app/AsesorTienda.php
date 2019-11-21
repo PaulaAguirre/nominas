@@ -51,4 +51,29 @@ class AsesorTienda extends Model
         }
     }
 
+    public function scopeTienda($query, $tienda_id)
+    {
+        if($tienda_id)
+        {
+            return $query->where('id_tienda', $tienda_id);
+        }
+    }
+
+    public function scopeTeamleader($query, $teamleader_id)
+    {
+        if ($teamleader_id)
+        {
+            $query->where('id_teamleader', $teamleader_id);
+        }
+    }
+
+    public function scopeEstado($query, $estado)
+    {
+        if($estado)
+        {
+            $query->where('activo','=', $estado);
+        }
+
+    }
+
 }

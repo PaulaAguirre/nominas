@@ -9,6 +9,7 @@ use App\Teamleader;
 use App\Tienda;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\ZonaTienda;
 
 class AsesorTiendaController extends Controller
 {
@@ -28,9 +29,17 @@ class AsesorTiendaController extends Controller
     public function index(Request $request)
     {
         $asesor_id = $request->get('asesor_id');
-        $asesores = AsesorTienda::asesor($asesor_id)->get();
+        $tienda_id = $request->get('tienda_id');
+        $zona_id = $request->get('zona_id');
+        $estado = $request->get('estado');
+        $tiendas = Tienda::all();
+        $zonas_tienda = ZonaTienda::all();
 
-        return view('tiendas.asesores.index', ['asesores'=>$asesores]);
+        $asesores = AsesorTienda::asesor($asesor_id)->tienda($tienda_id)->zona($zona_id)->estado($estado)
+            ->get();
+
+        return view('tiendas.asesores.index', ['asesores'=>$asesores, 'zonas_tienda'=>$zonas_tienda,
+            'tiendas'=>$tiendas, 'zonas'=>$zonas_tienda]);
     }
 
     /**

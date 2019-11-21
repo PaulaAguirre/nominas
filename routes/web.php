@@ -40,7 +40,7 @@ Route::group (['middleware'=>'auth'], function () {
     Route::get('index', function ()
     {
         return view('sys.index');
-    })->name('sys.index');
+    })->name('sys.index')->middleware('roles:tigo_people_admin');
 
     /**
      * Persona directa
@@ -107,37 +107,37 @@ Route::group (['middleware'=>'auth'], function () {
      * ----------------------------------------------------------------------------------------------------------------
      * */
 
-    /*** Tiendas
-     * todo lo referente a tiendas desde acá */
 
-    Route::resource('asesores_tienda', 'AsesorTiendaController');
-    Route::resource('nomina_tienda', 'NominaTiendaController');
+        /*** Tiendas
+         * todo lo referente a tiendas desde acá */
 
-    /**consideraciones tienda*/
-    Route::patch('asesores_tienda_consideracion/{id}', 'AsesorTiendaController@agregarConsideracion')
-        ->name('asesores_tienda.consideracion');
-    Route::resource('consideraciones_tienda', 'ConsideracionTiendaController');
-    Route::get('aprobacion_consideraciones_tienda', 'ConsideracionTiendaController@aprobarConsideraciones')//ruta para cargar las consideraciones de un asesor
-    ->name('consideraciones_tienda.aprobacion');//ruta para mostrar las consideraciones a aprobar
-    Route::patch('aprobacion_consideraciones_tienda', 'ConsideracionTiendaController@storeConsideraciones')
-        ->name('consideraciones_tienda_aprobacion.aprobacion'); //ruta para guardar estado de consideración
-    Route::patch('consideraciones_tienda_update_consideracion/{id}', 'ConsideracionTiendaController@updateConsideracion')
-        ->name('consideraciones_tienda_edit_consideracion'); //ruta para editar la consideracion
-    Route::patch('consideraciones_tienda_edit/{id}', 'ConsideracionTiendaController@updateEstado')
-        ->name('consideraciones_tienda_edit'); //ruta para editar el estado
+        Route::resource('asesores_tienda', 'AsesorTiendaController');
+        Route::resource('nomina_tienda', 'NominaTiendaController');
+
+        /**consideraciones tienda*/
+        Route::patch('asesores_tienda_consideracion/{id}', 'AsesorTiendaController@agregarConsideracion')
+            ->name('asesores_tienda.consideracion');
+        Route::resource('consideraciones_tienda', 'ConsideracionTiendaController');
+        Route::get('aprobacion_consideraciones_tienda', 'ConsideracionTiendaController@aprobarConsideraciones')//ruta para cargar las consideraciones de un asesor
+        ->name('consideraciones_tienda.aprobacion');//ruta para mostrar las consideraciones a aprobar
+        Route::patch('aprobacion_consideraciones_tienda', 'ConsideracionTiendaController@storeConsideraciones')
+            ->name('consideraciones_tienda_aprobacion.aprobacion'); //ruta para guardar estado de consideración
+        Route::patch('consideraciones_tienda_update_consideracion/{id}', 'ConsideracionTiendaController@updateConsideracion')
+            ->name('consideraciones_tienda_edit_consideracion'); //ruta para editar la consideracion
+        Route::patch('consideraciones_tienda_edit/{id}', 'ConsideracionTiendaController@updateEstado')
+            ->name('consideraciones_tienda_edit'); //ruta para editar el estado
 
 
-    /**Inactivaciones Tienda*/
-    Route::resource('inactivaciones_tienda', 'InactivacionTiendaController');
-    Route::get('aprobar_inactivaciones_tienda', 'InactivacionTiendaController@aprobarInactivaciones')
-        ->name('nomina_tienda.inactivacion');
-    Route::patch('aprobar_inactivaciones_tienda', 'InactivacionTiendaController@aprobarInactivacionesStore')
-        ->name('nomina_tienda.inactivacion_store');
-    Route::patch('inactivaciones_tienda_update/{id}', 'InactivacionTiendaController@updateInactivacion')
-        ->name('inactivaciones_tienda_edit_inactivacion'); //ruta para editar la inactivacion
-    Route::patch('inactivaciones_tienda_edit_estado/{id}', 'InactivacionTiendaController@updateEstado')
-        ->name('inactivaciones_tienda_edit'); //ruta para editar el estado
-
+        /**Inactivaciones Tienda*/
+        Route::resource('inactivaciones_tienda', 'InactivacionTiendaController');
+        Route::get('aprobar_inactivaciones_tienda', 'InactivacionTiendaController@aprobarInactivaciones')
+            ->name('nomina_tienda.inactivacion');
+        Route::patch('aprobar_inactivaciones_tienda', 'InactivacionTiendaController@aprobarInactivacionesStore')
+            ->name('nomina_tienda.inactivacion_store');
+        Route::patch('inactivaciones_tienda_update/{id}', 'InactivacionTiendaController@updateInactivacion')
+            ->name('inactivaciones_tienda_edit_inactivacion'); //ruta para editar la inactivacion
+        Route::patch('inactivaciones_tienda_edit_estado/{id}', 'InactivacionTiendaController@updateEstado')
+            ->name('inactivaciones_tienda_edit'); //ruta para editar el estado
 
 
 

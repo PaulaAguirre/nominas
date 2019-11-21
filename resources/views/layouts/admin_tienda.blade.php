@@ -199,7 +199,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('/generar')}}"><i class="fa fa-book"></i>Reportes Directa</a></li>
+                        <li><a href="#"><i class="fa fa-book"></i>Reportes tienda</a></li>
                     </ul>
                 </li>
                 <li>

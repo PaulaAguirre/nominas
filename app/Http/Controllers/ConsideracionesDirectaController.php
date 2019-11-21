@@ -21,7 +21,7 @@ class ConsideracionesDirectaController extends Controller
     {
 
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(21);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(19);
         $fecha_actual = Carbon::now();
         $porcentajes = ['50%', '75%','75% nuevo','prorrateado', '25%', 'sin objetivos'];
 
@@ -32,7 +32,7 @@ class ConsideracionesDirectaController extends Controller
         }
         else
         {
-            $mes=201911;
+            $mes=201912;
 
             //$mes = Carbon::now()->addMonth(1)->format('Ym');
 

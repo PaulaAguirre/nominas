@@ -45,15 +45,18 @@ class LoginController extends Controller
         {
             if (Auth::user()->hasCanales(['directa']))
             {
+
                 return route('nomina_directa.index');
             }
             elseif (Auth::user()->hasCanales(['tiendas']))
             {
+
                 return route('nomina_tienda.index');
             }
-            elseif (!Auth::user()->hasCanales(['tiendas', 'directa']))
+            elseif (Auth::user()->hasCanales(['tiendas', 'directa']))
             {
-                dd('hola');
+
+                return route('nomina_directa.index');
             }
 
         }

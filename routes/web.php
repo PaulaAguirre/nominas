@@ -12,17 +12,29 @@
 */
 
 use App\Http\Controllers\ExcelController;
-/*
+
 Route::get('/', function () {
     if (Auth::check())
     {
-        if (Auth::user()->hasRoles(['admin']))
+        if (Auth::user()->hasRoles(['tigo_people_admin']))
         {
             return redirect('index');
         }
         else
         {
-            return redirect('nomina_directa');
+            if (Auth::user()->hasCanales(['tiendas']))
+            {
+                return redirect('nomina_tienda');
+            }
+            elseif (Auth::user()->hasCanales(['directa']))
+            {
+                return redirect('nomina_tienda');
+            }
+            elseif (!Auth::user()->hasCanales(['directa','tiendas']))
+            {
+                return redirect('nomina_directa');
+            }
+
         }
 
     }
@@ -30,7 +42,7 @@ Route::get('/', function () {
     {
         return redirect ('login');
     }
-});*/
+});
 
 Auth::routes();
 

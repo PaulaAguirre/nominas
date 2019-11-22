@@ -10,7 +10,7 @@
                 <h4 class="modal-title"><span class="text-danger"> {{'Asesor: '.$persona->personaDirecta->nombre.' - '.'CH: '.$persona->personaDirecta->ch}}</span></h4>
             </div>
             <div class="modal-body">
-                <iframe style="width:560px; height:500px" src={{ asset('storage/'.$persona->archivos->where('tipo', '=', 'consideracion')->pluck('nombre')->first()) }}>
+                <iframe style="width:560px; height:700px" src={{ asset('storage/'.$persona->archivos->where('tipo', '=', 'consideracion')->pluck('nombre')->first()) }}>
                 </iframe>
             </div>
             <div class="modal-footer">

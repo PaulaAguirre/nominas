@@ -53,7 +53,7 @@ class LoginController extends Controller
             }
             elseif (!Auth::user()->hasCanales(['tiendas', 'directa']))
             {
-                return route('nomina_directa.index');
+                dd('hola');
             }
 
         }

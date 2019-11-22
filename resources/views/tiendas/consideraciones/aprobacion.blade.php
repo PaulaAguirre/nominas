@@ -78,10 +78,8 @@
                                     @endif
                                     <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
                                 </td>
-
-
                         </tr>
-
+                        @include('tiendas.consideraciones.archivo_modal')
                     @endforeach
                     </tbody>
 

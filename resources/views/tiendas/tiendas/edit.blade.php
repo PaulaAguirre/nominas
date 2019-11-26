@@ -72,7 +72,7 @@
                                     @if($tienda->zona_id == $zona->id)
                                         <option selected value="{{$zona->id}}">{{$zona->zona}}</option>
                                     @else
-                                        <option value="{{$zona->id}}">{{$zona->zona}}</option>
+                                        <option value="{{$zona->id}}">{{$zona->zona}} - {{$zona->representante_zonal_nombre}}</option>
                                     @endif
                                 @endforeach
                             </select>

@@ -16,10 +16,14 @@ class TiendaController extends Controller
      */
     public function index(Request $request)
     {
-        $tiendas = Tienda::orderBy('id')->get();
+        $zonas = ZonaTienda::all();
+        $zona_id = $request->get('zona_id');
+        $tienda_id = $request->get('tienda_id');
         $jefes_tienda = JefeTienda::all();
+        $tiendas = Tienda::tienda($tienda_id)->zonaTienda($zona_id)->get();
 
-        return view('tiendas.tiendas.index', ['tiendas'=>$tiendas, 'jefes_tienda'=>$jefes_tienda]);
+        return view('tiendas.tiendas.index', ['tiendas'=>$tiendas, 'jefes_tienda'=>$jefes_tienda,
+            'zonas'=>$zonas]);
     }
 
     /**

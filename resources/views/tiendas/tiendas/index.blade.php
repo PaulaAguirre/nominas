@@ -27,10 +27,13 @@
             <h3>Tiendas
                     <a href="#"><button class="btn btn-success">Nueva Tienda <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
         </div>
+
     </div>
 
     <div class="row text-uppercase">
+
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            @include('tiendas.tiendas.search')
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead class="text-center" style="background-color: #2ab27b">
@@ -61,6 +64,7 @@
                                     <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></button>
                                 </a></td>
                         </tr>
+
                     @endforeach
                 </table>
             </div>

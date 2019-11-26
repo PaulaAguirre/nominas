@@ -28,12 +28,14 @@ class InactivacionTiendaController extends Controller
         {
             $zonas = \Auth::user()->zonasTienda->pluck('id')->toArray();
             $asesores_inactivos = NominaTienda::whereNotNull('estado_inactivacion')->tiendas($zonas)
-                ->mes($mes)->asesor($id_asesor)->estadoInactivacion($estado_inactivacion)->get();
+                ->mes($mes)->asesor($id_asesor)->estadoInactivacion($estado_inactivacion)
+                ->orderBy('id')
+                ->get();
         }
         else
         {
             $asesores_inactivos = NominaTienda::whereNotNull('estado_inactivacion')
-                ->mes($mes)->asesor($id_asesor)->estadoInactivacion($estado_inactivacion)->get();
+                ->mes($mes)->asesor($id_asesor)->estadoInactivacion($estado_inactivacion)->orderBy('id')->get();
         }
 
         return view('tiendas.inactivaciones.index', ['asesores_inactivos'=>$asesores_inactivos,
@@ -44,7 +46,7 @@ class InactivacionTiendaController extends Controller
     {
       $mes = 201911;
       $asesores = NominaTienda::where('estado_inactivacion', '=', 'pendiente')
-            ->where('mes', '=', $mes)->get();
+            ->where('mes', '=', $mes)->orderBy('id')->get();
         return view('tiendas.inactivaciones.aprobar_inactivaciones', ['asesores' => $asesores, 'mes' => $mes]);
     }
 

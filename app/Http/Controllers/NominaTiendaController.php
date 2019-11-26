@@ -45,6 +45,7 @@ class NominaTiendaController extends Controller
             $asesores = NominaTienda::mes($mes_nomina)
                 ->tiendas($zonas)
                 ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)->teamleader($teamleader_id)
+                ->orderBy('id')
                 ->get();
 
         }
@@ -54,6 +55,7 @@ class NominaTiendaController extends Controller
             $zonas_tienda = ZonaTienda::all();
             $asesores = NominaTienda::mes($mes_nomina)
                 ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)->teamleader($teamleader_id)
+                ->orderBy('id')
                 ->get();
         }
 

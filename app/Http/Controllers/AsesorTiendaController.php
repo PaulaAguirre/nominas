@@ -35,7 +35,7 @@ class AsesorTiendaController extends Controller
         $tiendas = Tienda::all();
         $zonas_tienda = ZonaTienda::all();
 
-        $asesores = AsesorTienda::asesor($asesor_id)->tienda($tienda_id)->zona($zona_id)->estado($estado)
+        $asesores = AsesorTienda::asesor($asesor_id)->tienda($tienda_id)->zona($zona_id)->estado($estado)->orderBy('id')
             ->get();
 
         return view('tiendas.asesores.index', ['asesores'=>$asesores, 'zonas_tienda'=>$zonas_tienda,

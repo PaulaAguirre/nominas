@@ -25,14 +25,14 @@ class ConsideracionTiendaController extends Controller
             $zonas = $zonas = \Auth::user()->zonasTienda->pluck('id')->toArray();
             $asesores = NominaTienda::whereNotNull('estado_consideracion')
                 ->tiendas($zonas)->mes($mes_nomina)->asesor($id_asesor)->consideracion($consideracion_id)
-                ->estadoConsideracion($estado_consideracion)
+                ->estadoConsideracion($estado_consideracion)->orderBy('id')
                 ->get();
         }
         else
         {
             $asesores = NominaTienda::whereNotNull('estado_consideracion')->mes($mes_nomina)
                 ->asesor($id_asesor)->consideracion($consideracion_id)
-                ->estadoConsideracion($estado_consideracion)
+                ->estadoConsideracion($estado_consideracion)->orderBy('id')
                 ->get();
         }
 
@@ -65,7 +65,9 @@ class ConsideracionTiendaController extends Controller
 
         $asesores = NominaTienda::mes($mes_nomina)
             ->where('estado_consideracion', '=', 'pendiente')->asesor($asesor_id)
-            ->consideracion($id_consideracion)->get();
+            ->consideracion($id_consideracion)
+            ->orderBy('id')
+            ->get();
 
 
         return view('tiendas.consideraciones.aprobacion', ['mes_nomina'=>$mes_nomina, 'consideraciones'=>$consideraciones,

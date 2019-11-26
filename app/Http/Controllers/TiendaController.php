@@ -16,7 +16,7 @@ class TiendaController extends Controller
      */
     public function index(Request $request)
     {
-        $tiendas = Tienda::all();
+        $tiendas = Tienda::orderBy('id')->get();
         $jefes_tienda = JefeTienda::all();
 
         return view('tiendas.tiendas.index', ['tiendas'=>$tiendas, 'jefes_tienda'=>$jefes_tienda]);

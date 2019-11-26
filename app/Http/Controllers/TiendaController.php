@@ -20,7 +20,7 @@ class TiendaController extends Controller
         $zona_id = $request->get('zona_id');
         $tienda_id = $request->get('tienda_id');
         $jefes_tienda = JefeTienda::all();
-        $tiendas = Tienda::tienda($tienda_id)->zonaTienda($zona_id)->ordeBy('id')->get();
+        $tiendas = Tienda::tienda($tienda_id)->zonaTienda($zona_id)->orderBy('id')->get();
 
         return view('tiendas.tiendas.index', ['tiendas'=>$tiendas, 'jefes_tienda'=>$jefes_tienda,
             'zonas'=>$zonas]);

@@ -151,6 +151,9 @@ Route::group (['middleware'=>'auth'], function () {
         Route::patch('inactivaciones_tienda_edit_estado/{id}', 'InactivacionTiendaController@updateEstado')
             ->name('inactivaciones_tienda_edit'); //ruta para editar el estado
 
+    /**Tiendas*/
+        Route::resource('tiendas', 'TiendaController');
+
 
 
 });

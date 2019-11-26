@@ -44,7 +44,7 @@ class NominaTiendaController extends Controller
             $zonas_tienda = ZonaTienda::where('id', $zonas)->get();
             $asesores = NominaTienda::mes($mes_nomina)
                 ->tiendas($zonas)
-                ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)
+                ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)->teamleader($teamleader_id)
                 ->get();
 
         }
@@ -53,7 +53,7 @@ class NominaTiendaController extends Controller
             $tiendas=Tienda::all();
             $zonas_tienda = ZonaTienda::all();
             $asesores = NominaTienda::mes($mes_nomina)
-                ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)
+                ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)->teamleader($teamleader_id)
                 ->get();
         }
 

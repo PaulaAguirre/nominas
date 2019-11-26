@@ -13,6 +13,12 @@
             @endforeach
         </select>
 
+        <select name="teamleader_id" class="form-control selectpicker text-uppercase col-lg-4" id="id_jefe" title="TeamLeader" data-live-search="true">
+            @foreach($teamleaders as $teamleader)
+                <option value="{{$teamleader->id}}">CH: {{$teamleader->ch}} - {{$teamleader->nombre}}</option>
+            @endforeach
+        </select>
+
         <select name="zona_id" class="form-control selectpicker text-uppercase col-lg-4" id="zona_id" title="Seleccione Zona" data-live-search="true">
             @foreach($zonas_tienda as $zona)
                 <option value="{{$zona->id}}">{{$zona->representante_zonal_nombre}} - {{$zona->zona}}</option>

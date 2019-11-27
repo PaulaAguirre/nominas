@@ -40,12 +40,12 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Zona</th>
-                        <th>Zona Tienda</th>
-                        <th>Clasificación</th>
-                        <th>Tipo Tienda</th>
                         <th>Jefe Zonal</th>
                         <th>CH Jefe</th>
                         <th>Nombre Jefe</th>
+                        <th>Clasificación</th>
+                        <th>Zona Tienda</th>
+                        <th>Tipo Tienda</th>
                         <th class="text-center">OPC</th>
 
                     </thead>
@@ -54,12 +54,12 @@
                             <td>{{$tienda->id}}</td>
                             <td>{{$tienda->tienda_nombre}}</td>
                             <td>{{$tienda->zona->zona}}</td>
-                            <td>{{$tienda->zona_tienda}}</td>
-                            <td>{{$tienda->clasificacion}}</td>
-                            <td>{{$tienda->tipo_tienda}}</td>
                             <td>{{$tienda->zona->representante_zonal_nombre}}</td>
                             <td>{{$tienda->jefetienda ? $tienda->jefetienda->ch : ''}}</td>
                             <td>{{$tienda->jefetienda ? $tienda->jefetienda->nombre : ''}}</td>
+                            <td>{{$tienda->clasificacion}}</td>
+                            <td>{{$tienda->zona_tienda}}</td>
+                            <td>{{$tienda->tipo_tienda}}</td>
                             <td><a href="{{URL::action('TiendaController@edit', $tienda->id)}}">
                                     <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></button>
                                 </a></td>

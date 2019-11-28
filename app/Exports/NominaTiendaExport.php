@@ -17,7 +17,7 @@ class NominaTiendaExport implements FromView
     */
     public function view():View
     {
-        $mes = 201911;
+        $mes = 201912;
         $asesores = NominaTienda::where('mes', $mes)->get();
         return view('excel_tienda.exportar', ['asesores'=>$asesores]);
     }

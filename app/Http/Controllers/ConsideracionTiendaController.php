@@ -16,7 +16,7 @@ class ConsideracionTiendaController extends Controller
         $estado_consideracion = $request->get('estado');
         $id_asesor = $request->get('asesor_id');
         $consideracion_id = $request->get('consideracion_id');
-        $mes_nomina=201911;
+        $mes_nomina=201912;
         $porcentajes = ['50%', '75%','75% nuevo','prorrateado', '25%', 'sin objetivos'];
         $consideraciones = Consideracion::all();
 
@@ -58,7 +58,7 @@ class ConsideracionTiendaController extends Controller
 
     public function aprobarConsideraciones(Request $request)
     {
-        $mes_nomina = 201911;
+        $mes_nomina = 201912;
         $consideraciones = Consideracion::all();
         $id_consideracion = $request->get('id_consideracion');
         $asesor_id = $request->get('asesor_id');

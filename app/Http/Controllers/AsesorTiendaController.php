@@ -68,7 +68,7 @@ class AsesorTiendaController extends Controller
             'ch' => 'required|unique:asesores_tienda'
         ]);
 
-        $mes_nomina = 201911;
+        $mes_nomina = 201912;
         $tienda_tl = explode('-',$request->get('tienda_teamleader_id'));
         $tienda_id = $tienda_tl[0];
         $teamleader_id = $tienda_tl[1];

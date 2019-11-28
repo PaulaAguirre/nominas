@@ -64,6 +64,10 @@ class AsesorTiendaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'ch' => 'required|unique:asesores_tienda'
+        ]);
+
         $mes_nomina = 201911;
         $tienda_tl = explode('-',$request->get('tienda_teamleader_id'));
         $tienda_id = $tienda_tl[0];

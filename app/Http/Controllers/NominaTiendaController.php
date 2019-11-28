@@ -41,9 +41,8 @@ class NominaTiendaController extends Controller
         {
 
             $zonas = \Auth::user()->zonasTienda->pluck('id')->toArray();
-            dd($zonas);
             $tiendas = Tienda::whereIn('zona_id', $zonas)->get();
-            $zonas_tienda = ZonaTienda::where('id', $zonas)->get();
+            $zonas_tienda = ZonaTienda::whereIn('id', $zonas)->get();
 
             $asesores = NominaTienda::mes($mes_nomina)
                 ->tiendas($zonas)

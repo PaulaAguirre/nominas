@@ -39,6 +39,7 @@ class NominaTiendaController extends Controller
 
         if (\Auth::user()->hasRoles(['zonal']))
         {
+            dd('zonal');
             $zonas = \Auth::user()->zonasTienda->pluck('id')->toArray();
             $tiendas = Tienda::whereIn('zona_id', $zonas)->get();
             $zonas_tienda = ZonaTienda::where('id', $zonas)->get();

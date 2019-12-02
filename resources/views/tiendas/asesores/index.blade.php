@@ -63,7 +63,7 @@
                             <td>{{$asesor->teamleader->nombre}}</td>
                             <td>{{$asesor->zonaTienda($asesor->id)->zona}}</td>
                             <td>{{$asesor->tienda->tienda_nombre}}</td>
-                            <td>tcliap</td>
+                            <td>{{$asesor->user_red}}</td>
                             <td>{{$asesor->activo}}</td>
                             <td><a href="{{URL::action('AsesorTiendaController@edit', $asesor->id)}}">
                                     <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

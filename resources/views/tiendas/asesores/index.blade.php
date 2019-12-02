@@ -37,6 +37,7 @@
                         <th>ID</th>
                         <th>CH</th>
                         <th>Nombre</th>
+                        <th>Especialista</th>
                         <th>Staff</th>
                         <th>CI</th>
                         <th>Jefe Zonal</th>
@@ -44,8 +45,9 @@
                         <th>Team Leader</th>
                         <th>Zona</th>
                         <th>Tienda</th>
+                        <th>User</th>
                         <th>Estado</th>
-                        <th class="text-center">Opciones</th>
+                        <th class="text-center">OPC</th>
 
                     </thead>
                     @foreach ($asesores as $asesor)
@@ -53,6 +55,7 @@
                             <td>{{$asesor->id}}</td>
                             <td>{{$asesor->ch}}</td>
                             <td>{{$asesor->nombre}}</td>
+                            <td>{{$asesor->especialista}}</td>
                             <td>{{$asesor->staff}}</td>
                             <td>{{$asesor->documento}}</td>
                             <td>{{$asesor->zonaTienda($asesor->id)->representante_zonal_nombre}}</td>
@@ -60,6 +63,7 @@
                             <td>{{$asesor->teamleader->nombre}}</td>
                             <td>{{$asesor->zonaTienda($asesor->id)->zona}}</td>
                             <td>{{$asesor->tienda->tienda_nombre}}</td>
+                            <td>tcliap</td>
                             <td>{{$asesor->activo}}</td>
                             <td><a href="{{URL::action('AsesorTiendaController@edit', $asesor->id)}}">
                                     <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

@@ -1,5 +1,6 @@
 @extends ('layouts.admin_tienda')
 @section ('contenido')
+
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             @if (count($errors)>0)
@@ -49,6 +50,7 @@
                             </div>
                         </div>
 
+
                         <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">Staff</label>
@@ -56,13 +58,21 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                                <label class="">Nombre del Asesor</label>
-                                 <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
+
+
+                        <div class="form-group col-md-8">
+                            <label>Asesor</label>
+                            <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
                         </div>
 
+                        <div class="form-group col-md-4">
+                            <div class="">
+                                <label for="name">user</label>
+                                <input type="text" name="user_red"  value="{{old('user')}}" class="form-control">
+                            </div>
+                        </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-md-8">
                             <label for="">Team Leader</label>
                             <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
                                 @foreach($tiendas as $tienda )
@@ -76,13 +86,17 @@
                         <div class="form-group col-md-offset-0 col-md-4">
                             <label for="">Cargo GO</label>
                             <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione Cargo" required>
-                               @foreach($cargos as $cargo)
+                                @foreach($cargos as $cargo)
                                     <option  value="{{$cargo}}">{{$cargo}}</option>
-                               @endforeach
+                                @endforeach
                             </select>
                         </div>
 
-                        <div class="form-group col-md-offset-0 col-md-4">
+                        <div class="form-group form-group col-md-4">
+                            <label><input type="checkbox" name="especialista" value="si"> Especialista</label>
+                        </div>
+
+                        <div class="form-group col-md-4">
                             <label for="">consideración</label>
                             <select name="consideracion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Consideracion" required>
                                 <option  value="6">Nuevo Ingreso</option>
@@ -94,10 +108,6 @@
                         <div class="form-group col-md-4 ">
                             <label for="" class="col-md-3">Observaciones</label>
                             <textarea class="form-control" rows="2" name="detalles_consideracion"></textarea>
-                            <!--<select name="activo" class="selectpicker form-control text-uppercase" title="Estado" disabled="disabled">
-                                    <option value="inactivo" >inactivo</option>
-                                    <option value="activo" selected >activo</option>
-                            </select>-->
                         </div>
 
 

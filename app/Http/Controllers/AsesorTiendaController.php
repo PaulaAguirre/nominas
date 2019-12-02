@@ -51,7 +51,7 @@ class AsesorTiendaController extends Controller
     {
         $tiendas = Tienda::all();
         $cargos = ['GO1', 'GO2', 'GO3', 'GO3 PlUS', 'ASESOR DE VENTAS SMART',
-            'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS'];
+            'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS', 'ASESOR CORRESPONSALIA'];
 
         return view('tiendas.asesores.create', ['tiendas'=>$tiendas, 'cargos'=>$cargos]);
     }
@@ -75,6 +75,9 @@ class AsesorTiendaController extends Controller
         $consideracion_id = $request->get('consideracion_id');
         $detalles_consideracion = $request->get('detalles_consideracion');
         $cargo_go = $request->get('cargo_go');
+        $user_red = $request->get('user_red');
+        $especialista = $request->get('especialista');
+
 
         $asesor = new AsesorTienda();
         $asesor->id_teamleader = $teamleader_id;
@@ -86,6 +89,8 @@ class AsesorTiendaController extends Controller
         $asesor->id_tienda = $tienda_id;
         $asesor->cargo_go = $cargo_go;
         $asesor->activo = 'ACTIVO';
+        $asesor->user_red = $user_red;
+        $asesor->especialista = $especialista;
         $asesor->save();
 
         $nomina = new NominaTienda();
@@ -122,7 +127,7 @@ class AsesorTiendaController extends Controller
         $asesor = AsesorTienda::findOrFail($id);
         $tiendas = Tienda::all();
         $cargos = ['GO1', 'GO2', 'GO3', 'GO3 PlUS', 'ASESOR DE VENTAS SMART',
-            'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS'];
+            'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS', 'ASESOR CORRESPONSALIA'];
 
         return view('tiendas.asesores.edit', ['asesor'=>$asesor, 'tiendas'=>$tiendas, 'cargos'=>$cargos]);
 
@@ -137,12 +142,13 @@ class AsesorTiendaController extends Controller
         $cargo_anterior = $asesor->cargo_go;
         $tienda_tl = explode('-', $request->get('tienda_teamleader_id'));
 
-
         $asesor->ch = $request->get('ch');
         $asesor->documento = $request->get('documento');
         $asesor->nombre = strtoupper($request->get('nombre'));
         $asesor->fecha_ingreso = $request->get('fecha_ingreso');
         $asesor->staff = $request->get('staff');
+        $asesor->especialista = $request->get('especialista');
+        $asesor->user_red = $request->get('user_red');
 
 
         if ($teamleader_anterior <> $tienda_tl[1]) {

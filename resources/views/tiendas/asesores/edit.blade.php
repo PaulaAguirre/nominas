@@ -58,8 +58,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="">Nombre del Asesor</label>
+                        <div class="form-group col-md-8">
+                            <label class="">Asesor</label>
                             @if(auth()->user()->hasRoles(['tigo_people_admin']))
                                 <input type="text" name="nombre" required value="{{$asesor->nombre}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
                             @else
@@ -67,8 +67,15 @@
                             @endif
                         </div>
 
+                        <div class="form-group col-md-4">
+                            <div class="">
+                                <label for="name">user</label>
+                                <input type="text" name="user_red"  value="{{$asesor->user_red}}" class="form-control">
+                            </div>
+                        </div>
 
-                        <div class="form-group">
+
+                        <div class="form-group col-md-8">
                             <label for="">Team Leader</label>
                             <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
                                 @foreach($tiendas as $tienda )
@@ -94,6 +101,15 @@
                                     @endif
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="form-group form-group col-md-4">
+                            @if($asesor->especialista == 'si')
+                                <label><input type="checkbox" checked name="especialista" value="si"> Especialista</label>
+                            @else
+                                <label><input type="checkbox"  name="especialista" value="si"> Especialista</label>
+                            @endif
+
                         </div>
 
 

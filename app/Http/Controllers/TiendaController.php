@@ -70,7 +70,7 @@ class TiendaController extends Controller
         $jefes_tienda = JefeTienda::all();
         $zonas = ZonaTienda::all();
         $tipos_tienda = ['1','2','3', '4'];
-        $clasificaciones = ['TIENDA', 'TIENDA EXPRESS', 'SHOPPING'];
+        $clasificaciones = ['TIENDA', 'TIENDA EXPRESS', 'SHOPPING', 'CORRESPONSALIA'];
 
         return view('tiendas.tiendas.edit', ['tienda'=>$tienda, 'zonas'=>$zonas, 'tipos_tienda'=>$tipos_tienda,
             'jefes_tienda'=>$jefes_tienda, 'clasificaciones'=>$clasificaciones]);

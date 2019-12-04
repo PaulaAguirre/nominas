@@ -114,6 +114,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('tiendas')}}"><i class="fa fa-book"></i> Tiendas</a></li>
+                        <li><a href="{{url('teamleaders')}}"><i class="fa fa-book"></i> Teamleaders</a></li>
                         <li><a href="#"><i class="fa fa-book"></i> Consideraciones</a></li>
                     </ul>
                 </li>

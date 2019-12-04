@@ -153,6 +153,8 @@ Route::group (['middleware'=>'auth'], function () {
 
     /**Tiendas*/
         Route::resource('tiendas', 'TiendaController');
+    /**Teamleaders*/
+        Route::resource('teamleaders', 'TeamleaderController');
 
 
 

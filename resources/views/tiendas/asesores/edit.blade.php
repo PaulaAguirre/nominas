@@ -28,9 +28,9 @@
                             <div class="col-md-3">
                                 <label for="name">CH</label>
                                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
-                                    <input type="number" name="ch" required value="{{$asesor->ch}}" class="form-control text-uppercase">
+                                    <input type="number"  name="ch" required value="{{$asesor->ch}}" class="form-control text-uppercase">
                                 @else
-                                    <input type="number" name="ch" required value="{{$asesor->ch}}" class="form-control text-uppercase" disabled="disabled">
+                                    <input type="number"  name="ch" required value="{{$asesor->ch}}" class="form-control text-uppercase" disabled="disabled">
 
                                 @endif
                             </div>

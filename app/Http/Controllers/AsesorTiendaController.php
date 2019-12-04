@@ -142,10 +142,10 @@ class AsesorTiendaController extends Controller
         $cargo_anterior = $asesor->cargo_go;
         $tienda_tl = explode('-', $request->get('tienda_teamleader_id'));
 
-        $asesor->ch = $request->get('ch');
+        //$asesor->ch = $request->get('ch');
         $asesor->documento = $request->get('documento');
         $asesor->nombre = strtoupper($request->get('nombre'));
-        $asesor->fecha_ingreso = $request->get('fecha_ingreso');
+        //$asesor->fecha_ingreso = $request->get('fecha_ingreso');
         $asesor->staff = $request->get('staff');
         $asesor->especialista = $request->get('especialista');
         $asesor->user_red = $request->get('user_red');

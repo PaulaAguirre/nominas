@@ -144,7 +144,7 @@ class AsesorTiendaController extends Controller
 
         //$asesor->ch = $request->get('ch');
         $asesor->documento = $request->get('documento');
-        $asesor->nombre = strtoupper($request->get('nombre'));
+        //$asesor->nombre = strtoupper($request->get('nombre'));
         //$asesor->fecha_ingreso = $request->get('fecha_ingreso');
         $asesor->staff = $request->get('staff');
         $asesor->especialista = $request->get('especialista');

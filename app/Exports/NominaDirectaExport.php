@@ -21,7 +21,7 @@ class NominaDirectaExport implements FromView
     public function view():View
     {
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(19);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(24);
         $fecha_actual = Carbon::now();
 
         if ($fecha_actual->between($fecha1, $fecha2))

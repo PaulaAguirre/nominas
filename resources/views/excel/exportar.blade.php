@@ -23,8 +23,8 @@
         <th>Estado Consideración</th>
         <th>Comentarios canales</th>
         <th>Estado</th>
-        <th>Obs inactivacion canales</th>
         <th>Estado Inactivación</th>
+        <th>Obs inactivacion canales</th>
         <th>Fecha aprobación Consideración</th>
         <th>Fecha aprobación inactivación</th>
     </tr>
@@ -53,16 +53,10 @@
                 <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%' }}</td>
                 <td>{{$persona->detalles_consideracion}}</td>
                 <td>{{$persona->estado_consideracion}}</td>
-                @if($persona->estado_consideracion == 'aprobado')
-                    <td> {{$persona->comentario_consideracion}}</td>
-                @elseif($persona->estado_consideracion == 'rechazado')
-                    <td> {{$persona->motivo_rechazo_consideracion}}</td>
-                @else
-                    <td></td>
-                @endif
+                <td> {{$persona->comentario_consideracion}}</td>
                 <td>{{$persona->estado_inactivacion == 'aprobado' ? 'inactivo': 'activo'}}</td>
-                <td>{{$persona->comentario_inactivacion}}</td>
                 <td>{{$persona->estado_inactivacion}}</td>
+                <td>{{$persona->comentario_inactivacion ? $persona->comentario_inactivacion : $persona->motivo_rechazo_inactivacion }}</td>
                 <td>{{$persona->fecha_aprobacion_consideracion}}</td>
                 <td>{{$persona->fecha_aprobacion_inactivacion}}</td>
             </tr>

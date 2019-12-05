@@ -56,11 +56,11 @@
                 <td>{{$asesor->asesor->tienda->zona->representante_zonal_nombre  }}</td>
                 <td>{{$asesor->asesor->tienda->zona->region->region }}</td>
                 <td>{{$asesor->id_consideracion == 6 ? $asesor->asesor->fecha_ingreso : ''}}</td>
-                <td>{{$asesor->estado_consideracion == 'aprobado' ? $asesor->consideracion->nombre : 'OK'}}</td>
+                <td>{{$asesor->consideracion ? $asesor->consideracion->nombre : 'OK'}}</td>
                 <td>{{$asesor->porcentaje_objetivo ? $asesor->porcentaje_objetivo : '100%' }}</td>
                 <td>{{$asesor->detalles_consideracion}}</td>
                 <td>{{$asesor->estado_consideracion}}</td>
-                <td> {{$asesor->comentarios_consideracion}}</td>
+                <td>{{$asesor->comentarios_consideracion}}</td>
                 <td>{{$asesor->estado_inactivacion == 'aprobado' ? 'inactivo': 'activo'}}</td>
                 <td>{{$asesor->comentarios_inactivacion}}</td>
                 <td>{{$asesor->estado_inactivacion}}</td>

@@ -103,7 +103,7 @@ class ConsideracionesDirectaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
@@ -256,6 +256,13 @@ class ConsideracionesDirectaController extends Controller
             $persona->motivo_rechazo_consideracion = $comentarios;
             $persona->comentario_consideracion = NULL;
             $persona->porcentaje_objetivo = NULL;
+        }
+        else
+        {
+            $persona->estado_consideracion = 'pendiente';
+            $persona->motivo_rechazo_consideracion = NULL;
+            $persona->comentario_consideracion = NULL;
+            $persona->porcentaje_objetivo = 'NULL';
         }
 
         $persona->update();

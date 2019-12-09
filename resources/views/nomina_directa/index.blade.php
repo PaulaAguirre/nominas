@@ -38,9 +38,10 @@
                     <th>Perfil Anterior</th>
                     <th>Rep Zonal - Rep Jefe</th>
                     <th>Region/Zona</th>
+                    <th>Consideración</th>
+                    <th>Inactivación</th>
                     <th>Estado</th>
                     <th>%OBJ</th>
-                    <th>Inactivación</th>
                     @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
                         <th class="text-center col-lg-1">Opciones</th>
                     @endif
@@ -57,13 +58,8 @@
                                     <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
                                     <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
-                                    @if($persona->estado_nomina == 'pendiente')
-                                        <td class="alert-warning">{{$persona->estado_nomina}}</td>
-                                    @elseif ($persona->estado_nomina == 'rechazado')
-                                        <td class="alert-danger">{{$persona->estado_nomina}}</td>
-                                    @else
-                                        <td class="alert-success">{{$persona->estado_nomina}}</td>
-                                    @endif
+                                    <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br><span class="text-danger">Estado:</span>{{$persona->estado_consideracion}}</td>
+                                    <td><span class="text-info">Motivo: </span>{{$persona->motivo_inactivacion}}<br><span class="text-danger">Estado: </span>{{$persona->estado_inactivacion}}</td>
                                     @if($persona->estado_inactivacion == 'pendiente')
                                         <td>pendiente</td>
                                     @elseif($persona->estado_inactivacion == 'aprobado')
@@ -72,7 +68,7 @@
                                         <td class="text-success">Activo</td>
                                     @endif
                                     <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
-                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(02)))
+                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(15)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                                 <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
@@ -104,13 +100,8 @@
                                 <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
                                 <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                 <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
-                                @if($persona->estado_nomina == 'pendiente')
-                                    <td class="alert-warning">{{$persona->estado_nomina}}</td>
-                                @elseif ($persona->estado_nomina == 'rechazado')
-                                    <td class="alert-danger">{{$persona->estado_nomina}}</td>
-                                @else
-                                    <td class="alert-success">{{$persona->estado_nomina}}</td>
-                                @endif
+                                <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br><span class="text-danger">Estado:</span>{{$persona->estado_consideracion}}</td>
+                                <td><span class="text-info">Motivo: </span>{{$persona->motivo_inactivacion}}<br><span class="text-danger">Estado: </span>{{$persona->estado_inactivacion}}</td>
                                 <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
                                 @if($persona->estado_inactivacion == 'pendiente')
                                     <td>pendiente</td>

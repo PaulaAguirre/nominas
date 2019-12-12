@@ -114,6 +114,8 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('inactivaciones_directa_edit_estado/{id}', 'InactivacionesDirectaController@updateEstado')
         ->name('inactivaciones_directa_edit'); //ruta para editar el estado
 
+    /**Segundo mes*/
+    Route::resource('segundo_mes', 'SegundoMesDirectaController');
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------
      * ----------------------------------------------------------------------------------------------------------------

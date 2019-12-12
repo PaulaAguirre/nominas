@@ -115,6 +115,9 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-book"></i> Roles</a></li>
+                        @if(auth()->user()->hasRoles(['tigo_people', 'tigo_people_admin']))
+                            <li><a href="{{url('segundo_mes/create')}}"><i class="fa fa-book"></i>2do mes</a></li>
+                        @endif
                         <li><a href="#"><i class="fa fa-book"></i> Users</a></li>
                         <li><a href="#"><i class="fa fa-book"></i> Consideraciones</a></li>
                     </ul>

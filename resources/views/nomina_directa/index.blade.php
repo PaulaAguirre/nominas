@@ -58,7 +58,7 @@
                                     <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
                                     <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
-                                    <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br><span class="text-danger">Estado:</span>{{$persona->estado_consideracion}}</td>
+                                    <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$persona->estado_consideracion}}</td>
                                     <td><span class="text-info">Motivo: </span>{{$persona->motivo_inactivacion}}<br><span class="text-danger">Estado: </span>{{$persona->estado_inactivacion}}</td>
                                     @if($persona->estado_inactivacion == 'pendiente')
                                         <td>pendiente</td>

@@ -264,8 +264,6 @@
     </div><!-- /.col -->
 </div><!-- /.row -->
 
-</section><!-- /.content -->
-</div><!-- /.content-wrapper -->
 <!--Fin-Contenido-->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">

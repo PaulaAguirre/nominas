@@ -44,6 +44,7 @@ class InactivacionesDirectaController extends Controller
             //$mes= Carbon::now()->addMonth(1)->format('Ym');
 
         }
+        $mes = 202001;
 
        // $mes = Carbon::now()->format('Ym');
 

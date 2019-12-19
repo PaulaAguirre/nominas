@@ -108,7 +108,7 @@ NominaDirectaController extends Controller
         $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
 
         $fecha_actual = Carbon::today();
-        $fecha_fin = (new Carbon('first day of this month'))->addDays(18);
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(15);
 
         if ($fecha_actual < $fecha_fin)
         {
@@ -157,7 +157,7 @@ NominaDirectaController extends Controller
         $persona_mes = $request->get('persona_mes');
 
         $fecha_actual = Carbon::today();
-        $fecha_fin = (new Carbon('first day of this month'))->addDays(18);
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(15);
 
         if ($fecha_actual < $fecha_fin)
         {
@@ -284,7 +284,7 @@ NominaDirectaController extends Controller
     public function aprobarInactivaciones(Request $request)
     {
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(19);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(15);
         $mes_actual = Carbon::now();
 
         if ($mes_actual->between($fecha1, $fecha2))
@@ -293,7 +293,7 @@ NominaDirectaController extends Controller
         }
         else
         {
-            $mes=201912;
+            $mes=202001;
             //$mes= Carbon::now()->addMonth(1)->format('Ym');
 
 
@@ -444,7 +444,7 @@ NominaDirectaController extends Controller
     public function ingresarAsesorMesActual(Request $request)
     {
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(19);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(15);
         $mes = Carbon::now();
 
         if ($mes->between($fecha1, $fecha2))
@@ -454,7 +454,7 @@ NominaDirectaController extends Controller
         else
         {
             //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
-            $mes_nomina = 201912;
+            $mes_nomina = 202001;
         }
 
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
@@ -487,7 +487,7 @@ NominaDirectaController extends Controller
     public function ingresarAsesorMesActualStore(Request $request)
     {
         $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(19);
+        $fecha2 = (new Carbon('first day of this month'))->addDays(15);
         $mes = Carbon::now();
 
         if ($mes->between($fecha1, $fecha2))
@@ -504,7 +504,7 @@ NominaDirectaController extends Controller
 
         //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
 
-        $mes_nomina = 201912;
+        $mes_nomina = 202001;
 
 
         while ($cont < count($agregar))

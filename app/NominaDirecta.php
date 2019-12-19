@@ -97,6 +97,7 @@ class NominaDirecta extends Model
                 $mes_format = 201912;
                 //dd($mes);
             }
+            $mes_format = 202001;
 
             $query->where('mes', $mes_format);
 

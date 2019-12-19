@@ -27,6 +27,7 @@ class SegundoMesDirectaController extends Controller
         $mes_nomina = 201912;
         $nomina_segundo_mes = NominaDirecta::where('id_consideracion', '=', '6')
         ->where('mes', '=', $mes_nomina)->where('estado_consideracion', '=', 'aprobado')
+            ->whereNull('estado_inactivacion')
         ->get();
 
         return view('segundo_mes.create', ['mes_nomina'=>$mes_nomina, 'nomina_segundo_mes'=>$nomina_segundo_mes]);

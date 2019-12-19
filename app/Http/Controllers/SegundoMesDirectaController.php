@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\NominaDirecta;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SegundoMesDirectaController extends Controller
@@ -50,7 +51,10 @@ class SegundoMesDirectaController extends Controller
             $persona = NominaDirecta::where('id_persona_directa', $id_persona[$cont])
                 ->where('mes', $mes_nomina)->get()->first();
             $persona->id_consideracion = 7;
-            $persona->estado_consideracion = 'pendiente';
+            $persona->estado_consideracion = 'aprobado';
+            $persona->comentario_consideracion = 'ok';
+            $persona->fecha_aprobacion_consideracion = Carbon::now();
+            $persona->porcentaje_objetivo = '75%';
             $persona->detalles_consideracion = 'fecha de ingreso: '.$persona->personaDirecta->fecha_ingreso;
             $persona->update();
             $cont = $cont+1;

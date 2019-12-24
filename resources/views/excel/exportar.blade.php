@@ -56,7 +56,7 @@
                 <td> {{$persona->comentario_consideracion ? $persona->comentario_consideracion : $persona->motivo_rechazo_consideracion}}</td>
                 <td>{{$persona->estado_inactivacion == 'aprobado' ? 'inactivo': 'activo'}}</td>
                 <td>{{$persona->estado_inactivacion}}</td>
-                <td>{{$persona->comentario_inactivacion ? $persona->comentario_inactivacion : $persona->motivo_rechazo_inactivacion }}</td>
+                <td>{{$persona->motivo_inactivacion ? $persona->comentario_inactivacion : $persona->motivo_rechazo_inactivacion }}</td>
                 <td>{{$persona->fecha_aprobacion_consideracion}}</td>
                 <td>{{$persona->fecha_aprobacion_inactivacion}}</td>
             </tr>

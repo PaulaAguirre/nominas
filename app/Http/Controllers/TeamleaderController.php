@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Teamleader;
 use App\Tienda;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TeamleaderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -26,23 +27,34 @@ class TeamleaderController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-
-
+        return view('tiendas.teamleaders.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+           'ch' => Rule::unique('teamleaders', 'ch')->where(function ($query){
+               return $query->whereNotNull('ch');
+           })
+        ]);
+
+        $teamleader = New Teamleader();
+        $teamleader->ch = $request->get('ch');
+        $teamleader->documento = $request->get('documento');
+        $teamleader->nombre = $request->get('nombre');
+        $teamleader->save();
+
+        return redirect('teamleaders');
     }
 
     /**
@@ -60,14 +72,14 @@ class TeamleaderController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Teamleader  $teamlider
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
         $teamleader = Teamleader::findOrFail($id);
-        $tiendas_del_tl = $teamleader->tiendas->pluck('id')->toArray();
-        $tiendas = Tienda::whereNotIn('id', $tiendas_del_tl)->orderBy('tienda_nombre')->get();
-
+        //$tiendas_del_tl = $teamleader->tiendas->pluck('id')->toArray();
+        //$tiendas = Tienda::whereNotIn('id', $tiendas_del_tl)->orderBy('tienda_nombre')->get();
+        $tiendas = Tienda::all();
         return view('tiendas.teamleaders.edit', ['teamleader'=>$teamleader, 'tiendas'=>$tiendas]);
     }
 
@@ -76,14 +88,14 @@ class TeamleaderController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Teamleader  $teamlider
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
         $teamleader = Teamleader::findOrFail($id);
         $tiendas_id = $request->get('tienda_id');
 
-        $teamleader->tiendas()->attach($tiendas_id);
+        $teamleader->tiendas()->sync($tiendas_id);
 
         return redirect('teamleaders');
     }

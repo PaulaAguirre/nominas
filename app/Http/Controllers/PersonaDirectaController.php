@@ -63,7 +63,7 @@ class PersonaDirectaController extends Controller
     {
         $this->validate($request, [
         'ch' => 'required|unique:personas_directa'
-    ]);
+         ]);
 
         $id_consideracion = $request->get('id_consideracion');
         $detalles_consideracion = $request->get('detalles_consideracion');

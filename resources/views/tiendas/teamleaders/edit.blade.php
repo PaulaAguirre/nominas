@@ -30,7 +30,11 @@
                         <tr class="text-uppercase">
                             <td>{{$tienda->id}}</td>
                             <td>{{$tienda->tienda_nombre}}</td>
-                            <td class="text-center"><input type="checkbox" value="{{$tienda->id}}" name="tienda_id[]"></td>
+                            @if($tienda->teamleaders->pluck('id')->contains($teamleader->id))
+                                <td class="text-center"><input type="checkbox" checked value="{{$tienda->id}}" name="tienda_id[]"></td>
+                            @else
+                                <td class="text-center"><input type="checkbox" value="{{$tienda->id}}" name="tienda_id[]"></td>
+                            @endif
                         </tr>
                     @endforeach
                 </table>

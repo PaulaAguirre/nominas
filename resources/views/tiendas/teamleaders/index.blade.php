@@ -53,7 +53,7 @@
                                 @endforeach
                             </td>
                             <td><a href="{{URL::action('TeamleaderController@edit', $teamleader->id)}}">
-                                    <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></button</a></td>
+                                    <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></button></a></td>
                         </tr>
 
                     @endforeach

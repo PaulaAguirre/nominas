@@ -8,7 +8,7 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title text-danger">Inactivar Asesor: {{$asesor->asesor->nombre}}</h4>
+                <h4 class="modal-title text-danger">Inactivar Asesor: {{$asesor->asesor ? $asesor->asesor->nombre : ''}}</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">

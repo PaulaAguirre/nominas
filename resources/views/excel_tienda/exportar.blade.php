@@ -15,6 +15,7 @@
         <th>Cedula</th>
         <th>CARGO_GO</th>
         <th>CARGO_ANTERIOR</th>
+        <th>ESPECIALISTA</th>
         <th>ZONA</th>
         <th>ID ZONA</th>
         <th>EH_ZONAL</th>
@@ -50,6 +51,7 @@
                 <td>{{$asesor->asesor->documento}}</td>
                 <td>{{$asesor->asesor->cargo_go }}</td>
                 <td>{{$asesor->asesor->cargo_anterior}}</td>
+                <Td>{{$asesor->asesor->especialista == 'si' ? 'si' : 'no'}}</Td>
                 <td>{{$asesor->asesor->tienda->zona->familiazona ? $asesor->asesor->tienda->zona->familiazona->nombre : '' }}</td>
                 <td>{{$asesor->asesor->tienda->zona->familiazona ? $asesor->asesor->tienda->zona->familiazona->id : ''}}</td>
                 <td>{{$asesor->asesor->tienda->zona->representante_zonal_ch }}</td>

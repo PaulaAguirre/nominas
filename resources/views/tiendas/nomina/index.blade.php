@@ -48,7 +48,7 @@
                         <tr class="text-uppercase text-sm">
                             <td>{{$asesor->id}}</td>
                             <td>{{$asesor->mes}}</td>
-                            <td>{{$asesor->asesor->ch ? $asesor->asesor->ch : ''}}</td>
+                            <td>{{$asesor->asesor ?  $asesor->asesor->ch : ''}}</td>
                             <td>{{$asesor->asesor->nombre}}</td>
                             <td>{{$asesor->asesor->cargo_go}}</td>
                             <td>{{$asesor->asesor->especialista == 'si' ? 'si': 'no'}}</td>

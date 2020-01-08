@@ -49,7 +49,7 @@
                             <td>{{$asesor->id}}</td>
                             <td>{{$asesor->mes}}</td>
                             <td>{{$asesor->asesor ?  $asesor->asesor->ch : ''}}</td>
-                            <td>{{$asesor->asesor->nombre}}</td>
+                            <td>{{$asesor->asesor ? $asesor->asesor->nombre : ''}}</td>
                             <td>{{$asesor->asesor->cargo_go}}</td>
                             <td>{{$asesor->asesor->especialista == 'si' ? 'si': 'no'}}</td>
                             <td>{{$asesor->asesor->tienda->zona->zona.' / '.$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>

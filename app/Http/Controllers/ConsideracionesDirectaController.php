@@ -306,7 +306,9 @@ class ConsideracionesDirectaController extends Controller
 
         }
 
-        $persona->fill($request->all());
+        $persona->id_consideracion = $request->get('id_consideracion');
+        $persona->detalles_consideracion = $request->get('detalles_consideracion');
+        //dd($persona->detalles_consideracion);
         $persona->update();
         return redirect('consideraciones_directa');
     }

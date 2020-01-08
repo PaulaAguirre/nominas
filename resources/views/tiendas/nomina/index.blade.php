@@ -45,7 +45,7 @@
                     <th class="text-center col-lg-1">Opciones</th>
                     </thead>
                     @foreach ($asesores as $asesor)
-                        @if($asesor->$asesor)
+                        @if($asesor->asesor)
                             <tr class="text-uppercase text-sm">
                                 <td>{{$asesor->id}}</td>
                                 <td>{{$asesor->mes}}</td>

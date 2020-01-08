@@ -54,6 +54,8 @@ Route::group (['middleware'=>'auth'], function () {
         return view('sys.index');
     })->name('sys.index')->middleware('roles:tigo_people_admin');
 
+    Route::resource('users', 'UserController');
+
     /**
      * Persona directa
      * */

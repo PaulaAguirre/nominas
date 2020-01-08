@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Canal;
+use App\Role;
+use App\Zona;
+use App\ZonaTienda;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -19,11 +23,18 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $canales = Canal::all();
+        $zonas_directa = Zona::all();
+        $zonas_tienda = ZonaTienda::all();
+        $roles = Role::all();
+
+
+        return view('users.create', ['canales'=>$canales, 'zonas_directa'=>$zonas_directa,
+            'zonas_tienda'=>$zonas_tienda, 'roles'=>$roles]);
     }
 
     /**

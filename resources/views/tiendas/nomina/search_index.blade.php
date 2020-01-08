@@ -3,7 +3,7 @@
 
         <select name="asesor_id" class="form-control selectpicker text-uppercase col-lg-4" id="id_representante" title="Seleccione Representante" data-live-search="true">
             @foreach($asesores as $asesor)
-                <option value="{{$asesor->id_asesor}}">ch: {{$asesor->asesor ? $asesor->asesor->ch : '' }} - {{$asesor->asesor->nombre}}</option>
+                <option value="{{$asesor->id_asesor}}">ch: {{$asesor->asesor ? $asesor->asesor->ch : '' }} - {{$asesor->asesor ? $asesor->asesor->nombre : ''}}</option>
             @endforeach
         </select>
 

@@ -32,7 +32,9 @@ class NominaDirecta extends Model
         'comentario_inactivacion',
         'fecha_aprobacion_consideracion',
         'fecha_aprobacion_inactivacion',
-        'porcentaje_objetivo'
+        'porcentaje_objetivo',
+        'fecha_carga_consideracion',
+        'fecha_carga_inactivacion'
 
     ];
 

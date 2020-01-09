@@ -265,6 +265,7 @@ NominaDirectaController extends Controller
         $persona_nomina->motivo_inactivacion = $motivo_inactivacion;
         $persona_nomina->detalles_inactivacion = $detalles_inactivacion;
         $persona_nomina->estado_inactivacion = 'pendiente';
+        $persona_nomina->fecha_carga_inactivacion = (Carbon::now())->format('d-m-Y');
 
         if ($request->hasFile('archivo'))
         {
@@ -357,6 +358,7 @@ NominaDirectaController extends Controller
         $nominaDirecta->id_consideracion = $request->get('id_consideracion');
         $nominaDirecta->detalles_consideracion = $request->get('detalles_consideracion');
         $nominaDirecta->estado_consideracion = 'pendiente';
+        $nominaDirecta->fecha_carga_consideracion = (Carbon::now())->format('d-m-Y');
 
 
         if ($request->hasFile('archivo'))

@@ -118,6 +118,10 @@ Route::group (['middleware'=>'auth'], function () {
 
     /**Segundo mes*/
     Route::resource('segundo_mes', 'SegundoMesDirectaController');
+
+    /**coordinadores directa*/
+    Route::resource('coordinadores', 'CoordinadoresController');
+
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------
      * ----------------------------------------------------------------------------------------------------------------

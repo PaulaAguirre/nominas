@@ -53,11 +53,11 @@
             </div>
         </div>
 
-        <div class="panel panel-default col-lg-6">
+        <div class="panel panel-default col-lg-6" style="display: none">
             <div class="panel-heading text-bold"><span class="">Zonas Directa</span></div>
             <div class="panel-body text-uppercase">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-condensed table-hover">
+                    <table class="table table-striped table-bordered table-condensed table-hover" >
                         <thead class="text-center" >
                             <th>ID</th>
                             <th>Zona</th>
@@ -74,10 +74,10 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-default col-lg-6">
+        <div class="panel panel-default col-lg-6" style="display: none" id="tabla_tiendas">
             <div class="panel-heading text-bold"><span class="">Zonas Tienda</span></div>
             <div class="panel-body text-uppercase">
-                <table class="table table-striped table-bordered table-condensed table-hover">
+                <table class="table table-striped table-bordered table-condensed table-hover" >
                     <thead class="text-center" >
                     <th>ID</th>
                     <th>Zona</th>
@@ -107,6 +107,17 @@
                     else
                     {
                         $("#canal").hide();
+                    }
+                })
+
+                $("#canal").click(function () {
+                    if($("#canal").val() == 3)
+                    {
+                        $("#tabla_tiendas").show();
+                    }
+                    else
+                    {
+                        $("#tabla_tiendas").hide();
                     }
                 })
 

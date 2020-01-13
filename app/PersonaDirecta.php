@@ -111,6 +111,14 @@ class PersonaDirecta extends Model
 
     }
 
+    public function scopeCoordinador($query, $id_coordinador)
+    {
+        if($id_coordinador)
+        {
+            $query->where('id_persona', '=', $id_coordinador);
+        }
+    }
+
 
 
 

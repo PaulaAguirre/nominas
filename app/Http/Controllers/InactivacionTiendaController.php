@@ -136,7 +136,7 @@ class InactivacionTiendaController extends Controller
 
             if ($asesor->archivos->where('tipo', '=', 'inactivacion')->first())
             {
-                $archivo = Archivo::where('nomina_tienda_id', $asesor->id)
+                $archivo = ArchivoTienda::where('nomina_tienda_id', $asesor->id)
                     ->where('tipo', 'inactivacion')->get()->first();
                 $ruta = $request->file('archivo')->store('public');
                 $archivo->nombre = explode('/',$ruta)[1];

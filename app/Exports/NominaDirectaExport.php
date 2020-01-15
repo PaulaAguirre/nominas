@@ -35,7 +35,7 @@ class NominaDirectaExport implements FromView
             //$mes = Carbon::now()->addMonth(1)->format('Ym');
 
         }
-        $mes = 202001;
+        $mes = 202002;
         $personas = NominaDirecta::where('mes', '=', $mes)
             ->get();
 

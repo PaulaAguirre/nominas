@@ -88,18 +88,8 @@ class NominaDirecta extends Model
         {
             $fecha1 = new Carbon('first day of this month');
             $fecha2 = (new Carbon('first day of this month'))->addDays(19);
-            $mes = Carbon::now();
-            if ($mes->between($fecha1, $fecha2))
-            {
-                $mes_format = $mes->format('Ym');
-            }
-            else
-            {
-               // $mes_format = $mes->addMonth(1)->format('Ym');
-                $mes_format = 201912;
-                //dd($mes);
-            }
-            $mes_format = 202001;
+
+            $mes_format = 202002;
 
             $query->where('mes', $mes_format);
 

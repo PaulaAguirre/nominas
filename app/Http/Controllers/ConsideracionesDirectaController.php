@@ -37,7 +37,7 @@ class ConsideracionesDirectaController extends Controller
             //$mes = Carbon::now()->addMonth(1)->format('Ym');
 
         }
-        $mes=202001;
+        $mes=202002;
 
         $id_persona = $request->get('id_persona');
         $id_consideracion = $request->get('id_consideracion');

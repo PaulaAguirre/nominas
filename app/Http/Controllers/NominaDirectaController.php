@@ -108,7 +108,7 @@ NominaDirectaController extends Controller
         $jefes = PersonaDirecta::where('cargo', 'representante_jefe')->get();
 
         $fecha_actual = Carbon::today();
-        $fecha_fin = (new Carbon('first day of this month'))->addDays(15);
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(10);
 
         if ($fecha_actual < $fecha_fin)
         {
@@ -157,7 +157,7 @@ NominaDirectaController extends Controller
         $persona_mes = $request->get('persona_mes');
 
         $fecha_actual = Carbon::today();
-        $fecha_fin = (new Carbon('first day of this month'))->addDays(15);
+        $fecha_fin = (new Carbon('first day of this month'))->addDays(10);
 
         if ($fecha_actual < $fecha_fin)
         {
@@ -294,13 +294,13 @@ NominaDirectaController extends Controller
         }
         else
         {
-            $mes=202001;
+            $mes=202002;
             //$mes= Carbon::now()->addMonth(1)->format('Ym');
 
 
         }
+        $mes=202002;
 
-        //$mes = Carbon::today()->format('Ym');
         $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
             ->where('mes', '=', $mes)->get();
         return view('nomina_directa.aprobar_inactivaciones', ['personas' => $personas, 'mes' => $mes]);
@@ -456,7 +456,7 @@ NominaDirectaController extends Controller
         else
         {
             //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
-            $mes_nomina = 202001;
+            $mes_nomina = 202002;
         }
 
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
@@ -506,7 +506,7 @@ NominaDirectaController extends Controller
 
         //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
 
-        $mes_nomina = 202001;
+        $mes_nomina = 202002;
 
 
         while ($cont < count($agregar))

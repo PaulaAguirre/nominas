@@ -269,6 +269,9 @@ NominaDirectaController extends Controller
 
         if ($request->hasFile('archivo'))
         {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
             $archivo = new Archivo();
             $archivo->id_nomina_directa = $persona_nomina->id_nomina;
             $ruta = $request->file('archivo')->store('public');
@@ -363,6 +366,10 @@ NominaDirectaController extends Controller
 
         if ($request->hasFile('archivo'))
         {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
+
             $archivo = new Archivo();
             $archivo->id_nomina_directa = $nominaDirecta->id_nomina;
             $ruta = $request->file('archivo')->store('public');

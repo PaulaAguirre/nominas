@@ -50,7 +50,7 @@
                             <td>{{$coordinador->id_persona}}</td>
                             <td>{{$coordinador->nombre}}</td>
                             <td>{{$coordinador->ch}}</td>
-                            <td>{{$coordinador->documento}}</td>
+                            <td>{{$coordinador->documento_persona}}</td>
                             <td>{{$coordinador->zona ? $coordinador->zona->zona : '' }}</td>
                             <td>{{$coordinador->zona ? $coordinador->zona->representante_zonal_nombre : '' }}</td>
                             <td><a href="{{URL::action('CoordinadoresController@edit', $coordinador->id_persona)}}">

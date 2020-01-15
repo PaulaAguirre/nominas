@@ -93,6 +93,10 @@ class TeamleaderController extends Controller
     public function update(Request $request, $id)
     {
         $teamleader = Teamleader::findOrFail($id);
+        $teamleader->ch = $request->get('ch');
+        $teamleader->documento = $request->get('documento');
+        $teamleader->update();
+
         $tiendas_id = $request->get('tienda_id');
 
         $teamleader->tiendas()->sync($tiendas_id);

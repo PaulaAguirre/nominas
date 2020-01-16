@@ -8,7 +8,7 @@
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(30))
-                        <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip">Ingresos Mes Actual 2020-01</button></a>
+                        <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip">Ingresos Mes Actual 2020-02</button></a>
 
                     @endif
                     <a href="/nomina_x_zona"><button class="btn btn-github">Exportar Nómina</button></a>
@@ -18,8 +18,20 @@
                     <a href="nomina_directa/create"><button class="btn btn-success">Generar Nomina  {{\Carbon\Carbon::now()->addMonths(1)->format('Y-m')}}</button></a>
                 @endif
 
-
             </h3>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @if (count($errors)>0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+            </div>
             <p class="text-info" id="cantidad">Cantidad</p>
             @include('nomina_directa.search_index')
         </div>

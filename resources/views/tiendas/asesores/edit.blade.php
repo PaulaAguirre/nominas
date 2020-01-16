@@ -36,12 +36,21 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-3">
-                            <label for="name">Fecha ingreso</label>
-                            <div class="input-group">
-                                <input type="text" value="{{$asesor->fecha_ingreso}}" class="form-control text-uppercase" disabled="disabled">
+                        @if(auth()->user()->hasRoles(['tigo_people_admin']))
+                            <div class="form-group col-md-3">
+                                <label for="name">Fecha ingreso</label>
+                                <div class="input-group">
+                                    <input type="text" value="{{$asesor->fecha_ingreso}}" name="fecha_ingreso" class="form-control text-uppercase">
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="form-group col-md-3">
+                                <label for="name">Fecha ingreso</label>
+                                <div class="input-group">
+                                    <input type="text" value="{{$asesor->fecha_ingreso}}" class="form-control text-uppercase" disabled="disabled">
+                                </div>
+                            </div>
+                        @endif
 
 
                         <div class="form-group col-md-3">

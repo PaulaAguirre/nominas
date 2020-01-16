@@ -7,6 +7,7 @@
         <th>JEFE_tienda_CH</th>
         <th>NOMBRE_JEFE_tienda</th>
         <th>CEDULA Jefe_tienda</th>
+        <th>fecha cambio TL</th>
         <th>Teamleader CH</th>
         <th>NOMBRE_teamleader</th>
         <th>CEDULA teamleader</th>
@@ -43,6 +44,7 @@
                 <td>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->ch : ''}}</td>
                 <td>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : ''}}</td>
                 <td>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->cedula : '' }}</td>
+                <td>{{$asesor->fecha_cambio_jefe}}</td>
                 <td>{{$asesor->asesor->teamleader->ch }}</td>
                 <td>{{$asesor->asesor->teamleader->nombre}}</td>
                 <td>{{$asesor->asesor->teamleader->documento}}</td>

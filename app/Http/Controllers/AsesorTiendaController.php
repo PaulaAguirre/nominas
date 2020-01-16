@@ -7,6 +7,7 @@ use App\AsesorTienda;
 use App\NominaTienda;
 use App\Teamleader;
 use App\Tienda;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\ZonaTienda;
@@ -141,29 +142,42 @@ class AsesorTiendaController extends Controller
         $tienda_anterior = $asesor->id_tienda;
         $cargo_anterior = $asesor->cargo_go;
         $tienda_tl = explode('-', $request->get('tienda_teamleader_id'));
-
-        //$asesor->ch = $request->get('ch');
         $asesor->documento = $request->get('documento');
-        //$asesor->nombre = strtoupper($request->get('nombre'));
-        //$asesor->fecha_ingreso = $request->get('fecha_ingreso');
         $asesor->staff = $request->get('staff');
         $asesor->especialista = $request->get('especialista');
         $asesor->user_red = $request->get('user_red');
+
+        if (\Auth::user()->hasRoles(['tigo_people_admin']))
+        {
+            $asesor->ch = $request->get('ch');
+            $asesor->nombre = strtoupper($request->get('nombre'));
+            $asesor->fecha_ingreso = $request->get('fecha_ingreso');
+        }
 
 
         if ($teamleader_anterior <> $tienda_tl[1]) {
             $asesor->id_anterior_teamleader = $teamleader_anterior;
             $asesor->id_teamleader = $tienda_tl[1];
+
+            $nomina = NominaTienda::where('id_asesor', $asesor->id)->get()->last();
+            $nomina->cambio_jefe = 'si';
+            $nomina->fecha_cambio_jefe = Carbon::now()->format('d-m-Y');
+            $nomina->update();
+
         }
         if ($cargo_anterior <> $request->get('cargo_go')) {
 
             $asesor->cargo_go = $request->get('cargo_go');
             $asesor->cargo_anterior = $cargo_anterior;
 
+
+
         }
         if ($tienda_anterior <> $tienda_tl[0]) {
             $asesor->id_tienda_anterior = $tienda_anterior;
             $asesor->id_tienda = $tienda_tl[0];
+
+
         }
         $asesor->user_id = \Auth::user()->id;
 

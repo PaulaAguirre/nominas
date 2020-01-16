@@ -5,8 +5,22 @@
             <h3>Consideraciones Asesores Directa</h3>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            @if (count($errors)>0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
+    </div>
     @include('consideraciones_directa.search_aprobacion_index')
     <br>
+
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">

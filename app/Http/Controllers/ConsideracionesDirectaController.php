@@ -112,6 +112,9 @@ class ConsideracionesDirectaController extends Controller
 
         if ($request->hasFile('archivo'))
         {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
             if ($persona->archivos->where('tipo', '=', 'consideracion')->first())
             {
                 $archivo = Archivo::where('id_nomina_directa', $persona->id_nomina)
@@ -284,7 +287,9 @@ class ConsideracionesDirectaController extends Controller
 
         if ($request->hasFile('archivo'))
         {
-
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
 
             if ($persona->archivos->where('tipo', '=', 'consideracion')->first())
             {

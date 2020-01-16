@@ -7,7 +7,7 @@
                     <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual 2020-01</button></a>
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
-                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(30))
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(20))
                         <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip">Ingresos Mes Actual 2020-02</button></a>
 
                     @endif

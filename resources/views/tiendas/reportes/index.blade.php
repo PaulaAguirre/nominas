@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.admin_tienda')
 @section ('contenido')
 
     <div class="row">
@@ -13,27 +13,16 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
-                    <thead class="text-center" style="background-color: #8eb4cb">
+                    <thead class="text-center" style="background-color: #2ab27b">
                         <th>Mes</th>
                         <th class="col-lg-1 ">descargar</th>
 
                     </thead>
-                    <tr class="text-uppercase text-sm">
-                        <th>noviembre 2019</th>
-                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre_noviembre.xlsx')}}">
-                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
-                            </a></th>
-                    </tr>
-                    <tr class="text-uppercase text-sm">
-                        <th>diciembre 2019</th>
-                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre diciembre.xlsx')}}">
-                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
-                            </a></th>
-                    </tr>
+
                         <tr class="text-uppercase text-sm">
                             <th>enero 2020</th>
-                            <th class="text-center"><a href="{{URL::asset('img/directa/cierre_enero.xlsx')}}">
-                                    <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                            <th class="text-center"><a href="{{URL::asset('img/cierre_enero.xlsx')}}">
+                                    <button class="btn btn-dropbox btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                                 </a></th>
                         </tr>
                     <tr class="text-uppercase text-sm">

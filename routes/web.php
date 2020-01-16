@@ -121,6 +121,8 @@ Route::group (['middleware'=>'auth'], function () {
 
     /**coordinadores directa*/
     Route::resource('coordinadores', 'CoordinadoresController');
+    /**reportes*/
+    Route::view('reportes_directa', 'reportes.index');
 
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------
@@ -164,7 +166,8 @@ Route::group (['middleware'=>'auth'], function () {
     /**Teamleaders*/
         Route::resource('teamleaders', 'TeamleaderController');
 
-
+    /**reportes*/
+        Route::view('reportes_tienda', 'tiendas.reportes.index');
 
 });
 

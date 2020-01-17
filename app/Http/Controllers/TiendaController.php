@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\jefetienda;
+use App\JefeTienda;
 use App\ZonaTienda;
 use Illuminate\Http\Request;
 use App\Tienda;

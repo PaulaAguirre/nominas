@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\jefetienda;
 use App\ZonaTienda;
 use Illuminate\Http\Request;
 use App\Tienda;
-use App\JefeTienda;
+use Illuminate\Validation\Rule;
 
 class TiendaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -29,22 +30,35 @@ class TiendaController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        return view('tiendas.jefetienda.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'ch' => Rule::unique('jefes_tienda', 'ch')->where(function ($query){
+                return $query->whereNotNull('ch');
+            })
+        ]);
+
+        $jefetienda = New JefeTienda();
+        $jefetienda->ch = $request->get('ch');
+        $jefetienda->cedula = $request->get('documento');
+        $jefetienda->nombre = $request->get('nombre');
+
+        $jefetienda->save();
+
+        return redirect('tiendas');
     }
 
     /**

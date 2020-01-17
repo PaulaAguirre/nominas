@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <h3>Tiendas
-                    <a href="#"><button class="btn btn-success">Nueva Tienda <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
+                    <a href="{{url('tiendas/create')}}"><button class="btn btn-success">Nuevo Jefe Tienda <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
         </div>
 
     </div>

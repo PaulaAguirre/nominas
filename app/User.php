@@ -93,4 +93,9 @@ class User extends Authenticatable
         return false;
     }
 
+    public function zonasIndirecta()
+    {
+        return $this->hasMany('App\ZonasIndirecta', 'user_zona_indirecta');
+    }
+
 }

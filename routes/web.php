@@ -169,6 +169,20 @@ Route::group (['middleware'=>'auth'], function () {
     /**reportes*/
         Route::view('reportes_tienda', 'tiendas.reportes.index');
 
+    /**-------------Fin tiendas-----------------------------------------------------------------------------------------------*/
+
+    /**
+     * Indirecta*
+     */
+    Route::resource('asesores_indirecta', 'ImpulsadorController');
+    Route::resource('nomina_indirecta', 'NominaIndirectaController');
+    Route::resource('consideraciones_indirecta', 'ConsideracionesIndirectaController');
+
+    /**Consideraciones indirecta*/
+    Route::patch('agregar_consideracion_indirecta/{id}', 'ConsideracionIndirectaController@agregarConsideracion')
+        ->name('consideraciones_indirecta.agregar_consideracion');
+
+
 });
 
 

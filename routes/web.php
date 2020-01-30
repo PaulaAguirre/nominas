@@ -168,6 +168,8 @@ Route::group (['middleware'=>'auth'], function () {
 
     /**reportes*/
         Route::view('reportes_tienda', 'tiendas.reportes.index');
+    /**supervisores*/
+        Route::resource('supervisores_tienda', 'SupervisorGuiaTigoController');
 
 });
 

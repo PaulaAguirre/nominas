@@ -79,6 +79,7 @@ class AsesorTiendaController extends Controller
         $cargo_go = $request->get('cargo_go');
         $user_red = $request->get('user_red');
         $especialista = $request->get('especialista');
+        $supervisor_id = $request->get('supervisor_id');
 
 
         $asesor = new AsesorTienda();
@@ -93,6 +94,7 @@ class AsesorTiendaController extends Controller
         $asesor->activo = 'ACTIVO';
         $asesor->user_red = $user_red;
         $asesor->especialista = $especialista;
+        $asesor->supervisor_guiatigo_id = $supervisor_id;
         $asesor->save();
 
         $nomina = new NominaTienda();

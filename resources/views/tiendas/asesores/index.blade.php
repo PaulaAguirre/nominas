@@ -43,6 +43,7 @@
                         <th>Jefe Zonal</th>
                         <th>Jefe Tienda</th>
                         <th>Team Leader</th>
+                        <th>Supervisor Guia</th>
                         <th>Zona</th>
                         <th>Tienda</th>
                         <th>User</th>
@@ -61,6 +62,7 @@
                             <td>{{$asesor->zonaTienda($asesor->id)->representante_zonal_nombre}}</td>
                             <td>{{$asesor->tienda->jefetienda ? $asesor->tienda->jefetienda->nombre : 'sin jefe'}}</td>
                             <td>{{$asesor->teamleader->nombre}}</td>
+                            <td>{{$asesor->supervisor ? $asesor->supervisor->nombre : ''}}</td>
                             <td>{{$asesor->zonaTienda($asesor->id)->zona}}</td>
                             <td>{{$asesor->tienda->tienda_nombre}}</td>
                             <td>{{$asesor->user_red}}</td>

@@ -72,7 +72,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-5">
                             <label for="">Team Leader</label>
                             <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
                                 @foreach($tiendas as $tienda )
@@ -83,9 +83,20 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-md-offset-0 col-md-4">
+                        <div class="form-group col-md-5">
+                            <label for="">Team Leader</label>
+                            <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
+                                @foreach($tiendas as $tienda )
+                                    @foreach($tienda->teamleaders as $teamleader)
+                                        <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
+                                    @endforeach
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-offset-0 col-md-2">
                             <label for="">Cargo GO</label>
-                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione Cargo" required>
+                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="Cargo" required>
                                 @foreach($cargos as $cargo)
                                     <option  value="{{$cargo}}">{{$cargo}}</option>
                                 @endforeach

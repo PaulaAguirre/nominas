@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ArchivoTienda;
 use App\AsesorTienda;
 use App\NominaTienda;
+use App\SupervisorGuiaTigo;
 use App\Teamleader;
 use App\Tienda;
 use Carbon\Carbon;
@@ -53,8 +54,8 @@ class AsesorTiendaController extends Controller
         $tiendas = Tienda::all();
         $cargos = ['GO1', 'GO2', 'GO3', 'GO3 PlUS', 'ASESOR DE VENTAS SMART',
             'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS', 'ASESOR CORRESPONSALIA', 'ASESOR DE VENTAS SMART 5'];
-
-        return view('tiendas.asesores.create', ['tiendas'=>$tiendas, 'cargos'=>$cargos]);
+        $supervisores = SupervisorGuiaTigo::all();
+        return view('tiendas.asesores.create', ['tiendas'=>$tiendas, 'cargos'=>$cargos, 'supervisores'=>$supervisores]);
     }
 
     /**
@@ -129,8 +130,9 @@ class AsesorTiendaController extends Controller
         $tiendas = Tienda::all();
         $cargos = ['GO1', 'GO2', 'GO3', 'GO3 PlUS', 'ASESOR DE VENTAS SMART',
             'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS', 'ASESOR CORRESPONSALIA', 'ASESOR DE VENTAS SMART 5'];
+        $supervisores = SupervisorGuiaTigo::all();
 
-        return view('tiendas.asesores.edit', ['asesor'=>$asesor, 'tiendas'=>$tiendas, 'cargos'=>$cargos]);
+        return view('tiendas.asesores.edit', ['asesor'=>$asesor, 'tiendas'=>$tiendas, 'cargos'=>$cargos, 'supervisores'=>$supervisores]);
 
     }
 
@@ -146,6 +148,7 @@ class AsesorTiendaController extends Controller
         $asesor->staff = $request->get('staff');
         $asesor->especialista = $request->get('especialista');
         $asesor->user_red = $request->get('user_red');
+        $asesor->supervisor_guiatigo_id = $request->get('supervisor_id');
 
         if (\Auth::user()->hasRoles(['tigo_people_admin']))
         {

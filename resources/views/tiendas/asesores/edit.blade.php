@@ -84,7 +84,7 @@
                         </div>
 
 
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-5">
                             <label for="">Team Leader</label>
                             <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
                                 @foreach($tiendas as $tienda )
@@ -99,9 +99,22 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-md-offset-0 col-md-4">
+                        <div class="form-group col-md-5">
+                            <label for="">Supervisor 2</label>
+                            <select name="supervisor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione supervisor">
+                                @foreach($supervisores as $supervisor )
+                                    @if($asesor->supervisor_guiatigo_id == $supervisor->id)
+                                        <option selected value="{{$supervisor->id}}">{{$supervisor->ch}} - {{$supervisor->nombre}}</option>
+                                    @else
+                                        <option  value="{{$supervisor->id}}">{{$supervisor->ch}} - {{$supervisor->nombre}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-offset-0 col-md-2">
                             <label for="">Cargo GO</label>
-                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione Cargo" required>
+                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="Cargo">
                                 @foreach($cargos as $cargo)
                                     @if($asesor->cargo_go == $cargo)
                                         <option selected value="{{$cargo}}">{{$cargo}}</option>

@@ -76,4 +76,9 @@ class AsesorTienda extends Model
 
     }
 
+    public function supervisor()
+    {
+        return $this->belongsTo('App\SupervisorGuiaTigo', 'supervisor_guiatigo_id');
+    }
+
 }

@@ -14,7 +14,7 @@
             @endforeach
         </select>
 
-        <button type="submit" class="btn btn-success"><span>Buscar </span><i class="fa fa-search col-lg-2" aria-hidden="true"></i></button>
+        <button type="submit" class="btn btn-primary"><span>Buscar </span><i class="fa fa-search col-lg-2" aria-hidden="true"></i></button>
 
     </div>
     {!! Form::close() !!}

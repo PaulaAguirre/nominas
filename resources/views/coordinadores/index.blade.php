@@ -35,7 +35,7 @@
             @include('coordinadores.search')
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
-                    <thead class="text-center" style="background-color: #2ab27b">
+                    <thead class="text-center" style="background-color: #8eb4cb">
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>CH</th>

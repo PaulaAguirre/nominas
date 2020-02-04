@@ -44,6 +44,11 @@
                             <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
                         </div>
 
+                        <div class="form-group">
+                            <label> Asesor Experto</label>
+                            <input type="checkbox" name="asesor_experto" value="si">
+                        </div>
+
 
                         <div class="form-group text-center">
                             <br>

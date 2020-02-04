@@ -48,10 +48,16 @@ class TeamleaderController extends Controller
            })
         ]);
 
+        $asesor_experto = $request->get('asesor_experto');
         $teamleader = New Teamleader();
         $teamleader->ch = $request->get('ch');
         $teamleader->documento = $request->get('documento');
-        $teamleader->nombre = $request->get('nombre');
+        $teamleader->nombre = strtoupper($request->get('nombre'));
+        if ($asesor_experto)
+        {
+            $teamleader->asesor_experto = $asesor_experto;
+        }
+
         $teamleader->save();
 
         return redirect('teamleaders');
@@ -92,9 +98,15 @@ class TeamleaderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $asesor_experto = $request->get('asesor_experto');
         $teamleader = Teamleader::findOrFail($id);
         $teamleader->ch = $request->get('ch');
         $teamleader->documento = $request->get('documento');
+        if ($asesor_experto)
+        {
+            $teamleader->asesor_experto = $asesor_experto;
+        }
+
         $teamleader->update();
 
         $tiendas_id = $request->get('tienda_id');

@@ -80,7 +80,7 @@
                                         <td class="text-success">Activo</td>
                                     @endif
                                     <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
-                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(31)))
+                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(4)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                                 <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

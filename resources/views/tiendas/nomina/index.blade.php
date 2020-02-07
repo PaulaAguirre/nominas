@@ -36,7 +36,7 @@
                     <th>Asesor</th>
                     <th>Cargo</th>
                     <th>Especialista Retención</th>
-                    <th>Zona / <br>Rep Zonal</th>
+                    <th class="col-lg-1">Zona / <br>Rep Zonal</th>
                     <th>Tienda / Jefe Tienda </th>
                     <th>Team Leader</th>
                     <th>Supervisor Guia</th>

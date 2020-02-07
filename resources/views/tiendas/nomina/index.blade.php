@@ -35,15 +35,15 @@
                     <th>CH</th>
                     <th>Asesor</th>
                     <th>Cargo</th>
-                    <th>Especialista Retención</th>
-                    <th class="col-lg-1">Zona / <br>Rep Zonal</th>
+                    <th>Esp Retención</th>
+                    <th>Zona / <br>Rep Zonal</th>
                     <th>Tienda / Jefe Tienda </th>
                     <th>Team Leader</th>
                     <th>Supervisor Guia</th>
                     <th>Consideración</th>
                     <th>Inactivación</th>
                     <th>%OBJ</th>
-                    <th class="text-center col-lg-1">Opciones</th>
+                    <th>Opciones</th>
                     </thead>
                     @foreach ($asesores as $asesor)
                         @if($asesor->asesor)

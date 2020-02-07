@@ -54,8 +54,8 @@
                                 <td>{{$asesor->asesor ? $asesor->asesor->nombre : ''}}</td>
                                 <td>{{$asesor->asesor ? $asesor->asesor->cargo_go : ''}}</td>
                                 <td>{{$asesor->asesor->especialista == 'si' ? 'si': 'no'}}</td>
-                                <td>{{$asesor->asesor->tienda->zona->zona.' / '.$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>
-                                <td>{{$asesor->asesor->tienda->tienda_nombre}} / {{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe'}}</td>
+                                <td>{{$asesor->asesor->tienda->zona->zona}} / <br>{{$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>
+                                <td>{{$asesor->asesor->tienda->tienda_nombre}} / <br>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe'}}</td>
                                 <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader->nombre : ''}}</td>
                                 <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->nombre : ''}}</td>
                                 <td><span class="text-info">Cons.:</span> {{$asesor->consideracion ? $asesor->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$asesor->estado_consideracion}}</td>

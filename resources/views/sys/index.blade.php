@@ -23,15 +23,21 @@
                     <div class="panel-body text-uppercase">
 
                         <div class="form-group text-center col-md-offset-3 col-md-6">
-                            <br>
-                           <a href="{{url('nomina_directa')}}">
-                               <button class="btn btn-block btn-facebook">DIRECTA</button>
-                           </a>
-                            <br>
-                            <a href="{{url('nomina_tienda')}}">
-                                <button class="btn btn-block btn-success">TIENDAS</button>
-                            </a>
+                            @if(Auth::user()->hasRoles(['tigo_people_admin']))
+                                <br>
+                               <a href="{{url('nomina_directa')}}">
+                                   <button class="btn btn-block btn-facebook">DIRECTA</button>
+                               </a>
+                                <br>
+                                <a href="{{url('nomina_tienda')}}">
+                                    <button class="btn btn-block btn-success">TIENDAS</button>
+                                </a>
 
+                                <br>
+                                <a href="{{url('reportes_canales')}}">
+                                    <button class="btn btn-block btn-primary">Reportes</button>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>

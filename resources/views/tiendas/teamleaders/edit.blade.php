@@ -23,13 +23,24 @@
             <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="form-group col-lg-5">
+                    <div class="form-group col-lg-4">
                         <label for="name">CH</label>
                         <input type="number" name="ch"  value="{{$teamleader->ch}}" class="form-control text-uppercase">
                     </div>
-                    <div class="form-group col-lg-5">
+                    <div class="form-group col-lg-4">
                         <label for="name">Documento</label>
                         <input type="number" name="documento"  value="{{$teamleader->documento}}" class="form-control text-uppercase">
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <label> Asesor Experto <br>
+                            @if($teamleader->asesor_experto == 'si')
+                                <input type="checkbox" checked name="asesor_experto" value="si">
+                            @else
+                                <input type="checkbox"  name="asesor_experto" value="si">
+                            @endif
+                        </label>
+
                     </div>
                 </div>
             </div>

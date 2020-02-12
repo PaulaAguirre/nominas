@@ -21,7 +21,7 @@
                     <div class="panel-heading text-bold"><span class="text-green">NUEVO ASESOR</span></div>
 
                     <div class="panel-body text-uppercase">
-                        {!!Form::open(array('url'=>'asesores_tienda','method'=>'POST','autocomplete'=>'off'))!!}
+                        {!!Form::open(array('url'=>'asesores_indirecta','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
@@ -60,41 +60,32 @@
 
 
 
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-6">
                             <label>Asesor</label>
                             <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
                         </div>
 
-                        <div class="form-group col-md-4">
-                            <div class="">
-                                <label for="name">user</label>
-                                <input type="text" name="user_red"  value="{{old('user')}}" class="form-control">
-                            </div>
-                        </div>
 
-                        <div class="form-group col-md-8">
-                            <label for="">Team Leader</label>
-                            <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
-                                @foreach($tiendas as $tienda )
-                                    @foreach($tienda->teamleaders as $teamleader)
-                                        <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
+                        <div class="form-group col-md-6">
+                            <label for="">Coordinador</label>
+                            <select name="coordinador_zona" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Coordinador">
+                                @foreach($coordinadores as $coordinador )
+                                    @foreach($coordinador->zonas as $zona)
+                                        <option  value="{{$coordinador->id.'-'.$zona->id}}">{{$coordinador->nombre.' - '.$zona->nombre}}</option>
                                     @endforeach
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group col-md-offset-0 col-md-4">
-                            <label for="">Cargo GO</label>
-                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione Cargo" required>
-                                @foreach($cargos as $cargo)
-                                    <option  value="{{$cargo}}">{{$cargo}}</option>
+                            <label for="">Clasificación</label>
+                            <select name="clasificacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione clasificacion" required>
+                                @foreach($clasificaciones as $clasificacion)
+                                    <option  value="{{$clasificacion}}">{{$clasificacion}}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="form-group form-group col-md-4">
-                            <label><input type="checkbox" name="especialista" value="si"> Especialista</label>
-                        </div>
 
                         <div class="form-group col-md-4">
                             <label for="">consideración</label>
@@ -103,7 +94,6 @@
                                 <option value="12">Cambio de canal</option>
                             </select>
                         </div>
-
 
                         <div class="form-group col-md-4 ">
                             <label for="" class="col-md-3">Observaciones</label>

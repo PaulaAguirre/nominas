@@ -142,7 +142,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('impulsadores')}}"><i class="fa fa-users"></i>Asesores Tienda x Zona</a></li>
+                        <li><a href="{{url('asesores_indirecta')}}"><i class="fa fa-users"></i>Asesores x Zona</a></li>
 
 
                     </ul>

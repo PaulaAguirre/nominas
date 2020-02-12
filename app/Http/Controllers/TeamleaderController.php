@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Teamleader;
 use App\Tienda;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Validation\Rule;
 
 class TeamleaderController extends Controller
@@ -38,7 +39,7 @@ class TeamleaderController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse|Redirector
      */
     public function store(Request $request)
     {
@@ -48,10 +49,16 @@ class TeamleaderController extends Controller
            })
         ]);
 
+        $asesor_experto = $request->get('asesor_experto');
         $teamleader = New Teamleader();
         $teamleader->ch = $request->get('ch');
         $teamleader->documento = $request->get('documento');
-        $teamleader->nombre = $request->get('nombre');
+        $teamleader->nombre = strtoupper($request->get('nombre'));
+        if ($asesor_experto)
+        {
+            $teamleader->asesor_experto = $asesor_experto;
+        }
+
         $teamleader->save();
 
         return redirect('teamleaders');
@@ -88,13 +95,19 @@ class TeamleaderController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Teamleader  $teamlider
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse|Redirector
      */
     public function update(Request $request, $id)
     {
+        $asesor_experto = $request->get('asesor_experto');
         $teamleader = Teamleader::findOrFail($id);
         $teamleader->ch = $request->get('ch');
         $teamleader->documento = $request->get('documento');
+        if ($asesor_experto)
+        {
+            $teamleader->asesor_experto = $asesor_experto;
+        }
+
         $teamleader->update();
 
         $tiendas_id = $request->get('tienda_id');

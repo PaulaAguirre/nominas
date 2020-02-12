@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Coordinador;
 use App\Impulsador;
+use App\NominaIndirecta;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class ImpulsadorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index(Request $request)
     {
@@ -21,22 +27,51 @@ class ImpulsadorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function create()
     {
-        //
+        $clasificaciones = ['PDA', 'IMPULSADOR'];
+        $coordinadores = Coordinador::all();
+        return view('indirecta.impulsadores.create', ['clasificaciones'=>$clasificaciones, 'coordinadores'=>$coordinadores]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse|Redirector
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'ch' => 'required|unique:impulsadores'
+        ]);
+
+        $coordinador_zona = explode('-', $request->get('coordinador_zona'));
+
+        $mes_nomina = 202002;
+        $impulsador = new Impulsador();
+        $impulsador->ch = $request->get('ch');
+        $impulsador->fecha_ingreso = $request->get('fecha_ingreso');
+        $impulsador->nombre = $request->get('nombre');
+        $impulsador->documento = $request->get('documento');
+        $impulsador->coordinador_id = $coordinador_zona[0];
+        $impulsador->zona_id = $coordinador_zona[1];
+        $impulsador->clasificacion = $request->get('clasificacion');
+        $impulsador->save();
+
+        $nomina = new NominaIndirecta();
+        $nomina->mes = $mes_nomina;
+        $nomina->impulsador_id = $impulsador->id;
+        $nomina->impulsador_mes = $impulsador->id.$mes_nomina;
+        $nomina->consideracion_id = $request->get('consideracion_id');
+        $nomina->estado_consideracion = 'pendiente';
+        $nomina->detalles_consideracion = $request->get('detalles_consideracion');
+        $nomina->save();
+
+        return redirect('nomina_indirecta');
+
     }
 
     /**
@@ -64,7 +99,7 @@ class ImpulsadorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\Impulsador  $impulsador
      * @return \Illuminate\Http\Response
      */

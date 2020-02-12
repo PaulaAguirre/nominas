@@ -7,7 +7,7 @@
                     <a href="{{url('asesores_tienda/create')}}"><button class="btn btn-success">Nuevo Ingreso</button></a>
                     <a href="{{url('/excel_tienda')}}"><button class="btn btn-github">Exportar excel</button></a>
                 @else
-                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(27))
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(31))
                         <a href="{{url('asesores_tienda/create')}}"><button class="btn btn-facebook">Nuevo Ingreso</button></a>
                     @endif
                     <a href="{{url('/excel_tienda_x_zona')}}"><button class="btn btn-github">Exportar Nómina</button></a>
@@ -35,14 +35,15 @@
                     <th>CH</th>
                     <th>Asesor</th>
                     <th>Cargo</th>
-                    <th>Especialista Retención</th>
-                    <th>Zona / Rep Zonal</th>
+                    <th>Ret</th>
+                    <th>Zona / <br>Rep Zonal</th>
                     <th>Tienda / Jefe Tienda </th>
                     <th>Team Leader</th>
+                    <th>Supervisor Guia</th>
                     <th>Consideración</th>
                     <th>Inactivación</th>
                     <th>%OBJ</th>
-                    <th class="text-center col-lg-1">Opciones</th>
+                    <th>Opciones</th>
                     </thead>
                     @foreach ($asesores as $asesor)
                         @if($asesor->asesor)
@@ -53,9 +54,10 @@
                                 <td>{{$asesor->asesor ? $asesor->asesor->nombre : ''}}</td>
                                 <td>{{$asesor->asesor ? $asesor->asesor->cargo_go : ''}}</td>
                                 <td>{{$asesor->asesor->especialista == 'si' ? 'si': 'no'}}</td>
-                                <td>{{$asesor->asesor->tienda->zona->zona.' / '.$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>
-                                <td>{{$asesor->asesor->tienda->tienda_nombre}} / {{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe'}}</td>
+                                <td class="col-lg-1">{{$asesor->asesor->tienda->zona->zona}} / <br>{{$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>
+                                <td>{{$asesor->asesor->tienda->tienda_nombre}} / <br>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe'}}</td>
                                 <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader->nombre : ''}}</td>
+                                <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->nombre : ''}}</td>
                                 <td><span class="text-info">Cons.:</span> {{$asesor->consideracion ? $asesor->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$asesor->estado_consideracion}}</td>
                                 @if($asesor->estado_inactivacion == 'pendiente')
                                     <td class="text-warning">pendiente</td>

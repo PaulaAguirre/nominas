@@ -18,10 +18,10 @@
         <div class="row">
             <div class="col-lg-4 col-lg-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading text-bold"><span class="text-green">NUEVO Team Leader</span></div>
+                    <div class="panel-heading text-bold"><span class="text-green">NUEVO Supervisor</span></div>
 
                     <div class="panel-body text-uppercase">
-                        {!!Form::open(array('url'=>'teamleaders','method'=>'POST','autocomplete'=>'off'))!!}
+                        {!!Form::open(array('url'=>'supervisores_tienda','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
@@ -42,11 +42,6 @@
                         <div class="form-group">
                             <label>Nombre</label>
                             <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Asesor Experto</label>
-                            <input type="checkbox" name="asesor_experto" value="si">
                         </div>
 
 

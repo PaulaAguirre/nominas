@@ -20,6 +20,10 @@ Route::get('/', function () {
         {
             return redirect('index');
         }
+        elseif (Auth::user()->hasRoles(['analista']))
+        {
+            return redirect('reportes_canales');
+        }
         else
         {
             if (Auth::user()->hasCanales(['tiendas']))
@@ -123,6 +127,7 @@ Route::group (['middleware'=>'auth'], function () {
     Route::resource('coordinadores', 'CoordinadoresController');
     /**reportes*/
     Route::view('reportes_directa', 'reportes.index');
+    Route::view('reportes_canales', 'analistas.reportes');
 
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------
@@ -168,6 +173,8 @@ Route::group (['middleware'=>'auth'], function () {
 
     /**reportes*/
         Route::view('reportes_tienda', 'tiendas.reportes.index');
+    /**supervisores*/
+        Route::resource('supervisores_tienda', 'SupervisorGuiaTigoController');
 
     /**-------------Fin tiendas-----------------------------------------------------------------------------------------------*/
 

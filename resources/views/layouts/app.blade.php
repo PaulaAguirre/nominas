@@ -35,7 +35,7 @@
             <div class="navbar-header">
 
                 <!-- Branding Image -->
-                <img src="{{URL::asset('img/logotigo.png')}}" style="width: 80%">
+               <a href="{{url('index')}}"><img src="{{URL::asset('img/logotigo.png')}}" style="width: 80%"></a>
 
             </div>
 
@@ -53,15 +53,16 @@
 
                     @else
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {{ Auth::user()->name }}<b class="caret"></b>
+
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                Cerrar Sesion
                             </a>
 
-                            <ul class="dropdown-menu">
-                                <li>
-                                    Cerrar sesion {{Auth::logout ()}}
-                                </li>
-                            </ul>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </li>
                     @endguest
                 </ul>

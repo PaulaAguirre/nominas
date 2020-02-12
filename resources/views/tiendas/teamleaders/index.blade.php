@@ -40,6 +40,7 @@
                         <th>Nombre</th>
                         <th>CH</th>
                         <th>Documento</th>
+                        <th>Asesor Experto</th>
                         <th>Tiendas</th>
                         <th class="text-center">OPC</th>
 
@@ -50,6 +51,7 @@
                             <td>{{$teamleader->nombre}}</td>
                             <td>{{$teamleader->ch}}</td>
                             <td>{{$teamleader->documento}}</td>
+                            <td>{{$teamleader->asesor_experto}}</td>
                             <td>@foreach($teamleader->tiendas as $tienda)
                                     {{$tienda->tienda_nombre}} -
                                 @endforeach

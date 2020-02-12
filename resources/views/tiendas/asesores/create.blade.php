@@ -72,7 +72,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-5">
                             <label for="">Team Leader</label>
                             <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
                                 @foreach($tiendas as $tienda )
@@ -83,14 +83,24 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-md-offset-0 col-md-4">
+                        <div class="form-group col-md-5">
+                            <label for="">Supervisor</label>
+                            <select name="supervisor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
+                                @foreach($supervisores as $supervisor)
+                                    <option value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-offset-0 col-md-2">
                             <label for="">Cargo GO</label>
-                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione Cargo" required>
+                            <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="Cargo" required>
                                 @foreach($cargos as $cargo)
                                     <option  value="{{$cargo}}">{{$cargo}}</option>
                                 @endforeach
                             </select>
                         </div>
+
 
                         <div class="form-group form-group col-md-4">
                             <label><input type="checkbox" name="especialista" value="si"> Especialista</label>

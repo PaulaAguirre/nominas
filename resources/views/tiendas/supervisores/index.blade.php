@@ -24,53 +24,35 @@
 
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Representantes Canal Tiendas (todas las zonas)
-                    <a href="asesores_tienda/create"><button class="btn btn-success">Nuevo Asesor  <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
+            <h3>Tiendas
+                    <a href="{{url('supervisores_tienda/create')}}"><button class="btn btn-success">Nuevo supervisor <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
         </div>
     </div>
-    @include('tiendas.asesores.search_index')
+
     <div class="row text-uppercase">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            @include('tiendas.supervisores.search')
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead class="text-center" style="background-color: #2ab27b">
                         <th>ID</th>
-                        <th>CH</th>
                         <th>Nombre</th>
-                        <th>Especialista</th>
-                        <th>Staff</th>
-                        <th>CI</th>
-                        <th>Jefe Zonal</th>
-                        <th>Jefe Tienda</th>
-                        <th>Team Leader</th>
-                        <th>Supervisor Guia</th>
-                        <th>Zona</th>
-                        <th>Tienda</th>
-                        <th>User</th>
-                        <th>Estado</th>
+                        <th>CH</th>
+                        <th>Documento</th>
                         <th class="text-center">OPC</th>
 
                     </thead>
-                    @foreach ($asesores as $asesor)
-                        <tr class="text-uppercase text-sm">
-                            <td>{{$asesor->id}}</td>
-                            <td>{{$asesor->ch}}</td>
-                            <td>{{$asesor->nombre}}</td>
-                            <td>{{$asesor->especialista}}</td>
-                            <td>{{$asesor->staff}}</td>
-                            <td>{{$asesor->documento}}</td>
-                            <td>{{$asesor->zonaTienda($asesor->id)->representante_zonal_nombre}}</td>
-                            <td>{{$asesor->tienda->jefetienda ? $asesor->tienda->jefetienda->nombre : 'sin jefe'}}</td>
-                            <td>{{$asesor->teamleader->nombre}}</td>
-                            <td>{{$asesor->supervisor ? $asesor->supervisor->nombre : ''}}</td>
-                            <td>{{$asesor->zonaTienda($asesor->id)->zona}}</td>
-                            <td>{{$asesor->tienda->tienda_nombre}}</td>
-                            <td>{{$asesor->user_red}}</td>
-                            <td>{{$asesor->activo}}</td>
-                            <td><a href="{{URL::action('AsesorTiendaController@edit', $asesor->id)}}">
-                                    <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
-                                </a></td>
+                    @foreach ($supervisores as $supervisor)
+                        <tr class="text-uppercase text-center">
+                            <td>{{$supervisor->id}}</td>
+                            <td>{{$supervisor->nombre}}</td>
+                            <td>{{$supervisor->ch}}</td>
+                            <td>{{$supervisor->documento}}</td>
+                            <td><a href="{{URL::action('SupervisorGuiaTigoController@edit', $supervisor->id)}}">
+                                    <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></button></a></td>
                         </tr>
+
                     @endforeach
                 </table>
             </div>

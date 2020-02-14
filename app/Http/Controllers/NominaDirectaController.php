@@ -297,12 +297,12 @@ NominaDirectaController extends Controller
         }
         else
         {
-            $mes=202002;
+            $mes=202003;
             //$mes= Carbon::now()->addMonth(1)->format('Ym');
 
 
         }
-        $mes=202002;
+        $mes=202003;
 
         $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
             ->where('mes', '=', $mes)->get();
@@ -463,9 +463,9 @@ NominaDirectaController extends Controller
         else
         {
             //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
-            $mes_nomina = 202002;
+            $mes_nomina = 202003;
         }
-
+        $mes_nomina = 202003;
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
 
         //$mes_nomina=Carbon::now()->addMonth(1)->format('Ym');
@@ -509,11 +509,12 @@ NominaDirectaController extends Controller
         }
 
         $agregar = $request->get('agregar');
+
         $cont = 0;
 
         //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
 
-        $mes_nomina = 202002;
+        $mes_nomina = 202003;
 
 
         while ($cont < count($agregar))

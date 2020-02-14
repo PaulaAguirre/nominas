@@ -133,9 +133,9 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{url('aprobacion_nomina_directa')}}/202002"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos Dir</a></li>
-                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/202002"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
-                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/202002"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
+                            <li><a href="{{url('aprobacion_nomina_directa')}}/202003"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos Dir</a></li>
+                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/202003"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
+                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/202003"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
                             <li><a href="{{url('aprobar_inactivaciones')}}"><i class="fa fa-check-square"></i>Inactivaciones Directa</a></li>
 
                         </ul>

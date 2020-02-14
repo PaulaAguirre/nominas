@@ -89,7 +89,7 @@ class NominaDirecta extends Model
             $fecha1 = new Carbon('first day of this month');
             $fecha2 = (new Carbon('first day of this month'))->addDays(19);
 
-            $mes_format = 202002;
+            $mes_format = 202003;
 
             $query->where('mes', $mes_format);
 

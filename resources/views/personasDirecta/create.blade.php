@@ -66,7 +66,9 @@
                             <label for="">Representante Jefe</label>
                             <select name="rep_jefe_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Representante Jefe">
                                 @foreach($jefes as $jefe )
-                                        <option value="{{$jefe->id_persona}}">{{strtoupper ($jefe->nombre)}}-->{{$jefe->zona->zona}}</option>
+                                    @if($jefe->zona)
+                                        <option value="{{$jefe->id_persona}}">{{strtoupper ($jefe->nombre)}}-->{{$jefe->zona ? $jefe->zona->zona : ''}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

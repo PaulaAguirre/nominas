@@ -31,7 +31,7 @@
                                         <th class="col-lg-1 ">descargar</th>
                                     </thead>
                                     <tr class="text-uppercase text-sm">
-                                        <td>Febero 2020</td>
+                                        <td>Marzo 2020</td>
                                         <td>Directa</td>
                                         <td class="text-center"><a href="{{URL::asset('excel')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
@@ -39,7 +39,7 @@
                                         </td>
                                     </tr>
                                     <tr class="text-uppercase text-sm">
-                                        <td>Febero 2020</td>
+                                        <td>Marzo 2020</td>
                                         <td>Tiendas</td>
                                         <td class="text-center"><a href="{{URL::asset('excel_tienda')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>

@@ -205,7 +205,7 @@ NominaDirectaController extends Controller
             $cont = $cont + 1;
         }
 
-        return redirect('nomina_directa');
+        return redirect()->back();
 
     }
 

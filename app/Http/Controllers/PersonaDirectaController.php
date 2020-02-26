@@ -149,7 +149,9 @@ class PersonaDirectaController extends Controller
         }
         else
         {
-            $asesor->estado_cambio = 'pendiente';
+            $asesor->estado_cambio = 'aprobado';
+            $asesor->id_zona = $id_zona_nuevo;
+            $asesor->id_representante_jefe = $id_representante_jefe_nuevo;
             $asesor->id_responsable_cambio = auth()->user()->id;
         }
 

@@ -12,7 +12,6 @@
                     @endif
                     <a href="{{url('/excel_tienda_x_zona')}}"><button class="btn btn-github">Exportar Nómina</button></a>
                 @endif
-
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="{{url('nomina_tienda/create')}}"><button class="btn btn-google">Generar Nomina  {{\Carbon\Carbon::now()->addMonths(1)->format('Y-m')}}</button></a>
                 @endif

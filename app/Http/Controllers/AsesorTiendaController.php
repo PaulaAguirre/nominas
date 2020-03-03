@@ -205,6 +205,9 @@ class AsesorTiendaController extends Controller
 
         if($request->hasFile('archivo'))
         {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
             $archivo = new ArchivoTienda();
             $archivo->nomina_tienda_id = $asesor->id;
             $ruta = $request->file('archivo')->store('public');
@@ -224,6 +227,9 @@ class AsesorTiendaController extends Controller
 
         if($request->hasFile('archivo'))
         {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
             $archivo = new ArchivoTienda();
             $archivo->nomina_tienda_id = $asesor->id;
             $ruta = $request->file('archivo')->store('public');

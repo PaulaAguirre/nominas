@@ -119,6 +119,9 @@ class ConsideracionTiendaController extends Controller
         {
             if ($asesor->archivos->where('tipo', '=', 'consideracion')->first())
             {
+                $this->validate($request, [
+                    'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+                ]);
                 $archivo = Archivo::where('id_nomina_directa', $asesor->id)
                     ->where('tipo', 'consideracion')->get()->first();
                 $ruta = $request->file('archivo')->store('public');
@@ -150,6 +153,9 @@ class ConsideracionTiendaController extends Controller
 
         if ($request->hasFile('archivo'))
         {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
             if ($asesor->archivos->where('tipo', '=', 'consideracion')->first())
             {
                 $archivo = ArchivoTienda::where('nomina_tienda_id', $asesor->id)

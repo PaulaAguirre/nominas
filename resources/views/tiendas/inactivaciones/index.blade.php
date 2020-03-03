@@ -5,6 +5,18 @@
             <h3>Asesores Inactivados</h3>
         </div>
     </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @if (count($errors)>0)
+            <div class="alert alert-warning alert-dismissible ">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></li>
+
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
     @include('tiendas.inactivaciones.search_index')
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

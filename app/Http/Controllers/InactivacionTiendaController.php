@@ -133,7 +133,9 @@ class InactivacionTiendaController extends Controller
 
         if ($request->hasFile('archivo'))
         {
-
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
             if ($asesor->archivos->where('tipo', '=', 'inactivacion')->first())
             {
                 $archivo = ArchivoTienda::where('nomina_tienda_id', $asesor->id)

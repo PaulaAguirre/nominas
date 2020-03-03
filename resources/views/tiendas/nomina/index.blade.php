@@ -19,7 +19,20 @@
 
             </h3>
             <p class="text-success" id="cantidad">Cantidad</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            @if (count($errors)>0)
+                <div class="alert alert-warning alert-dismissible ">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></li>
 
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClasificacionImpulsadores;
 use App\Coordinador;
 use App\Impulsador;
 use App\NominaIndirecta;
@@ -31,8 +32,9 @@ class ImpulsadorController extends Controller
      */
     public function create()
     {
-        $clasificaciones = ['PDA', 'IMPULSADOR'];
+
         $coordinadores = Coordinador::all();
+        $clasificaciones = ClasificacionImpulsadores::all();
         return view('indirecta.impulsadores.create', ['clasificaciones'=>$clasificaciones, 'coordinadores'=>$coordinadores]);
     }
 
@@ -58,7 +60,7 @@ class ImpulsadorController extends Controller
         $impulsador->documento = $request->get('documento');
         $impulsador->coordinador_id = $coordinador_zona[0];
         $impulsador->zona_id = $coordinador_zona[1];
-        $impulsador->clasificacion = $request->get('clasificacion');
+        $impulsador->clasificacion_id = $request->get('clasificacion_id');
         $impulsador->save();
 
         $nomina = new NominaIndirecta();

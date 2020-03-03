@@ -49,7 +49,7 @@
                                 <td>{{$impulsador->mes}}</td>
                                 <td>{{$impulsador->impulsador ?  $impulsador->impulsador->ch : ''}}</td>
                                 <td>{{$impulsador->impulsador ? $impulsador->impulsador->nombre : ''}}</td>
-                                <td>{{$impulsador->impulsador ? $impulsador->impulsador->clasificacion : ''}}</td>
+                                <td>{{$impulsador->impulsador->clasificacion ? $impulsador->impulsador->clasificacion->nombre : ''}}</td>
                                 <td>{{$impulsador->impulsador->zona->nombre.' / '.$impulsador->impulsador->zona->representante_zonal_nombre}}</td>
                                 <td> {{$impulsador->impulsador ? $impulsador->impulsador->coordinador->nombre : 'Sin Jefe'}}</td>
                                 <td><span class="text-info">Cons.:</span> {{$impulsador->consideracion ? $impulsador->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$impulsador->estado_consideracion}}</td>

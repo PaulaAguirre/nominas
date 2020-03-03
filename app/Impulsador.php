@@ -23,6 +23,11 @@ class Impulsador extends Model
         return $this->belongsTo('App\ZonaIndirecta', 'zona_id');
     }
 
+    public function clasificacion ()
+    {
+        return $this->belongsTo('App\ClasificacionImpulsadores', 'clasificacion_id');
+    }
+
     /** @return Builder
      * @var $query Builder
      */

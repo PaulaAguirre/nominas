@@ -79,9 +79,9 @@
 
                         <div class="form-group col-md-offset-0 col-md-4">
                             <label for="">Clasificación</label>
-                            <select name="clasificacion" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione clasificacion" required>
+                            <select name="clasificacion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="seleccione clasificacion" required>
                                 @foreach($clasificaciones as $clasificacion)
-                                    <option  value="{{$clasificacion}}">{{$clasificacion}}</option>
+                                    <option  value="{{$clasificacion->id}}">{{$clasificacion->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -23,7 +23,6 @@ class CreateImpulsadoresTable extends Migration
             $table->integer('zona_id');
             $table->integer('coordinador_anterior_id')->nullable();
             $table->string('fecha_cambio_coordinador')->nullable();
-            $table->string('clasificacion');
             $table->string('activo')->default('ACTIVO')->nullable();
             $table->timestamps();
         });

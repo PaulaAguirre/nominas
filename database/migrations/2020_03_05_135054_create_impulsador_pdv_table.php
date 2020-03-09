@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCiudadesTable extends Migration
+class CreateImpulsadorPdvTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCiudadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ciudades', function (Blueprint $table) {
+        Schema::create('impulsador_pdv', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('ciudad_id')->nullable();
-            $table->string('nombre');
-            $table->string('descripcion')->nullable();
+            $table->integer('impulsador_id');
+            $table->integer('pdv_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateCiudadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ciudades');
+        Schema::dropIfExists('impulsador_pdv');
     }
 }

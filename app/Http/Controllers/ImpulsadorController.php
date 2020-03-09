@@ -6,6 +6,7 @@ use App\ClasificacionImpulsadores;
 use App\Coordinador;
 use App\Impulsador;
 use App\NominaIndirecta;
+use App\Pdv;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,7 +36,9 @@ class ImpulsadorController extends Controller
 
         $coordinadores = Coordinador::all();
         $clasificaciones = ClasificacionImpulsadores::all();
-        return view('indirecta.impulsadores.create', ['clasificaciones'=>$clasificaciones, 'coordinadores'=>$coordinadores]);
+        $pdvs = Pdv::all();
+        return view('indirecta.impulsadores.create', ['clasificaciones'=>$clasificaciones, 'coordinadores'=>$coordinadores,
+        'pdvs' => $pdvs]);
     }
 
     /**
@@ -46,10 +49,12 @@ class ImpulsadorController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'ch' => 'required|unique:impulsadores'
         ]);
 
+        $pdv_ids = $request->get('idpdv');
         $coordinador_zona = explode('-', $request->get('coordinador_zona'));
 
         $mes_nomina = 202002;
@@ -71,6 +76,8 @@ class ImpulsadorController extends Controller
         $nomina->estado_consideracion = 'pendiente';
         $nomina->detalles_consideracion = $request->get('detalles_consideracion');
         $nomina->save();
+
+        $impulsador->pdvs()->sync($pdv_ids);
 
         return redirect('nomina_indirecta');
 

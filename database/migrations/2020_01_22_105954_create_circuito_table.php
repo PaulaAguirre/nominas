@@ -16,7 +16,7 @@ class CreateCircuitoTable extends Migration
         Schema::create('circuitos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo');
-            $table->integer('ciudad_id')->nullable();
+            $table->integer('zona_id');
             $table->timestamps();
         });
     }

@@ -28,6 +28,11 @@ class Impulsador extends Model
         return $this->belongsTo('App\ClasificacionImpulsadores', 'clasificacion_id');
     }
 
+    public function pdvs ()
+    {
+        return $this->belongsToMany('App\Pdv');
+    }
+
     /** @return Builder
      * @var $query Builder
      */

@@ -13,13 +13,10 @@ class CreatePdvsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pdvs;', function (Blueprint $table) {
+        Schema::create('pdvs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_pdv');
-            $table->string('nombre');
+            $table->string('codigo');
             $table->integer('circuito_id');
-            $table->integer('circuito_anterior_id')->nullable();
-            $table->string('fecha_cambio_circuito')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreatePdvsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pdvs;');
+        Schema::dropIfExists('pdvs');
     }
 }

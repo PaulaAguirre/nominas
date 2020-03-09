@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Tiendas
+            <h3>Coordinadores
                     <a href="{{url('coordinadores/create')}}"><button class="btn btn-success">Nuevo Coordinador <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
         </div>
     </div>

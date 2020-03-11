@@ -27,7 +27,7 @@
                         </tr>
                     <tr class="text-uppercase text-sm">
                         <th>febrero 2020</th>
-                        <th class="text-center"><a href="">
+                        <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre febrero 2020 tiendas.xlsx')}}">
                             </a></th>
                     </tr>
                     <tr class="text-uppercase text-sm">

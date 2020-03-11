@@ -28,6 +28,7 @@
                     <tr class="text-uppercase text-sm">
                         <th>febrero 2020</th>
                         <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre febrero 2020 tiendas.xlsx')}}">
+                                <button class="btn btn-dropbox btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                             </a></th>
                     </tr>
                     <tr class="text-uppercase text-sm">

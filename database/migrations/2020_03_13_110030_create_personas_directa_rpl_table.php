@@ -15,6 +15,7 @@ class CreatePersonasDirectaRplTable extends Migration
     {
         Schema::create('personas_directa_rpl', function (Blueprint $table) {
             $table->increments('id_persona');
+            $table->integer('mes')->nullable();
             $table->integer('ch');
             $table->string('fecha_ingreso')->nullable();
             $table->string('documento_persona')->nullable();

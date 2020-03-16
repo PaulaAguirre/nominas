@@ -44,7 +44,9 @@
                     </tr>
                     <tr class="text-uppercase text-sm">
                         <th>marzo 2020</th>
-                        <th class="text-center"><a href="">
+                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre_marzo_2020.xlsx')}}">
+                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+
                             </a></th>
                     </tr>
                     <tr class="text-uppercase text-sm">

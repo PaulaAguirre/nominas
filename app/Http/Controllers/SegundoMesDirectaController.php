@@ -43,7 +43,7 @@ class SegundoMesDirectaController extends Controller
     public function store(Request $request)
     {
         $id_persona = $request->get('id_persona');
-        $mes_nomina = 202003;
+        $mes_nomina = 202004;
         $cont = 0;
 
         while ($cont < count($id_persona))

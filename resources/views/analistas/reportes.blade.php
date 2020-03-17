@@ -16,7 +16,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-7 col-md-offset-2">
+            <div class="col-md-5 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading text-bold"><span class="text-info">Descargar Nómina</span></div>
 
@@ -26,26 +26,59 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-condensed table-hover">
                                     <thead class="text-center" style="background-color: #8eb4cb">
-                                        <th>Mes</th>
-                                        <th>Canal</th>
-                                        <th class="col-lg-1 ">descargar</th>
+                                        <th class="col-lg-3">Mes</th>
+                                        <th class="col-lg-1">Directa</th>
+                                        <th class="col-lg-1 ">Tiendas</th>
                                     </thead>
-                                    <tr class="text-uppercase text-sm">
-                                        <td>Marzo 2020</td>
-                                        <td>Directa</td>
-                                        <td class="text-center"><a href="{{URL::asset('excel')}}">
+                                    <tbody>
+                                    <tr>
+                                        <th>Enero 2020</th>
+                                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre_enero.xlsx')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                                             </a>
-                                        </td>
+                                        </th>
+                                        <th class="text-center"><a href="{{URL::asset('img/cierre_enero.xlsx')}}">
+                                                <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
                                     </tr>
-                                    <tr class="text-uppercase text-sm">
-                                        <td>Marzo 2020</td>
-                                        <td>Tiendas</td>
-                                        <td class="text-center"><a href="{{URL::asset('excel_tienda')}}">
+                                    <tr>
+                                        <th>Febrero 2020</th>
+                                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre_febrero_2020.xlsx')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                                             </a>
-                                        </td>
+                                        </th>
+                                        <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre febrero 2020 tiendas.xlsx')}}">
+                                                <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
                                     </tr>
+                                    <tr>
+                                        <th>marzo 2020</th>
+                                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre_marzo_2020.xlsx')}}">
+                                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+
+                                            </a>
+                                        </th>
+                                        <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre_marzo_2020.xlsx')}}">
+                                                <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Abril 2020</th>
+                                        <th class="text-center"><a href="{{URL::asset('excel')}}">
+                                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+
+                                            </a>
+                                        </th>
+                                        <th class="text-center"><a href="{{URL::asset('excel_tienda')}}">
+                                                <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
+                                    </tr>
+                                    </tbody>
+
                                 </table>
                             </div>
 

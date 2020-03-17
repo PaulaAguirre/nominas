@@ -40,11 +40,12 @@ class ReplicarNominaDirecta extends Command
      */
     public function handle()
     {
-        $mes = 202002;
-        $personas = NominaDirecta::where('mes', '=', $mes);
+        $mes = 202003;
+        $personas = NominaDirecta::where('mes', '=', $mes)->get();
 
         foreach ($personas as $persona)
         {
+            // replica la tabla personas directa
             $personaRPL = new PersonaDirectaRPL();
             $personaRPL->mes = $mes;
             $personaRPL->ch = $persona->personaDirecta->ch;
@@ -68,7 +69,14 @@ class ReplicarNominaDirecta extends Command
             $personaRPL->agrupacion_anterior = $persona->personaDirecta->agrupacion_anterior;
 
             $personaRPL->save();
+            $this->info($personaRPL ? 'ok' : 'not ok');
         }
 
+        foreach ($personas as $persona)
+        {
+            //replica la nómina
+
+
+        }
     }
 }

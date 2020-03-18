@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\NominaDirectaRPL;
 use Illuminate\Console\Command;
 use App\PersonaDirecta;
 use App\PersonaDirectaRPL;
@@ -75,8 +76,39 @@ class ReplicarNominaDirecta extends Command
         foreach ($personas as $persona)
         {
             //replica la nómina
+            $nominaRPL = new NominaDirectaRPL();
+            $nominaRPL->id_persona_directa = $persona->id_persona_directa;
+            $nominaRPL->mes = $mes;
+            $nominaRPL->persona_mes = $persona->persona_mes;
+            $nominaRPL->estado_nomina = $persona->estado_nomina;
+            $nominaRPL->motivo_rechazo = $persona->motivo_rechazo;
+            $nominaRPL->id_consideracion = $persona->id_consideracion;
+            $nominaRPL->detalles_consideracion = $persona->detalles_consideracion;
+            $nominaRPL->motivo_rechazo_consideracion = $persona->motivo_rechazo_consideracion;
+            $nominaRPL->estado_consideracion = $persona->estado_consideracion;
+            $nominaRPL->activo = $persona->activo;
+            $nominaRPL->agrupacion = $persona->agrupacion;
+            $nominaRPL->agrupacion_anterior = $persona->agrupacion_anterior;
+            $nominaRPL->regularizacion = $persona->regularizacion;
+            $nominaRPL->regularizacion_consideracion = $persona->regularizacion_consideracion;
+            $nominaRPL->regularizacion_nomina = $persona->regularizacion_nomina;
+            $nominaRPL->motivo_inactivacion = $persona->motivo_inactivacion;
+            $nominaRPL->detalles_inactivacion = $persona->detalles_inactivacion;
+            $nominaRPL->estado_inactivacion = $persona->estado_inactivacion;
+            $nominaRPL->regularizacion_inactivacion = $persona->regularizacion_inactivacion;
+            $nominaRPL->motivo_rechazo_inactivacion = $persona->motivo_rechazo_inactivacion;
+            $nominaRPL->comentario_consideracion = $persona->comentario_consideracion;
+            $nominaRPL->comentario_inactivacion = $persona->comentario_inactivacion;
+            $nominaRPL->fecha_aprobacion_consideracion = $persona->fecha_aprobacion_consideracion;
+            $nominaRPL->fecha_aprobacion_inactivacion = $persona->fecha_aprobacion_inactivacion;
+            $nominaRPL->fecha_aprobacion_inactivacion = $persona->fecha_aprobacion_inactivacion;
+            $nominaRPL->porcentaje_objetivo = $persona->porcentaje_objetivo;
+            $nominaRPL->fecha_carga_consideracion = $persona->fecha_carga_consideracion;
+            $nominaRPL->fecha_carga_inactivacion = $persona->fecha_carga_inactivacion;
 
-
+            $nominaRPL->save();
+            $personaRPL->save();
+            $this->info($personaRPL ? 'ok' : 'not ok');
         }
     }
 }

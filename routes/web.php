@@ -129,6 +129,9 @@ Route::group (['middleware'=>'auth'], function () {
     Route::view('reportes_directa', 'reportes.index');
     Route::view('reportes_canales', 'analistas.reportes');
 
+    /**reapertura de nómina en mes en curso*/
+    Route::resource('nomina_directa_mescurso', 'NominaDirectaRPLController');
+
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------
      * ----------------------------------------------------------------------------------------------------------------

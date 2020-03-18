@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\NominaDirectaRPL;
+use App\PersonaDirectaRPL;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class NominaDirectaRPLController extends Controller
 {
@@ -19,7 +22,7 @@ class NominaDirectaRPLController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function index(Request $request)
     {
@@ -38,7 +41,8 @@ class NominaDirectaRPLController extends Controller
         }
         else
         {
-
+            $personas = NominaDirectaRPL::all();
+            return view('directaRPL.nomina.index', ['personas'=>$personas]);
 
         }
     }

@@ -11,6 +11,6 @@ class NominaDirectaRPL extends Model
 
     public function personaDirecta ()
     {
-        return $this->belongsTo('App\PersonaDirectaRPL', 'id_persona');
+        return $this->belongsTo('App\PersonaDirectaRPL', 'id_persona_directa');
     }
 }

@@ -48,6 +48,7 @@ class ReplicarNominaDirecta extends Command
         {
             // replica la tabla personas directa
             $personaRPL = new PersonaDirectaRPL();
+            $personaRPL->id_persona_anterior = $persona->id_persona_directa;
             $personaRPL->mes = $mes;
             $personaRPL->ch = $persona->personaDirecta->ch;
             $personaRPL->fecha_ingreso = $persona->personaDirecta->fecha_ingreso;
@@ -77,7 +78,9 @@ class ReplicarNominaDirecta extends Command
         {
             //replica la nómina
             $nominaRPL = new NominaDirectaRPL();
-            $nominaRPL->id_persona_directa = $persona->id_persona_directa;
+            $id_persona = PersonaDirectaRPL::where('mes', '=', $mes)
+                ->where('id_persona_anterior', '=', $persona->id_persona_directa)->get()->first();
+            $nominaRPL->id_persona_directa = $id_persona->id_persona;
             $nominaRPL->mes = $mes;
             $nominaRPL->persona_mes = $persona->persona_mes;
             $nominaRPL->estado_nomina = $persona->estado_nomina;

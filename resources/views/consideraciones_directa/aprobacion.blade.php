@@ -87,11 +87,12 @@
                                 </td>
                                 <td id="td_objetivo">
                                     <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$persona->id_nomina}}">
-                                        <option value="100%">100%</option>
+                                        <option value="ok">100%</option>
                                         <option value="75% nuevo">75% nuevo</option>
                                         <option value="75%">75%</option>
                                         <option value="50%">50%</option>
-                                        <option value="prorrateado">prorrateado%</option>
+                                        <option value="prorrateado 0">prorrateado 0</option>
+                                        <option value="prorrateado 2">prorrateado 2</option>
                                         <option value="25%">25%</option>
                                         <option value="sin objetivos">Sin objetivos</option>
                                         </select>

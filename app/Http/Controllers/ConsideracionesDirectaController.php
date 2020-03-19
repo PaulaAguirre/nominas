@@ -23,7 +23,7 @@ class ConsideracionesDirectaController extends Controller
         $fecha1 = new Carbon('first day of this month');
         $fecha2 = (new Carbon('first day of this month'))->addDays(10);
         $fecha_actual = Carbon::now();
-        $porcentajes = ['50%', '75%','75% nuevo','prorrateado', '25%', 'sin objetivos'];
+        $porcentajes = ['50%', '75%','75% nuevo','prorrateado 0', '25%', 'sin objetivos', 'prorrateado 2'];
 
         if ($fecha_actual->between($fecha1, $fecha2))
         {

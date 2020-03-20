@@ -1,0 +1,249 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\ArchivoDirectaRPL;
+use App\Consideracion;
+use App\Zona;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\NominaDirectaRPL;
+use App\PersonaDirectaRPL;
+class ConsideracionDirectaRPLController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        $porcentajes = ['50%', '75%','75% nuevo','prorrateado 0', '25%', 'sin objetivos', 'prorrateado 2'];
+
+        $mes=202003;
+        $id_persona = $request->get('id_persona');
+        $id_consideracion = $request->get('id_consideracion');
+        $zonas = auth()->user()->zonas->pluck('id');
+        $estado_consideracion = $request->get('estado');
+
+        $personas_consideracion = NominaDirectaRPL::where('estado_consideracion', '<>', NULL)
+            //->mes($mes)->representanteDir($id_persona)->consideracion($id_consideracion)->estadoConsideracion($estado_consideracion)
+            ->get();
+        $consideraciones = Consideracion::all();
+
+
+        return view('directaRPL.consideraciones.index', ['personas_consideracion' => $personas_consideracion,
+            'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'porcentajes'=>$porcentajes, 'mes'=> $mes]);
+    }
+
+    public function agregarConsideracion (Request $request, $id)
+    {
+        $nomina = NominaDirectaRPL::findOrFail($id);
+        $nomina->id_consideracion = $request->get('id_consideracion');
+        $nomina->detalles_consideracion = $request->get('detalles_consideracion');
+        $nomina->estado_consideracion = 'pendiente';
+
+        if($request->hasFile('archivo'))
+        {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
+            $archivo = new ArchivoDirectaRPL();
+            $archivo->nomina_directa_id = $nomina->id_nomina;
+            $ruta = $request->file('archivo')->store('public');
+            $archivo->nombre = explode('/',$ruta)[1];
+            $archivo->tipo = 'consideracion';
+            $archivo->save();
+        }
+
+        $nomina->update();
+        return redirect()->back();
+    }
+    /**Aprobar las consideraciones*/
+    public function aprobarConsideraciones (Request $request)
+    {
+        $zonas = Zona::all();
+        $consideraciones = Consideracion::all();
+        $jefes = PersonaDirectaRPL::where('cargo', '=', 'representante_jefe')->get();
+        $id_consideracion = $request->get('id_consideracion');
+        $id_persona = $request->get('id_persona');
+        $id_zona = $request->get('id_zona');
+        $id_jefe= $request->get('id_jefe');
+        $mes = '202003';
+
+        $personas_directa = NominaDirectaRPL::where('estado_consideracion', '=', 'pendiente')
+           // ->mes($mes)->representanteDir($id_persona)->zonadirecta($id_zona, $id_jefe)->consideracion($id_consideracion)
+            ->get();
+
+        return view('directaRPL.consideraciones.aprobacion', ['personas_directa' => $personas_directa, 'mes'=>$mes,
+            'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'jefes'=>$jefes]);
+
+    }
+    /**Guardar las consideraciones aprobadas*/
+    public function storeConsideraciones (Request $request)
+    {
+        $nomina = $request->get('id_nomina');
+        $estado_consideracion = $request->get('aprobacion');
+        $motivo_rechazo = $request->get('motivo_rechazo');
+        $comentario_consideracion = $request->get('comentario_consideracion');
+        $objetivo = $request->get('objetivo');
+
+        $cont = 0;
+        $cantidad_registros = count($estado_consideracion);
+
+        //dd($cantidad_registros);
+
+        foreach ($nomina as $id)
+        {
+            if ($cont < $cantidad_registros)
+            {
+                $nomina_consideracion = NominaDirectaRPL::findOrFail($id);
+                $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
+                $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
+                $nomina_consideracion->comentario_consideracion = $comentario_consideracion[$cont];
+
+                if (in_array($nomina_consideracion->id_consideracion, [6,12]) and
+                    $nomina_consideracion->estado_consideracion == 'aprobado')
+                {
+                    $nomina_consideracion->estado_nomina = 'aprobado';
+                }
+                if ($nomina_consideracion->estado_consideracion == 'aprobado')
+                {
+                    $nomina_consideracion->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
+                    $nomina_consideracion->porcentaje_objetivo = $objetivo[$cont];
+                }
+
+                $nomina_consideracion->update();
+            }
+            $cont = $cont+1;
+        }
+
+        return redirect()->back();
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    /**
+     * Editar una consideracion ya creada, antes de que se apruebe o se rechace
+     * */
+    public function updateConsideracion(Request $request, $id)
+    {
+        $persona = NominaDirectaRPL::findOrFail($id);
+
+        if ($request->hasFile('archivo'))
+        {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
+
+            if ($persona->archivos->where('tipo', '=', 'consideracion')->first())
+            {
+                $archivo = ArchivoDirectaRPL::where('nomina_directa_id', $persona->id_nomina)
+                    ->where('tipo', 'consideracion')->get()->first();
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->update();
+            }
+            else
+            {
+                $archivo = new ArchivoDirectaRPL();
+                $archivo->nomina_directa_id = $persona->id_nomina;
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->tipo = 'consideracion';
+                $archivo->save();
+            }
+
+        }
+
+        $persona->id_consideracion = $request->get('id_consideracion');
+        $persona->detalles_consideracion = $request->get('detalles_consideracion');
+        $persona->update();
+        return redirect()->back();
+    }
+
+    /**Editar el estado de una consideracion ya aprobada o rechazada*/
+    public function updateEstado(Request $request, $id)
+    {
+
+        $persona = NominaDirectaRPL::findOrFail($id);
+        $estado_consideracion = $request->get('estado_consideracion');
+        $comentarios = $request->get('comentario_consideracion');
+        $objetivo = $request->get('objetivo');
+
+
+        if ($estado_consideracion == 'aprobado')
+        {
+            $persona->estado_consideracion = 'aprobado';
+            $persona->comentario_consideracion = $comentarios;
+            $persona->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
+            $persona->motivo_rechazo_consideracion = NULL;
+            $persona->porcentaje_objetivo = $objetivo[0];
+
+        }
+        elseif ($estado_consideracion == 'rechazado')
+        {
+            $persona->estado_consideracion = 'rechazado';
+            $persona->motivo_rechazo_consideracion = $comentarios;
+            $persona->comentario_consideracion = NULL;
+            $persona->porcentaje_objetivo = NULL;
+        }
+        else
+        {
+            $persona->estado_consideracion = 'pendiente';
+            $persona->motivo_rechazo_consideracion = NULL;
+            $persona->comentario_consideracion = NULL;
+            $persona->porcentaje_objetivo = 'NULL';
+        }
+
+        $persona->update();
+
+        return redirect('consideraciones_directa');
+
+    }
+
+}

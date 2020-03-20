@@ -13,4 +13,15 @@ class NominaDirectaRPL extends Model
     {
         return $this->belongsTo('App\PersonaDirectaRPL', 'id_persona_directa');
     }
+
+    public function consideracion ()
+    {
+        return $this->belongsTo('App\Consideracion', 'id_consideracion');
+    }
+
+    public function archivos ()
+    {
+        return $this->hasMany('App\ArchivoDirectaRPL', 'nomina_directa_id');
+    }
+
 }

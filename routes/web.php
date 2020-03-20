@@ -129,8 +129,20 @@ Route::group (['middleware'=>'auth'], function () {
     Route::view('reportes_directa', 'reportes.index');
     Route::view('reportes_canales', 'analistas.reportes');
 
-    /**reapertura de nómina en mes en curso*/
+    /**----------------reapertura de nómina en mes en curso----------*/
     Route::resource('nomina_directa_mescurso', 'NominaDirectaRPLController');
+        /**Consideraciones mes curso**/
+    Route::resource('consideraciones_directa_rpl', 'ConsideracionDirectaRPLController');
+    Route::patch('agregar_consideraciones_directa_mes_curso/{id}', 'ConsideracionDirectaRPLController@agregarConsideracion')
+        ->name('nomina_directa_mes_curso.consideracion');
+    Route::get('aprobacion_consideraciones_directa_rpl', 'ConsideracionDirectaRPLController@aprobarConsideraciones')//ruta para cargar las consideraciones de un asesor
+    ->name('consideraciones_directa_rpl.aprobacion');//ruta para mostrar las consideraciones a aprobar
+    Route::patch('aprobacion_consideraciones_directa_rpl', 'ConsideracionDirectaRPLController@storeConsideraciones')
+        ->name('consideraciones_directa_rpl.store'); //ruta para guardar estado de consideración
+    Route::patch('consideraciones_directa_rpl_update_consideracion/{id}', 'ConsideracionDirectaRPLController@updateConsideracion')
+        ->name('consideraciones_directa_rpl_edit_consideracion'); //ruta para editar la consideracion ya creada
+    Route::patch('consideraciones_directa_rpl_edit/{id}', 'ConsideracionDirectaRPLController@updateEstado')
+        ->name('consideraciones_directa_rpl_edit'); //ruta para editar el estado de la consideracion ya aprobada o rechazada
 
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------

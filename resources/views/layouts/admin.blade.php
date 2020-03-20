@@ -140,6 +140,19 @@
 
                         </ul>
                     </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-check-square text-green" aria-hidden="true"></i>
+                            <span class="text-green">Aprobaciones Mes curso</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{url('aprobacion_consideraciones_directa_rpl')}}"><i class="fa fa-check-square text-green"></i>Aprobar consideraciones</a></li>
+
+
+                        </ul>
+                    </li>
                 @endif
 
                 <li class="treeview">
@@ -163,10 +176,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('nomina_directa')}}"><i class="fa fa-list-ol"></i>Nómina Directa</a></li>
-                       <!-- <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Tiendas</a></li>
-                        <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Indirecta</a></li>-->
-
-
+                        <li><a href="{{url('nomina_directa_mescurso')}}"><i class="fa fa-calendar-plus-o"></i><span class="text-green">Mes en Curso</span></a></li>
                     </ul>
                 </li>
 
@@ -191,8 +201,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('consideraciones_directa')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
-                       <!-- <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Tiendas</a></li>-->
+                        <li><a href="{{url('consideraciones_directa_rpl')}}"><i class="fa fa-calendar"></i><span class="text-green">Cons. mes en curso</span> </a></li>
+
                     </ul>
                 </li>
 
@@ -278,9 +288,6 @@
         </section>
     </div><!-- /.col -->
 </div><!-- /.row -->
-
-</section><!-- /.content -->
-</div><!-- /.content-wrapper -->
 <!--Fin-Contenido-->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">

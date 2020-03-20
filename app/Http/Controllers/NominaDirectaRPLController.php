@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Consideracion;
 use App\NominaDirectaRPL;
 use App\PersonaDirectaRPL;
 use Illuminate\Contracts\View\Factory;
@@ -35,6 +36,8 @@ class NominaDirectaRPLController extends Controller
         $mes_nomina = 202003;
         $teamleaders = Teamleader::all();*/
 
+        $consideraciones = Consideracion::all();
+
         if (\Auth::user()->hasRoles(['zonal']))
         {
 
@@ -42,7 +45,7 @@ class NominaDirectaRPLController extends Controller
         else
         {
             $personas = NominaDirectaRPL::all();
-            return view('directaRPL.nomina.index', ['personas'=>$personas]);
+            return view('directaRPL.nomina.index', ['personas'=>$personas, 'consideraciones'=>$consideraciones]);
 
         }
     }

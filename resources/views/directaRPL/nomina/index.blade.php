@@ -108,22 +108,19 @@
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                     </a>
                                     @if(!$persona->estado_consideracion)
-                                        <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
-                                            <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
-                                        </a>
+                                        <a href="" data-target="#modal-consideracion-store-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+
                                     @endif
                                     @if($persona->estado_nomina == 'rechazado')
-                                        <a href="{{URL::action('NominaDirectaController@edit', $persona)}}">
-                                            <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
-                                        </a>
+                                        <a href="" data-target="#modal-consideracion-store-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
                                     @endif
                                     @if(!$persona->motivo_inactivacion)
                                         <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
                                     @endif
                                 </td>
                             @endif
-
                         </tr>
+                        @include('directaRPL.consideraciones.crear_consideracion_modal')
                     @endforeach
                 </table>
             </div>

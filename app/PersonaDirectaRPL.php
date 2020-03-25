@@ -29,10 +29,6 @@ class PersonaDirectaRPL extends Model
         return $this->belongsTo('App\User', 'id_responsable_cambio');
     }
 
-    public function representantes ()
-    {
-        return $this->hasMany('App\PersonaDirecta', 'id_representante_jefe');
-    }
 
     public function jefeNuevo()
     {

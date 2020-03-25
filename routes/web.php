@@ -144,6 +144,13 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('consideraciones_directa_rpl_edit/{id}', 'ConsideracionDirectaRPLController@updateEstado')
         ->name('consideraciones_directa_rpl_edit'); //ruta para editar el estado de la consideracion ya aprobada o rechazada
 
+        /**Inactivaciones Directa* mes curso*/
+    Route::get('aprobar_inactivaciones_rpl', 'InactivacionDirectaRPLController@aprobarInactivaciones')
+        ->name('nomina_directa_rpl.inactivacion');
+    Route::patch('aprobar_inactivaciones_rpl', 'InactivacionDirectaRPLController@aprobarInactivacionesStore')
+        ->name('nomina_directa_rpl.inactivacion_store');
+    Route::resource('inactivaciones_directa_rpl', 'InactivacionDirectaRPLController');
+
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------
      * ----------------------------------------------------------------------------------------------------------------

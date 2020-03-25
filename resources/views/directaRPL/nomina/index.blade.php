@@ -2,11 +2,11 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-            <h3>Nómina - Canal: Directa.
-
-            </h3>
+            <h3>Nómina - Canal: Directa.</h3>
+            <h4 class="text-green">Mes en curso: {{$mes}}</h4>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @include('directaRPL.nomina.search_index')
                     @if (count($errors)>0)
                         <div class="alert alert-danger">
                             <ul>
@@ -69,35 +69,9 @@
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                     </a>
                                     @if(!$persona->estado_consideracion)
-                                        <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
-                                            <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
-                                        </a>
+                                        <a href="" data-target="#modal-consideracion-store-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
                                     @endif
-                                    @if($persona->estado_nomina == 'rechazado')
-                                        <a href="{{URL::action('NominaDirectaController@edit', $persona)}}">
-                                            <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
-                                        </a>
-                                    @endif
-                                    @if(!$persona->motivo_inactivacion)
-                                        <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
-                                    @endif
-                                </td>
-                            @endif
-                            @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(19)))
-                                <td>
-                                    <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
-                                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
-                                    </a>
-                                    @if(!$persona->estado_consideracion)
-                                        <a href="{{URL::action('NominaDirectaController@agregarConsideraciones',$persona)}}">
-                                            <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar Consideración"><i class="fa fa-comment"></i></button>
-                                        </a>
-                                    @endif
-                                    @if($persona->estado_nomina == 'rechazado')
-                                        <a href="{{URL::action('NominaDirectaController@edit', $persona)}}">
-                                            <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar asesor"><i class="fa fa-wrench"></i></button>
-                                        </a>
-                                    @endif
+
                                     @if(!$persona->motivo_inactivacion)
                                         <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
                                     @endif
@@ -108,11 +82,7 @@
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                     </a>
                                     @if(!$persona->estado_consideracion)
-                                        <a href="" data-target="#modal-consideracion-store-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
-
-                                    @endif
-                                    @if($persona->estado_nomina == 'rechazado')
-                                        <a href="" data-target="#modal-consideracion-store-{{$persona->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+                                        <a href="" data-target="#modal-consideracion-store-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
                                     @endif
                                     @if(!$persona->motivo_inactivacion)
                                         <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
@@ -121,6 +91,7 @@
                             @endif
                         </tr>
                         @include('directaRPL.consideraciones.crear_consideracion_modal')
+                        @include('directaRPL.nomina.modal_eliminacion')
                     @endforeach
                 </table>
             </div>

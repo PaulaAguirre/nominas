@@ -21,16 +21,25 @@ class ConsideracionDirectaRPLController extends Controller
         $porcentajes = ['50%', '75%','75% nuevo','prorrateado 0', '25%', 'sin objetivos', 'prorrateado 2'];
 
         $mes=202003;
-        $id_persona = $request->get('id_persona');
         $id_consideracion = $request->get('id_consideracion');
+        $id_persona = $request->get('id_persona');
         $zonas = auth()->user()->zonas->pluck('id');
         $estado_consideracion = $request->get('estado');
-
-        $personas_consideracion = NominaDirectaRPL::where('estado_consideracion', '<>', NULL)
-            //->mes($mes)->representanteDir($id_persona)->consideracion($id_consideracion)->estadoConsideracion($estado_consideracion)
-            ->get();
         $consideraciones = Consideracion::all();
-
+        if (\Auth::user()->hasRoles(['zonal']))
+        {
+            $zonas = \Auth::user()->zonas->pluck('id')->toArray();
+            $personas_consideracion = NominaDirectaRPL::where('estado_consideracion', '<>', NULL)
+                ->zonasZonales($zonas)
+                ->consideracion($id_consideracion)->representante($id_persona, $mes)->estadoConsideracion($estado_consideracion)
+                ->get();
+        }
+        else
+        {
+            $personas_consideracion = NominaDirectaRPL::where('estado_consideracion', '<>', NULL)
+                ->consideracion($id_consideracion)->representante($id_persona, $mes)->estadoConsideracion($estado_consideracion)
+                ->get();
+        }
 
         return view('directaRPL.consideraciones.index', ['personas_consideracion' => $personas_consideracion,
             'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'porcentajes'=>$porcentajes, 'mes'=> $mes]);
@@ -67,12 +76,10 @@ class ConsideracionDirectaRPLController extends Controller
         $jefes = PersonaDirectaRPL::where('cargo', '=', 'representante_jefe')->get();
         $id_consideracion = $request->get('id_consideracion');
         $id_persona = $request->get('id_persona');
-        $id_zona = $request->get('id_zona');
-        $id_jefe= $request->get('id_jefe');
-        $mes = '202003';
+        $mes = 202003;
 
         $personas_directa = NominaDirectaRPL::where('estado_consideracion', '=', 'pendiente')
-           // ->mes($mes)->representanteDir($id_persona)->zonadirecta($id_zona, $id_jefe)->consideracion($id_consideracion)
+            ->consideracion($id_consideracion)->representante($id_persona, $mes)
             ->get();
 
         return view('directaRPL.consideraciones.aprobacion', ['personas_directa' => $personas_directa, 'mes'=>$mes,
@@ -242,7 +249,7 @@ class ConsideracionDirectaRPLController extends Controller
 
         $persona->update();
 
-        return redirect('consideraciones_directa');
+        return redirect()->back();
 
     }
 

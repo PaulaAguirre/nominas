@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-     role="dialog" tabindex="-1" id="modal-consideracion-store-{{$persona->id_nomina}}">
-    {{Form::Open(array('action'=>array('ConsideracionDirectaRPLController@agregarConsideracion', $persona->id_nomina),'files'=>'true','method'=>'patch'))}}
+     role="dialog" tabindex="-1" id="modal-nomina-delete-{{$persona->id_nomina}}">
+    {{Form::Open(array('action'=>array('NominaDirectaRPLController@destroy', $persona->id_nomina),'method'=>'delete', 'enctype'=>'multipart/form-data'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,29 +8,29 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title text-blue">Agregar Consideración: {{$persona->personaDirecta->nombre}}</h4>
+                <h4 class="modal-title text-danger">Inactivar Asesor: {{$persona->personaDirecta->nombre}}</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="text-blue">Consideración</label>
-                    <select class="form-control" id="id_consideracion" name="id_consideracion">
-                        @foreach($consideraciones as $consideracion)
-                                <option value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre ? $consideracion->nombre : '')}}</option>
-                        @endforeach
+                    <label class="text-danger">Motivo</label>
+                    <select class="form-control" id="motivo_inactivacion" name="motivo_inactivacion">
+                        <option value="renuncia" selected>Renuncia</option>
+                        <option value="desvinculacion">Desvinculacion</option>
+                        <option value="cambio de canal">Cambio de Canal</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="text-blue">comentarios</label>
-                    <textarea name="detalles_consideracion" required value="" placeholder="detalles de la consideración" class="form-control text-uppercase"></textarea>
+                    <label class="text-danger">Detalles de la inactivación</label>
+                    <textarea rows="2" name="detalles_inactivacion" required value="{{old('detalles_inactivacion')}}" class="form-control" placeholder="detalles de la inactivación"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="">adjuntar</label>
                     <input type="file" name="archivo">
                 </div>
-            </div>
 
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-warning">Confirmar</button>
@@ -38,4 +38,5 @@
         </div>
     </div>
     {{Form::Close()}}
+
 </div>

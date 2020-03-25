@@ -4,6 +4,7 @@
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <h3>Consideraciones Asesores Directa</h3>
             <h5><span class="text-green">Mes en Curso: {{$mes}}</span></h5>
+            @include('directaRPL.consideraciones.search_aprobacion_index')
         </div>
     </div>
     <div class="row">

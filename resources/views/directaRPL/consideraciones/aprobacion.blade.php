@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <h3>Aprobar Consideraciones - <span class="text-info">Mes: {{$mes}}</span> </h3>
+            @include('directaRPL.consideraciones.search_aprobacion')
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -81,6 +82,7 @@
                                     <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
                                 </td>
                         </tr>
+
                         @include('directaRPL.consideraciones.archivo_modal')
                     @endforeach
                     </tbody>

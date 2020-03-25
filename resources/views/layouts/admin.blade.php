@@ -149,6 +149,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{url('aprobacion_consideraciones_directa_rpl')}}"><i class="fa fa-check-square text-green"></i>Aprobar consideraciones</a></li>
+                            <li><a href="{{url('aprobar_inactivaciones_rpl')}}"><i class="fa fa-check-square text-green"></i>Aprobar inactivaciones</a></li>
 
 
                         </ul>
@@ -214,8 +215,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('inactivaciones_directa')}}"><i class="fa fa-comment"></i> Inactivaciones Directa</a></li>
-                        <!--<li><a href="#"><i class="fa fa-comment"></i> Inactivaciones Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Inctivaciones Tiendas</a></li>-->
+                        <li><a href="{{url('inactivaciones_directa_rpl')}}"><i class="fa fa-comment"></i><span class="text-green">Inactivaciones Mes curso</span></a></li>
+
                     </ul>
                 </li>
                 <li class="treeview">

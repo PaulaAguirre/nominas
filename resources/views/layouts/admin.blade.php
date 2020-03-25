@@ -270,7 +270,6 @@
                                 <!--Fin Contenido-->
                                 </div>
                             </div>
-
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.box-body -->
@@ -279,9 +278,6 @@
     </div><!-- /.col -->
 </div><!-- /.row -->
 
-</section><!-- /.content -->
-</div><!-- /.content-wrapper -->
-<!--Fin-Contenido-->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
         <b>Version. </b><i class="btn-primary">Beta</i>

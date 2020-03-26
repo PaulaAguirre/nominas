@@ -150,7 +150,10 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('aprobar_inactivaciones_rpl', 'InactivacionDirectaRPLController@aprobarInactivacionesStore')
         ->name('nomina_directa_rpl.inactivacion_store');
     Route::resource('inactivaciones_directa_rpl', 'InactivacionDirectaRPLController');
-
+    Route::patch('inactivaciones_directa_edit_rpl/{id}', 'InactivacionDirectaRPLController@updateInactivacion')
+        ->name('inactivaciones_directa_edit_rpl'); //ruta para editar la inactivacion
+    Route::patch('inactivaciones_directa_edit_estado_rpl/{id}', 'InactivacionDirectaRPLController@updateEstado')
+        ->name('inactivaciones_directa_edit_estado_rpl'); //ruta para editar el estado
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------
      * ----------------------------------------------------------------------------------------------------------------

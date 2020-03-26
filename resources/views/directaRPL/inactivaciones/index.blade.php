@@ -52,7 +52,7 @@
                                     <td>{{$persona->comentario_inactivacion ? $persona->comentario_inactivacion.' -OBJ:'.$persona->porcentaje_objetivo : ''}}</td>
                                     <td>{{$persona->motivo_rechazo_inactivacion}}</td>
 
-                                    @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
+                                    @if(auth()->user()->hasRoles(['zonal']))
                                         <td class="text-center">
                                             @if($persona->archivos->where('tipo', '=', 'inactivacion')->first())
                                                 <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
@@ -104,15 +104,17 @@
                                         @if($persona->estado_inactivacion == 'pendiente')
                                             <a href="" data-target="#modal-inactivacion-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="editar inactivacion"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
                                         @endif
-                                            @if(in_array($persona->estado_inactivacion, ['aprobado', 'rechazado']))
-                                                <a href="" data-target="#modal-inactivacion_estado-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
-                                            @endif
+                                        @if(in_array($persona->estado_inactivacion, ['aprobado', 'rechazado']))
+                                            <a href="" data-target="#modal-inactivacion_estado-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
+                                        @endif
 
                                     </td>
                                 @endif
                             </tr>
                         @endif
-
+                        @include('directaRPL.inactivaciones.modal_editar_inactivacion')
+                        @include('directaRPL.inactivaciones.archivo_modal_inactivacion')
+                        @include('directaRPL.inactivaciones.modal_editar_estado')
                     @endforeach
                 </table>
             </div>

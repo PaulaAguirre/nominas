@@ -44,10 +44,11 @@ class NominaDirectaRPLController extends Controller
 
         if (\Auth::user()->hasRoles(['zonal']))
         {
-            $zonas = \Auth::user()->zonas->pluck('id')->toArray();
+            $zonasZonal = \Auth::user()->zonas->pluck('id')->toArray();
+            $zonas = \Auth::user()->zonas;
             $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')
-                ->whereIn('id_zona', $zonas)->get();
-            $personas = NominaDirectaRPL::zonasZonales($zonas)->representante($representante_id, $mes)->jefe($jefe_id)->zona($zona_id)
+                ->whereIn('id_zona', $zonasZonal)->get();
+            $personas = NominaDirectaRPL::zonasZonales($zonasZonal)->representante($representante_id, $mes)->jefe($jefe_id)->zona($zona_id)
                 ->where('mes', '=', $mes)->get();
 
         }
@@ -62,60 +63,6 @@ class NominaDirectaRPLController extends Controller
             'mes'=>$mes, 'jefes'=>$jefes, 'zonas'=>$zonas]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\NominaDirectaRPL  $nominaDirectaRPL
-     * @return \Illuminate\Http\Response
-     */
-    public function show(NominaDirectaRPL $nominaDirectaRPL)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\NominaDirectaRPL  $nominaDirectaRPL
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(NominaDirectaRPL $nominaDirectaRPL)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\NominaDirectaRPL  $nominaDirectaRPL
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, NominaDirectaRPL $nominaDirectaRPL)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

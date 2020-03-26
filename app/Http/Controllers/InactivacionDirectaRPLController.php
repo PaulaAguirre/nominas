@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ArchivoDirectaRPL;
 use App\NominaDirecta;
 use App\NominaDirectaRPL;
 use App\PersonaDirecta;
@@ -22,6 +23,7 @@ class InactivacionDirectaRPLController extends Controller
     public function index(Request $request)
     {
         $mes = 202003;
+        $porcentajes = ['50%', '75%','75% nuevo','prorrateado 0', '25%', 'sin objetivos', 'prorrateado 2'];
         $id_persona = $request->get('id_persona');
         $estado_inactivacion = $request->get('estado');
 
@@ -42,64 +44,10 @@ class InactivacionDirectaRPLController extends Controller
                 ->get();
         }
 
-        return view('directaRPL.inactivaciones.index', ['inactivaciones'=>$inactivaciones, 'mes'=>$mes]);
+        return view('directaRPL.inactivaciones.index', ['inactivaciones'=>$inactivaciones, 'mes'=>$mes, 'porcentajes'=>$porcentajes]);
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -144,12 +92,76 @@ class InactivacionDirectaRPLController extends Controller
                 $nomina_directa->fecha_aprobacion_inactivacion = Carbon::now()->format('d/m/Y');
                 $persona_directa->update();
             }
-
             $nomina_directa->update();
             $cont = $cont+1;
         }
-
         return redirect('aprobar_inactivaciones');
+    }
+
+    /**Modificar una inactivacion si es que aún no fue aprobada*/
+    public function updateInactivacion(Request $request, $id)
+    {
+        $persona = NominaDirectaRPL::findOrFail($id);
+
+        if ($request->hasFile('archivo'))
+        {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
+
+            if ($persona->archivos->where('tipo', '=', 'inactivacion')->first())
+            {
+                $archivo = ArchivoDirectaRPL::where('nomina_directa_id', $persona->id_nomina)
+                    ->where('tipo', 'inactivacion')->get()->first();
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->update();
+            }
+            else
+            {
+                $archivo = new ArchivoDirectaRPL();
+                $archivo->nomina_directa_id = $persona->id_nomina;
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->tipo = 'inactivacion';
+                $archivo->save();
+            }
+
+        }
+        $persona->detalles_inactivacion = $request->get('detalles_inactivacion');
+        $persona->motivo_inactivacion = $request->get('motivo_inactivacion');
+        $persona->update();
+        return redirect()->back();
+    }
+
+    public function updateEstado(Request $request, $id)
+    {
+        $persona = NominaDirectaRPL::findOrFail($id);
+
+        $estado_inactivacion = $request->get('estado_inactivacion');
+        $comentarios = $request->get('comentario_inactivacion');
+        $objetivo = $request->get('objetivo');
+
+        if ($estado_inactivacion == 'aprobado')
+        {
+            $persona->estado_inactivacion = 'aprobado';
+            $persona->comentario_inactivacion = $comentarios;
+            $persona->fecha_aprobacion_inactivacion = Carbon::now()->format('d/m/Y');
+            $persona->motivo_rechazo_inactivacion = NULL;
+            $persona->porcentaje_objetivo = $objetivo[0];
+        }
+        elseif ($estado_inactivacion == 'rechazado')
+        {
+            $persona->estado_inactivacion = 'rechazado';
+            $persona->motivo_rechazo_inactivacion = $comentarios;
+            $persona->comentario_inactivacion = NULL;
+            $persona->porcentaje_objetivo = '100%';
+        }
+
+        $persona->update();
+
+        return redirect()->back();
+
     }
 
 }

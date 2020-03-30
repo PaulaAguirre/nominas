@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <h3>Aprobar Inactivaciones</h3>
-            <h4 class="text-green">Mes en curso: {{$mesgit }}</h4>
+            <h4 class="text-green">Mes en curso: {{$mes }}</h4>
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>

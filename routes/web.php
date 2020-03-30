@@ -131,6 +131,7 @@ Route::group (['middleware'=>'auth'], function () {
 
     /**----------------reapertura de nómina en mes en curso----------*/
     Route::resource('nomina_directa_mescurso', 'NominaDirectaRPLController');
+    Route::resource('representantes_directa_rpl', 'PersonaDirectaRPLController');
         /**Consideraciones mes curso**/
     Route::resource('consideraciones_directa_rpl', 'ConsideracionDirectaRPLController');
     Route::patch('agregar_consideraciones_directa_mes_curso/{id}', 'ConsideracionDirectaRPLController@agregarConsideracion')

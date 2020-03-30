@@ -78,7 +78,7 @@
                                 </td>
                             @else
                                 <td>
-                                    <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
+                                    <a href="{{URL::action('PersonaDirectaRPLController@edit', $persona->personaDirecta)}}">
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                     </a>
                                     @if(!$persona->estado_consideracion)

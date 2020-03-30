@@ -9,6 +9,31 @@ class PersonaDirectaRPL extends Model
     protected $table = 'personas_directa_rpl';
     protected $primaryKey = "id_persona";
 
+    protected $fillable = [ //asigna los campos de la tabla de BD
+        'ch',
+        'id_persona_anterior',
+        'documento_persona',
+        'fecha_ingreso',
+        'nombre',
+        'id_representante_jefe',
+        'cargo',
+        'id_zona',
+        'id_zona_nuevo',
+        'cargo_go',
+        'activo',
+        'agrupacion',
+        'agrupacion_anterior',
+        'estado_cambio',
+        'motivo_rechazo',
+        'regularizacion_cambio',
+        'staff',
+        'id_consideracion',
+        'detalles_consideracion',
+        'id_responsable_cambio'
+
+    ];
+
+
     public function zona ()
     {
         return $this->belongsTo('App\Zona', 'id_zona');

@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\ReplicarNominaDirecta'
+        'App\Console\Commands\ReplicarNominaDirecta',
+        'App\Console\Commands\ReplicarInactivaciones'
     ];
 
     /**

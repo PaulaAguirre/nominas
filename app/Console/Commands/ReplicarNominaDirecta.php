@@ -60,7 +60,7 @@ class ReplicarNominaDirecta extends Command
             $personaRPL->id_zona = $persona->personaDirecta->id_zona;
             $personaRPL->id_zona_nuevo = $persona->personaDirecta->id_zona_nuevo;
             $personaRPL->cargo_go = $persona->personaDirecta->cargo_go;
-            $personaRPL->agrupacion = $persona->personaDirecta->activo;
+            $personaRPL->agrupacion = $persona->personaDirecta->agrupacion;
             $personaRPL->estado_cambio = $persona->personaDirecta->estado_cambio;
             $personaRPL->motivo_rechazo = $persona->personaDirecta->motivo_rechazo;
             $personaRPL->regularizacion_cambio = $persona->personaDirecta->regularizacion_cambio;

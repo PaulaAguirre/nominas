@@ -107,10 +107,10 @@
                                             <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
                                         </a>
                                     @endif
+                                    @if(in_array($persona->estado_consideracion, ['aprobado', 'rechazado']))
                                         <a href="" data-target="#modal-nomina-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
-                                    @if(in_array($persona->estado_consideracion, ['pendiente']))
-                                        <a href="" data-target="#modal-consideracion-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="editar consideración"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
                                     @endif
+                                        <a href="" data-target="#modal-consideracion-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="editar consideración"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
                                 </td>
                             </tr>
                         @endif

@@ -35,7 +35,7 @@ class NominaDirectaRPLController extends Controller
         $mes = $request->get('mes');
         if(!$mes)
         {
-            $mes = 202003;
+            $mes = \Config::get('global.mes_anterior');
         }
         $consideraciones = Consideracion::all();
         $jefe_id = $request->get('id_jefe');

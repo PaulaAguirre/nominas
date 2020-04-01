@@ -16,7 +16,7 @@ class NominaDirectaMesAnteriorExport implements FromView
      */
     public function view():View
     {
-        $mes = Config::get('global.mes');
+        $mes = Config::get('global.mes_anterior');
         $personas = NominaDirectaRPL::where('mes', '=', $mes)
             ->get();
 

@@ -217,7 +217,7 @@ Route::get('/home', 'HomeController@index')->name('home');
   //  return Excel::download(new NominaDirectaExport, 'nomina.xlsx');
 //});
  Route::get('/excel', 'ExcelController@exportNominaDirecta'); //Descarga las Consideraciones
-Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //descarga los nuevos ingresos
+ Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //descarga los nuevos ingresos
  Route::get('/generar', 'ExcelController@index');
  Route::get('/exportar_consideraciones', 'ExcelController@exportConsideracionesController');
  Route::get('/nomina_x_zona', 'ExcelController@exportarNominaXZonalController');
@@ -225,6 +225,8 @@ Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //
  /**excel tiendas*/
 Route::get('/excel_tienda', 'ExcelController@exportNominaTienda');
 Route::get('/excel_tienda_x_zona', 'ExcelController@exportNominaTiendaxZona');
+/**excel reapertura*/
+Route::get('/excel_directa_mes_anterior', 'ExcelController@exportarDirectaMesAnterior');
 
 
 

@@ -287,22 +287,8 @@ NominaDirectaController extends Controller
 
     public function aprobarInactivaciones(Request $request)
     {
-        $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(15);
-        $mes_actual = Carbon::now();
 
-        if ($mes_actual->between($fecha1, $fecha2))
-        {
-            $mes=Carbon::now()->format('Ym');
-        }
-        else
-        {
-            $mes=202004;
-            //$mes= Carbon::now()->addMonth(1)->format('Ym');
-
-
-        }
-        $mes=202004;
+        $mes=\Config::get('global.mes');
 
         $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
             ->where('mes', '=', $mes)->get();

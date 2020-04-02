@@ -40,6 +40,7 @@
                         <th>Nombre</th>
                         <th>CH</th>
                         <th>Cédula</th>
+                        <th>oficina</th>
                         <th>Zona</th>
                         <th>Rep. Zonal</th>
                         <th class="text-center">OPC</th>
@@ -51,6 +52,7 @@
                             <td>{{$coordinador->nombre}}</td>
                             <td>{{$coordinador->ch}}</td>
                             <td>{{$coordinador->documento_persona}}</td>
+                            <td>{{$coordinador->oficina ? $coordinador->oficina->nombre : ''}}</td>
                             <td>{{$coordinador->zona ? $coordinador->zona->zona : '' }}</td>
                             <td>{{$coordinador->zona ? $coordinador->zona->representante_zonal_nombre : '' }}</td>
                             <td><a href="{{URL::action('CoordinadoresController@edit', $coordinador->id_persona)}}">

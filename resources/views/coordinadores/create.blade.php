@@ -53,6 +53,14 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label for="">Oficina</label>
+                            <select name="oficina_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione oficina">
+                                @foreach($oficinas as $oficina )
+                                        <option  value="{{$oficina->id}}">{{strtoupper ($oficina->nombre)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="form-group text-center col-md-offset-2 col-md-6">
                             <br>

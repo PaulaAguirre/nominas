@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Oficina;
 use App\Teamleader;
 use App\Zona;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class CoordinadoresController extends Controller
     public function create()
     {
         $zonas = Zona::all();
-        return view('coordinadores.create', ['zonas'=>$zonas]);
+        $oficinas = Oficina::all();
+        return view('coordinadores.create', ['zonas'=>$zonas, 'oficinas'=>$oficinas]);
 
     }
 
@@ -50,6 +52,7 @@ class CoordinadoresController extends Controller
         $coordinador->documento_persona = $request->get('documento');
         $coordinador->cargo = 'representante_jefe';
         $coordinador->id_zona = $request->get('id_zona');
+        $coordinador->oficina_id = $request->get('oficina_id');
         $coordinador->save();
 
         return redirect('coordinadores');
@@ -75,9 +78,10 @@ class CoordinadoresController extends Controller
     public function edit($id)
     {
         $coordinador = PersonaDirecta::findOrFail($id);
+        $oficinas = Oficina::all();
         $zonas = Zona::all();
 
-        return view('coordinadores.edit', ['coordinador'=>$coordinador, 'zonas'=>$zonas]);
+        return view('coordinadores.edit', ['coordinador'=>$coordinador, 'zonas'=>$zonas, 'oficinas'=>$oficinas]);
     }
 
     /**
@@ -94,6 +98,7 @@ class CoordinadoresController extends Controller
         $coordinador->ch = $request->get('ch');
         $coordinador->documento_persona = $request->get('documento_persona');
         $coordinador->id_zona = $request->get('id_zona');
+        $coordinador->oficina_id = $request->get('oficina_id');
         $coordinador->update();
 
         return redirect('coordinadores');

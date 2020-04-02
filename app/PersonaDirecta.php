@@ -29,7 +29,8 @@ class PersonaDirecta extends Model
         'staff',
         'id_consideracion',
         'detalles_consideracion',
-        'id_responsable_cambio'
+        'id_responsable_cambio',
+        'oficina_id'
 
     ];
 
@@ -63,6 +64,11 @@ class PersonaDirecta extends Model
     public function jefeNuevo()
     {
         return $this->belongsTo('App\PersonaDirecta', 'id_representante_jefe_nuevo');
+    }
+
+    public function oficina ()
+    {
+        return $this->belongsTo('App\Oficina');
     }
 
 

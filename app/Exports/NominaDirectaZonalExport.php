@@ -23,7 +23,7 @@ class NominaDirectaZonalExport implements FromView
         $fecha_actual = Carbon::now();
 
             //$mes = Carbon::now()->addMonth(1)->format('Ym');
-            $mes = 202004;
+            $mes = \Config::get('global.mes');
             $personas = NominaDirecta::where('mes', '=', $mes)
                 ->get();
 

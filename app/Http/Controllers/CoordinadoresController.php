@@ -19,7 +19,7 @@ class CoordinadoresController extends Controller
         $id_coordinador = $request->get('id_coordinador');
         $id_zona = $request->get('id_zona');
         $coordinadores = PersonaDirecta::where('cargo', '=', 'representante_jefe')
-            ->coordinador($id_coordinador)->zona($id_zona)->get();
+            ->coordinador($id_coordinador)->zona($id_zona)->where('activo', '=', 'activo')->get();
         $zonas = Zona::all();
         return view('coordinadores.index', ['coordinadores'=>$coordinadores, 'zonas'=>$zonas]);
     }

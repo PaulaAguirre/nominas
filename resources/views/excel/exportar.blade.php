@@ -11,6 +11,7 @@
         <th>Cedula</th>
         <th>NEW PERFIL</th>
         <th>PERFIL_ANTERIOR</th>
+        <th>OFICINA</th>
         <th>ZONA</th>
         <th>ID ZONA</th>
         <th>EH_ZONAL</th>
@@ -43,6 +44,7 @@
                 <td>{{$persona->personaDirecta->documento_persona}}</td>
                 <td>{{$persona->personaDirecta->agrupacion }}</td>
                 <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
+                <td>{{$persona->personaDirecta->representanteJefe->oficina ? $persona->personaDirecta->representanteJefe->oficina->nombre : ''}}</td>
                 <td>{{$persona->personaDirecta->zona->familiazona ? $persona->personaDirecta->zona->familiazona->nombre : '' }}</td>
                 <td>{{$persona->personaDirecta->zona->id_familiazona }}</td>
                 <td>{{$persona->personaDirecta->zona->representante_zonal_ch }}</td>

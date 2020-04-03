@@ -3,6 +3,9 @@
     <tr>
         <th>ID</th>
         <th>Mes</th>
+        <th>CH</th>
+        <th>NOMBRE</th>
+        <th>Cedula</th>
         <th>Tienda</th>
         <th>JEFE_tienda_CH</th>
         <th>NOMBRE_JEFE_tienda</th>
@@ -11,9 +14,6 @@
         <th>Teamleader CH</th>
         <th>NOMBRE_teamleader</th>
         <th>CEDULA teamleader</th>
-        <th>CH</th>
-        <th>NOMBRE</th>
-        <th>Cedula</th>
         <th>CARGO_GO</th>
         <th>CARGO_ANTERIOR</th>
         <th>ESPECIALISTA</th>
@@ -40,6 +40,9 @@
             <tr>
                 <td>{{$asesor->id}}</td>
                 <td>{{$asesor->mes}}</td>
+                <td>{{$asesor->asesor->ch }}</td>
+                <td>{{$asesor->asesor->nombre }}</td>
+                <td>{{$asesor->asesor->documento}}</td>
                 <td>{{$asesor->asesor->tienda->tienda_nombre}}</td>
                 <td>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->ch : ''}}</td>
                 <td>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : ''}}</td>
@@ -48,9 +51,6 @@
                 <td>{{$asesor->asesor->teamleader->ch }}</td>
                 <td>{{$asesor->asesor->teamleader->nombre}}</td>
                 <td>{{$asesor->asesor->teamleader->documento}}</td>
-                <td>{{$asesor->asesor->ch }}</td>
-                <td>{{$asesor->asesor->nombre }}</td>
-                <td>{{$asesor->asesor->documento}}</td>
                 <td>{{$asesor->asesor->cargo_go }}</td>
                 <td>{{$asesor->asesor->cargo_anterior}}</td>
                 <Td>{{$asesor->asesor->especialista == 'si' ? 'si' : 'no'}}</Td>

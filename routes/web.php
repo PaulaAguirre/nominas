@@ -228,5 +228,10 @@ Route::get('/excel_tienda_x_zona', 'ExcelController@exportNominaTiendaxZona');
 /**excel reapertura*/
 Route::get('/excel_directa_mes_anterior', 'ExcelController@exportarDirectaMesAnterior');
 
+Route::get('variable', function ()
+{
+    dd(Config::get('global.mes'));
+});
+
 
 

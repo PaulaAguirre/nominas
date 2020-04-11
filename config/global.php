@@ -6,6 +6,7 @@
 return [
     'mes' => 202004,
     'mes_anterior' => 202003,
+    'cadena' => 'hola'
 ];
 
 

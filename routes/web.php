@@ -230,7 +230,7 @@ Route::get('/excel_directa_mes_anterior', 'ExcelController@exportarDirectaMesAnt
 
 Route::get('variable', function ()
 {
-    dd(\Illuminate\Support\Facades\Config::get('global.mes'));
+    dd(Config::get('global.cadena'));
 });
 
 

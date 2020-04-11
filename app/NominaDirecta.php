@@ -34,7 +34,8 @@ class NominaDirecta extends Model
         'fecha_aprobacion_inactivacion',
         'porcentaje_objetivo',
         'fecha_carga_consideracion',
-        'fecha_carga_inactivacion'
+        'fecha_carga_inactivacion',
+        'porcentaje_id'
 
     ];
 
@@ -51,6 +52,11 @@ class NominaDirecta extends Model
     public function consideracion ()
     {
         return $this->belongsTo('App\Consideracion', 'id_consideracion');
+    }
+
+    public function porcentaje ()
+    {
+        return $this->belongsTo('App\PorcentajeDirecta', 'porcentaje_id');
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
@@ -89,7 +95,7 @@ class NominaDirecta extends Model
             $fecha1 = new Carbon('first day of this month');
             $fecha2 = (new Carbon('first day of this month'))->addDays(19);
 
-            $mes_format = 202004;
+            $mes_format = \Config::get('global.mes');
 
             $query->where('mes', $mes_format);
 

@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <h3>Aprobar Consideraciones - <span class="text-info">Mes: {{$mes}}</span> </h3>
+            @include('directaRPL.consideraciones.search_aprobacion')
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -15,9 +16,7 @@
         </div>
     </div>
 
-    @include('consideraciones_directa.search_aprobacion')
-
-    {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['consideraciones_directa_aprobacion.aprobacion', $mes]])!!}
+    {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['consideraciones_directa_rpl.store', $mes]])!!}
     {{Form::token()}}
 
     <div class="row text-uppercase">
@@ -41,34 +40,8 @@
 
                     </thead>
                     <tbody id="ajuste">
-                    @foreach ($personas_consideracion as $persona)
+                    @foreach ($personas_directa as $persona)
                         <tr class="text-uppercase text-sm">
-                            @if (auth()->user()->hasRoles(['tigo_people']))
-                                @if(auth()->user()->zonas->contains($persona->personaDirecta->id_zona))
-                                    <td>{{$persona->id_nomina}}</td>
-                                    <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
-                                    <td>{{$persona->personaDirecta->nombre}}</td>
-                                    <td>{{$persona->personaDirecta->zona->zona}}</td>
-                                    <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
-                                    <td>{{$persona->consideracion ? $persona->consideracion->nombre : ''}}</td>
-                                    <td>{{$persona->detalles_consideracion}}</td>
-                                    <td>{{$persona->regularizacion_consideracion}}</td>
-                                    <td id="tdaprobacion">
-                                        <select name="aprobacion[]" class="form-control aprobacion text-sm" id="aprobacion-{{$persona->id_nomina}}">
-                                            <option value="aprobado" >aprobado</option>
-                                            <option value="rechazado">rechazado</option>
-                                            <option value="pendiente" selected>pendiente</option>
-                                        </select>
-                                    </td>
-                                    <td>%</td>
-                                    <td><input type="text" class="form-control text-uppercase" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"><input type="hidden" ></td>
-                                    <td><input type="text" class="form-control text-uppercase" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"><input type="hidden" ></td>
-                                    <td class="text-center">
-                                        <input name="_token" value="{{csrf_token()}}" type="hidden">
-                                        <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
-                                    </td>
-                                @endif
-                            @elseif(auth()->user()->hasRoles(['tigo_people_admin']))
                                 <td>{{$persona->id_nomina}}</td>
                                 <td >{{$persona->personaDirecta->ch}}<input type="hidden" name="id_nomina[]" value="{{$persona->id_nomina}}"></td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
@@ -85,31 +58,27 @@
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
-                                <td id="td_objetivo">
-                                    <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$persona->id_nomina}}">
-                                        @foreach($porcentajes as $porcentaje)
-                                            <option value="{{$porcentaje->id}}-{{$porcentaje->porcentaje}}">{{$porcentaje->nombre}} - {{$porcentaje->porcentaje}}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
+                            <td id="td_objetivo">
+                                <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$persona->id_nomina}}">
+                                    @foreach($porcentajes as $porcentaje)
+                                        <option value="{{$porcentaje->id}}-{{$porcentaje->porcentaje}}">{{$porcentaje->nombre}} - {{$porcentaje->porcentaje}}</option>
+                                    @endforeach
+                                </select>
+                            </td>
                                 <td><textarea rows="3" class="form-control text-uppercase text-sm" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
 
                                 <td><textarea rows="3"  class="form-control text-uppercase text-sm" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
 
-
                                     @if($persona->archivos->where('tipo', '=', 'consideracion')->first())
-
-                                     <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                        <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
                                     @endif
                                     <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
                                 </td>
-
-                            @endif
                         </tr>
-                        @include('consideraciones_directa.archivo_modal')
 
+                        @include('directaRPL.consideraciones.archivo_modal')
                     @endforeach
                     </tbody>
 

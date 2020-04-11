@@ -129,6 +129,32 @@ Route::group (['middleware'=>'auth'], function () {
     Route::view('reportes_directa', 'reportes.index');
     Route::view('reportes_canales', 'analistas.reportes');
 
+    /**----------------reapertura de nómina en mes en curso----------*/
+    Route::resource('nomina_directa_mescurso', 'NominaDirectaRPLController');
+    Route::resource('representantes_directa_rpl', 'PersonaDirectaRPLController');
+        /**Consideraciones mes curso**/
+    Route::resource('consideraciones_directa_rpl', 'ConsideracionDirectaRPLController');
+    Route::patch('agregar_consideraciones_directa_mes_curso/{id}', 'ConsideracionDirectaRPLController@agregarConsideracion')
+        ->name('nomina_directa_mes_curso.consideracion');
+    Route::get('aprobacion_consideraciones_directa_rpl', 'ConsideracionDirectaRPLController@aprobarConsideraciones')//ruta para cargar las consideraciones de un asesor
+    ->name('consideraciones_directa_rpl.aprobacion');//ruta para mostrar las consideraciones a aprobar
+    Route::patch('aprobacion_consideraciones_directa_rpl', 'ConsideracionDirectaRPLController@storeConsideraciones')
+        ->name('consideraciones_directa_rpl.store'); //ruta para guardar estado de consideración
+    Route::patch('consideraciones_directa_rpl_update_consideracion/{id}', 'ConsideracionDirectaRPLController@updateConsideracion')
+        ->name('consideraciones_directa_rpl_edit_consideracion'); //ruta para editar la consideracion ya creada
+    Route::patch('consideraciones_directa_rpl_edit/{id}', 'ConsideracionDirectaRPLController@updateEstado')
+        ->name('consideraciones_directa_rpl_edit'); //ruta para editar el estado de la consideracion ya aprobada o rechazada
+
+        /**Inactivaciones Directa* mes curso*/
+    Route::get('aprobar_inactivaciones_rpl', 'InactivacionDirectaRPLController@aprobarInactivaciones')
+        ->name('nomina_directa_rpl.inactivacion');
+    Route::patch('aprobar_inactivaciones_rpl', 'InactivacionDirectaRPLController@aprobarInactivacionesStore')
+        ->name('nomina_directa_rpl.inactivacion_store');
+    Route::resource('inactivaciones_directa_rpl', 'InactivacionDirectaRPLController');
+    Route::patch('inactivaciones_directa_edit_rpl/{id}', 'InactivacionDirectaRPLController@updateInactivacion')
+        ->name('inactivaciones_directa_edit_rpl'); //ruta para editar la inactivacion
+    Route::patch('inactivaciones_directa_edit_estado_rpl/{id}', 'InactivacionDirectaRPLController@updateEstado')
+        ->name('inactivaciones_directa_edit_estado_rpl'); //ruta para editar el estado
     /**
      * fin Nomina directa-----------------------------------------------------------------------------------------------
      * ----------------------------------------------------------------------------------------------------------------
@@ -191,7 +217,7 @@ Route::get('/home', 'HomeController@index')->name('home');
   //  return Excel::download(new NominaDirectaExport, 'nomina.xlsx');
 //});
  Route::get('/excel', 'ExcelController@exportNominaDirecta'); //Descarga las Consideraciones
-Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //descarga los nuevos ingresos
+ Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //descarga los nuevos ingresos
  Route::get('/generar', 'ExcelController@index');
  Route::get('/exportar_consideraciones', 'ExcelController@exportConsideracionesController');
  Route::get('/nomina_x_zona', 'ExcelController@exportarNominaXZonalController');
@@ -199,6 +225,8 @@ Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //
  /**excel tiendas*/
 Route::get('/excel_tienda', 'ExcelController@exportNominaTienda');
 Route::get('/excel_tienda_x_zona', 'ExcelController@exportNominaTiendaxZona');
+/**excel reapertura*/
+Route::get('/excel_directa_mes_anterior', 'ExcelController@exportarDirectaMesAnterior');
 
 
 

@@ -3,9 +3,10 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <h3>Asesores Inactivados</h3>
+            <h4 class="text-green">Mes en curso: {{$mes}}</h4>
         </div>
     </div>
-    @include('inactivaciones_directa.search_index')
+    @include('directaRPL.inactivaciones.search_index')
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
@@ -48,10 +49,10 @@
                                     @else
                                         <td class="alert-danger">{{$persona->estado_inactivacion}}</td>
                                     @endif
-                                    <td>{{$persona->comentario_inactivacion ? $persona->comentario_inactivacion.' -OBJ:'.$persona->porcentaje_objetivo : ''}}</td>
+                                    <td>{{$persona->porcentaje_id ? $persona->porcentaje->nombre.' -OBJ:'.$persona->porcentaje->porcentaje : ''}}</td>
                                     <td>{{$persona->motivo_rechazo_inactivacion}}</td>
 
-                                    @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
+                                    @if(auth()->user()->hasRoles(['zonal']))
                                         <td class="text-center">
                                             @if($persona->archivos->where('tipo', '=', 'inactivacion')->first())
                                                 <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
@@ -103,17 +104,17 @@
                                         @if($persona->estado_inactivacion == 'pendiente')
                                             <a href="" data-target="#modal-inactivacion-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="editar inactivacion"><button class="btn btn-warning btn-xs"  id="btn_ver"><i class="fa fa-pencil"></i></button></a>
                                         @endif
-                                            @if(in_array($persona->estado_inactivacion, ['aprobado', 'rechazado']))
-                                                <a href="" data-target="#modal-inactivacion_estado-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
-                                            @endif
+                                        @if(in_array($persona->estado_inactivacion, ['aprobado', 'rechazado']))
+                                            <a href="" data-target="#modal-inactivacion_estado-update-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" ><button class="btn-xs btn-file" title="editar estado"><i class="fa fa-cogs" aria-hidden="true"></i></button></a>
+                                        @endif
 
                                     </td>
                                 @endif
                             </tr>
                         @endif
-                        @include('inactivaciones_directa.modal_editar_estado')
-                        @include('inactivaciones_directa.modal_editar_inactivacion')
-                        @include('inactivaciones_directa.archivo_modal_inactivacion')
+                        @include('directaRPL.inactivaciones.modal_editar_inactivacion')
+                        @include('directaRPL.inactivaciones.archivo_modal_inactivacion')
+                        @include('directaRPL.inactivaciones.modal_editar_estado')
                     @endforeach
                 </table>
             </div>

@@ -133,13 +133,27 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{url('aprobacion_nomina_directa')}}/202004"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos Dir</a></li>
-                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/202004"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
-                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/202004"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
+                            <li><a href="{{url('aprobacion_nomina_directa')}}/{{Config::get('global.mes')}}"><i class="fa fa-user-plus"></i> Aprobar Nuevos Ingresos Dir</a></li>
+                            <li><a href="{{url('aprobacion_consideraciones_directa')}}/{{Config::get('global.mes')}}"><i class="fa fa-check-square"></i> Aprobar consideraciones Dir</a></li>
+                            <li><a href="{{url('representantes_directa/aprobacion_estructura')}}/{{Config::get('global.mes')}}"><i class="fa fa-check-square"></i>Cambios Estructura Dir</a></li>
                             <li><a href="{{url('aprobar_inactivaciones')}}"><i class="fa fa-check-square"></i>Inactivaciones Directa</a></li>
 
                         </ul>
                     </li>
+
+                    @if(\Carbon\Carbon::now() > Carbon\Carbon::now()->firstOfMonth()->addDay(14))
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-check-square text-green" aria-hidden="true"></i>
+                                <span class="text-green">Aprobaciones Mes curso</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{url('aprobacion_consideraciones_directa_rpl')}}"><i class="fa fa-check-square text-green"></i>Aprobar consideraciones</a></li>
+                                <li><a href="{{url('aprobar_inactivaciones_rpl')}}"><i class="fa fa-check-square text-green"></i>Aprobar inactivaciones</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 @endif
 
                 <li class="treeview">
@@ -163,14 +177,13 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('nomina_directa')}}"><i class="fa fa-list-ol"></i>Nómina Directa</a></li>
-                       <!-- <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Tiendas</a></li>
-                        <li><a href="#"><i class="fa fa-list-ol"></i>Nómina Indirecta</a></li>-->
-
-
+                        @if(\Carbon\Carbon::now() > Carbon\Carbon::now()->firstOfMonth()->addDay(14))
+                            <li><a href="{{url('nomina_directa_mescurso')}}"><i class="fa fa-calendar-plus-o"></i><span class="text-green">Mes en Curso</span></a></li>
+                        @endif
                     </ul>
                 </li>
 
-                <li class="treeview">
+                <!--<li class="treeview">
                     <a href="#">
                         <i class="fa fa-line-chart" aria-hidden="true"></i>
                         <span>Objetivos</span>
@@ -178,10 +191,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Directa</a></li>
-                       <!-- <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-calculator"></i> Objetivos Tiendas</a></li>-->
                     </ul>
-                </li>
+                </li>-->
 
                 <li class="treeview">
                     <a href="#">
@@ -191,8 +202,9 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('consideraciones_directa')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
-                       <!-- <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Consideraciones Tiendas</a></li>-->
+                        @if(\Carbon\Carbon::now() > Carbon\Carbon::now()->firstOfMonth()->addDay(14))
+                            <li><a href="{{url('consideraciones_directa_rpl')}}"><i class="fa fa-calendar"></i><span class="text-green">Cons. mes en curso</span> </a></li>
+                        @endif
                     </ul>
                 </li>
 
@@ -204,8 +216,9 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('inactivaciones_directa')}}"><i class="fa fa-comment"></i> Inactivaciones Directa</a></li>
-                        <!--<li><a href="#"><i class="fa fa-comment"></i> Inactivaciones Indirecta</a></li>
-                        <li><a href="#"><i class="fa fa-comment"></i> Inctivaciones Tiendas</a></li>-->
+                        @if(\Carbon\Carbon::now() > Carbon\Carbon::now()->firstOfMonth()->addDay(14))
+                            <li><a href="{{url('inactivaciones_directa_rpl')}}"><i class="fa fa-comment"></i><span class="text-green">Inactivaciones Mes curso</span></a></li>
+                        @endif
                     </ul>
                 </li>
                 <li class="treeview">
@@ -214,6 +227,8 @@
                         <span>Reportes</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
+
+
                     <ul class="treeview-menu">
                         <li><a href="{{url('reportes_directa')}}"><i class="fa fa-book"></i>Reportes Directa</a></li>
                     </ul>
@@ -270,6 +285,7 @@
                                 <!--Fin Contenido-->
                                 </div>
                             </div>
+
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.box-body -->
@@ -277,7 +293,7 @@
         </section>
     </div><!-- /.col -->
 </div><!-- /.row -->
-
+<!--Fin-Contenido-->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
         <b>Version. </b><i class="btn-primary">Beta</i>

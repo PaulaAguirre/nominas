@@ -8,6 +8,7 @@
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(00))
+
                         <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip">Ingresos Mes Actual</button></a>
                     @endif
                     <a href="/nomina_x_zona"><button class="btn btn-github">Exportar Nómina</button></a>
@@ -66,12 +67,12 @@
                                     <td>{{$persona->mes}}</td>
                                     <td>{{$persona->personaDirecta->ch}}</td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
-                                    <td>{{$persona->agrupacion}}</td>
+                                    <td>{{$persona->personaDirecta->agrupacion}}</td>
                                     <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
                                     <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                     <td>{{$persona->personaDirecta->representanteJefe->oficina ? $persona->personaDirecta->representanteJefe->oficina->nombre : ''}}</td>
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
-                                    <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$persona->estado_consideracion}}</td>
+                                    <td><span class="text-info">Cons.:</span> {{$persona->porcentaje ? $persona->porcentaje->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$persona->estado_consideracion}}</td>
                                     <td><span class="text-info">Motivo: </span>{{$persona->motivo_inactivacion}}<br><span class="text-danger">Estado: </span>{{$persona->estado_inactivacion}}</td>
                                     @if($persona->estado_inactivacion == 'pendiente')
                                         <td>pendiente</td>
@@ -115,10 +116,16 @@
                                 <td>{{$persona->personaDirecta->representanteJefe->oficina ? $persona->personaDirecta->representanteJefe->oficina->nombre : ''}}</td>
                                 <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                 <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br>
+                                    @if($persona->estado_consideracion == 'aprobado')
+                                        <span class="text-fuchsia">OBS.:</span> {{$persona->porcentaje ? $persona->porcentaje->nombre : ''}}<br>
+                                    @endif
                                     <span class="text-danger">Estado:</span>{{$persona->estado_consideracion}}<br>
                                     <span class="text-green">Fecha:</span>{{$persona->fecha_carga_consideracion}}
                                 </td>
                                 <td><span class="text-info">Motivo: </span>{{$persona->motivo_inactivacion}}<br>
+                                    @if($persona->estado_inactivacion == 'aprobado')
+                                        <span class="text-fuchsia">OBS.:</span> {{$persona->porcentaje ? $persona->porcentaje->nombre : ''}}<br>
+                                    @endif
                                     <span class="text-danger">Estado: </span>{{$persona->estado_inactivacion}}<br>
                                     <span class="text-green">Fecha:</span>{{$persona->fecha_carga_inactivacion}}
 
@@ -131,7 +138,7 @@
                                 @else
                                     <td class="text-success">Activo</td>
                                 @endif
-                                <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
+                                <td>{{$persona->porcentaje ? $persona->porcentaje->porcentaje : '100%'}}</td>
                                 <td>
                                     <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
@@ -176,5 +183,4 @@
             })
         </script>
     @endpush
-
 @endsection

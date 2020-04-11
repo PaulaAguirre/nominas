@@ -25,7 +25,7 @@ class SegundoMesDirectaController extends Controller
      */
     public function create()
     {
-        $mes_nomina = 202003;
+        $mes_nomina = \Config::get('global.mes_anterior');
         $nomina_segundo_mes = NominaDirecta::where('id_consideracion', '=', '6')
         ->where('mes', '=', $mes_nomina)->where('estado_consideracion', '=', 'aprobado')
             ->whereNull('estado_inactivacion')
@@ -43,7 +43,7 @@ class SegundoMesDirectaController extends Controller
     public function store(Request $request)
     {
         $id_persona = $request->get('id_persona');
-        $mes_nomina = 202004;
+        $mes_nomina = \Config::get('global.mes');
         $cont = 0;
 
         while ($cont < count($id_persona))
@@ -55,6 +55,7 @@ class SegundoMesDirectaController extends Controller
             $persona->comentario_consideracion = 'ok';
             $persona->fecha_aprobacion_consideracion = Carbon::now();
             $persona->porcentaje_objetivo = '75%';
+            $persona->porcentaje_id = 10;
             $persona->detalles_consideracion = 'fecha de ingreso: '.$persona->personaDirecta->fecha_ingreso;
             $persona->update();
             $cont = $cont+1;

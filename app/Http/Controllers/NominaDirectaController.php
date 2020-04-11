@@ -8,6 +8,7 @@ use App\Archivo;
 use App\Consideracion;
 use App\NominaDirecta;
 use App\PersonaDirecta;
+use App\PorcentajeDirecta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Psr\Log\NullLogger;
@@ -287,26 +288,15 @@ NominaDirectaController extends Controller
 
     public function aprobarInactivaciones(Request $request)
     {
-        $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(15);
-        $mes_actual = Carbon::now();
 
-        if ($mes_actual->between($fecha1, $fecha2))
-        {
-            $mes=Carbon::now()->format('Ym');
-        }
-        else
-        {
-            $mes=202004;
-            //$mes= Carbon::now()->addMonth(1)->format('Ym');
-
-
-        }
-        $mes=202004;
+        $mes=\Config::get('global.mes');
 
         $personas = NominaDirecta::where('estado_inactivacion', '=', 'pendiente')
             ->where('mes', '=', $mes)->get();
-        return view('nomina_directa.aprobar_inactivaciones', ['personas' => $personas, 'mes' => $mes]);
+        $porcentajes = PorcentajeDirecta::where('descripcion', 'inactivacion')
+            ->orderBy('nombre')->get();
+        return view('nomina_directa.aprobar_inactivaciones', ['personas' => $personas, 'mes' => $mes,
+            'porcentajes'=>$porcentajes]);
     }
 
     public function aprobarInactivacionesStore(Request $request)
@@ -316,17 +306,16 @@ NominaDirectaController extends Controller
         $motivo_rechazo = $request->get('motivo_rechazo');
         $comentario_inactivacion = $request->get('comentario_inactivacion');
         $objetivo = $request->get('objetivo');
-
-        //dd($comentario_inactivacion);
         $cont = 0;
 
         while ($cont < count($nomina))
         {
+            $porcentaje = explode('-', $objetivo[$cont]);
+
             $nomina_directa = NominaDirecta::findOrFail($nomina[$cont]);
             $nomina_directa->estado_inactivacion = $estado_inactivacion[$cont];
             $nomina_directa->motivo_rechazo_inactivacion = $motivo_rechazo[$cont];
             $nomina_directa->comentario_inactivacion = $comentario_inactivacion[$cont];
-            $nomina_directa->porcentaje_objetivo = $objetivo[$cont];
 
 
             if ($nomina_directa->estado_inactivacion == 'aprobado')
@@ -334,6 +323,8 @@ NominaDirectaController extends Controller
                 $persona_directa = PersonaDirecta::findOrFail($nomina_directa->id_persona_directa);
                 $persona_directa->activo = 'inactivo';
                 $nomina_directa->fecha_aprobacion_inactivacion = Carbon::now()->format('d/m/Y');
+                $nomina_directa->porcentaje_id = $porcentaje[0];
+                $nomina_directa->porcentaje_objetivo = $porcentaje[1];
                 $persona_directa->update();
             }
 
@@ -422,7 +413,7 @@ NominaDirectaController extends Controller
         $motivo_rechazo = $request->get('motivo_rechazo');
         $cont = 0;
 
-        $mes = Carbon::now()->addMonth()->format ('Ym');
+        $mes = \Config::get('global.mes');
 
         $asesores_existentes = NominaDirecta::where('mes', $mes)
             ->whereNotIn('id_nomina', $nomina)
@@ -452,24 +443,9 @@ NominaDirectaController extends Controller
 
     public function ingresarAsesorMesActual(Request $request)
     {
-        $fecha1 = new Carbon('first day of this month');
-        $fecha2 = (new Carbon('first day of this month'))->addDays(15);
-        $mes = Carbon::now();
 
-        if ($mes->between($fecha1, $fecha2))
-        {
-            $mes_nomina=Carbon::now()->format('Ym');
-        }
-        else
-        {
-            //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
-            $mes_nomina = 202004;
-        }
-        $mes_nomina = 202004;
+        $mes_nomina = \Config::get('global.mes');
         $id_zonas = auth()->user()->zonas->pluck('id')->toArray();
-
-        //$mes_nomina=Carbon::now()->addMonth(1)->format('Ym');
-            //$mes_nomina = 201910;
 
 
         $personas_mes_actual = NominaDirecta::where('mes', '=', $mes_nomina)
@@ -514,7 +490,7 @@ NominaDirectaController extends Controller
 
         //$mes_nomina = Carbon::now()->addMonth(1)->format('Ym');
 
-        $mes_nomina = 202004;
+        $mes_nomina = \Config::get('global.mes');
 
 
         while ($cont < count($agregar))

@@ -2,7 +2,8 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            <h3>Aprobar Inactivaciones - <span class="text-info">Mes: {{$mes}}</span> </h3>
+            <h3>Aprobar Inactivaciones</h3>
+            <h4 class="text-green">Mes en curso: {{$mes }}</h4>
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -15,7 +16,7 @@
         </div>
     </div>
     <br>
-    {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['nomina_directa.inactivacion_store']])!!}
+    {!!Form::model ($mes, ['method'=>'PATCH', 'route'=>['nomina_directa_rpl.inactivacion_store']])!!}
     {{Form::token()}}
 
     <div class="row text-uppercase">

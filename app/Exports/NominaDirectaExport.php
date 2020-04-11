@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\NominaDirecta;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\Exportable;
@@ -16,8 +17,8 @@ class NominaDirectaExport implements FromView
     use Exportable;
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return View
+     */
     public function view():View
     {
         $fecha1 = new Carbon('first day of this month');
@@ -35,7 +36,7 @@ class NominaDirectaExport implements FromView
             //$mes = Carbon::now()->addMonth(1)->format('Ym');
 
         }
-        $mes = 202004;
+        $mes = \Config::get('global.mes');
         $personas = NominaDirecta::where('mes', '=', $mes)
             ->get();
 

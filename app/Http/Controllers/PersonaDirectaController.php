@@ -49,7 +49,7 @@ class PersonaDirectaController extends Controller
     {
         $jefes = PersonaDirecta::where ('cargo', '=', 'representante_jefe')->get();
         $cargos_go = ['go1', 'go2', 'go3'];
-        $agrupaciones = ['MOBILE PRE', 'MOBILE POS', 'HOME', 'B2B', 'CONVERGENTE', 'LINCE', 'PUNTO FIJO', 'ASESOR DELIVERY'];
+        $agrupaciones = ['MOBILE PRE', 'MOBILE POS', 'HOME', 'B2B', 'CONVERGENTE', 'LINCE', 'PUNTO FIJO'];
         return view('personasDirecta.create', ['jefes'=>$jefes, 'cargos_go' => $cargos_go, 'agrupaciones'=>$agrupaciones]);
     }
 

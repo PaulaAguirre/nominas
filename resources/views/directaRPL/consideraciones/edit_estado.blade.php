@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-     role="dialog" tabindex="-1" id="modal-inactivacion_estado-update-{{$persona->id_nomina}}">
-    {{Form::Open(array('action'=>array('InactivacionesDirectaController@updateEstado', $persona->id_nomina),'method'=>'patch'))}}
+     role="dialog" tabindex="-1" id="modal-nomina-update-{{$persona->id_nomina}}">
+    {{Form::Open(array('action'=>array('ConsideracionDirectaRPLController@updateEstado', $persona->id_nomina),'method'=>'patch'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,22 +8,21 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title text-blue">Cambio de Estado de Inactivación: {{$persona->personaDirecta->nombre}}</h4>
+                <h4 class="modal-title text-blue">Cambio de Estado: {{$persona->personaDirecta->nombre}}</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label class="text-blue">Estado</label>
-                    <select class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}" name="estado_inactivacion">
-                        @if($persona->estado_inactivacion=='aprobado')
+                    <select class="form-control aprobacion" id="aprobacion-{{$persona->id_nomina}}" name="estado_consideracion">
+                        @if($persona->estado_consideracion=='aprobado')
                             <option value="aprobado" selected >Aprobado</option>
                             <option value="rechazado">rechazado</option>
                             <option value="pendiente">pendiente</option>
-                        @elseif($persona->estado_inactivacion=='rechazado')
+                        @elseif($persona->estado_consideracion=='rechazado')
                             <option value="aprobado"  >Aprobado</option>
                             <option value="rechazado" selected>rechazado</option>
                             <option value="pendiente">pendiente</option>
                         @endif
-
                     </select>
                 </div>
                 <div class="form-group">
@@ -31,17 +30,19 @@
                     <select class="form-control text-uppercase " name="objetivo" id="objetivo-{{$persona->id_nomina}}">
                         @foreach($porcentajes as $porcentaje)
                             @if($persona->porcentaje_id == $porcentaje->id)
-                                <option selected value="{{$porcentaje->id}}-{{$porcentaje->porcentaje}}">{{$porcentaje->nombre}} - {{$porcentaje->porcentaje}}</option>
+                                <option value="{{$porcentaje->id.'-'.$porcentaje->porcentaje}}" selected>{{$porcentaje->nombre.' - OBJ:'.$porcentaje->porcentaje}}</option>
                             @else
-                                <option value="{{$porcentaje->id}}-{{$porcentaje->porcentaje}}">{{$porcentaje->nombre}} - {{$porcentaje->porcentaje}}</option>
+                                <option value="{{$porcentaje->id.'-'.$porcentaje->porcentaje}}" >{{$porcentaje->nombre.' - OBJ:'.$porcentaje->porcentaje}}</option>
                             @endif
                         @endforeach
                     </select>
                 </div>
 
+
+
                 <div class="form-group">
                     <label class="text-blue">comentarios</label>
-                    <textarea name="comentario_inactivacion" required  class="form-control" placeholder="detalles de la inactivación" rows="2">{{$persona->estado_inactivacion=='aprobado' ? $persona->comentario_inactivacion : $persona->motivo_rechazo_inactivacion}}</textarea>
+                    <input type="text" name="comentario_consideracion" required value="{{$persona->estado_consideracion=='aprobado' ? $persona->comentario_consideracion : $persona->motivo_rechazo_consideracion}}" class="form-control" placeholder="detalles de la inactivación">
                 </div>
 
 
@@ -78,8 +79,6 @@
             })
         </script>
     @endpush
-
-
     {{Form::Close()}}
 
 </div>

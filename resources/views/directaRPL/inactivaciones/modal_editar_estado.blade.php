@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
      role="dialog" tabindex="-1" id="modal-inactivacion_estado-update-{{$persona->id_nomina}}">
-    {{Form::Open(array('action'=>array('InactivacionesDirectaController@updateEstado', $persona->id_nomina),'method'=>'patch'))}}
+    {{Form::Open(array('action'=>array('InactivacionDirectaRPLController@updateEstado', $persona->id_nomina),'method'=>'patch'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

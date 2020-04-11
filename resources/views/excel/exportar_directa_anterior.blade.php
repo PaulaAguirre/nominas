@@ -17,7 +17,8 @@
         <th>ENCARGADO</th>
         <th>TERRITORIO</th>
         <th>F INGRESO</th>
-        <th>OBS (Consideración)</th>
+        <th>OBS zonal (Consideración)</th>
+        <th>OBS Canales</th>
         <th>% Objetivos</th>
         <th>Comentarios Zonal</th>
         <th>Estado Consideración</th>
@@ -50,7 +51,8 @@
                 <td>{{$persona->personaDirecta->zona->region->region }}</td>
                 <td>{{$persona->id_consideracion == 6 ? $persona->personaDirecta->fecha_ingreso : ''}}</td>
                 <td>{{$persona->consideracion ? $persona->consideracion->nombre : 'OK'}}</td>
-                <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%' }}</td>
+                <td>{{$persona->porcentaje ? $persona->porcentaje->nombre : ''}}</td>
+                <td>{{$persona->porcentaje ? $persona->porcentaje->porcentaje : '100%' }}</td>
                 <td>{{$persona->detalles_consideracion}}</td>
                 <td>{{$persona->estado_consideracion}}</td>
                 <td> {{$persona->comentario_consideracion ? $persona->comentario_consideracion : $persona->motivo_rechazo_consideracion}}</td>

@@ -50,6 +50,11 @@ class PersonaDirecta extends Model
         return $this->belongsTo('App\PersonaDirecta', 'id_representante_jefe');
     }
 
+    public function porcentaje()
+    {
+        return $this->belongsTo('App\PorcentajeDirecta', 'porcentaje_id');
+    }
+
     public function responsable_cambio ()
     {
         return $this->belongsTo('App\User', 'id_responsable_cambio');
@@ -72,9 +77,7 @@ class PersonaDirecta extends Model
         if (trim($name))
         {
             $query->where ('nombre', 'like', '%'.$name.'%');
-
         }
-
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */

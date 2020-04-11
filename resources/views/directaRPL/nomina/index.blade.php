@@ -56,9 +56,21 @@
                             <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
                             <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                             <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
-                            <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$persona->estado_consideracion}}</td>
-                            <td><span class="text-info">Motivo: </span>{{$persona->motivo_inactivacion}}<br><span class="text-danger">Estado: </span>{{$persona->estado_inactivacion}}</td>
-                            @if($persona->estado_inactivacion == 'pendiente')
+                            <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br>
+                                @if($persona->estado_consideracion == 'aprobado')
+                                    <span class="text-fuchsia">OBS.:</span> {{$persona->porcentaje ? $persona->porcentaje->nombre : ''}}<br>
+                                @endif
+                                <span class="text-danger">Estado:</span>{{$persona->estado_consideracion}}<br>
+                                <span class="text-green">Fecha:</span>{{$persona->fecha_carga_consideracion}}
+                            </td>
+                            <td><span class="text-info">Motivo: </span>{{$persona->motivo_inactivacion}}<br>
+                                @if($persona->estado_inactivacion == 'aprobado')
+                                    <span class="text-fuchsia">OBS.:</span> {{$persona->porcentaje ? $persona->porcentaje->nombre : ''}}<br>
+                                @endif
+                                <span class="text-danger">Estado: </span>{{$persona->estado_inactivacion}}<br>
+                                <span class="text-green">Fecha:</span>{{$persona->fecha_carga_inactivacion}}
+
+                            </td>                            @if($persona->estado_inactivacion == 'pendiente')
                                 <td>pendiente</td>
                             @elseif($persona->estado_inactivacion == 'aprobado')
                                 <td class="text-danger">Inactivo</td>

@@ -58,18 +58,13 @@
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
-                                <td id="td_objetivo">
-                                    <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$persona->id_nomina}}">
-                                        <option value="ok">100%</option>
-                                        <option value="75% nuevo">75% nuevo</option>
-                                        <option value="75%">75%</option>
-                                        <option value="50%">50%</option>
-                                        <option value="prorrateado 0">prorrateado 0</option>
-                                        <option value="prorrateado 2">prorrateado 2</option>
-                                        <option value="25%">25%</option>
-                                        <option value="sin objetivos">Sin objetivos</option>
-                                    </select>
-                                </td>
+                            <td id="td_objetivo">
+                                <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$persona->id_nomina}}">
+                                    @foreach($porcentajes as $porcentaje)
+                                        <option value="{{$porcentaje->id}}-{{$porcentaje->porcentaje}}">{{$porcentaje->nombre}} - {{$porcentaje->porcentaje}}</option>
+                                    @endforeach
+                                </select>
+                            </td>
                                 <td><textarea rows="3" class="form-control text-uppercase text-sm" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>
 
                                 <td><textarea rows="3"  class="form-control text-uppercase text-sm" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$persona->id_nomina}}"></textarea><input type="hidden" ></td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Archivo;
+use App\PorcentajeDirecta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\NominaDirecta;
@@ -31,22 +32,10 @@ class InactivacionesDirectaController extends Controller
         $mes_actual = Carbon::now();
         $id_persona = $request->get('id_persona');
         $estado_inactivacion = $request->get('estado');
-        $porcentajes = ['100%', '75% nuevo', '75%', '50%', 'prorrateado', '25%', 'sin objetivos'];
+        $porcentajes = PorcentajeDirecta::where('descripcion', 'inactivacion')
+            ->orderBy('nombre')->get();
 
-        if ($mes_actual->between($fecha1, $fecha2))
-        {
-            $mes=Carbon::now()->format('Ym');
-        }
-        else
-        {
-
-            $mes = 201912;
-            //$mes= Carbon::now()->addMonth(1)->format('Ym');
-
-        }
-        $mes = 202004;
-
-       // $mes = Carbon::now()->format('Ym');
+        $mes = \Config::get('global.mes');
 
         $inactivaciones = NominaDirecta::where('estado_inactivacion', '<>', 'NULL')
             ->where('mes', '=', $mes )
@@ -168,6 +157,7 @@ class InactivacionesDirectaController extends Controller
         $estado_inactivacion = $request->get('estado_inactivacion');
         $comentarios = $request->get('comentario_inactivacion');
         $objetivo = $request->get('objetivo');
+        $porcentaje = explode('-', $objetivo);
 
         if ($estado_inactivacion == 'aprobado')
         {
@@ -175,7 +165,8 @@ class InactivacionesDirectaController extends Controller
             $persona->comentario_inactivacion = $comentarios;
             $persona->fecha_aprobacion_inactivacion = Carbon::now()->format('d/m/Y');
             $persona->motivo_rechazo_inactivacion = NULL;
-            $persona->porcentaje_objetivo = $objetivo[0];
+            $persona->porcentaje_id = $porcentaje[0];
+            $persona->porcentaje_objetivo = $porcentaje[1];
         }
         elseif ($estado_inactivacion == 'rechazado')
         {
@@ -183,6 +174,7 @@ class InactivacionesDirectaController extends Controller
             $persona->motivo_rechazo_inactivacion = $comentarios;
             $persona->comentario_inactivacion = NULL;
             $persona->porcentaje_objetivo = '100%';
+            $persona->porcentaje_id = NULL;
         }
 
         $persona->update();

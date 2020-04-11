@@ -38,6 +38,7 @@ class CreateNominaDirectaRplTable extends Migration
             $table->string('comentario_consideracion')->nullable();
             $table->string('comentario_inactivacion')->nullable();
             $table->string('fecha_aprobacion_consideracion')->nullable();
+            $table->integer('porcentaje_id')->nullable();
             $table->string('porcentaje_objetivo')->nullable();
             $table->string('fecha_carga_consideracion')->nullable();
             $table->string('fecha_carga_inactivacion')->nullable();

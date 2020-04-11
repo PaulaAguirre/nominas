@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Archivo;
+use App\PorcentajeDirecta;
 use App\Zona;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,21 +24,11 @@ class ConsideracionesDirectaController extends Controller
         $fecha1 = new Carbon('first day of this month');
         $fecha2 = (new Carbon('first day of this month'))->addDays(10);
         $fecha_actual = Carbon::now();
-        $porcentajes = ['50%', '75%','75% nuevo','prorrateado 0', '25%', 'sin objetivos', 'prorrateado 2'];
 
-        if ($fecha_actual->between($fecha1, $fecha2))
-        {
-            $mes = Carbon::now()->format('Ym');
+        $porcentajes = PorcentajeDirecta::where('descripcion', 'consideracion')
+            ->orderBy('nombre')->get();
 
-        }
-        else
-        {
-            $mes=201912;
-
-            //$mes = Carbon::now()->addMonth(1)->format('Ym');
-
-        }
-        $mes=202004;
+        $mes=\Config::get('global.mes');
 
         $id_persona = $request->get('id_persona');
         $id_consideracion = $request->get('id_consideracion');
@@ -145,12 +136,21 @@ class ConsideracionesDirectaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return void
      */
     public function destroy($id)
     {
-        //
+        $persona = NominaDirecta::findOrFail($id);
+        $persona->id_consideracion = NULL;
+        $persona->detalles_consideracion = NULL;
+        $persona->estado_consideracion = NULL;
+        $persona->fecha_carga_consideracion = NULL;
+
+        if (auth()->user->haRoles(['tigo_people_admin']))
+        {
+            //
+        }
     }
 
     public function aprobarConsideraciones (Request $request, $mes)
@@ -163,12 +163,15 @@ class ConsideracionesDirectaController extends Controller
         $id_zona = $request->get('id_zona');
         $id_jefe= $request->get('id_jefe');
 
+        $porcentajes = PorcentajeDirecta::where('descripcion', 'consideracion')
+            ->orderBy('nombre')->get();
+
         $personas_consideracion = NominaDirecta::where('estado_consideracion', '=', 'pendiente')
             ->mes($mes)->representanteDir($id_persona)->zonadirecta($id_zona, $id_jefe)->consideracion($id_consideracion)
             ->get();
 
         return view('consideraciones_directa.aprobacion', ['personas_consideracion' => $personas_consideracion, 'mes'=>$mes,
-            'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'jefes'=>$jefes]);
+            'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'jefes'=>$jefes, 'porcentajes'=>$porcentajes]);
 
     }
 
@@ -183,16 +186,17 @@ class ConsideracionesDirectaController extends Controller
         $cont = 0;
         $cantidad_registros = count($estado_consideracion);
 
-        //dd($cantidad_registros);
-
         foreach ($nomina as $id)
         {
             if ($cont < $cantidad_registros)
             {
+                $porcentaje = explode('-', $objetivo[$cont]);
+
                 $nomina_consideracion = NominaDirecta::findOrFail($id);
                 $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
                 $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
                 $nomina_consideracion->comentario_consideracion = $comentario_consideracion[$cont];
+                $nomina_consideracion->porcentaje_id = $porcentaje[0];
 
                 if (in_array($nomina_consideracion->id_consideracion, [6,12]) and
                     $nomina_consideracion->estado_consideracion == 'aprobado')
@@ -202,7 +206,7 @@ class ConsideracionesDirectaController extends Controller
                 if ($nomina_consideracion->estado_consideracion == 'aprobado')
                 {
                     $nomina_consideracion->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
-                    $nomina_consideracion->porcentaje_objetivo = $objetivo[$cont];
+                    $nomina_consideracion->porcentaje_objetivo = $porcentaje[1];
                 }
 
                 $nomina_consideracion->update();
@@ -243,6 +247,7 @@ class ConsideracionesDirectaController extends Controller
         $estado_consideracion = $request->get('estado_consideracion');
         $comentarios = $request->get('comentario_consideracion');
         $objetivo = $request->get('objetivo');
+        $porcentaje = explode('-', $objetivo);
 
 
         if ($estado_consideracion == 'aprobado')
@@ -251,7 +256,8 @@ class ConsideracionesDirectaController extends Controller
             $persona->comentario_consideracion = $comentarios;
             $persona->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
             $persona->motivo_rechazo_consideracion = NULL;
-            $persona->porcentaje_objetivo = $objetivo[0];
+            $persona->porcentaje_id = $porcentaje[0];
+            $persona->porcentaje_objetivo = $porcentaje[1];
 
         }
         elseif ($estado_consideracion == 'rechazado')
@@ -260,13 +266,15 @@ class ConsideracionesDirectaController extends Controller
             $persona->motivo_rechazo_consideracion = $comentarios;
             $persona->comentario_consideracion = NULL;
             $persona->porcentaje_objetivo = NULL;
+            $persona->porcentaje_id = NULL;
         }
         else
         {
             $persona->estado_consideracion = 'pendiente';
             $persona->motivo_rechazo_consideracion = NULL;
             $persona->comentario_consideracion = NULL;
-            $persona->porcentaje_objetivo = 'NULL';
+            $persona->porcentaje_objetivo = NULL;
+            $persona->porcentaje_id = NULL;
         }
 
         $persona->update();

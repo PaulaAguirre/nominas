@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ArchivoDirectaRPL;
 use App\Consideracion;
+use App\PorcentajeDirecta;
 use App\Zona;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,9 +19,10 @@ class ConsideracionDirectaRPLController extends Controller
      */
     public function index(Request $request)
     {
-        $porcentajes = ['50%', '75%','75% nuevo','prorrateado 0', '25%', 'sin objetivos', 'prorrateado 2'];
+        $porcentajes = PorcentajeDirecta::where('descripcion', 'consideracion')
+            ->orderBy('nombre')->get();
 
-        $mes=202003;
+        $mes=\Config::get('global.mes_anterior');
         $id_consideracion = $request->get('id_consideracion');
         $id_persona = $request->get('id_persona');
         $zonas = auth()->user()->zonas->pluck('id');
@@ -76,14 +78,17 @@ class ConsideracionDirectaRPLController extends Controller
         $jefes = PersonaDirectaRPL::where('cargo', '=', 'representante_jefe')->get();
         $id_consideracion = $request->get('id_consideracion');
         $id_persona = $request->get('id_persona');
-        $mes = 202003;
+        $mes = \Config::get('global.mes_anterior');
+
+        $porcentajes = PorcentajeDirecta::where('descripcion', 'consideracion')
+            ->orderBy('nombre')->get();
 
         $personas_directa = NominaDirectaRPL::where('estado_consideracion', '=', 'pendiente')
             ->consideracion($id_consideracion)->representante($id_persona, $mes)
             ->get();
 
         return view('directaRPL.consideraciones.aprobacion', ['personas_directa' => $personas_directa, 'mes'=>$mes,
-            'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'jefes'=>$jefes]);
+            'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'jefes'=>$jefes, 'porcentajes'=>$porcentajes]);
 
     }
     /**Guardar las consideraciones aprobadas*/
@@ -104,10 +109,13 @@ class ConsideracionDirectaRPLController extends Controller
         {
             if ($cont < $cantidad_registros)
             {
+                $porcentaje = explode('-', $objetivo[$cont]);
+
                 $nomina_consideracion = NominaDirectaRPL::findOrFail($id);
                 $nomina_consideracion->estado_consideracion = $estado_consideracion[$cont];
                 $nomina_consideracion->motivo_rechazo_consideracion = $motivo_rechazo[$cont];
                 $nomina_consideracion->comentario_consideracion = $comentario_consideracion[$cont];
+                $nomina_consideracion->porcentaje_id = $porcentaje[0];
 
                 if (in_array($nomina_consideracion->id_consideracion, [6,12]) and
                     $nomina_consideracion->estado_consideracion == 'aprobado')
@@ -117,8 +125,9 @@ class ConsideracionDirectaRPLController extends Controller
                 if ($nomina_consideracion->estado_consideracion == 'aprobado')
                 {
                     $nomina_consideracion->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
-                    $nomina_consideracion->porcentaje_objetivo = $objetivo[$cont];
+                    $nomina_consideracion->porcentaje_objetivo = $porcentaje[1];
                 }
+
 
                 $nomina_consideracion->update();
             }
@@ -128,51 +137,6 @@ class ConsideracionDirectaRPLController extends Controller
         return redirect()->back();
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     /**
      * Editar una consideracion ya creada, antes de que se apruebe o se rechace
@@ -221,6 +185,7 @@ class ConsideracionDirectaRPLController extends Controller
         $estado_consideracion = $request->get('estado_consideracion');
         $comentarios = $request->get('comentario_consideracion');
         $objetivo = $request->get('objetivo');
+        $porcentaje = explode('-', $objetivo);
 
 
         if ($estado_consideracion == 'aprobado')
@@ -229,7 +194,8 @@ class ConsideracionDirectaRPLController extends Controller
             $persona->comentario_consideracion = $comentarios;
             $persona->fecha_aprobacion_consideracion = Carbon::now()->format('d/m/Y');
             $persona->motivo_rechazo_consideracion = NULL;
-            $persona->porcentaje_objetivo = $objetivo[0];
+            $persona->porcentaje_id = $porcentaje[0];
+            $persona->porcentaje_objetivo = $porcentaje[1];
 
         }
         elseif ($estado_consideracion == 'rechazado')
@@ -238,19 +204,20 @@ class ConsideracionDirectaRPLController extends Controller
             $persona->motivo_rechazo_consideracion = $comentarios;
             $persona->comentario_consideracion = NULL;
             $persona->porcentaje_objetivo = NULL;
+            $persona->pocentaje_id = NULL;
         }
         else
         {
             $persona->estado_consideracion = 'pendiente';
             $persona->motivo_rechazo_consideracion = NULL;
             $persona->comentario_consideracion = NULL;
-            $persona->porcentaje_objetivo = 'NULL';
+            $persona->porcentaje_objetivo = NULL;
+            $persona->pocentaje_id = NULL;
         }
 
         $persona->update();
 
         return redirect()->back();
-
     }
 
 }

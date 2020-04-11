@@ -81,14 +81,10 @@
                                     </select>
                                 </td>
                                 <td id="td_objetivo">
-                                    <select class="form-control text-uppercase text-sm" style="display:none;" name="objetivo[]" id="objetivo-{{$persona->id_nomina}}">
-                                        <option value="100%">100%</option>
-                                        <option value="75% nuevo">75% nuevo</option>
-                                        <option value="75%">75%</option>
-                                        <option value="50%">50%</option>
-                                        <option value="prorrateado">prorrateado%</option>
-                                        <option value="25%">25%</option>
-                                        <option value="sin objetivos">Sin objetivos</option>
+                                    <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$persona->id_nomina}}">
+                                        @foreach($porcentajes as $porcentaje)
+                                            <option value="{{$porcentaje->id}}-{{$porcentaje->porcentaje}}">{{$porcentaje->nombre}} - {{$porcentaje->porcentaje}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td><textarea rows="3" class="form-control text-uppercase text-sm" style="display: none;" name="comentario_inactivacion[]" id="comentario_inactivacion-{{$persona->id_nomina}}"></textarea></td>

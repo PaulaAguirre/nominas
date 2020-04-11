@@ -24,6 +24,16 @@ class NominaDirectaRPL extends Model
         return $this->hasMany('App\ArchivoDirectaRPL', 'nomina_directa_id');
     }
 
+    public function porcentaje ()
+    {
+        return $this->belongsTo('App\PorcentajeDirecta', 'porcentaje_id');
+    }
+
+    public function personaAnterior()
+    {
+        return $this->belongsTo('App\PersonaDirecta', 'id_persona_anterior');
+    }
+
     public function scopeZonasZonales($query, array $zonas)
     {
         return

@@ -87,7 +87,7 @@
                                 @else
                                     <td class="alert-danger">{{$persona->estado_inactivacion}}</td>
                                 @endif
-                                <td>{{$persona->comentario_inactivacion ? $persona->comentario_inactivacion.' -OBJ:'.$persona->porcentaje_objetivo : ''}}</td>
+                                <td>{{$persona->porcentaje_id ? $persona->porcentaje->nombre.' -OBJ:'.$persona->porcentaje->porcentaje : ''}}</td>
                                 <td>{{$persona->motivo_rechazo_inactivacion}}</td>
                                 @if(auth()->user()->hasRoles(['zonal', 'tigo_people_admin']))
                                     <td class="text-center">

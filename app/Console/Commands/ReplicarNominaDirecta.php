@@ -41,7 +41,7 @@ class ReplicarNominaDirecta extends Command
      */
     public function handle()
     {
-        $mes = 202003;
+        $mes = \Config::get('global.mes_anterior');
         $personas = NominaDirecta::where('mes', '=', $mes)->get();
 
         foreach ($personas as $persona)

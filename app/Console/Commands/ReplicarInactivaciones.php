@@ -15,7 +15,7 @@ class ReplicarInactivaciones extends Command
      *
      * @var string
      */
-    protected $signature = 'replicar:inactivacionesDirecta {mes}';
+    protected $signature = 'replicar:inactivacionesDirecta';
 
     /**
      * The console command description.
@@ -41,8 +41,9 @@ class ReplicarInactivaciones extends Command
      */
     public function handle()
     {
+        $mes = \Config::get('global.mes_anterior');
         $asesores_inactivados_mes_pasado = PersonaDirectaRPL::where('activo','=', 'inactivo' )
-            ->where('mes', '=', $this->argument('mes'))->get();
+            ->where('mes', '=', $mes)->get();
 
         foreach ($asesores_inactivados_mes_pasado as $persona)
         {

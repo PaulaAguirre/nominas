@@ -57,7 +57,8 @@
                                 @else
                                     <td class="alert-danger">{{$persona->estado_consideracion}}</td>
                                 @endif
-                                <td>{{$persona->comentario_consideracion ? $persona->comentario_consideracion.' -OBJ:'.$persona->porcentaje_objetivo : ''}}</td>
+                                <td>{{$persona->porcentaje ? $persona->porcentaje->nombre.' -OBJ:'.$persona->porcentaje->porcentaje : ''}}</td>
+
                                 <td>{{$persona->motivo_rechazo_consideracion}}</td>
                                 <td class="text-center">
                                     @if($persona->archivos->where('tipo', '=', 'consideracion')->first())

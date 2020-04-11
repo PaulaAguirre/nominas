@@ -15,6 +15,9 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'mes' =>  env('mes', 202004),
+    'mes_anterior' => env('mes_anterior', 202003),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

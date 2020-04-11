@@ -230,7 +230,7 @@ Route::get('/excel_directa_mes_anterior', 'ExcelController@exportarDirectaMesAnt
 
 Route::get('variable', function ()
 {
-    dd(Config::get('global.cadena'));
+    dd(Config::get('mes', 202004));
 });
 
 

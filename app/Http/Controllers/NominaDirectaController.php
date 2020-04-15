@@ -30,7 +30,6 @@ NominaDirectaController extends Controller
         $this->middleware('roles:tigo_people,tigo_people_admin')->only(['aprobarNomina', 'aprobarInactivaciones']);
         $this->middleware('roles:zonal,tigo_people_admin')->only(['create', 'edit','agregarConsideraciones', 'destroy']);
 
-
     }
 
 
@@ -43,7 +42,6 @@ NominaDirectaController extends Controller
     {
 
         $zonas = auth()->user()->zonas->pluck('id')->toArray();
-       // dd($zonas);
 
         $mes = $request->get('mes');
         $id_zona = $request->get('id_zona');
@@ -51,6 +49,8 @@ NominaDirectaController extends Controller
         $id_jefe = $request->get('id_jefe');
         $estado = $request->get('estado');
         $activo = $request->get('activo');
+
+        $mes_en_curso = \Config::get('global.mes');
 
         if(auth()->user()->hasRoles(['tigo_people_admin']))
         {
@@ -82,7 +82,7 @@ NominaDirectaController extends Controller
 
         return view('nomina_directa.index', ['personas' => $personas,
             'zonas' =>$zonas, 'zonas_user'=>$zonas_user, 'jefes'=>$jefes,
-            'fecha_inicio'=>$fecha_inicio, 'fecha_fin'=>$fecha_fin, 'today'=>$today]);
+            'fecha_inicio'=>$fecha_inicio, 'fecha_fin'=>$fecha_fin, 'today'=>$today, 'mes_en_curso'=>$mes_en_curso]);
     }
 
     /**

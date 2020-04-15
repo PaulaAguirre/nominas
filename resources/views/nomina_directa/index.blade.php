@@ -2,7 +2,7 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-            <h3>Nómina - Canal: Directa.
+            <h3>Nómina - Canal: Directa.  <span class="text-green">Mes: {{$mes_en_curso}}</span>
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual</button></a>
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>

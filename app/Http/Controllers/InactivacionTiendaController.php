@@ -22,7 +22,7 @@ class InactivacionTiendaController extends Controller
         $id_asesor = $request->get('asesor_id');
         $estado_inactivacion = $request->get('estado');
         $porcentajes = ['100%', '75% nuevo', '75%', '50%', 'prorrateado', '25%', 'sin objetivos'];
-        $mes = 202004;
+        $mes = 202005;
 
         if (\Auth::user()->hasRoles(['zonal']))
         {
@@ -44,7 +44,7 @@ class InactivacionTiendaController extends Controller
 
     public function aprobarInactivaciones(Request $request)
     {
-      $mes = 202004;
+      $mes = 202005;
       $asesores = NominaTienda::where('estado_inactivacion', '=', 'pendiente')
             ->where('mes', '=', $mes)->orderBy('id')->get();
         return view('tiendas.inactivaciones.aprobar_inactivaciones', ['asesores' => $asesores, 'mes' => $mes]);

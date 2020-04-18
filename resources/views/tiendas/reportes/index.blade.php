@@ -39,8 +39,11 @@
                     </tr>
                     <tr class="text-uppercase text-sm">
                         <th>abril 2020</th>
-                        <th class="text-center"><a href="">
-                            </a></th>
+                        <th class="text-center">
+                            <a href="{{URL::asset('img/tiendas/cierre_abril.xlsx')}}">
+                                <button class="btn btn-dropbox btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                            </a>
+                        </th>
                     </tr>
                     <tr class="text-uppercase text-sm">
                         <th>mayo 2020</th>

@@ -21,7 +21,8 @@ class NominaDirectaRPLController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('canales:tiendas');
+        $this->middleware('roles:tigo_people,tigo_people_admin')->only(['aprobarNomina', 'aprobarInactivaciones']);
+        $this->middleware('roles:zonal,tigo_people_admin')->only(['create', 'edit','agregarConsideraciones', 'destroy']);
     }
 
 

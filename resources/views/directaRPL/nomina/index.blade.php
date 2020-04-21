@@ -78,19 +78,21 @@
                                 <td class="text-success">Activo</td>
                             @endif
                             <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
-                            @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(15)))
-                                <td>
-                                    <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
-                                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
-                                    </a>
-                                    @if(!$persona->estado_consideracion)
-                                        <a href="" data-target="#modal-consideracion-store-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
-                                    @endif
+                            @if(auth()->user()->hasRoles(['zonal']))
+                                @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(14))
+                                    <td>
+                                        <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
+                                            <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                        </a>
+                                        @if(!$persona->estado_consideracion)
+                                            <a href="" data-target="#modal-consideracion-store-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+                                        @endif
 
-                                    @if(!$persona->motivo_inactivacion)
-                                        <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
-                                    @endif
-                                </td>
+                                        @if(!$persona->motivo_inactivacion)
+                                            <a href="" data-target="#modal-nomina-delete-{{$persona->id_nomina}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                        @endif
+                                    </td>
+                                @endif
                             @else
                                 <td>
                                     <a href="{{URL::action('PersonaDirectaRPLController@edit', $persona->personaDirecta)}}">

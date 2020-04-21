@@ -33,6 +33,8 @@ class NominaDirectaRPLController extends Controller
      */
     public function index(Request $request)
     {
+
+        //dd(Carbon::now() < Carbon::now()->firstOfMonth()->addDay(14));
         $mes = $request->get('mes');
         if(!$mes)
         {

@@ -30,7 +30,6 @@
                     </thead>
                     @foreach ($inactivaciones as $persona)
                         @if(auth()->user()->hasRoles(['zonal', 'tigo_people']))
-                            @if($zonas->contains($persona->personaDirecta->id_zona))
                                 <tr class="text-uppercase text-sm">
                                     <td>{{$persona->mes}}</td>
                                     <td>{{$persona->id_nomina}}</td>
@@ -68,7 +67,6 @@
                                         </td>
                                     @endif
                                 </tr>
-                            @endif
                         @elseif(auth()->user()->hasRoles([ 'tigo_people_admin']))
                             <tr class="text-uppercase text-sm">
                                 <td>{{$persona->mes}}</td>

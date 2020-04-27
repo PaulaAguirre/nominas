@@ -32,7 +32,7 @@ class InactivacionDirectaRPLController extends Controller
         if (\Auth::user()->hasRoles(['zonal']))
         {
             $zonas = \Auth::user()->zonas->pluck('id')->toArray();
-            $inactivaciones = NominaDirectaRPL::zonaZonales($zonas)->
+            $inactivaciones = NominaDirectaRPL::zonasZonales($zonas)->
             where('estado_inactivacion', '<>', 'NULL')
                 ->where('mes', '=', $mes )
                 ->representante($id_persona, $mes)->estadoInactivacion($estado_inactivacion)

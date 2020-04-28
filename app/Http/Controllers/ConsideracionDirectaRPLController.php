@@ -204,7 +204,7 @@ class ConsideracionDirectaRPLController extends Controller
             $persona->motivo_rechazo_consideracion = $comentarios;
             $persona->comentario_consideracion = NULL;
             $persona->porcentaje_objetivo = NULL;
-            $persona->pocentaje_id = NULL;
+            $persona->porcentaje_id = NULL;
         }
         else
         {
@@ -212,7 +212,7 @@ class ConsideracionDirectaRPLController extends Controller
             $persona->motivo_rechazo_consideracion = NULL;
             $persona->comentario_consideracion = NULL;
             $persona->porcentaje_objetivo = NULL;
-            $persona->pocentaje_id = NULL;
+            $persona->porcentaje_id = NULL;
         }
 
         $persona->update();

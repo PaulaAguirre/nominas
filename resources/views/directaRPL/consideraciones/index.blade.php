@@ -66,7 +66,7 @@
                                         <a href="" data-target="#modal-delete-{{$persona->id_persona_directa}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
                                     @endif
                                     @if($persona->estado_consideracion == 'rechazado')
-                                        <a href="{{URL::action('ConsideracionesDirectaRPLController@edit', $persona)}}">
+                                        <a href="{{URL::action('ConsideracionDirectaRPLController@edit', $persona)}}">
                                             <button class="btn btn-adn btn-xs" data-toggle="tooltip" data-placement="top" title="Regularizar Consideracion"><i class="fa fa-wrench"></i></button>
                                         </a>
                                     @endif

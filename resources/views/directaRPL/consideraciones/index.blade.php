@@ -60,7 +60,7 @@
                                 @endif
                                 <td>{{$persona->comentario_consideracion}}</td>
                                 <td>{{$persona->motivo_rechazo_consideracion}}</td>
-                                <td>{{$persona->porcentaje ? $persona->porcentaje->nombre.' OBJ:'.$persona->porcentaje->porcentaje->porcentaje : '' }}</td>
+                                <td>{{$persona->porcentaje ? $persona->porcentaje->nombre.' OBJ:'.$persona->porcentaje->porcentaje : '' }}</td>
                                 <td class="text-center">
                                     @if($persona->archivos->where('tipo', '=', 'consideracion')->first())
 

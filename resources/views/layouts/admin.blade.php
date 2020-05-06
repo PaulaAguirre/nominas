@@ -202,7 +202,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('consideraciones_directa')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
-                        @if(\Carbon\Carbon::now() > Carbon\Carbon::now()->firstOfMonth()->addDay(14))
+                        @if(\Carbon\Carbon::now() < Carbon\Carbon::now()->firstOfMonth()->addDay(14))
                             <li><a href="{{url('consideraciones_directa_rpl')}}"><i class="fa fa-calendar"></i><span class="text-green">Cons. mes en curso</span> </a></li>
                         @endif
                     </ul>

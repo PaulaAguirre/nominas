@@ -6,6 +6,7 @@
 namespace App\Exports;
 
 use App\NominaTienda;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Illuminate\Contracts\View\View;
@@ -16,12 +17,12 @@ class NominaTiendaZonalExport implements FromView
 {
     use Exportable;
     /**
-    * @return \Illuminate\Support\Collection
+    * @return View
     */
     public function view():View
     {
         $zonas = auth()->user()->zonasTienda->pluck('id')->toArray();
-        $mes = 202005;
+        $mes = \Config::get('global.mes');
         $asesores = NominaTienda::where('mes', $mes)->get();
         return view('excel_tienda.exportar_x_zona', ['asesores'=>$asesores, 'zonas'=>$zonas]);
     }

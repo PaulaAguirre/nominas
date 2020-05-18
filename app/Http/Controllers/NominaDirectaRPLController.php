@@ -58,9 +58,11 @@ class NominaDirectaRPLController extends Controller
         else
         {
             $zonas = Zona::all();
-            $personas = NominaDirectaRPL::jefe($jefe_id)->zona($zona_id)->representante($representante_id, $mes)->get();
             $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')
                 ->get();
+            $personas = NominaDirectaRPL::jefe($jefe_id)->zona($zona_id)->representante($representante_id, $mes)
+                ->where('mes', '=', $mes)->get();
+
         }
         return view('directaRPL.nomina.index', ['personas'=>$personas, 'consideraciones'=>$consideraciones,
             'mes'=>$mes, 'jefes'=>$jefes, 'zonas'=>$zonas]);

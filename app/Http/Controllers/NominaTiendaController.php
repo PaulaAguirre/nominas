@@ -34,7 +34,7 @@ class NominaTiendaController extends Controller
         $teamleader_id =$request->get('teamleader_id');
         $asesor_id = $request->get('asesor_id');
         $consideraciones = Consideracion::all();
-        $mes_nomina = 202005;
+        $mes_nomina = \Config::get('global.mes_tienda');
         $teamleaders = Teamleader::all();
 
         if (\Auth::user()->hasRoles(['zonal']))
@@ -76,7 +76,7 @@ class NominaTiendaController extends Controller
     {
         $zona_id = $request->get('zona_id');
         $zonas_tienda = ZonaTienda::all();
-        $mes_nomina = 202005;
+        $mes_nomina = \Config::get('global.mes_tienda');
         $asesores_existentes = NominaTienda::where('mes', '=', $mes_nomina)->get()->pluck('id_asesor')->toArray();
         $asesores = AsesorTienda::whereNotIn('asesores_tienda.id', $asesores_existentes)
             ->where('asesores_tienda.activo', '=', 'ACTIVO')->get();
@@ -100,7 +100,7 @@ class NominaTiendaController extends Controller
 
         $cont = 0;
         $asesor_mes = $request->get('asesor_mes');
-        $mes_nomina = '202005';
+        $mes_nomina = \Config::get('mes_tienda');
 
         while ($cont < count($asesores_id))
         {

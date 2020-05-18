@@ -4,8 +4,8 @@
  */
 
 return [
-    'mes' => 202005,
-    'mes_anterior' => 202004,
+    'mes' => 202006,
+    'mes_anterior' => 202005,
     'cadena' => 'hola'
 ];
 

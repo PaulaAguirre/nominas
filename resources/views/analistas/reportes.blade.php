@@ -67,7 +67,7 @@
                                     </tr>
                                     <tr>
                                         <th>Abril 2020</th>
-                                        <th class="text-center"><a href="{{URL::asset('excel')}}">
+                                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre_abril_directa_2020.xlsx')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
 
                                             </a>
@@ -79,7 +79,20 @@
                                     </tr>
                                     <tr>
                                         <th>Mayo 2020</th>
-                                        <th class="text-center"><a href="">
+                                        <th class="text-center"><a href="{{URL::asset('excel_directa_mes_anterior')}}">
+                                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+
+                                            </a>
+                                        </th>
+                                        <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre_mayo_2020.xlsx')}}">
+                                                <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Junio 2020</th>
+                                        <th class="text-center"><a href="{{URL::asset('excel')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
 
                                             </a>

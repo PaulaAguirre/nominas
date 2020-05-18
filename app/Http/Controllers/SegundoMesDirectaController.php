@@ -55,7 +55,7 @@ class SegundoMesDirectaController extends Controller
             $persona->comentario_consideracion = 'ok';
             $persona->fecha_aprobacion_consideracion = Carbon::now();
             $persona->porcentaje_objetivo = '75%';
-            $persona->porcentaje_id = 10;
+            $persona->porcentaje_id = 8;
             $persona->detalles_consideracion = 'fecha de ingreso: '.$persona->personaDirecta->fecha_ingreso;
             $persona->update();
             $cont = $cont+1;

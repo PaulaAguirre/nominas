@@ -203,6 +203,9 @@ Route::group (['middleware'=>'auth'], function () {
     /**supervisores*/
         Route::resource('supervisores_tienda', 'SupervisorGuiaTigoController');
 
+    /**Reapertura Tienda*/
+    Route::resource('nomina_tienda_rpl', 'NominaTiendaRPLController');
+
 });
 
 

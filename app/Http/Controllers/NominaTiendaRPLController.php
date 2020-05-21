@@ -7,14 +7,18 @@ use App\NominaTiendaRPL;
 use App\Teamleader;
 use App\Tienda;
 use App\ZonaTienda;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class NominaTiendaRPLController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|Application|View
      */
     public function index(Request $request)
     {
@@ -51,12 +55,16 @@ class NominaTiendaRPLController extends Controller
                 ->orderBy('id')
                 ->get();
         }
+
+        return view('TiendaRPL.nomina.index', ['mes_nomina'=>$mes_nomina, 'asesores'=>$asesores,
+            'consideraciones'=>$consideraciones, 'zonas_tienda'=>$zonas_tienda, 'tiendas'=>$tiendas, 'teamleaders'=>$teamleaders]);
+
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -67,7 +75,7 @@ class NominaTiendaRPLController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -78,7 +86,7 @@ class NominaTiendaRPLController extends Controller
      * Display the specified resource.
      *
      * @param  \App\NominaTiendaRPL  $nominaTiendaRPL
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(NominaTiendaRPL $nominaTiendaRPL)
     {
@@ -89,7 +97,7 @@ class NominaTiendaRPLController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\NominaTiendaRPL  $nominaTiendaRPL
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(NominaTiendaRPL $nominaTiendaRPL)
     {
@@ -101,7 +109,7 @@ class NominaTiendaRPLController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\NominaTiendaRPL  $nominaTiendaRPL
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, NominaTiendaRPL $nominaTiendaRPL)
     {
@@ -112,7 +120,7 @@ class NominaTiendaRPLController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\NominaTiendaRPL  $nominaTiendaRPL
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(NominaTiendaRPL $nominaTiendaRPL)
     {

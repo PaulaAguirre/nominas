@@ -42,6 +42,7 @@ class ReplicarInactivaciones extends Command
     public function handle()
     {
         $mes = \Config::get('global.mes_anterior');
+        $mes_actual = \Config::get('global.mes');
         $asesores_inactivados_mes_pasado = PersonaDirectaRPL::where('activo','=', 'inactivo' )
             ->where('mes', '=', $mes)->get();
 
@@ -52,6 +53,7 @@ class ReplicarInactivaciones extends Command
             $persona_mes_pasado->update();
 
             $nomina_actual = NominaDirecta::where('id_persona_directa', '=', $persona_mes_pasado->id_persona)
+                ->where('mes', '=', $mes_actual )
                 ->get()->last();
 
             $this->info($nomina_actual->delete() ? 'ok' : 'not ok');

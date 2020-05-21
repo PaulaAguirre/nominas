@@ -216,7 +216,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('inactivaciones_directa')}}"><i class="fa fa-comment"></i> Inactivaciones Directa</a></li>
-                        @if(\Carbon\Carbon::now() > Carbon\Carbon::now()->firstOfMonth()->addDay(24))
+                        @if(\Carbon\Carbon::now() < Carbon\Carbon::now()->firstOfMonth()->addDay(24))
                             <li><a href="{{url('inactivaciones_directa_rpl')}}"><i class="fa fa-comment"></i><span class="text-green">Inactivaciones Mes curso</span></a></li>
                         @endif
                     </ul>

@@ -141,7 +141,7 @@
                         </ul>
                     </li>
 
-                    @if(\Carbon\Carbon::now() < Carbon\Carbon::now()->firstOfMonth()->addDay(14))
+                    @if(\Carbon\Carbon::now() < Carbon\Carbon::now()->firstOfMonth()->addDay(24))
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-check-square text-green" aria-hidden="true"></i>
@@ -177,7 +177,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('nomina_directa')}}"><i class="fa fa-list-ol"></i>Nómina Directa</a></li>
-                        @if(\Carbon\Carbon::now() < Carbon\Carbon::now()->firstOfMonth()->addDay(20))
+                        @if(\Carbon\Carbon::now() < Carbon\Carbon::now()->firstOfMonth()->addDay(24))
                             <li><a href="{{url('nomina_directa_mescurso')}}"><i class="fa fa-calendar-plus-o"></i><span class="text-green">Mes en Curso</span></a></li>
                         @endif
                     </ul>
@@ -202,7 +202,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('consideraciones_directa')}}"><i class="fa fa-comment"></i> Consideraciones Directa</a></li>
-                        @if(\Carbon\Carbon::now() < Carbon\Carbon::now()->firstOfMonth()->addDay(14))
+                        @if(\Carbon\Carbon::now() < Carbon\Carbon::now()->firstOfMonth()->addDay(24))
                             <li><a href="{{url('consideraciones_directa_rpl')}}"><i class="fa fa-calendar"></i><span class="text-green">Cons. mes en curso</span> </a></li>
                         @endif
                     </ul>
@@ -216,7 +216,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('inactivaciones_directa')}}"><i class="fa fa-comment"></i> Inactivaciones Directa</a></li>
-                        @if(\Carbon\Carbon::now() > Carbon\Carbon::now()->firstOfMonth()->addDay(14))
+                        @if(\Carbon\Carbon::now() > Carbon\Carbon::now()->firstOfMonth()->addDay(24))
                             <li><a href="{{url('inactivaciones_directa_rpl')}}"><i class="fa fa-comment"></i><span class="text-green">Inactivaciones Mes curso</span></a></li>
                         @endif
                     </ul>

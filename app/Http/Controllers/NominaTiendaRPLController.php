@@ -54,6 +54,7 @@ class NominaTiendaRPLController extends Controller
                 ->zona($zona_id)->tienda($tienda_id)->activo($activo)->asesor($asesor_id)->teamleader($teamleader_id)
                 ->orderBy('id')
                 ->get();
+
         }
 
         return view('TiendaRPL.nomina.index', ['mes_nomina'=>$mes_nomina, 'asesores'=>$asesores,

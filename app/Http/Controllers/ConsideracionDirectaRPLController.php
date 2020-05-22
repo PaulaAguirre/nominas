@@ -47,6 +47,50 @@ class ConsideracionDirectaRPLController extends Controller
             'zonas'=>$zonas, 'consideraciones'=>$consideraciones, 'porcentajes'=>$porcentajes, 'mes'=> $mes]);
     }
 
+
+    public function edit($id)
+    {
+        $consideraciones = Consideracion::all();
+        $persona = NominaDirectaRPL::findOrFail($id);
+        return view('directaRPL.consideraciones.regularizar_consideracion', ['persona'=>$persona, 'consideraciones'=>$consideraciones]);
+    }
+    public function update(Request $request, $id)
+    {
+        $persona = NominaDirectaRPL::findOrFail($id);
+
+        if ($request->hasFile('archivo'))
+        {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
+            if ($persona->archivos->where('tipo', '=', 'consideracion')->first())
+            {
+                $archivo = ArchivoDirectaRPL::where('id_nomina_directa', $persona->id_nomina)
+                    ->where('tipo', 'consideracion')->get()->first();
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->update();
+            }
+            else
+            {
+                $archivo = new ArchivoDirectaRPL();
+                $archivo->id_nomina_directa = $persona->id_nomina;
+                $ruta = $request->file('archivo')->store('public');
+                $archivo->nombre = explode('/',$ruta)[1];
+                $archivo->tipo = 'consideracion';
+                $archivo->save();
+            }
+
+        }
+
+        $persona->estado_consideracion = 'pendiente';
+        $persona->regularizacion_consideracion = $request->get('regularizacion_consideracion');
+        $persona->id_consideracion = $request->get('id_consideracion');
+        $persona->update();
+        return redirect('consideraciones_directa_rpl');
+    }
+
+
     public function agregarConsideracion (Request $request, $id)
     {
         $nomina = NominaDirectaRPL::findOrFail($id);

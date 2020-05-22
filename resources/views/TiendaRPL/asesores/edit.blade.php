@@ -20,7 +20,7 @@
                     <div class="panel-heading text-bold"><span class="text-green">Editar Asesor</span></div>
 
                     <div class="panel-body text-uppercase">
-                        {!!Form::model ($asesor, ['method'=>'PATCH', 'route'=>['asesores_tienda.update', $asesor]])!!}
+                        {!!Form::model ($asesor, ['method'=>'PATCH', 'route'=>['asesores_tienda_rpl.update', $asesor]])!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">

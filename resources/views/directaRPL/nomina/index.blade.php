@@ -69,8 +69,8 @@
                                 @endif
                                 <span class="text-danger">Estado: </span>{{$persona->estado_inactivacion}}<br>
                                 <span class="text-green">Fecha:</span>{{$persona->fecha_carga_inactivacion}}
-
-                            </td>                            @if($persona->estado_inactivacion == 'pendiente')
+                            </td>
+                            @if($persona->estado_inactivacion == 'pendiente')
                                 <td>pendiente</td>
                             @elseif($persona->estado_inactivacion == 'aprobado')
                                 <td class="text-danger">Inactivo</td>

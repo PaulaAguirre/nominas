@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArchivoTiendaRPL extends Model
 {
-    protected $table = 'archivos_directa_rpl';
+    protected $table = 'archivos_tienda_rpl';
     protected $primaryKey = "id";
 
     protected $fillable =

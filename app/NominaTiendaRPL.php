@@ -27,7 +27,7 @@ class NominaTiendaRPL extends Model
 
     public function archivos ()
     {
-        return $this->hasMany('App\ArchivoTienda', 'nomina_tienda_id');
+        return $this->hasMany('App\ArchivoTiendaRPL', 'nomina_tienda_id');
     }
 
     /**

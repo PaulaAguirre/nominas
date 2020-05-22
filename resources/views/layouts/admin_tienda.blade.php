@@ -135,6 +135,19 @@
 
                         </ul>
                     </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <span class="text-green">Aprobaciones Mes Curso</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu ">
+                            <li><a class="" href="{{url('aprobacion_consideraciones_tienda_rpl')}}"><i class="fa fa-check-square"></i><span class="text-green">Aprobar consideraciones</span> </a></li>
+                            <li><a class="" href="{{url('aprobar_inactivaciones_tienda_rpl')}}"><i class="fa fa-check-square"></i><span class="text-green">Inactivaciones Tienda</span></a></li>
+
+                        </ul>
+                    </li>
                 @endif
 
                 <li class="treeview">
@@ -157,6 +170,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('nomina_tienda')}}"><i class="fa fa-list-ol"></i>Nómina Tienda</a></li>
+                        <li><a href="{{url('nomina_tienda_rpl')}}"><i class="fa fa-list-ol"></i><span class="text-green">Nómina Mes Curso</span></a></li>
 
 
                     </ul>
@@ -182,6 +196,9 @@
                     <ul class="treeview-menu">
                         <li><a href="{{url('consideraciones_tienda')}}"><i class="fa fa-comment"></i> Consideraciones Tienda</a></li>
                     </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('consideraciones_tienda_rpl')}}"><i class="fa fa-comment"></i><span class="text-green">Consideraciones Mes Curso</span> </a></li>
+                    </ul>
                 </li>
 
                 <li class="treeview">
@@ -192,6 +209,9 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('inactivaciones_tienda')}}"><i class="fa fa-comment"></i> Inactivaciones Tienda</a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('inactivaciones_tienda_rpl')}}"><i class="fa fa-comment"></i><span class="text-green">Inactivaciones Tienda</span></a></li>
                     </ul>
                 </li>
                 <li class="treeview">

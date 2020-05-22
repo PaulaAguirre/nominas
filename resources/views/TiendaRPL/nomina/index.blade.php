@@ -62,18 +62,15 @@
                                 <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader->nombre : ''}}</td>
                                 <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->nombre : ''}}</td>
                                 <td><span class="text-info">Cons.:</span> {{$asesor->consideracion ? $asesor->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$asesor->estado_consideracion}}</td>
-                                @if($asesor->estado_inactivacion == 'pendiente')
-                                    <td class="text-warning">pendiente</td>
-                                @elseif($asesor->estado_inactivacion == 'aprobado')
-                                    <td class="text-danger">Inactivo</td>
-                                @else
-                                    <td class="text-success">Activo</td>
-                                @endif
+                                <td><span class="text-info">Motivo: </span>{{$asesor->motivo_inactivacion}}<br>
+                                    <span class="text-danger">Estado: </span>{{$asesor->estado_inactivacion ? $asesor->estado_inactivacion : 'activo'}}<br>
+                                    <span class="text-green">Fecha:</span>{{$asesor->fecha_aprobacion_inactivacion}}
+                                </td>
                                 <td>{{$asesor->porcentaje_objetivo}}</td>
                                 <td>
                                     @if(auth()->user()->hasRoles(['zonal']))
                                         @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(20)))
-                                        <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
+                                        <a href="{{URL::action('AsesorTiendaRPLController@edit', $asesor->asesor->id)}}">
                                             <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                         </a>
                                         @if(!$asesor->estado_consideracion)
@@ -84,7 +81,7 @@
                                         @endif
                                         @endif
                                     @else
-                                        <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
+                                        <a href="{{URL::action('AsesorTiendaRPLController@edit', $asesor->asesor->id)}}">
                                             <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                         </a>
                                         @if(!$asesor->estado_consideracion)
@@ -97,8 +94,8 @@
                                 </td>
                             </tr>
                         @endif
-                            @include('tiendas.asesores.modal_eliminacion')
-                            @include('tiendas.consideraciones.crear_consideracion_modal')
+                            @include('TiendaRPL.asesores.modal_eliminacion')
+                            @include('TiendaRPL.consideraciones.crear_consideracion_modal')
                     @endforeach
 
                 </table>

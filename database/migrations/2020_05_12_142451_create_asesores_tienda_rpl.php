@@ -30,6 +30,7 @@ class CreateAsesoresTiendaRpl extends Migration
             $table->integer('id_tienda_anterior')->nullable();
             $table->string('cargo_anterior')->nullable();
             $table->string('user_red')->nullable();
+            $table->string('user_id')->nullable();
             $table->string('especialista')->nullable();
             $table->integer('supervisor_guiatigo_id')->nullable();
             $table->timestamps();

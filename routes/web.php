@@ -253,6 +253,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
  /**excel tiendas*/
 Route::get('/excel_tienda', 'ExcelController@exportNominaTienda');
+Route::get('/excel_tienda_rpl', 'ExcelController@exportarNominaTiendaMesAnterior');
 Route::get('/excel_tienda_x_zona', 'ExcelController@exportNominaTiendaxZona');
 /**excel reapertura*/
 Route::get('/excel_directa_mes_anterior', 'ExcelController@exportarDirectaMesAnterior');

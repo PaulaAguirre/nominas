@@ -6,7 +6,7 @@
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="{{url('/excel_tienda_rpl')}}"><button class="btn btn-github">Exportar excel</button></a>
                 @else
-                    <a href="{{url('/excel_tienda_x_zona_rpl')}}"><button class="btn btn-github">Exportar Nómina</button></a>
+                    <a href="{{url('/excel_tienda_rpl')}}"><button class="btn btn-github">Exportar Nómina</button></a>
                 @endif
             </h3>
             <p class="text-success" id="cantidad">Cantidad</p>

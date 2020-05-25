@@ -203,6 +203,34 @@ Route::group (['middleware'=>'auth'], function () {
     /**supervisores*/
         Route::resource('supervisores_tienda', 'SupervisorGuiaTigoController');
 
+    /**************Reapertura Tienda************************************/
+    Route::resource('nomina_tienda_rpl', 'NominaTiendaRPLController');
+    Route::resource('asesores_tienda_rpl', 'AsesorTiendaRPLController');
+
+    /**consideraciones tienda rpl*/
+    Route::patch('asesores_tienda_consideracion_rpl/{id}', 'AsesorTiendaRPLController@agregarConsideracion')
+        ->name('asesores_tienda.consideracion_rpl');
+    Route::resource('consideraciones_tienda_rpl', 'ConsideracionTiendaRPLController');
+    Route::get('aprobacion_consideraciones_tienda_rpl', 'ConsideracionTiendaRPLController@aprobarConsideraciones')//ruta para cargar las consideraciones de un asesor
+    ->name('consideraciones_tienda.aprobacion_rpl');//ruta para mostrar las consideraciones a aprobar
+    Route::patch('aprobacion_consideraciones_tienda_rpl', 'ConsideracionTiendaRPLController@storeConsideraciones')
+        ->name('consideraciones_tienda_aprobacion.aprobacion_rpl'); //ruta para guardar estado de consideración
+    Route::patch('consideraciones_tienda_update_consideracion_rpl/{id}', 'ConsideracionTiendaRPLController@updateConsideracion')
+        ->name('consideraciones_tienda_edit_consideracion_rpl'); //ruta para editar la consideracion
+    Route::patch('consideraciones_tienda_edit_rpl/{id}', 'ConsideracionTiendaRPLController@updateEstado')
+        ->name('consideraciones_tienda_edit_rpl'); //ruta para editar el estado
+
+    /**Inactivaciones Tienda rpl*/
+    Route::resource('inactivaciones_tienda_rpl', 'InactivacionTiendaRPLController');
+    Route::get('aprobar_inactivaciones_tienda_rpl', 'InactivacionTiendaRPLController@aprobarInactivaciones')
+        ->name('nomina_tienda.inactivacion_rpl');
+    Route::patch('aprobar_inactivaciones_tienda_rpl', 'InactivacionTiendaRPLController@aprobarInactivacionesStore')
+        ->name('nomina_tienda.inactivacion_store_rpl');
+    Route::patch('inactivaciones_tienda_update_rpl/{id}', 'InactivacionTiendaRPLController@updateInactivacion')
+        ->name('inactivaciones_tienda_edit_inactivacion_rpl'); //ruta para editar la inactivacion
+    Route::patch('inactivaciones_tienda_edit_estado_rpl/{id}', 'InactivacionTiendaRPLController@updateEstado')
+        ->name('inactivaciones_tienda_edit_rpl'); //ruta para editar el estado
+
 });
 
 

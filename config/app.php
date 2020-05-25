@@ -14,9 +14,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'habilitar'=> env('HABILITAR', 'SI'),
 
-    'mes' =>  env('MES', 202004),
-    'mes_anterior' => env('MES_ANTERIOR', 202003),
 
     /*
     |--------------------------------------------------------------------------

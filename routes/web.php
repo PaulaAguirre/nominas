@@ -230,6 +230,19 @@ Route::group (['middleware'=>'auth'], function () {
         ->name('inactivaciones_tienda_edit_inactivacion_rpl'); //ruta para editar la inactivacion
     Route::patch('inactivaciones_tienda_edit_estado_rpl/{id}', 'InactivacionTiendaRPLController@updateEstado')
         ->name('inactivaciones_tienda_edit_rpl'); //ruta para editar el estado
+    /**-------------Fin tiendas-----------------------------------------------------------------------------------------------*/
+
+    /**
+     * Indirecta*
+     */
+    Route::resource('asesores_indirecta', 'ImpulsadorController');
+    Route::resource('nomina_indirecta', 'NominaIndirectaController');
+    Route::resource('consideraciones_indirecta', 'ConsideracionesIndirectaController');
+
+    /**Consideraciones indirecta*/
+    Route::patch('agregar_consideracion_indirecta/{id}', 'ConsideracionIndirectaController@agregarConsideracion')
+        ->name('consideraciones_indirecta.agregar_consideracion');
+
 
 });
 
@@ -247,6 +260,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //});
  Route::get('/excel', 'ExcelController@exportNominaDirecta'); //Descarga las Consideraciones
  Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //descarga los nuevos ingresos
+ Route::get('/excel', 'ExcelController@exportNominaDirecta'); //Descarga la nomina y las consideraciones
+Route::get('/excel_nuevos_ingresos', 'ExcelController@exportNuevosIngresos'); //descarga los nuevos ingresos
  Route::get('/generar', 'ExcelController@index');
  Route::get('/exportar_consideraciones', 'ExcelController@exportConsideracionesController');
  Route::get('/nomina_x_zona', 'ExcelController@exportarNominaXZonalController');

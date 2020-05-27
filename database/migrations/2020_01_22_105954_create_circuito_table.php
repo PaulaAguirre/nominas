@@ -17,6 +17,7 @@ class CreateCircuitoTable extends Migration
             $table->increments('id');
             $table->string('codigo');
             $table->integer('zona_id');
+            $table->integer('coordinador_id')->nullable();
             $table->timestamps();
         });
     }

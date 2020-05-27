@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Circuito;
 use App\ClasificacionImpulsadores;
 use App\Coordinador;
 use App\Impulsador;
@@ -57,11 +58,11 @@ class ImpulsadorController extends Controller
         $pdv_ids = $request->get('idpdv');
         $coordinador_zona = explode('-', $request->get('coordinador_zona'));
 
-        $mes_nomina = 202002;
+        $mes_nomina = \Config::get('global.mes_indirecta');
         $impulsador = new Impulsador();
         $impulsador->ch = $request->get('ch');
         $impulsador->fecha_ingreso = $request->get('fecha_ingreso');
-        $impulsador->nombre = $request->get('nombre');
+        $impulsador->nombre = strtoupper($request->get('nombre'));
         $impulsador->documento = $request->get('documento');
         $impulsador->coordinador_id = $coordinador_zona[0];
         $impulsador->zona_id = $coordinador_zona[1];
@@ -77,9 +78,25 @@ class ImpulsadorController extends Controller
         $nomina->detalles_consideracion = $request->get('detalles_consideracion');
         $nomina->save();
 
-        $impulsador->pdvs()->sync($pdv_ids);
+        //$impulsador->pdvs()->sync($pdv_ids);
 
-        return redirect('nomina_indirecta');
+        return redirect('agregar_pdv/'.$impulsador->id);
+    }
+
+    public function agregarPdvs($impulsador_id)
+    {
+        //dd($impulsador_id);
+        $impulsador =  Impulsador::findOrFail($impulsador_id);
+        $coordinador = Coordinador::findOrFail($impulsador->coordinador->id);
+
+        $circuitos = Circuito::where('coordinador_id', '=', $coordinador)
+        ->where('zona_id', '=', $impulsador->zona_id)->get();
+        dd($circuitos);
+
+    }
+
+    public function agregarPdvsStore(Request $request, $coordinador_id)
+    {
 
     }
 

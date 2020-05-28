@@ -81,7 +81,7 @@
                                 <td>{{$asesor->porcentaje_objetivo}}</td>
                                 <td>
                                     @if(auth()->user()->hasRoles(['zonal']))
-                                        @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(19)))
+                                        @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(29)))
                                         <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
                                             <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                         </a>

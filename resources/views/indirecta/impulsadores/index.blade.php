@@ -50,7 +50,7 @@
                             <td>{{$impulsador->id}}</td>
                             <td>{{$impulsador->ch}}</td>
                             <td>{{$impulsador->nombre}}</td>
-                            <td>{{$impulsador->clasificacion}}</td>
+                            <td>{{$impulsador->clasificacion ? $impulsador->clasificacion->nombre : ''}}</td>
                             <td>{{$impulsador->documento}}</td>
                             <td>{{$impulsador->zona->representante_zonal_nombre.' - '.$impulsador->zona->nombre}}</td>
                             <td>{{$impulsador->coordinador ? $impulsador->coordinador->nombre : ''}}</td>

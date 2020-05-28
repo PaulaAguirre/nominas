@@ -12,10 +12,16 @@ class Circuito extends Model
     protected $fillable = [
         'codigo',
         'zona_id',
+        'coordinador_id'
     ];
 
     public function zona ()
     {
         return $this->belongsTo('App\ZonaIndirecta');
+    }
+
+    public function pdvs ()
+    {
+        return $this->hasMany('App\Pdv');
     }
 }

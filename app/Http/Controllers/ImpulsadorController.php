@@ -9,6 +9,7 @@ use App\Impulsador;
 use App\NominaIndirecta;
 use App\Pdv;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -37,9 +38,8 @@ class ImpulsadorController extends Controller
 
         $coordinadores = Coordinador::all();
         $clasificaciones = ClasificacionImpulsadores::all();
-        $pdvs = Pdv::all();
-        return view('indirecta.impulsadores.create', ['clasificaciones'=>$clasificaciones, 'coordinadores'=>$coordinadores,
-        'pdvs' => $pdvs]);
+
+        return view('indirecta.impulsadores.create', ['clasificaciones'=>$clasificaciones, 'coordinadores'=>$coordinadores]);
     }
 
     /**
@@ -78,7 +78,6 @@ class ImpulsadorController extends Controller
         $nomina->detalles_consideracion = $request->get('detalles_consideracion');
         $nomina->save();
 
-        //$impulsador->pdvs()->sync($pdv_ids);
 
         return redirect('agregar_pdv/'.$impulsador->id);
     }
@@ -89,14 +88,19 @@ class ImpulsadorController extends Controller
         $impulsador =  Impulsador::findOrFail($impulsador_id);
         $coordinador = Coordinador::findOrFail($impulsador->coordinador->id);
 
-        $circuitos = Circuito::where('coordinador_id', '=', $coordinador)
+        $circuitos = Circuito::where('coordinador_id', '=', $coordinador->id)
         ->where('zona_id', '=', $impulsador->zona_id)->get();
-        dd($circuitos);
 
+        return \view('indirecta.impulsadores.pdvs', ['impulsador'=>$impulsador, 'circuitos'=>$circuitos]);
     }
 
-    public function agregarPdvsStore(Request $request, $coordinador_id)
+    public function agregarPdvsStore(Request $request, $impulsador_id)
     {
+        $impulsador = Impulsador::findOrFail($impulsador_id);
+        $pdv_ids = $request->get('idpdv');
+        $impulsador->pdvs()->sync($pdv_ids);
+
+        return redirect('nomina_indirecta');
 
     }
 
@@ -114,12 +118,17 @@ class ImpulsadorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Impulsador  $impulsador
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Factory|Application|View
      */
-    public function edit(Impulsador $impulsador)
+    public function edit($id)
     {
-        //
+        $impulsador = Impulsador::findOrFail($id);
+        $clasificaciones = ClasificacionImpulsadores::all();
+        $coordinadores = Coordinador::all();
+
+        return view('indirecta.impulsadores.edit', ['impulsador'=>$impulsador, 'clasificaciones'=>$clasificaciones,
+            'coordinadores'=>$coordinadores]);
     }
 
     /**
@@ -129,7 +138,7 @@ class ImpulsadorController extends Controller
      * @param  \App\Impulsador  $impulsador
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Impulsador $impulsador)
+    public function update(Request $request, $id)
     {
         //
     }

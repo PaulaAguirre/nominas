@@ -29,7 +29,7 @@ class NominaIndirectaController extends Controller
         $clasificacion = $request->get('clasificacion');
         $impulsador_id = $request->get('impulsador_id');
         $consideraciones = Consideracion::all();
-        $mes_nomina = 202002;
+        $mes_nomina = \Config::get('mes_indirecta');
         $coordinadores = Coordinador::all();
 
         if (\Auth::user()->hasRoles(['zonal']))
@@ -69,7 +69,7 @@ class NominaIndirectaController extends Controller
     {
         $zona_id = $request->get('zona_id');
         $zonas = ZonaIndirecta::all();
-        $mes_nomina = 202002;
+        $mes_nomina = \Config::get('mes_indirecta');
         $impulsadores_existentes = NominaIndirecta::where('mes', '=', $mes_nomina)->get()->pluck('impulsador_id')->toArray();
         $impulsadores = Impulsador::whereNotIn('id', $impulsadores_existentes)
             ->where('activo', '=', 'activo')->zonaInd($zona_id)->get();
@@ -88,7 +88,7 @@ class NominaIndirectaController extends Controller
         $impulsadores_id = $request->get('impulsador_id');
         $cont = 0;
         $impulsador_mes = $request->get('impulsador_mes');
-        $mes_nomina = 202002;
+        $mes_nomina = \Config::get('mes_indirecta');
 
         while ($cont < count($impulsadores_id))
         {

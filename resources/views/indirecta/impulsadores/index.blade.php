@@ -55,7 +55,17 @@
                             <td>{{$impulsador->zona->representante_zonal_nombre.' - '.$impulsador->zona->nombre}}</td>
                             <td>{{$impulsador->coordinador ? $impulsador->coordinador->nombre : ''}}</td>
                             <td>{{$impulsador->activo}}</td>
+                            <td>
+                                @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(19)))
 
+                                    <a href="{{URL::action('ImpulsadorController@edit', $impulsador->id)}}">
+                                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button></a>
+                                @else
+                                    <a href="{{URL::action('ImpulsadorController@edit', $impulsador->id)}}">
+                                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                    </a>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </table>

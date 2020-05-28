@@ -238,6 +238,8 @@ Route::group (['middleware'=>'auth'], function () {
     Route::resource('asesores_indirecta', 'ImpulsadorController');
     Route::get('agregar_pdv/{impulsador_id}', 'ImpulsadorController@agregarPdvs')->name('agregar_pdv');
     Route::patch('agregar_pdv/{impulsador_id}', 'ImpulsadorController@agregarPdvsStore')->name('agregar_pdv_store');
+    Route::get('editar_pdv/{impulsador_id}', 'ImpulsadorController@editarPdvs')->name('editar_pdv');
+    Route::patch('editar_pdv/{impulsador_id}', 'ImpulsadorController@updatePdvs')->name('editar_pdv_update');
     Route::resource('nomina_indirecta', 'NominaIndirectaController');
     Route::resource('consideraciones_indirecta', 'ConsideracionIndirectaController');
 

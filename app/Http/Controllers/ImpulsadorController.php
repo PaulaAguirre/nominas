@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ArchivoIndirecta;
 use App\Circuito;
 use App\ClasificacionImpulsadores;
 use App\Coordinador;
@@ -135,22 +136,72 @@ class ImpulsadorController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  \App\Impulsador  $impulsador
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|RedirectResponse|Redirector
      */
     public function update(Request $request, $id)
     {
-        //
+        $coordinador_zona = explode('-', $request->get('coordinador_zona'));
+        $impulsador = Impulsador::findOrFail($id);
+        $impulsador->ch = $request->get('ch');
+        $impulsador->nombre = strtoupper($request->get('nombre'));
+        $impulsador->documento = $request->get('documento');
+        $impulsador->coordinador_id = $coordinador_zona[0];
+        $impulsador->zona_id = $coordinador_zona[1];
+        $impulsador->clasificacion_id = $request->get('clasificacion_id');
+        $impulsador->update();
+
+        return redirect('editar_pdv/'.$impulsador->id);
+    }
+
+    public function editarPdvs($impulsador_id)
+    {
+        $impulsador = Impulsador::findOrFail($impulsador_id);
+        $coordinador_id = $impulsador->coordinador->id;
+
+        $circuitos = Circuito::where('coordinador_id', '=', $coordinador_id)
+            ->where('zona_id', '=', $impulsador->zona_id)->get();
+
+        return view('indirecta.impulsadores.edit_pdvs', ['impulsador'=>$impulsador, 'circuitos'=>$circuitos]);
+
+    }
+
+    public function updatePdvs(Request $request, $impulsador_id)
+    {
+        $impulsador = Impulsador::findOrFail($impulsador_id);
+        $pdv_ids = $request->get('idpdv');
+        $impulsador->pdvs()->sync($pdv_ids);
+
+        return redirect('nomina_indirecta');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Impulsador  $impulsador
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy(Impulsador $impulsador)
+    public function destroy(Request $request, $id)
     {
-        //
+        $impulsador = NominaIndirecta::findOrFail($id);
+        $impulsador->motivo_inactivacion = $request->get('motivo_inactivacion');
+        $impulsador->detalles_inactivacion = $request->get('detalles_inactivacion');
+        $impulsador->estado_inactivacion = 'pendiente';
+
+        if($request->hasFile('archivo'))
+        {
+            $this->validate($request, [
+                'archivo' => 'mimes:jpg,jpeg,gif,png,pdf'
+            ]);
+            $archivo = new ArchivoIndirecta();
+            $archivo->nomina_indirecta_id = $impulsador->id;
+            $ruta = $request->file('archivo')->store('public');
+            $archivo->nombre = explode('/',$ruta)[1];
+            $archivo->tipo = 'inactivacion';
+            $archivo->save();
+        }
+        $impulsador->update();
+        return redirect()->back();
     }
 }

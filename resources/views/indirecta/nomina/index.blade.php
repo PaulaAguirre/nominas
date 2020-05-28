@@ -62,17 +62,26 @@
                                 @endif
                                 <td>{{$impulsador->porcentaje_objetivo}}</td>
                                 <td>
-                                    <a href="{{URL::action('ImpulsadorController@edit', $impulsador->impulsador->id)}}">
-                                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
-                                    </a>
-                                    <a href="">
-                                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Agregar PDV"><i class="fa fa-user-plus"></i></button>
-                                    </a>
-                                    @if(!$impulsador->estado_consideracion)
-                                        <a href="" data-target="#modal-consideracion-store-{{$impulsador->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
-                                    @endif
-                                    @if(!$impulsador->estado_inactivacion)
-                                        <a href="" data-target="#modal-nomina-delete-{{$impulsador->id}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(19)))
+
+                                        <a href="{{URL::action('ImpulsadorController@edit', $impulsador->impulsador->id)}}">
+                                            <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button></a>
+                                        @if(!$impulsador->estado_consideracion)
+                                            <a href="" data-target="#modal-consideracion-store-{{$impulsador->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+                                        @endif
+                                        @if(!$impulsador->estado_inactivacion)
+                                            <a href="" data-target="#modal-nomina-delete-{{$impulsador->id}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                        @endif
+                                    @else
+                                        <a href="{{URL::action('ImpulsadorController@edit', $impulsador->impulsador->id)}}">
+                                            <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                        </a>
+                                        @if(!$impulsador->estado_consideracion)
+                                            <a href="" data-target="#modal-consideracion-store-{{$impulsador->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+                                        @endif
+                                        @if(!$impulsador->estado_inactivacion)
+                                            <a href="" data-target="#modal-nomina-delete-{{$impulsador->id}}" data-toggle="modal" data-placement="top" title="inactivar" ><button class="btn btn-xs btn-danger"><i class="fa fa-user-times" aria-hidden="true"></i></button></a>
+                                        @endif
                                     @endif
                                 </td>
                             </tr>

@@ -9,6 +9,12 @@ class NominaIndirecta extends Model
     protected $table = 'nomina_indirecta';
     protected $primaryKey = "id";
 
+    protected $fillable = [
+        'id_asesor', 'mes', 'asesor_mes', 'id_consideracion', 'detalles_consideracion', 'estado_consideracion',
+        'motivo_inactivacion', 'detalles_inactivacion', 'estado_inactivacion', 'comentarios_inactivacion', 'regularizacion_consideracion',
+        'regularizacion_inactivacion', 'fecha_aprobacion_consideracion', 'fecha_aprobacion_inactivacion', 'porcentaje_objetivo'
+    ];
+
     public function impulsador()
     {
         return $this->belongsTo('App\Impulsador');
@@ -62,5 +68,20 @@ class NominaIndirecta extends Model
             return $query->where('mes', $mes);
         }
 
+    }
+
+    public function scopeZonas ($query, array $zonas)
+    {
+        return
+        $query->whereHas('impulsador', function ($q1) use ($zonas)
+        {
+            $q1->whereIn('zona_id', $zonas);
+        });
+
+    }
+
+    public function archivos ()
+    {
+        return $this->hasMany('App\ArchivoIndirecta', 'nomina_indirecta_id');
     }
 }

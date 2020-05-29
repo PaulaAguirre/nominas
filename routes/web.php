@@ -242,6 +242,15 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('editar_pdv/{impulsador_id}', 'ImpulsadorController@updatePdvs')->name('editar_pdv_update');
     Route::resource('nomina_indirecta', 'NominaIndirectaController');
     Route::resource('consideraciones_indirecta', 'ConsideracionIndirectaController');
+    Route::resource('inactivaciones_indirecta', 'InactivacionIndirectaController');
+    Route::get('aprobar_inactivaciones_indirecta', 'InactivacionIndirectaController@aprobarInactivaciones')
+        ->name('nomina_indirecta.inactivacion');
+    Route::patch('aprobar_inactivaciones_indirecta', 'InactivacionIndirectaController@aprobarInactivacionesStore')
+        ->name('nomina_indirecta.inactivacion_store');
+    Route::patch('inactivaciones_indirecta_edit_estado/{id}', 'InactivacionIndirectaController@updateEstado')
+        ->name('inactivaciones_indirecta_edit'); //ruta para editar el estado
+    Route::patch('inactivaciones_indirecta_update/{id}', 'InactivacionIndirectaController@updateInactivacion')
+        ->name('inactivaciones_indirecta_edit_inactivacion'); //ruta para editar la inactivacion
 
     /**Consideraciones indirecta*/
     Route::patch('agregar_consideracion_indirecta/{id}', 'ConsideracionIndirectaController@agregarConsideracion')

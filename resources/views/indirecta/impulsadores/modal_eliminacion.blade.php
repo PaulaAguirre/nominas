@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-     role="dialog" tabindex="-1" id="modal-nomina-delete-{{$asesor->id}}">
-    {{Form::Open(array('action'=>array('AsesorTiendaController@destroy', $asesor->id),'method'=>'delete', 'enctype'=>'multipart/form-data'))}}
+     role="dialog" tabindex="-1" id="modal-nomina-delete-{{$impulsador->id}}">
+    {{Form::Open(array('action'=>array('ImpulsadorController@destroy', $impulsador->id),'method'=>'delete', 'enctype'=>'multipart/form-data'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title text-danger">Inactivar Asesor: {{$asesor->asesor ? $asesor->asesor->nombre : ''}}</h4>
+                <h4 class="modal-title text-danger">Inactivar Asesor: {{$impulsador->impulsador ? $impulsador->impulsador->nombre : ''}}</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">

@@ -113,7 +113,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('tiendas')}}"><i class="fa fa-book"></i> Tiendas</a></li>
+                        <li><a href="{{url('indirectas')}}"><i class="fa fa-book"></i> indirectas</a></li>
                         <li><a href="{{url('teamleaders')}}"><i class="fa fa-book"></i> Teamleaders</a></li>
                         <li><a href="#"><i class="fa fa-book"></i> Consideraciones</a></li>
                     </ul>
@@ -123,7 +123,7 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
-                            <span>Aprobaciones Tienda</span>
+                            <span>Aprobaciones indirecta</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -178,7 +178,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('consideraciones_indirecta')}}"><i class="fa fa-comment"></i> Consideraciones Tienda</a></li>
+                        <li><a href="{{url('consideraciones_indirecta')}}"><i class="fa fa-comment"></i> Consideraciones indirecta</a></li>
                     </ul>
                 </li>
 
@@ -189,7 +189,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('inactivaciones_indirecta')}}"><i class="fa fa-comment"></i> Inactivaciones Tienda</a></li>
+                        <li><a href="{{url('inactivaciones_indirecta')}}"><i class="fa fa-comment"></i> Inactivaciones indirecta</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -199,7 +199,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('reportes_indirecta')}}"><i class="fa fa-book"></i>Reportes tienda</a></li>
+                        <li><a href="{{url('reportes_indirecta')}}"><i class="fa fa-book"></i>Reportes indirecta</a></li>
                     </ul>
                 </li>
                 <li>

@@ -29,17 +29,19 @@ class NominaIndirectaController extends Controller
         $clasificacion = $request->get('clasificacion');
         $impulsador_id = $request->get('impulsador_id');
         $consideraciones = Consideracion::all();
-        $mes_nomina = \Config::get('mes_indirecta');
+        $mes_nomina = \Config::get('global.mes_indirecta');
         $coordinadores = Coordinador::all();
 
         if (\Auth::user()->hasRoles(['zonal']))
         {
-            $zonas = \Auth::user()->zonasIndirecta->pluck('id')->toArray();
-            $zonas = ZonaIndirecta::whereIn('id', $zonas)->get();
+            $zonas_zonal = \Auth::user()->zonasIndirecta->pluck('id')->toArray();
+            $zonas = ZonaIndirecta::whereIn('id', $zonas_zonal)->get();
 
             $impulsadores = NominaIndirecta::mes($mes_nomina)
-                ->coordinador($zonas)
-                ->zona($zona_id)->activo($activo)->impulsadorInd($impulsador_id)
+                ->zonas($zonas)
+                ->coordinador($coordinador_id)
+                ->zona($zona_id)
+                ->activo($activo)->impulsadorInd($impulsador_id)
                 ->orderBy('id')
                 ->get();
         }
@@ -69,7 +71,7 @@ class NominaIndirectaController extends Controller
     {
         $zona_id = $request->get('zona_id');
         $zonas = ZonaIndirecta::all();
-        $mes_nomina = \Config::get('mes_indirecta');
+        $mes_nomina = \Config::get('global.mes_indirecta');
         $impulsadores_existentes = NominaIndirecta::where('mes', '=', $mes_nomina)->get()->pluck('impulsador_id')->toArray();
         $impulsadores = Impulsador::whereNotIn('id', $impulsadores_existentes)
             ->where('activo', '=', 'activo')->zonaInd($zona_id)->get();
@@ -88,7 +90,7 @@ class NominaIndirectaController extends Controller
         $impulsadores_id = $request->get('impulsador_id');
         $cont = 0;
         $impulsador_mes = $request->get('impulsador_mes');
-        $mes_nomina = \Config::get('mes_indirecta');
+        $mes_nomina = \Config::get('global.mes_indirecta');
 
         while ($cont < count($impulsadores_id))
         {

@@ -7,7 +7,7 @@ use App\NominaIndirecta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ConsideracionIndirectaController extends Controller
+class   ConsideracionIndirectaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class ConsideracionIndirectaController extends Controller
     public function agregarConsideracion(Request $request, $id)
     {
         $impulsador = NominaIndirecta::findOrFail($id);
-        $impulsador->id_consideracion = $request->get('id_consideracion');
+        $impulsador->consideracion_id = $request->get('id_consideracion');
         $impulsador->detalles_consideracion = $request->get('detalles_consideracion');
         $impulsador->estado_consideracion = 'pendiente';
         $impulsador->fecha_carga_consideracion = (Carbon::now())->format('d-m-Y');

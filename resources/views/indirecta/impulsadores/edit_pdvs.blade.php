@@ -29,16 +29,18 @@
                     </thead>
                     @foreach ($circuitos as $circuito)
                         @foreach($circuito->pdvs as $pdv)
-                        <tr class="text-uppercase">
-                            <td>{{$pdv->id}}</td>
-                            <td>{{$pdv->codigo}}</td>
-                            <td>{{$pdv->circuito ? $pdv->circuito->codigo : ''}}</td>
-                            @if($impulsador->pdvs->contains('id', $pdv->id))
-                                <td class="text-center"><input type="checkbox" value="{{$pdv->id}}" name="idpdv[]" checked></td>
-                            @else
-                                <td class="text-center"><input type="checkbox" value="{{$pdv->id}}" name="idpdv[]"></td>
+                            @if($pdv->impulsador_id == $impulsador->id || !$pdv->impulsador_id )
+                                <tr class="text-uppercase">
+                                    <td>{{$pdv->id}}</td>
+                                    <td>{{$pdv->codigo}}</td>
+                                    <td>{{$pdv->circuito ? $pdv->circuito->codigo : ''}}</td>
+                                    @if($pdv->impulsador_id == $impulsador->id)
+                                        <td class="text-center"><input type="checkbox" value="{{$pdv->id}}" name="idpdv[]" checked></td>
+                                    @else
+                                        <td class="text-center"><input type="checkbox" value="{{$pdv->id}}" name="idpdv[]"></td>
+                                    @endif
+                                </tr>
                             @endif
-                        </tr>
                         @endforeach
                     @endforeach
                 </table>

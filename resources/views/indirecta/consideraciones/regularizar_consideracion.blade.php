@@ -1,4 +1,4 @@
-@extends ('layouts.admin_tienda')
+@extends ('layouts.admin_indirecta')
 @section ('contenido')
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -20,36 +20,36 @@
                     <div class="panel-heading"><span class="text-bold text-info">Regularizar Consideración</span></div>
 
                     <div class="panel-body">
-                        {!!Form::model ($asesor, ['method'=>'PATCH','files'=> true, 'route'=>['consideraciones_tienda.update', $asesor->id]])!!}
+                        {!!Form::model ($impulsador, ['method'=>'PATCH','files'=> true, 'route'=>['consideraciones_indirecta.update', $impulsador->id]])!!}
                         {{Form::token()}}
 
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
 
                         <div class="form-group">
-                            <label for="name" class="text-info">Nombre Asesor - CH </label>
-                            <p>{{$asesor->asesor->nombre}} - {{$asesor->asesor->ch}}</p>
+                            <label for="name" class="text-info">Nombre impulsador - CH </label>
+                            <p>{{$impulsador->impulsador->nombre}} - {{$impulsador->impulsador->ch}}</p>
                         </div>
 
                         <div class="form-group">
                             <label class="text-info">Consideración</label>
-                            <p>{{$asesor->consideracion->nombre}}</p>
+                            <p>{{$impulsador->consideracion->nombre}}</p>
                         </div>
 
                         <div class="form-group">
                             <label class="text-info">Detalles</label>
-                            <p>{{$asesor->detalles_consideracion}}</p>
+                            <p>{{$impulsador->detalles_consideracion}}</p>
                         </div>
 
                         <div class="form-group">
                             <label class="text-danger">Motivo Rechazo</label>
-                            <p>{{$asesor->comentarios_consideracion}}</p>
+                            <p>{{$impulsador->comentarios_consideracion}}</p>
                         </div>
                         <div class="form-group">
                             <label class="text-danger">seleccione consideracion</label>
                             <select name="id_consideracion" class="selectpicker form-control text-uppercase" title="Seleccione Consideración" required>
                                 @foreach($consideraciones as $consideracion )
-                                    @if($asesor->consideracion == $consideracion)
+                                    @if($impulsador->consideracion == $consideracion)
                                         <option selected value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre)}}</option>
                                     @else
                                         <option value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre)}}</option>

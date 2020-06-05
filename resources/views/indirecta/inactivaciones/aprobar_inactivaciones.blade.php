@@ -56,7 +56,7 @@
                                 </select>
                             </td>
                             <td id="td_objetivo">
-                                <select class="form-control text-uppercase text-sm" style="display:none;" name="objetivo[]" id="objetivo-{{$impulsador->id}}">
+                                <select class="form-control aprobacion selectpicker text-sm" style="display:none;" name="objetivo[]" id="objetivo-{{$impulsador->id}}">
                                     <option value="100%">100%</option>
                                     <option value="75% nuevo">75% nuevo</option>
                                     <option value="75%">75%</option>

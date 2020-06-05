@@ -1,4 +1,4 @@
-@extends ('layouts.admin_tienda')
+@extends ('layouts.admin_indirecta')
 @section ('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -12,19 +12,19 @@
                     </ul>
                 </div>
             @endif
-            @include('tiendas.consideraciones.search_aprobacion')
+            @include('indirecta.consideraciones.search_aprobacion')
         </div>
     </div>
 
-    {!!Form::model ($mes_nomina, ['method'=>'PATCH', 'route'=>['consideraciones_tienda_aprobacion.aprobacion']])!!}
+    {!!Form::model ($mes_nomina, ['method'=>'PATCH', 'route'=>['consideraciones_indirecta.aprobacion_store']])!!}
     {{Form::token()}}
 
     <div class="row text-uppercase">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_asesor">
-                    <thead class="text-center text-sm" style="background-color: #2ab27b" >
+                <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_impulsador">
+                    <thead class="text-center text-gray text-sm" style="background-color: #5d59a6" >
                     <th>id</th>
                     <th>CH</th>
                     <th>Nombre</th>
@@ -40,25 +40,25 @@
 
                     </thead>
                     <tbody id="ajuste">
-                    @foreach ($asesores as $asesor)
+                    @foreach ($impulsadores as $impulsador)
                         <tr class="text-uppercase text-sm">
 
-                                <td>{{$asesor->id}}</td>
-                                <td >{{$asesor->asesor->ch}}<input type="hidden" name="id_nomina[]" value="{{$asesor->id}}"></td>
-                                <td>{{$asesor->asesor->nombre}}</td>
-                                <td>{{$asesor->asesor->tienda->zona->zona.' / '.$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>
-                                <td>{{$asesor->consideracion ? $asesor->consideracion->nombre : ''}}</td>
-                                <td>{{$asesor->detalles_consideracion}}</td>
-                                <td>{{$asesor->regularizacion_consideracion}}</td>
+                                <td>{{$impulsador->id}}</td>
+                                <td >{{$impulsador->impulsador->ch}}<input type="hidden" name="id_nomina[]" value="{{$impulsador->id}}"></td>
+                                <td>{{$impulsador->impulsador->nombre}}</td>
+                                <td>{{$impulsador->impulsador->zona->nombre.' / '.$impulsador->impulsador->zona->representante_zonal_nombre}}</td>
+                                <td>{{$impulsador->consideracion ? $impulsador->consideracion->nombre : ''}}</td>
+                                <td>{{$impulsador->detalles_consideracion}}</td>
+                                <td>{{$impulsador->regularizacion_consideracion}}</td>
                                 <td id="tdaprobacion">
-                                    <select name="aprobacion[]" class="form-control aprobacion selectpicker text-sm" id="aprobacion-{{$asesor->id}}">
+                                    <select name="aprobacion[]" class="form-control aprobacion selectpicker text-sm" id="aprobacion-{{$impulsador->id}}">
                                         <option value="aprobado" >aprobado</option>
                                         <option value="rechazado">rechazado</option>
                                         <option value="pendiente" selected>pendiente</option>
                                     </select>
                                 </td>
                                 <td id="td_objetivo">
-                                    <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$asesor->id}}">
+                                    <select name="objetivo[]" class="form-control text-uppercase text-sm" style="display:none;"  id="objetivo-{{$impulsador->id}}">
                                         <option value="100%">100%</option>
                                         <option value="75% nuevo">75% nuevo</option>
                                         <option value="75%">75%</option>
@@ -68,18 +68,18 @@
                                         <option value="sin objetivos">Sin objetivos</option>
                                         </select>
                                 </td>
-                                <td><textarea rows="3" class="form-control text-uppercase text-sm" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$asesor->id}}"></textarea><input type="hidden" ></td>
+                                <td><textarea rows="3" class="form-control text-uppercase text-sm" style="display:none;" name="comentario_consideracion[]" id="comentario_cosideracion-{{$impulsador->id}}"></textarea><input type="hidden" ></td>
 
-                                <td><textarea rows="3"  class="form-control text-uppercase text-sm" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$asesor->id}}"></textarea><input type="hidden" ></td>
+                                <td><textarea rows="3"  class="form-control text-uppercase text-sm" style="display:none;" name="motivo_rechazo[]" id="motivo_rechazo-{{$impulsador->id}}"></textarea><input type="hidden" ></td>
                                 <td class="text-center">
                                     <input name="_token" value="{{csrf_token()}}" type="hidden">
-                                    @if($asesor->archivos->where('tipo', '=', 'consideracion')->first())
-                                     <a href="" data-target="#modal-delete-{{$asesor->id}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
+                                    @if($impulsador->archivos->where('tipo', '=', 'consideracion')->first())
+                                     <a href="" data-target="#modal-delete-{{$impulsador->id}}" data-toggle="modal" data-placement="top" title="Archivo"><button class="btn btn-foursquare btn-xs"  id="btn_ver"><i class="fa fa-eye"></i></button></a>
                                     @endif
                                     <button class="btn btn-success btn-xs" type="submit" id="btn_enviar"><i class="fa fa-send-o"></i></button>
                                 </td>
                         </tr>
-                        @include('tiendas.consideraciones.archivo_modal')
+                        @include('indirecta.consideraciones.archivo_modal')
                     @endforeach
                     </tbody>
 
@@ -103,7 +103,7 @@
                 $("#btn_enviar").hide();
                 $("#btn_cancelar").hide();
 
-                var nfilas = $("#tabla_asesor tr").length -1;
+                var nfilas = $("#tabla_impulsador tr").length -1;
 
                 if ( nfilas > 0)
                 {

@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-     role="dialog" tabindex="-1" id="modal-nomina-update-{{$asesor->id}}">
-    {{Form::Open(array('action'=>array('ConsideracionTiendaController@updateEstado', $asesor->id),'method'=>'patch'))}}
+     role="dialog" tabindex="-1" id="modal-nomina-update-{{$impulsador->id}}">
+    {{Form::Open(array('action'=>array('ConsideracionIndirectaController@updateEstado', $impulsador->id),'method'=>'patch'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,17 +8,17 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title text-blue">Cambio de Estado: {{$asesor->asesor->nombre}}</h4>
+                <h4 class="modal-title text-blue">Cambio de Estado: {{$impulsador->impulsador->nombre}}</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label class="text-blue">Estado</label>
-                    <select class="form-control aprobacion" id="aprobacion-{{$asesor->id}}" name="estado_consideracion">
-                        @if($asesor->estado_consideracion=='aprobado')
+                    <select class="form-control aprobacion" id="aprobacion-{{$impulsador->id}}" name="estado_consideracion">
+                        @if($impulsador->estado_consideracion=='aprobado')
                             <option value="aprobado" selected >Aprobado</option>
                             <option value="rechazado">rechazado</option>
                             <option value="pendiente">pendiente</option>
-                        @elseif($asesor->estado_consideracion=='rechazado')
+                        @elseif($impulsador->estado_consideracion=='rechazado')
                             <option value="aprobado"  >Aprobado</option>
                             <option value="rechazado" selected>rechazado</option>
                             <option value="pendiente">pendiente</option>
@@ -27,9 +27,9 @@
                 </div>
                 <div class="form-group">
                     <label class="text-blue">porcentaje</label>
-                    <select class="form-control text-uppercase " name="objetivo[]" id="objetivo-{{$asesor->id}}">
+                    <select class="form-control text-uppercase " name="objetivo[]" id="objetivo-{{$impulsador->id}}">
                         @foreach($porcentajes as $porcentaje)
-                            @if($asesor->porcentaje_objetivo == $porcentaje)
+                            @if($impulsador->porcentaje_objetivo == $porcentaje)
                                 <option value="{{$porcentaje}}" selected>{{$porcentaje}}</option>
                             @else
                                 <option value="{{$porcentaje}}" >{{$porcentaje}}</option>
@@ -42,7 +42,7 @@
 
                 <div class="form-group">
                     <label class="text-blue">comentarios</label>
-                    <input type="text" name="comentario_consideracion" required value="{{$asesor->comentarios_consideracion}}" class="form-control" placeholder="detalles de la consideracion">
+                    <input type="text" name="comentario_consideracion" required value="{{$impulsador->comentarios_consideracion}}" class="form-control" placeholder="detalles de la consideracion">
                 </div>
 
 

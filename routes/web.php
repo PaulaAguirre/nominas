@@ -255,6 +255,15 @@ Route::group (['middleware'=>'auth'], function () {
     /**Consideraciones indirecta*/
     Route::patch('agregar_consideracion_indirecta/{id}', 'ConsideracionIndirectaController@agregarConsideracion')
         ->name('consideraciones_indirecta.agregar_consideracion');
+    Route::resource('consideraciones_indirecta', 'ConsideracionIndirectaController');
+    Route::get('aprobacion_consideraciones_indirecta', 'ConsideracionIndirectaController@aprobarConsideraciones')
+        ->name('consideraciones_indirecta.aprobacion');
+    Route::patch('aprobacion_consideraciones_indirecta', 'ConsideracionIndirectaController@storeConsideraciones')
+        ->name('consideraciones_indirecta.aprobacion_store');
+    Route::patch('consideraciones_indirecta_edit/{id}', 'ConsideracionIndirectaController@updateEstado')
+        ->name('consideraciones_indirecta_edit'); //ruta para editar el estado
+    Route::patch('consideraciones_indirecta_update/{id}', 'ConsideracionIndirectaController@updateConsideracion')
+        ->name('consideraciones_edit_consideracion'); //ruta para editar la inactivacio
 
 
 });

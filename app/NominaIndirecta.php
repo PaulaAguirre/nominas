@@ -84,4 +84,20 @@ class NominaIndirecta extends Model
     {
         return $this->hasMany('App\ArchivoIndirecta', 'nomina_indirecta_id');
     }
+
+    public function scopeConsideracion($query, $id_consideracion)
+    {
+        if ($id_consideracion)
+        {
+            $query->where('consideracion_id', $id_consideracion);
+        }
+
+    }
+    public function scopeEstadoConsideracion($query, $estado)
+    {
+        if ($estado)
+        {
+            $query->where('estado_consideracion', '=', $estado);
+        }
+    }
 }

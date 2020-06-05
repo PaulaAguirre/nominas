@@ -99,7 +99,16 @@ class ImpulsadorController extends Controller
     {
         $impulsador = Impulsador::findOrFail($impulsador_id);
         $pdv_ids = $request->get('idpdv');
-        $impulsador->pdvs()->sync($pdv_ids);
+        $cont = 0;
+        while ($cont < count($pdv_ids))
+        {
+            $pdv = Pdv::findOrFail($pdv_ids[$cont]);
+            $pdv->impulsador_id = $impulsador_id;
+            $pdv->update();
+            $cont++;
+        }
+
+        //$impulsador->pdvs()->sync($pdv_ids);
 
         return redirect('nomina_indirecta');
 
@@ -170,7 +179,15 @@ class ImpulsadorController extends Controller
     {
         $impulsador = Impulsador::findOrFail($impulsador_id);
         $pdv_ids = $request->get('idpdv');
-        $impulsador->pdvs()->sync($pdv_ids);
+        //$impulsador->pdvs()->sync($pdv_ids);
+        $cont = 0;
+        while ($cont < count($pdv_ids))
+        {
+            $pdv = Pdv::findOrFail($pdv_ids[$cont]);
+            $pdv->impulsador_id = $impulsador_id;
+            $pdv->update();
+            $cont++;
+        }
 
         return redirect('nomina_indirecta');
 

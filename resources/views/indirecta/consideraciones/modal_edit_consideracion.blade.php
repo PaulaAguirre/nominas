@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-     role="dialog" tabindex="-1" id="modal-consideracion-update-{{$asesor->id}}">
-    {{Form::Open(array('action'=>array('ConsideracionTiendaController@updateConsideracion', $asesor->id),'files'=>true,'method'=>'patch'))}}
+     role="dialog" tabindex="-1" id="modal-consideracion-update-{{$impulsador->id}}">
+    {{Form::Open(array('action'=>array('ConsideracionIndirectaController@updateConsideracion', $impulsador->id),'files'=>true,'method'=>'patch'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,14 +8,14 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title text-blue">Editar Consideración: {{$asesor->asesor->nombre}}</h4>
+                <h4 class="modal-title text-blue">Editar Consideración: {{$impulsador->impulsador->nombre}}</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label class="text-blue">Consideración</label>
-                    <select class="form-control" id="id_consideracion" name="id_consideracion">
+                    <select class="form-control" id="consideracion_id" name="consideracion_id">
                         @foreach($consideraciones as $consideracion)
-                            @if ($consideracion->id==$asesor->id_consideracion)
+                            @if ($consideracion->id==$impulsador->id_consideracion)
                                 <option value="{{$consideracion->id}}" selected>{{strtoupper ($consideracion->nombre ? $consideracion->nombre : '')}}</option>
                             @else
                                 <option value="{{$consideracion->id}}">{{strtoupper ($consideracion->nombre ? $consideracion->nombre : '')}}</option>
@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <label class="text-blue">comentarios</label>
-                    <textarea name="detalles_consideracion" required value="{{$asesor->detalles_consideracion}}" class="form-control text-uppercase">{{$asesor->detalles_consideracion}}</textarea>
+                    <textarea name="detalles_consideracion" required value="{{$impulsador->detalles_consideracion}}" class="form-control text-uppercase">{{$impulsador->detalles_consideracion}}</textarea>
                 </div>
 
                 <div class="form-group">

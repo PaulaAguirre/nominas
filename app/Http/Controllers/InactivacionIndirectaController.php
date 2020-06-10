@@ -34,8 +34,10 @@ class InactivacionIndirectaController extends Controller
             $zonas_zonal = \Auth::user()->zonasIndirecta->pluck('id')->toArray();
             $zonas = ZonaIndirecta::whereIn('id', $zonas_zonal)->get();
             $impulsadores_inactivos = NominaIndirecta::whereNotNull('estado_inactivacion')
-                ->coordinador($zonas)->zonas($zonas_zonal)
-                ->mes($mes)->impulsadorInd($impulsador_id)->activo($estado_inactivacion)
+                ->zonas($zonas_zonal)
+                ->mes($mes)
+                ->activo($estado_inactivacion)
+                ->impulsadorInd($impulsador_id)
                 ->orderBy('id')
                 ->get();
 

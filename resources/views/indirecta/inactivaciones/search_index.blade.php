@@ -1,7 +1,7 @@
 {!! Form::open(array('url'=>'inactivaciones_indirecta','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group form-inline">
 
-    <select name="asesor_id" class="form-control selectpicker text-uppercase col-lg-4" id="asesor_id" title="Seleccione Representante" data-live-search="true">
+    <select name="impulsador_id" class="form-control selectpicker text-uppercase col-lg-4" id="impulsador_id" title="Seleccione Representante" data-live-search="true">
         @foreach($impulsadores_inactivos as $impulsador)
             <option value="{{$impulsador->impulsador_id}}">ch: {{$impulsador->impulsador->ch}} - {{$impulsador->impulsador->nombre}}</option>
         @endforeach

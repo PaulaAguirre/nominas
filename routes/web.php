@@ -34,9 +34,13 @@ Route::get('/', function () {
             {
                 return redirect('nomina_tienda');
             }
-            elseif (!Auth::user()->hasCanales(['directa','tiendas']))
+            elseif (!Auth::user()->hasCanales(['directa','tiendas','indirecta']))
             {
                 return redirect('nomina_directa');
+            }
+            elseif (Auth::user()->hasCanales(['indirecta']))
+            {
+                return redirect('nomina_indirecta');
             }
 
         }
@@ -292,6 +296,9 @@ Route::get('/excel_tienda_rpl', 'ExcelController@exportarNominaTiendaMesAnterior
 Route::get('/excel_tienda_x_zona', 'ExcelController@exportNominaTiendaxZona');
 /**excel reapertura*/
 Route::get('/excel_directa_mes_anterior', 'ExcelController@exportarDirectaMesAnterior');
+
+/**Excel indirecta*/
+Route::get('/excel_indirecta', 'ExcelController@exportarNominaIndirecta');
 
 Route::get('variable', function ()
 {

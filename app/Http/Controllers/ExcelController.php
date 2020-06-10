@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\NominaDirectaMesAnteriorExport;
+use App\Exports\NominaIndirectaExport;
 use App\Exports\NominaTiendaRPLExport;
 use App\Exports\NominaTiendaZonalExport;
 use Carbon\Carbon;
@@ -86,5 +87,10 @@ class ExcelController extends Controller
     {
         $mes = \Config::get('global.mes_anterior_tienda');
         return Excel::download(new NominaTiendaRPLExport, 'nomina_tienda_mes_anterior.xlsx');
+    }
+
+    public function exportarNominaIndirecta()
+    {
+        return Excel::download(new NominaIndirectaExport, 'nomina_indirecta.xlsx');
     }
 }

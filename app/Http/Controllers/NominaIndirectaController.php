@@ -17,6 +17,14 @@ use Illuminate\View\View;
 class NominaIndirectaController extends Controller
 {
     /**
+     * NominaIndirectaController constructor.
+     */
+    public function __construct()
+    {
+        return $this->middleware('canales:indirecta');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return Factory|View
@@ -38,7 +46,7 @@ class NominaIndirectaController extends Controller
             $zonas = ZonaIndirecta::whereIn('id', $zonas_zonal)->get();
 
             $impulsadores = NominaIndirecta::mes($mes_nomina)
-                ->zonas($zonas)
+                ->zonas($zonas_zonal)
                 ->coordinador($coordinador_id)
                 ->zona($zona_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)

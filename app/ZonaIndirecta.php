@@ -11,7 +11,7 @@ class ZonaIndirecta extends Model
 
     public function region()
     {
-        return $this->belongsTo('App\Region');
+        return $this->belongsTo('App\Region', 'region_id');
     }
 
     public function familiazona ()

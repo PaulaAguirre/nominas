@@ -86,12 +86,12 @@
                                 </td>
                             </tr>
                         @endif
-
                         @include('indirecta.impulsadores.modal_eliminacion')
                         @include('indirecta.consideraciones.crear_consideracion_modal')
                     @endforeach
                 </table>
             </div>
+            {{$impulsadores->render()}}
         </div>
     </div>
 

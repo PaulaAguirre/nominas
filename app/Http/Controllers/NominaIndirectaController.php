@@ -51,7 +51,7 @@ class NominaIndirectaController extends Controller
                 ->zona($zona_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)
                 ->orderBy('id')
-                ->get();
+                ->paginate(200);
         }
         else
         {
@@ -61,7 +61,7 @@ class NominaIndirectaController extends Controller
                ->zona($zona_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)
                 ->orderBy('id')
-                ->get();
+                ->paginate(200);
         }
 
         return \view('indirecta.nomina.index', ['zonas'=>$zonas, 'coordinadores'=>$coordinadores,
@@ -82,7 +82,8 @@ class NominaIndirectaController extends Controller
         $mes_nomina = \Config::get('global.mes_indirecta');
         $impulsadores_existentes = NominaIndirecta::where('mes', '=', $mes_nomina)->get()->pluck('impulsador_id')->toArray();
         $impulsadores = Impulsador::whereNotIn('id', $impulsadores_existentes)
-            ->where('activo', '=', 'ACTIVO')->zonaInd($zona_id)->get();
+            ->where('activo', '=', 'ACTIVO')->zonaInd($zona_id)
+            ->get();
 
         return view('indirecta.nomina.create', ['impulsadores'=>$impulsadores, 'mes_nomina'=>$mes_nomina, 'zonas'=>$zonas]);
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\pdv;
+use App\Pdv;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;

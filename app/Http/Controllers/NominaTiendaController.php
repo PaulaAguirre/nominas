@@ -100,7 +100,7 @@ class NominaTiendaController extends Controller
 
         $cont = 0;
         $asesor_mes = $request->get('asesor_mes');
-        $mes_nomina = \Config::get('mes_tienda');
+        $mes_nomina = \Config::get('global.mes_tienda');
 
         while ($cont < count($asesores_id))
         {

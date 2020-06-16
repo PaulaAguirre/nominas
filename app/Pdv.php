@@ -25,4 +25,20 @@ class Pdv extends Model
     {
         return $this->belongsTo('App\Impulsador');
     }
+
+    public function scopeImpulsadorPDV($query, $impulsador_id)
+    {
+        if ($impulsador_id)
+        {
+            return $query->where('impulsador_id', '=', $impulsador_id);
+        }
+    }
+
+    public function scopePdv ($query, $pdv_id)
+    {
+        if($pdv_id)
+        {
+            return $query->where('id', '=', $pdv_id);
+        }
+    }
 }

@@ -113,9 +113,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('indirectas')}}"><i class="fa fa-book"></i> indirectas</a></li>
-                        <li><a href="{{url('teamleaders')}}"><i class="fa fa-book"></i> Teamleaders</a></li>
-                        <li><a href="#"><i class="fa fa-book"></i> Consideraciones</a></li>
+                        <li><a href="{{url('pdvs')}}"><i class="fa fa-book"></i> PDVs</a></li>
+
                     </ul>
                 </li>
 

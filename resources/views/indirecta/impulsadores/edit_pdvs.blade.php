@@ -24,6 +24,7 @@
                     <thead class="text-center text-gray" style="background-color: #5d59a6">
                     <th>ID</th>
                     <th>ID PDV</th>
+                    <th>Nombre</th>
                     <th>CIRCUITO</th>
                     <th class="col-lg-1">Agregar</th>
                     </thead>
@@ -33,6 +34,7 @@
                                 <tr class="text-uppercase">
                                     <td>{{$pdv->id}}</td>
                                     <td>{{$pdv->codigo}}</td>
+                                    <td>{{$pdv->nombre}}</td>
                                     <td>{{$pdv->circuito ? $pdv->circuito->codigo : ''}}</td>
                                     @if($pdv->impulsador_id == $impulsador->id)
                                         <td class="text-center"><input type="checkbox" value="{{$pdv->id}}" name="idpdv[]" checked></td>

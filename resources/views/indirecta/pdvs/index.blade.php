@@ -2,7 +2,7 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <h3>Agregar PDVs - Asesor: {{$impulsador->nombre}} </h3>
+            <h3>PDVs </h3>
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -15,9 +15,9 @@
         </div>
     </div>
 
-    {!!Form::model ($impulsador, ['method'=>'PATCH', 'route'=>['agregar_pdv', $impulsador]])!!}
     {{Form::token()}}
     <div class="row text-uppercase">
+        @include('indirecta.pdvs.search_index')
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
@@ -26,20 +26,18 @@
                     <th>ID PDV</th>
                     <th>Nombre</th>
                     <th>CIRCUITO</th>
-                    <th class="col-lg-1">Agregar</th>
+                    <th>Impulsador</th>
+                    <th class="col-lg-1">opciones</th>
                     </thead>
-                    @foreach ($circuitos as $circuito)
-                        @foreach($circuito->pdvs as $pdv)
-                            @if(!$pdv->impulsador_id)
-                                <tr class="text-uppercase">
-                                    <td>{{$pdv->id}}</td>
-                                    <td>{{$pdv->codigo}}</td>
-                                    <td>{{$pdv->nombre}}</td>
-                                    <td>{{$pdv->circuito ? $pdv->circuito->codigo : ''}}</td>
-                                    <td class="text-center"><input type="checkbox" value="{{$pdv->id}}" name="idpdv[]"></td>
-                                </tr>
-                            @endif
-                        @endforeach
+                    @foreach($pdvs as $pdv)
+                        <tr class="text-uppercase">
+                            <td>{{$pdv->id}}</td>
+                            <td>{{$pdv->codigo}}</td>
+                            <td>{{$pdv->nombre}}</td>
+                            <td>{{$pdv->circuito ? $pdv->circuito->codigo : ''}}</td>
+                            <td>{{$pdv->impulsador ? $pdv->impulsador->nombre : ''}}</td>
+                            <td class="text-center"></td>
+                        </tr>
                     @endforeach
                 </table>
                 <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">

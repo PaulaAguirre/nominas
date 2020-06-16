@@ -79,8 +79,14 @@ class ImpulsadorController extends Controller
         $nomina->detalles_consideracion = $request->get('detalles_consideracion');
         $nomina->save();
 
-
-        return redirect('agregar_pdv/'.$impulsador->id);
+        if ($impulsador->clasificacion->nombre == 'IMPULSADOR')
+        {
+            return redirect('agregar_pdv/'.$impulsador->id);
+        }
+        else
+        {
+            return redirect('nomina_indirecta');
+        }
     }
 
     public function agregarPdvs($impulsador_id)
@@ -160,7 +166,16 @@ class ImpulsadorController extends Controller
         $impulsador->clasificacion_id = $request->get('clasificacion_id');
         $impulsador->update();
 
-        return redirect('editar_pdv/'.$impulsador->id);
+        if ($impulsador->clasificacion->nombre == 'IMPULSADOR')
+        {
+            return redirect('editar_pdv/'.$impulsador->id);
+        }
+        else
+        {
+            return redirect('nomina_indirecta');
+        }
+
+        //c vreturn redirect('editar_pdv/'.$impulsador->id);
     }
 
     public function editarPdvs($impulsador_id)

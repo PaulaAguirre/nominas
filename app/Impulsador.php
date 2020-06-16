@@ -30,7 +30,7 @@ class Impulsador extends Model
 
     public function pdvs ()
     {
-        return $this->belongsToMany('App\Pdv');
+        return $this->hasMany('App\Pdv');
     }
 
     /** @return Builder
@@ -55,6 +55,7 @@ class Impulsador extends Model
         }
     }
 
+
     /** @return Builder
      * @var $query Builder
      */
@@ -78,6 +79,7 @@ class Impulsador extends Model
            return $query->where('activo', '=', $activo);
         }
     }
+
 
 }
 

@@ -269,6 +269,9 @@ Route::group (['middleware'=>'auth'], function () {
     Route::patch('consideraciones_indirecta_update/{id}', 'ConsideracionIndirectaController@updateConsideracion')
         ->name('consideraciones_edit_consideracion'); //ruta para editar la inactivacio
 
+    /**PDVS*/
+    Route::resource('pdvs', 'PdvController');
+
 
 });
 

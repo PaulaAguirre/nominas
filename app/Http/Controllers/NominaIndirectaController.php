@@ -82,7 +82,7 @@ class NominaIndirectaController extends Controller
         $mes_nomina = \Config::get('global.mes_indirecta');
         $impulsadores_existentes = NominaIndirecta::where('mes', '=', $mes_nomina)->get()->pluck('impulsador_id')->toArray();
         $impulsadores = Impulsador::whereNotIn('id', $impulsadores_existentes)
-            ->where('activo', '=', 'activo')->zonaInd($zona_id)->get();
+            ->where('activo', '=', 'ACTIVO')->zonaInd($zona_id)->get();
 
         return view('indirecta.nomina.create', ['impulsadores'=>$impulsadores, 'mes_nomina'=>$mes_nomina, 'zonas'=>$zonas]);
     }

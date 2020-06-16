@@ -22,7 +22,7 @@ class NominaTiendaZonalExport implements FromView
     public function view():View
     {
         $zonas = auth()->user()->zonasTienda->pluck('id')->toArray();
-        $mes = \Config::get('global.mes');
+        $mes = \Config::get('global.mes_tienda');
         $asesores = NominaTienda::where('mes', $mes)->get();
         return view('excel_tienda.exportar_x_zona', ['asesores'=>$asesores, 'zonas'=>$zonas]);
     }

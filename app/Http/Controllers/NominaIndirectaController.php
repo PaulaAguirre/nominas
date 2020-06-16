@@ -51,7 +51,7 @@ class NominaIndirectaController extends Controller
                 ->zona($zona_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)
                 ->orderBy('id')
-                ->paginate(200);
+                ->paginate(500);
         }
         else
         {
@@ -61,7 +61,7 @@ class NominaIndirectaController extends Controller
                ->zona($zona_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)
                 ->orderBy('id')
-                ->paginate(200);
+                ->paginate(500);
         }
 
         return \view('indirecta.nomina.index', ['zonas'=>$zonas, 'coordinadores'=>$coordinadores,

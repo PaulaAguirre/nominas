@@ -26,6 +26,7 @@
                     <th>ID PDV</th>
                     <th>Nombre</th>
                     <th>CIRCUITO</th>
+                    <th>CH</th>
                     <th>Impulsador</th>
                     <th class="col-lg-1">opciones</th>
                     </thead>
@@ -35,6 +36,7 @@
                             <td>{{$pdv->codigo}}</td>
                             <td>{{$pdv->nombre}}</td>
                             <td>{{$pdv->circuito ? $pdv->circuito->codigo : ''}}</td>
+                            <td>{{$pdv->impulsador ? $pdv->impulsador->ch :''}}</td>
                             <td>{{$pdv->impulsador ? $pdv->impulsador->nombre : ''}}</td>
                             <td class="text-center"></td>
                         </tr>

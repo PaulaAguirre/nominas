@@ -26,7 +26,12 @@ class ImpulsadorController extends Controller
      */
     public function index(Request $request)
     {
-        $impulsadores = Impulsador::all();
+        $impulsador_id = $request->get('impulsador_id');
+        $coordinador_id = $request->get('coordinador_id');
+        $zona_id = $request->get('zona_id');
+        $activo = $request->get('activo');
+        $impulsadores = Impulsador::impulsador($impulsador_id)->coordinadorInd($coordinador_id)
+            ->zonaInd($zona_id)->activo($activo)->paginate(500);
         $coordinadores = Coordinador::all();
         $zonas_indirecta = ZonaIndirecta::all();
         return view('indirecta.impulsadores.index', ['impulsadores'=>$impulsadores, 'coordinadores'=>$coordinadores

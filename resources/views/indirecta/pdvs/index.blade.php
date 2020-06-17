@@ -28,7 +28,7 @@
                     <th>CIRCUITO</th>
                     <th>CH</th>
                     <th>Impulsador</th>
-                    <th class="col-lg-1">opciones</th>
+                    <th class="col-lg-1">Coordinador</th>
                     </thead>
                     @foreach($pdvs as $pdv)
                         <tr class="text-uppercase">

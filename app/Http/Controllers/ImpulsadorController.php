@@ -9,6 +9,7 @@ use App\Coordinador;
 use App\Impulsador;
 use App\NominaIndirecta;
 use App\Pdv;
+use App\ZonaIndirecta;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +27,10 @@ class ImpulsadorController extends Controller
     public function index(Request $request)
     {
         $impulsadores = Impulsador::all();
-        return view('indirecta.impulsadores.index', ['impulsadores'=>$impulsadores]);
+        $coordinadores = Coordinador::all();
+        $zonas_indirecta = ZonaIndirecta::all();
+        return view('indirecta.impulsadores.index', ['impulsadores'=>$impulsadores, 'coordinadores'=>$coordinadores
+        ,'zonas_indirecta'=>$zonas_indirecta]);
     }
 
     /**
@@ -79,7 +83,7 @@ class ImpulsadorController extends Controller
         $nomina->detalles_consideracion = $request->get('detalles_consideracion');
         $nomina->save();
 
-        if ($impulsador->clasificacion->nombre == 'IMPULSADOR')
+        if ($impulsador->clasificacion->nombre == 'IMPULSADORES')
         {
             return redirect('agregar_pdv/'.$impulsador->id);
         }
@@ -166,7 +170,7 @@ class ImpulsadorController extends Controller
         $impulsador->clasificacion_id = $request->get('clasificacion_id');
         $impulsador->update();
 
-        if ($impulsador->clasificacion->nombre == 'IMPULSADOR')
+        if ($impulsador->clasificacion->nombre == 'IMPULSADORES')
         {
             return redirect('editar_pdv/'.$impulsador->id);
         }

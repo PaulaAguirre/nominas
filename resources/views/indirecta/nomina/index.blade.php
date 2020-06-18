@@ -77,7 +77,7 @@
                                             <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                         </a>
                                         @if($impulsador->impulsador->clasificacion ? $impulsador->impulsador->clasificacion->nombre == 'IMPULSADORES' : '')
-                                        <a href="{{URL::action('ImpulsadorController@agregarPdvs', $impulsador->impulsador->id)}}">
+                                        <a href="{{URL::action('ImpulsadorController@editarPdvs', $impulsador->impulsador->id)}}">
                                             <button class="btn btn-github btn-xs" data-toggle="tooltip" data-placement="top" title="Editar PDVS"><i class="fa fa-pencil"></i></button></a>
                                         @endif
                                     @if(!$impulsador->estado_consideracion)

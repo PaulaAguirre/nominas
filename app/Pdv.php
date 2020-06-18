@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pdv extends Model
 {
 
-    protected $table = 'pdvs';
+    protected $table = 'pdvss';
     protected $primaryKey = "id";
 
     protected $fillable = [

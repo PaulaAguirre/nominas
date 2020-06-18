@@ -14,4 +14,9 @@ class Coordinador extends Model
         return $this->belongsToMany('App\ZonaIndirecta', 'coordinador_zona');
     }
 
+    public function circuitos ()
+    {
+        return $this->hasMany('App\Circuito');
+    }
+
 }

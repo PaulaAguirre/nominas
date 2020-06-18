@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Circuito;
 use App\Pdv;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Impulsador;
+use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use PhpParser\Node\Expr\New_;
 
 class PdvController extends Controller
 {
@@ -32,18 +36,33 @@ class PdvController extends Controller
      */
     public function create()
     {
+        $circuitos = Circuito::all();
+        $impulsadores = Impulsador::where('clasificacion_id', '=', 1)->get();
+
+        return view('indirecta.pdvs.create', ['circuitos'=>$circuitos, 'impulsadores'=>$impulsadores]);
 
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'codigo' => 'required|unique:pdvs'
+        ]);
+
+        $pdv = New Pdv();
+        $pdv->codigo = $request->get('codigo');
+        $pdv->circuito_id = $request->get('circuito_id');
+        $pdv->nombre =  $request->get('nombre');
+        $pdv->impulsador_id = $request->get('impulsador_id');
+        $pdv->save();
+
+        return redirect('pdvs');
     }
 
     /**
@@ -71,7 +90,7 @@ class PdvController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\pdv  $pdv
      * @return \Illuminate\Http\Response
      */

@@ -24,4 +24,9 @@ class Circuito extends Model
     {
         return $this->hasMany('App\Pdv');
     }
+
+    public function coordinador ()
+    {
+        return $this->belongsTo('App\Coordinador');
+    }
 }

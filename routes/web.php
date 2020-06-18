@@ -271,6 +271,8 @@ Route::group (['middleware'=>'auth'], function () {
 
     /**PDVS*/
     Route::resource('pdvs', 'PdvController');
+    /**CIRCUITOS*/
+    Route::resource('circuitos', 'CircuitoController');
 
 
 });

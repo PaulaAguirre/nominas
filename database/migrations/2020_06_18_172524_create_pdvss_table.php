@@ -18,8 +18,8 @@ class CreatePdvssTable extends Migration
             $table->integer('codigo');
             $table->integer('circuito_id');
             $table->integer('impulsador_id')->nullable();
-            $table->string('nombre')->nullable();
             $table->timestamps();
+            $table->string('nombre')->nullable();
         });
     }
 

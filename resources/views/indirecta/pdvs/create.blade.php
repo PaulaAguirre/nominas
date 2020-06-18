@@ -51,7 +51,7 @@
 
                         <div class="form-group">
                             <div class="">
-                                <label for="name">Circuito</label>
+                                <label for="name">IMPULSADOR</label>
                                 <select name="impulsador_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione impulsador">
                                     @foreach($impulsadores as $impulsador )
                                         <option value="{{$impulsador->id}}">{{$impulsador->ch}} - {{$impulsador->nombre}}</option>

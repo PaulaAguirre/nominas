@@ -46,6 +46,8 @@ class CircuitoController extends Controller
         $coordinador_zona = $request->get('coordinador_zona');
         $coordinador_id = $coordinador_zona[0];
         $zona_id = $coordinador_zona[1];
+
+        dd($coordinador_id.' '.$zona_id);
         $this->validate($request, [
             'codigo' => 'required|unique:circuitos'
         ]);

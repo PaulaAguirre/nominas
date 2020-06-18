@@ -37,8 +37,9 @@
                             <td>{{$pdv->nombre}}</td>
                             <td>{{$pdv->circuito ? $pdv->circuito->codigo : ''}}</td>
                             <td>{{$pdv->impulsador ? $pdv->impulsador->ch :''}}</td>
-                            <td>{{$pdv->impulsador ? $pdv->impulsador->coordinador->nombre : ''}}</td>
                             <td>{{$pdv->impulsador ? $pdv->impulsador->nombre : ''}}</td>
+                            <td>{{$pdv->impulsador ? $pdv->impulsador->coordinador->nombre : ''}}</td>
+
 
                             <td class="text-center"></td>
                         </tr>

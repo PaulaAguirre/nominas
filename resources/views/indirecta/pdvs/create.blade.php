@@ -27,7 +27,7 @@
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
                         <div class="form-group">
                             <div class="">
-                                <label for="name">Circuito</label>
+                                <label for="name">PDV</label>
                                 <input type="number" name="codigo" required value="{{old('codigo')}}" class="form-control text-uppercase">
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <div class="">
                                 <label for="name">Nombre Cliente</label>
-                                <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase">
+                                <input type="text" name="nombre"  value="{{old('nombre')}}" class="form-control text-uppercase">
                             </div>
                         </div>
 

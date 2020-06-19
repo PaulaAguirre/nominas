@@ -29,6 +29,7 @@
                     <th>CH</th>
                     <th>Impulsador</th>
                     <th class="col-lg-1">Coordinador</th>
+                    <th>ZONA</th>
                     </thead>
                     @foreach($pdvs as $pdv)
                         <tr class="text-uppercase">
@@ -39,6 +40,7 @@
                             <td>{{$pdv->impulsador ? $pdv->impulsador->ch :''}}</td>
                             <td>{{$pdv->impulsador ? $pdv->impulsador->nombre : ''}}</td>
                             <td>{{$pdv->impulsador ? $pdv->impulsador->coordinador->nombre : ''}}</td>
+                            <td>{{$pdv->circuito ? $pdv->circuito->zona->nombre : ''}}</td>
 
 
                             <td class="text-center"></td>

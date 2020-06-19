@@ -231,7 +231,8 @@ class   ConsideracionIndirectaController extends Controller
 
         }
 
-        $impulsador->fill($request->all());
+        $impulsador->consideracion_id = $request->get('consideracion_id');
+        $impulsador->detalles_consideracion = $request->get('detalles_consideracion');
         $impulsador->update();
         return redirect()->back();
     }

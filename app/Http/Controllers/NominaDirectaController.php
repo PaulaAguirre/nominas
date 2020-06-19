@@ -59,7 +59,6 @@ NominaDirectaController extends Controller
             $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->jefesDirecta($id_jefe)
                 ->zonadirecta($id_zona, $id_jefe)
                 ->estado($estado)
-                ->inactivo($activo)
                 ->orderBy('id_nomina')->get();
         }
         else

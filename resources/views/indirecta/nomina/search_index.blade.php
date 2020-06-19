@@ -19,6 +19,12 @@
         @endforeach
     </select>
 
+    <select name="clasificacion_id" class="form-control selectpicker text-uppercase col-lg-4" id="zona_id" title="Clasificacion" data-live-search="true">
+        @foreach($clasificaciones as $clasificacion)
+            <option value="{{$clasificacion->id}}">{{$clasificacion->nombre}}</option>
+        @endforeach
+    </select>
+
     <select name="activo" class="form-control selectpicker text-uppercase col-lg-4"  title="activo" data-live-search="true">
         <option value="">Activo</option>
         <option value="pendiente">pendiente inactivación</option>

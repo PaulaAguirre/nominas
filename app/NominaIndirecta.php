@@ -100,4 +100,15 @@ class NominaIndirecta extends Model
             $query->where('estado_consideracion', '=', $estado);
         }
     }
+
+    public function scopeClasificacion ($query, $clasificacion_id)
+    {
+        if ($clasificacion_id)
+        {
+            $query->whereHas('impulsador', function ($q1) use ($clasificacion_id)
+            {
+                $q1->where('clasificacion_id', '=', $clasificacion_id);
+            });
+        }
+    }
 }

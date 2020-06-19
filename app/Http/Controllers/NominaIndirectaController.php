@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClasificacionImpulsadores;
 use App\Consideracion;
 use App\Coordinador;
 use App\Impulsador;
@@ -34,11 +35,12 @@ class NominaIndirectaController extends Controller
         $zona_id = $request->get('zona_id');
         $coordinador_id = $request->get('coordinador_id');
         $activo = $request->get('activo');
-        $clasificacion = $request->get('clasificacion');
+        $clasificacion_id = $request->get('clasificacion_id');
         $impulsador_id = $request->get('impulsador_id');
         $consideraciones = Consideracion::all();
         $mes_nomina = \Config::get('global.mes_indirecta');
         $coordinadores = Coordinador::all();
+        $clasificaciones = ClasificacionImpulsadores::all();
 
         if (\Auth::user()->hasRoles(['zonal']))
         {
@@ -48,7 +50,7 @@ class NominaIndirectaController extends Controller
             $impulsadores = NominaIndirecta::mes($mes_nomina)
                 ->zonas($zonas_zonal)
                 ->coordinador($coordinador_id)
-                ->zona($zona_id)
+                ->zona($zona_id)->clasificacion($clasificacion_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)
                 ->orderBy('id')
                 ->paginate(500);
@@ -58,14 +60,14 @@ class NominaIndirectaController extends Controller
             $zonas = ZonaIndirecta::all();
             $impulsadores = NominaIndirecta::mes($mes_nomina)
                 ->coordinador($coordinador_id)
-               ->zona($zona_id)
+               ->zona($zona_id)->clasificacion($clasificacion_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)
                 ->orderBy('id')
                 ->paginate(500);
         }
 
         return \view('indirecta.nomina.index', ['zonas'=>$zonas, 'coordinadores'=>$coordinadores,
-            'consideraciones'=>$consideraciones, 'impulsadores'=>$impulsadores]);
+            'consideraciones'=>$consideraciones, 'impulsadores'=>$impulsadores, 'clasificaciones'=>$clasificaciones]);
 
     }
 

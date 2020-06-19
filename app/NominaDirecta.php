@@ -168,7 +168,7 @@ class NominaDirecta extends Model
     }
 
     /** @var $query \Illuminate\Database\Query\Builder */
-    public function scopeInactivo ($query, $activo)
+    public function scopeActivo ($query, $activo)
     {
         $mes = Carbon::now()->format('Ym');
         if($activo)
@@ -187,8 +187,6 @@ class NominaDirecta extends Model
         }
 
     }
-
-
 
 
 

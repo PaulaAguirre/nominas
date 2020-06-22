@@ -7,7 +7,7 @@
                     <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook">Ingresos Mes Actual</button></a>
                     <a href="/excel"><button class="btn btn-github">Exportar</button></a>
                 @else
-                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(28))
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(20))
 
                         <a href="ingresar_nuevo_asesor"><button class="btn btn-facebook" data-toggle="tooltip">Ingresos Mes Actual</button></a>
                     @endif
@@ -82,7 +82,7 @@
                                         <td class="text-success">Activo</td>
                                     @endif
                                     <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
-                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(28)))
+                                    @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(20)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                                 <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

@@ -16,7 +16,7 @@ class NominaIndirectaExport implements FromView, WithTitle
     public function view():View
     {
         $mes = \Config::get('global.mes_indirecta');
-        $clasificacion_id = 1;
+        $clasificacion_id = 2;
         $impulsadores = NominaIndirecta::where('mes', $mes)
             ->clasificacion($clasificacion_id)
             ->get();
@@ -28,6 +28,6 @@ class NominaIndirectaExport implements FromView, WithTitle
      */
     public function title(): string
     {
-        return 'impulsadores';
+        return 'pdas';
     }
 }

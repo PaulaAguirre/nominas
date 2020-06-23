@@ -42,7 +42,7 @@ class NominaDirectaExport implements FromView
 
         return view('excel.exportar', ['personas'=>$personas]);
 
-
     }
+
 
 }

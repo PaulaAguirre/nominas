@@ -28,6 +28,6 @@ class NominaIndirectaExport implements FromView, WithTitle
      */
     public function title(): string
     {
-        return 'nomina_indirecta';
+        return 'impulsadores';
     }
 }

@@ -59,6 +59,7 @@ class NominaIndirectaController extends Controller
         {
             $zonas = ZonaIndirecta::all();
             $impulsadores = NominaIndirecta::mes($mes_nomina)
+               ->noPdas()
                 ->coordinador($coordinador_id)
                ->zona($zona_id)->clasificacion($clasificacion_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)

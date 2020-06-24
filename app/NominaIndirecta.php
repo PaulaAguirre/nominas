@@ -112,4 +112,12 @@ class NominaIndirecta extends Model
         }
     }
 
+    public function scopeNoPdas ($query)
+    {
+        $query->whereHas('impulsador', function ($q1)
+        {
+            $q1->where('clasificacion_id', '<>', 2);
+        });
+    }
+
 }

@@ -6,6 +6,7 @@ use App\Exports\NominaDirectaMesAnteriorExport;
 use App\Exports\NominaIndirectaExport;
 use App\Exports\NominaTiendaRPLExport;
 use App\Exports\NominaTiendaZonalExport;
+use App\Exports\PDAsExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
@@ -92,5 +93,10 @@ class ExcelController extends Controller
     public function exportarNominaIndirecta()
     {
         return Excel::download(new NominaIndirectaExport, 'nomina_indirecta.xlsx');
+    }
+
+    public function exportarPdas()
+    {
+        return Excel::download(new PDAsExport, 'pdas.xlsx');
     }
 }

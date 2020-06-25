@@ -29,6 +29,7 @@
                                         <th class="col-lg-3">Mes</th>
                                         <th class="col-lg-1">Directa</th>
                                         <th class="col-lg-1 ">Tiendas</th>
+                                        <th class="col-lg-1 ">Indirecta</th>
                                     </thead>
                                     <tbody>
                                     <tr>
@@ -79,12 +80,12 @@
                                     </tr>
                                     <tr>
                                         <th>Mayo 2020</th>
-                                        <th class="text-center"><a href="{{URL::asset('excel_directa_mes_anterior')}}">
+                                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre final mayo.xlsx')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
 
                                             </a>
                                         </th>
-                                        <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre_mayo_2020.xlsx')}}">
+                                        <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre final mayo.xlsx')}}">
                                                 <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                                             </a>
                                         </th>
@@ -92,13 +93,31 @@
 
                                     <tr>
                                         <th>Junio 2020</th>
-                                        <th class="text-center"><a href="{{URL::asset('excel')}}">
+                                        <th class="text-center"><a href="{{URL::asset('/excel_directa_mes_anterior')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
 
                                             </a>
                                         </th>
-                                        <th class="text-center"><a href="{{URL::asset('excel_tienda')}}">
+                                        <th class="text-center"><a href="{{url('/excel_tienda_rpl')}}">
                                                 <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Julio 2020</th>
+                                        <th class="text-center"><a href="{{URL::asset('/excel')}}">
+                                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+
+                                            </a>
+                                        </th>
+                                        <th class="text-center"><a href="{{url('/excel_tienda')}}">
+                                                <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
+
+                                        <th class="text-center"><a href="{{url('/excel_indirecta')}}">
+                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                                             </a>
                                         </th>
                                     </tr>

@@ -35,7 +35,7 @@
                                 </a>
                                 <br>
                                 <a href="{{url('nomina_indirecta')}}">
-                                    <button class="btn btn-block btn-default text-gray" style="background-color: #5d59a6">INDIRECTA</button>
+                                    <button class="btn btn-block btn-yahoo">INDIRECTA</button>
                                 </a>
                                 <br>
                                 <a href="{{url('reportes_canales')}}">

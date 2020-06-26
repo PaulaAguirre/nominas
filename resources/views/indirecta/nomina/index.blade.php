@@ -5,12 +5,16 @@
             <h3>Nómina - Canal: INDIRECTA.
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))
                     <a href="{{url('asesores_indirecta/create')}}"><button class="btn btn-success">Nuevo Ingreso</button></a>
-                    <a href="{{url('/excel_indirecta')}}"><button class="btn btn-github">Exportar excel</button></a>
+                    <a href="{{url('/excel_indirecta')}}"><button class="btn btn-github">Exportar nomina</button></a>
+                    <a href="{{url('/excel_indirecta')}}"><button class="btn btn-github">Exportar pdv</button></a>
+
                 @else
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(27))
                         <a href="{{url('impulsadores/create')}}"><button class="btn btn-facebook">Nuevo Ingreso</button></a>
                     @endif
                     <a href="{{url('/excel_indirecta')}}"><button class="btn btn-github">Exportar Nómina</button></a>
+                        <a href="{{url('/excel_indirecta')}}"><button class="btn btn-github">Exportar pdv</button></a>
+
                 @endif
 
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))

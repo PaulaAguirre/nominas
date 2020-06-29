@@ -32,7 +32,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_asesor">
-                    <thead class="text-center" style="background-color: #2ab27b">
+                    <thead class="text-center" style="background-color: #2ab29b">
                     <th>ID</th>
                     <th>Mes</th>
                     <th>CH</th>
@@ -69,7 +69,7 @@
                                 <td>{{$asesor->porcentaje_objetivo}}</td>
                                 <td>
                                     @if(auth()->user()->hasRoles(['zonal']))
-                                        @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(27)))
+                                        @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(29)))
                                         <a href="{{URL::action('AsesorTiendaRPLController@edit', $asesor->asesor->id)}}">
                                             <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                         </a>

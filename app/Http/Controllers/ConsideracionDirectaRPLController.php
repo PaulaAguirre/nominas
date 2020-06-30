@@ -32,13 +32,14 @@ class ConsideracionDirectaRPLController extends Controller
         {
             $zonas = \Auth::user()->zonas->pluck('id')->toArray();
             $personas_consideracion = NominaDirectaRPL::where('estado_consideracion', '<>', NULL)
-                ->zonasZonales($zonas)
+                ->zonasZonales($zonas)->where('mes', $mes)
                 ->consideracion($id_consideracion)->representante($id_persona, $mes)->estadoConsideracion($estado_consideracion)
                 ->get();
         }
         else
         {
             $personas_consideracion = NominaDirectaRPL::where('estado_consideracion', '<>', NULL)
+                ->where('mes', $mes)
                 ->consideracion($id_consideracion)->representante($id_persona, $mes)->estadoConsideracion($estado_consideracion)
                 ->get();
         }

@@ -73,6 +73,7 @@ class NominaDirectaRPL extends Model
             return $query->where('id_persona_directa', $representante_id)
                 ->where('mes', $mes);
         }
+
     }
 
     public function scopeConsideracion ($query, $consideracion_id)

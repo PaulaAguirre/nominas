@@ -50,6 +50,7 @@ class NominaIndirectaController extends Controller
             $impulsadores = NominaIndirecta::mes($mes_nomina)
                 ->zonas($zonas_zonal)
                 ->coordinador($coordinador_id)
+                ->noPdas()
                 ->zona($zona_id)->clasificacion($clasificacion_id)
                 ->activo($activo)->impulsadorInd($impulsador_id)
                 ->orderBy('id')

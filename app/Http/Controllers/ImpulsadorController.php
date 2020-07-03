@@ -212,9 +212,7 @@ class ImpulsadorController extends Controller
             $pdv->update();
             $cont++;
         }
-
         return redirect('nomina_indirecta');
-
     }
 
     /**

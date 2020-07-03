@@ -105,8 +105,8 @@ class PdvController extends Controller
      * @param  \App\pdv  $pdv
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pdv $pdv)
+    public function destroy($id)
     {
-        //
+
     }
 }

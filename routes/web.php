@@ -170,6 +170,7 @@ Route::group (['middleware'=>'auth'], function () {
          * todo lo referente a tiendas desde acá */
 
         Route::resource('asesores_tienda', 'AsesorTiendaController');
+        Route::resource('asesores_tienda2', 'AsesorTiendaController2');
         Route::resource('nomina_tienda', 'NominaTiendaController');
 
         /**consideraciones tienda*/

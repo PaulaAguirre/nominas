@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePdvssTable extends Migration
+class CreateSupervisoresRetencionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreatePdvssTable extends Migration
      */
     public function up()
     {
-        Schema::create('pdvss', function (Blueprint $table) {
+        Schema::create('supervisores_retencion', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('codigo');
-            $table->integer('circuito_id');
-            $table->integer('impulsador_id')->nullable();
+            $table->integer('ch');
+            $table->string('documento')->nullable();
+            $table->string('nombre');
+            $table->string('clasificacion')->nullable();
             $table->timestamps();
-            $table->string('nombre')->nullable();
         });
     }
 
@@ -30,6 +30,6 @@ class CreatePdvssTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pdvss');
+        Schema::dropIfExists('supervisores_retencion');
     }
 }

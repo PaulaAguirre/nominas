@@ -10,11 +10,11 @@
 
     <div class="row text-uppercase">
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead class="text-center" style="background-color: #2ab27b">
-                        <th>Mes</th>
+                        <th class="col-md-2">Mes</th>
                         <th class="col-lg-1 ">descargar</th>
 
                     </thead>
@@ -47,8 +47,9 @@
                     </tr>
                     <tr class="text-uppercase text-sm">
                         <th>mayo 2020</th>
-                        <th class="text-center"><a href="">
-                            </a></th>
+                        <th class="text-center">
+
+                        </th>
                     </tr>
                     <tr class="text-uppercase text-sm">
                         <th>junio 2020</th>

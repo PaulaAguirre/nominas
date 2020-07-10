@@ -117,7 +117,10 @@
                                         </th>
 
                                         <th class="text-center"><a href="{{url('/excel_indirecta')}}">
-                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar Nomina"><i class="fa fa-download"></i></button>
+                                            </a>
+                                            <a href="{{url('/pdas_indirecta')}}">
+                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar PDV"><i class="fa fa-download"></i></button>
                                             </a>
                                         </th>
                                     </tr>

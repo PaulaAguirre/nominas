@@ -10,7 +10,7 @@
 
     <div class="row text-uppercase">
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead class="text-center" style="background-color: #8eb4cb">
@@ -57,7 +57,8 @@
                     </tr>
                     <tr class="text-uppercase text-sm">
                         <th>mayo 2020</th>
-                        <th class="text-center"><a href="">
+                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre final mayo.xlsx')}}">
+                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                             </a></th>
                     </tr>
                     <tr class="text-uppercase text-sm">

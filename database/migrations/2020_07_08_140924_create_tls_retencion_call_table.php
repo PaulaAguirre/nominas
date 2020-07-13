@@ -13,12 +13,13 @@ class CreateTlsRetencionCallTable extends Migration
      */
     public function up()
     {
-        Schema::create('tls_retencion_call', function (Blueprint $table) {
+        Schema::create('tls_retencion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('ch');
             $table->string('documento')->nullable();
             $table->string('nombre');
             $table->integer('clasificacion_retencion_id')->nullable();
+            $table->string('canal')->nullable();
             $table->timestamps();
         });
     }

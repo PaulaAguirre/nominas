@@ -40,6 +40,13 @@
                                 <input type="checkbox"  name="asesor_experto" value="si">
                             @endif
                         </label>
+                        <label> RAC Retención <br>
+                            @if($teamleader->rac_retencion == 'si')
+                                <input type="checkbox" checked name="rac_retencion" value="si">
+                            @else
+                                <input type="checkbox"  name="rac_retencion" value="si">
+                            @endif
+                        </label>
 
                     </div>
                 </div>

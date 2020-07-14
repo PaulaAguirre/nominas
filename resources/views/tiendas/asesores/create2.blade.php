@@ -21,7 +21,7 @@
                     <div class="panel-heading text-bold"><span class="text-green">NUEVO ASESOR</span></div>
 
                     <div class="panel-body text-uppercase">
-                        {!!Form::open(array('url'=>'asesores_tienda','method'=>'POST','autocomplete'=>'off'))!!}
+                        {!!Form::open(array('url'=>'asesores_tienda2','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
@@ -93,7 +93,7 @@
                         <div id="asesor" style="display: none" class="asesor">
                             <div class="form-group col-md-4">
                                 <label for="">Team Leader</label>
-                                <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Team Leader">
+                                <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-size="8" data-live-search="true" title="Team Leader">
                                     @foreach($tiendas as $tienda )
                                         @foreach($tienda->teamleaders as $teamleader)
                                             <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
@@ -107,6 +107,29 @@
                                 <select name="supervisor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
                                     @foreach($supervisores as $supervisor)
                                         <option value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div id="retencion_call" style="display: none" class="retencion_call">
+                            <div class="form-group col-md-4">
+                                <label for="">RAC Leader</label>
+                                <select name="tl_retencion_call" class="selectpicker form-control text-uppercase " data-live-search="true" title="RAC">
+                                    @foreach($tls_retencion_call as $tl )
+                                        <option value="{{$tl->id}}">{{$tl->nombre.' - '.$tl->clasificacionRetencion->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div id="retencion_tiendas" style="display: none" class="retencion_tiendas">
+                            <div class="form-group col-md-4">
+                                <label for="">RAC Leader</label>
+                                <select name="tls_retencion_tiendas" class="selectpicker form-control text-uppercase"
+                                        data-size="8" data-live-search="true" title="RAC">
+                                    @foreach($tls_retencion_tiendas as $tl )
+                                        @foreach($tl->tiendas as $tienda)
+                                            <option value="{{$tl->id}}-{{$tienda->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
+                                        @endforeach
                                     @endforeach
                                 </select>
                             </div>
@@ -156,6 +179,21 @@
                 if($(this).val() == 'ASESOR')
                 {
                     $('#asesor').show();
+                    $('#retencion_call').hide();
+                    $('#retencion_tiendas').hide();
+                }
+                else if ($(this).val() == 'RETENCION CALL')
+                {
+                    $('#asesor').hide();
+                    $('#retencion_call').show();
+                    $('#retencion_tiendas').hide();
+
+                }
+                else if ($(this).val() == 'RETENCION TIENDA')
+                {
+                    $('#asesor').hide();
+                    $('#retencion_call').hide();
+                    $('#retencion_tiendas').show();
                 }
 
             });

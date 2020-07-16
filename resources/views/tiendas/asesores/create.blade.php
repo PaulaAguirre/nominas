@@ -60,39 +60,19 @@
 
 
 
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-6">
                             <label>Asesor</label>
                             <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <div class="">
                                 <label for="name">user</label>
                                 <input type="text" name="user_red"  value="{{old('user')}}" class="form-control">
                             </div>
                         </div>
 
-                        <div class="form-group col-md-5">
-                            <label for="">Team Leader</label>
-                            <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Team Leader">
-                                @foreach($tiendas as $tienda )
-                                    @foreach($tienda->teamleaders as $teamleader)
-                                        <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
-                                    @endforeach
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-5">
-                            <label for="">Supervisor</label>
-                            <select name="supervisor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
-                                @foreach($supervisores as $supervisor)
-                                    <option value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-offset-0 col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="">Cargo GO</label>
                             <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="Cargo" required>
                                 @foreach($cargos as $cargo)
@@ -101,11 +81,59 @@
                             </select>
                         </div>
 
-
-                        <div class="form-group form-group col-md-4">
-                            <label><input type="checkbox" name="especialista" value="si"> Especialista</label>
+                        <div class="form-group col-md-4">
+                            <label for="">Agrupación</label>
+                            <select name="agrupacion" class="selectpicker form-control text-uppercase agrupacion" id="agrupacion" data-live-search="true" title="agrupacion" required>
+                                @foreach($agrupaciones as $agrupacion)
+                                    <option  value="{{$agrupacion}}">{{$agrupacion}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
+                        <div id="asesor" style="display: none" class="asesor">
+                            <div class="form-group col-md-4">
+                                <label for="">Team Leader</label>
+                                <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-size="8" data-live-search="true" title="Team Leader">
+                                    @foreach($tiendas as $tienda )
+                                        @foreach($tienda->teamleaders as $teamleader)
+                                            <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Supervisor</label>
+                                <select name="supervisor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
+                                    @foreach($supervisores as $supervisor)
+                                        <option value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div id="retencion_call" style="display: none" class="retencion_call">
+                            <div class="form-group col-md-4">
+                                <label for="">RAC Leader</label>
+                                <select name="tl_retencion_call" class="selectpicker form-control text-uppercase " data-live-search="true" title="RAC">
+                                    @foreach($tls_retencion_call as $tl )
+                                        <option value="{{$tl->id}}">{{$tl->nombre.' - '.$tl->clasificacionRetencion->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div id="retencion_tiendas" style="display: none" class="retencion_tiendas">
+                            <div class="form-group col-md-4">
+                                <label for="">RAC Leader</label>
+                                <select name="tls_retencion_tiendas" class="selectpicker form-control text-uppercase"
+                                        data-size="8" data-live-search="true" title="RAC">
+                                    @foreach($tls_retencion_tiendas as $tl )
+                                        @foreach($tl->tiendas as $tienda)
+                                            <option value="{{$tl->id}}-{{$tienda->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group col-md-4">
                             <label for="">consideración</label>
                             <select name="consideracion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Consideracion" required>
@@ -145,6 +173,30 @@
                     autoclose: true
                 });
             })
+
+            $('.agrupacion').change(function ()
+            {
+                if($(this).val() == 'ASESOR')
+                {
+                    $('#asesor').show();
+                    $('#retencion_call').hide();
+                    $('#retencion_tiendas').hide();
+                }
+                else if ($(this).val() == 'RETENCION CALL')
+                {
+                    $('#asesor').hide();
+                    $('#retencion_call').show();
+                    $('#retencion_tiendas').hide();
+
+                }
+                else if ($(this).val() == 'RETENCION TIENDA')
+                {
+                    $('#asesor').hide();
+                    $('#retencion_call').hide();
+                    $('#retencion_tiendas').show();
+                }
+
+            });
         </script>
     @endpush
 @endsection

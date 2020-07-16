@@ -82,9 +82,14 @@ class PdvController extends Controller
      * @param  \App\pdv  $pdv
      * @return \Illuminate\Http\Response
      */
-    public function edit(pdv $pdv)
+    public function edit($id)
     {
-        //
+        $pdv = Pdv::findOrFail($id);
+        $impulsadores = Impulsador::where('clasificacion_id', '=', '1')->get();
+        //dd($impulsadores);
+        $circuitos = Circuito::all();
+
+        return \view('indirecta.pdvs.edit', ['pdv' => $pdv, 'impulsadores'=> $impulsadores, 'circuitos'=>$circuitos]);
     }
 
     /**
@@ -94,9 +99,11 @@ class PdvController extends Controller
      * @param  \App\pdv  $pdv
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pdv $pdv)
+    public function update(Request $request, $id)
     {
-        //
+        $pdv = Pdv::findOrFail($id);
+        $pdv->update($request->all());
+        return redirect('pdvs');
     }
 
     /**

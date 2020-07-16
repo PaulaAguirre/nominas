@@ -13,7 +13,8 @@ class Pdv extends Model
     protected $fillable = [
         'codigo',
         'circuito_id',
-        'impulsador_id'
+        'impulsador_id',
+        'nombre'
     ];
 
     public function circuito()

@@ -34,7 +34,7 @@
 
                         <div class="form-group">
                             <label for="">Coordinador</label>
-                            <select name="coordinador_zona" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione impulsador">
+                            <select name="coordinador_zona" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione coordinador">
                                 @foreach($coordinadores as $coordinador )
                                     @foreach($coordinador->zonas as $zona)
                                         <option value="{{$coordinador->id}}-{{$zona->id}}">{{$coordinador->nombre}} - {{$zona->nombre}}</option>
@@ -45,13 +45,19 @@
 
                         <div class="form-group">
                             <label for="">Auditor</label>
-                            <select name="auditor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione impulsador">
+                            <select name="auditor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione auditor">
                                 @foreach($auditores as $auditor )
                                     <option value="{{$auditor->id}}">{{'CH:'.$auditor->ch}} - {{$auditor->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
 
+                        <div class="form-group text-center">
+                            <br>
+                            <input name="_token" value="{{csrf_token()}}" type="hidden">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                            <button class="btn btn-danger" type="reset">Cancelar</button>
+                        </div>
 
                     </div>
                 </div>

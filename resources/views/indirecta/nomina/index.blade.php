@@ -7,6 +7,7 @@
                     <a href="{{url('asesores_indirecta/create')}}"><button class="btn btn-success">Nuevo Ingreso</button></a>
                     <a href="{{url('/excel_indirecta')}}"><button class="btn btn-github">Exportar nomina</button></a>
                     <a href="{{url('/pdas_indirecta')}}"><button class="btn btn-github">Exportar pdv</button></a>
+                    <a href="{{url('/circuitos_auditores')}}"><button class="btn btn-github">Exportar Circuitos</button></a>
 
                 @else
                     @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(27))
@@ -14,7 +15,7 @@
                     @endif
                     <a href="{{url('/excel_indirecta')}}"><button class="btn btn-github">Exportar Nómina</button></a>
                         <a href="{{url('/pdas_indirecta')}}"><button class="btn btn-github">Exportar pdv</button></a>
-
+                        <a href="{{url('/circuitos_auditores')}}"><button class="btn btn-github">Exportar Circuitos</button></a>
                 @endif
 
                 @if(auth()->user()->hasRoles(['tigo_people_admin']))

@@ -24,7 +24,8 @@ class CircuitoController extends Controller
         $circuito_id = $request->get('circuito_id');
         $auditor_id = $request->get('auditor_id');
         $coordinador_id = $request->get('coordinador_id');
-        $circuitos = Circuito::buscarAuditor($auditor_id)->circuito($circuito_id)->buscarCoordinador($coordinador_id)->get();
+        $circuitos = Circuito::buscarAuditor($auditor_id)->circuito($circuito_id)->buscarCoordinador($coordinador_id)
+            ->orderBy('id')->get();
         $auditores = Impulsador::where('clasificacion_id', '=', 3)->get();
         $coordinadores = Coordinador::all();
 

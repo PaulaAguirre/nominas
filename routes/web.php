@@ -306,6 +306,7 @@ Route::get('/excel_directa_mes_anterior', 'ExcelController@exportarDirectaMesAnt
 /**Excel indirecta*/
 Route::get('/excel_indirecta', 'ExcelController@exportarNominaIndirecta');
 Route::get('/pdas_indirecta', 'ExcelController@exportarPdas');
+Route::get('/circuitos_auditores', 'ExcelController@exportarAuditoresCircuitos');
 
 Route::get('variable', function ()
 {

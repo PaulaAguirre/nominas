@@ -12,7 +12,8 @@ class Circuito extends Model
     protected $fillable = [
         'codigo',
         'zona_id',
-        'coordinador_id'
+        'coordinador_id',
+        'auditor_id'
     ];
 
     public function zona ()
@@ -28,5 +29,34 @@ class Circuito extends Model
     public function coordinador ()
     {
         return $this->belongsTo('App\Coordinador');
+    }
+
+    public function auditor()
+    {
+        return $this->belongsTo('App\Impulsador', 'auditor_id');
+    }
+
+    public function scopeBuscarAuditor($query ,$auditor_id)
+    {
+        if ($auditor_id)
+        {
+            return $query->where('auditor_id', '=', $auditor_id);
+        }
+    }
+
+    public function scopeCircuito($query, $circuito_id)
+    {
+        if ($circuito_id)
+        {
+            return $query->where('id', '=', $circuito_id);
+        }
+    }
+
+    public function scopeBuscarCoordinador($query, $coordinador_id)
+    {
+        if ($coordinador_id)
+        {
+            return $query->where('coordinador_id', '=', $coordinador_id);
+        }
     }
 }

@@ -42,4 +42,24 @@ class Pdv extends Model
             return $query->where('id', '=', $pdv_id);
         }
     }
+
+    public function scopeBuscarCircuito($query, $circuito_id)
+    {
+        if ($circuito_id)
+        {
+            return $query->where('circuito_id', '=', $circuito_id);
+        }
+    }
+
+    public function scopeBuscarCoordinador($query, $ccoordinador_id)
+    {
+        if ($ccoordinador_id)
+        {
+            $query->whereHas('circuito', function ($q1) use ($ccoordinador_id)
+            {
+                $q1->where('coordinador_id', '=', $ccoordinador_id);
+            });
+        }
+
+    }
 }

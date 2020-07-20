@@ -241,6 +241,7 @@ Route::group (['middleware'=>'auth'], function () {
      * Indirecta*
      */
     Route::resource('asesores_indirecta', 'ImpulsadorController');
+    Route::get('circuitos_auditor/{auditor_id}', 'ImpulsadorController@showCircuitos' )->name('ver_circuitos');
     Route::get('agregar_pdv/{impulsador_id}', 'ImpulsadorController@agregarPdvs')->name('agregar_pdv');
     Route::patch('agregar_pdv/{impulsador_id}', 'ImpulsadorController@agregarPdvsStore')->name('agregar_pdv_store');
     Route::get('editar_pdv/{impulsador_id}', 'ImpulsadorController@editarPdvs')->name('editar_pdv');

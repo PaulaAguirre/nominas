@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Circuito;
+use App\Coordinador;
 use App\Pdv;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
@@ -24,9 +25,17 @@ class PdvController extends Controller
     {
         $impulsador_id = $request->get('impulsador_id');
         $pdv_id = $request->get('pdv_id');
-        $pdvs = Pdv::impulsadorPDV($impulsador_id)->pdv($pdv_id)->get();
+        $coordinador_id = $request->get('coordinador_id');
+        $circuito_id = $request->get('circuito_id');
+        $auditor_id = $request->get('auditor_id');
+        $coordinadores = Coordinador::all();
+        $circuitos = Circuito::all();
+        $auditores = Impulsador::where('clasificacion_id', '=', 3)->get();
+        $pdvs = Pdv::impulsadorPDV($impulsador_id)->pdv($pdv_id)->buscarCircuito($circuito_id)
+            ->buscarCoordinador($coordinador_id)->get();
         $impulsadores = Impulsador::where('clasificacion_id', '=', '1')->get();
-        return view('indirecta.pdvs.index', ['pdvs'=>$pdvs, 'impulsadores'=>$impulsadores]);
+        return view('indirecta.pdvs.index', ['pdvs'=>$pdvs, 'impulsadores'=>$impulsadores,
+            'coordinadores'=>$coordinadores, 'auditores'=>$auditores, 'circuitos'=>$circuitos]);
     }
 
     /**

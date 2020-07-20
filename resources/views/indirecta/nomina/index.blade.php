@@ -68,7 +68,7 @@
                                 <td>{{$impulsador->porcentaje_objetivo}}</td>
                                 <td>
                                     @if(auth()->user()->hasRoles(['zonal']))
-                                        @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(24))
+                                        @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18))
                                             <a href="{{URL::action('ImpulsadorController@edit', $impulsador->impulsador->id)}}">
                                                 <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button></a>
                                             @if($impulsador->impulsador->clasificacion ? $impulsador->impulsador->clasificacion->nombre == 'IMPULSADORES' : '')
@@ -86,10 +86,14 @@
                                         <a href="{{URL::action('ImpulsadorController@edit', $impulsador->impulsador->id)}}">
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                         </a>
-                                        @if($impulsador->impulsador->clasificacion ? $impulsador->impulsador->clasificacion->nombre == 'IMPULSADORES' : '')
-                                        <a href="{{URL::action('ImpulsadorController@editarPdvs', $impulsador->impulsador->id)}}">
+                                        @if($impulsador->impulsador->clasificacion->nombre == 'IMPULSADORES')
+                                        <a href="{{URL::action('ImpulsadorController@show', $impulsador->impulsador->id)}}">
                                             <button class="btn btn-github btn-xs" data-toggle="tooltip" data-placement="top" title="pdvs"><i class="fa fa-pencil"></i></button></a>
+                                        @elseif($impulsador->impulsador->clasificacion->nombre == 'AUDITORES' )
+                                            <a href="{{URL::action('ImpulsadorController@showCircuitos', $impulsador->impulsador->id)}}">
+                                                <button class="btn btn-github btn-xs" data-toggle="tooltip" data-placement="top" title="pdvs"><i class="fa fa-pencil"></i></button></a>
                                         @endif
+
                                         @if(!$impulsador->estado_consideracion)
                                             <a href="" data-target="#modal-consideracion-store-{{$impulsador->id}}" data-toggle="modal" data-placement="top" title="Consideración" ><button class="btn btn-xs btn-facebook"><i class="fa fa-comment" aria-hidden="true"></i></button></a>
                                         @endif

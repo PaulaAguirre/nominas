@@ -134,4 +134,15 @@ class NominaTienda extends Model
         }
     }
 
+    public function scopeEspecialista($query, $es_especialista)
+    {
+        if ($es_especialista)
+        {
+            $query->whereHas('asesor', function ($q1) use ($es_especialista)
+            {
+               $q1->where('especialista', '=', $es_especialista);
+            });
+        }
+    }
+
 }

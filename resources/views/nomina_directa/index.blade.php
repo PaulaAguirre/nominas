@@ -163,7 +163,7 @@
                         @include('nomina_directa.modal_eliminacion')
                     @endforeach
                 </table>
-                {{$personas->render()}}
+
             </div>
         </div>
     </div>

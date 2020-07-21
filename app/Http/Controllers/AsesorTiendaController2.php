@@ -62,21 +62,28 @@ class AsesorTiendaController2 extends Controller
         $user_red = $request->get('user_red');
         $especialista = $request->get('especialista');
         $supervisor_id = $request->get('supervisor_id');
+        $agrupacion = $request->get('agrupacion');
 
 
         $asesor = new AsesorTienda();
-        $asesor->id_teamleader = $teamleader_id;
         $asesor->ch = $request->get('ch');
         $asesor->documento = $request->get('documento');
         $asesor->nombre = strtoupper($request->get('nombre'));
         $asesor->fecha_ingreso = $request->get('fecha_ingreso');
         $asesor->staff = $request->get('staff');
-        $asesor->id_tienda = $tienda_id;
         $asesor->cargo_go = $cargo_go;
         $asesor->activo = 'ACTIVO';
         $asesor->user_red = $user_red;
         $asesor->especialista = $especialista;
         $asesor->supervisor_guiatigo_id = $supervisor_id;
+        $asesor->agrupacion = $agrupacion;
+
+        if ($agrupacion <> 'RETENCION CALL' )
+        {
+            $asesor->id_tienda = $tienda_id;
+            $asesor->id_teamleader = $teamleader_id;
+        }
+
         $asesor->save();
 
         $nomina = new NominaTienda();

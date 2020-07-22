@@ -17,10 +17,10 @@
         <div class="row">
             <div class="col-md-7 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading text-bold"><span class="text-green">Editar Asesor </span></div>
+                    <div class="panel-heading text-bold"><span class="text-green">Editar Asesor</span></div>
 
                     <div class="panel-body text-uppercase">
-                        {!!Form::model ($asesor, ['method'=>'PATCH', 'route'=>['asesores_tienda.update', $asesor]])!!}
+                        {!!Form::model ($asesor, ['method'=>'PATCH', 'route'=>['asesores_tienda2.update', $asesor]])!!}
                         {{Form::token()}}
 
                         <div class="form-group">
@@ -99,7 +99,7 @@
                                 <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-size="8" data-live-search="true" title="Team Leader">
                                     @foreach($tiendas as $tienda )
                                         @foreach($tienda->teamleaders as $teamleader)
-                                            @if($asesor->id_teamleader == $teamleader->id)
+                                            @if($asesor->teamleader_id == $teamleader->id)
                                                 <option selected value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
                                             @else
                                                 <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
@@ -113,11 +113,7 @@
                                 <label for="">Supervisor</label>
                                 <select name="supervisor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
                                     @foreach($supervisores as $supervisor)
-                                        @if($asesor->supervisor_guiatigo_id == $supervisor->id)
-                                            <option selected value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
-                                        @else
-                                            <option  value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
-                                        @endif
+                                        <option value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>

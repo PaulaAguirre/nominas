@@ -14,6 +14,9 @@
         <th>Teamleader CH</th>
         <th>NOMBRE_teamleader</th>
         <th>CEDULA teamleader</th>
+        <th>Sup guia CH</th>
+        <th>DOC Sup guia</th>
+        <th>Sup guia Nombre</th>
         <th>CARGO_GO</th>
         <th>CARGO_ANTERIOR</th>
         <th>ESPECIALISTA</th>
@@ -51,6 +54,9 @@
                 <td>{{$asesor->asesor->teamleader->ch }}</td>
                 <td>{{$asesor->asesor->teamleader->nombre}}</td>
                 <td>{{$asesor->asesor->teamleader->documento}}</td>
+                <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->ch : ''}}</td>
+                <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->documento : ''}}</td>
+                <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->nombre : ''}}</td>
                 <td>{{$asesor->asesor->cargo_go }}</td>
                 <td>{{$asesor->asesor->cargo_anterior}}</td>
                 <Td>{{$asesor->asesor->especialista == 'si' ? 'si' : 'no'}}</Td>

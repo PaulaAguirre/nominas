@@ -81,5 +81,10 @@ class Impulsador extends Model
     }
 
 
+    public function circuitos ()
+    {
+        return $this->hasMany('App\Circuito', 'auditor_id');
+    }
+
 }
 

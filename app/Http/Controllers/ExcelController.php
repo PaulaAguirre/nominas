@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AuditorCircuitoExport;
 use App\Exports\NominaDirectaMesAnteriorExport;
 use App\Exports\NominaIndirectaExport;
 use App\Exports\NominaTiendaRPLExport;
@@ -98,5 +99,10 @@ class ExcelController extends Controller
     public function exportarPdas()
     {
         return Excel::download(new PDAsExport, 'pdas.xlsx');
+    }
+
+    public function exportarAuditoresCircuitos()
+    {
+        return Excel::download(new AuditorCircuitoExport, 'auditores_circuitos.xlsx');
     }
 }

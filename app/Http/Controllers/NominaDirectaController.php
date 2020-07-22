@@ -15,6 +15,7 @@ use Psr\Log\NullLogger;
 use App\Zona;
 
 
+
 class
 
 
@@ -70,7 +71,8 @@ NominaDirectaController extends Controller
               ->whereIn('id_zona', $zonas)->get()->pluck('id_persona')->toArray();
           $personas = NominaDirecta::representanteDir($id_persona)->mes($mes)->zonadirecta($id_zona, $id_jefe)
             ->jefesDirecta($id_jefe)->estado($estado)->whereIn('id_persona_directa', $id_personas)
-            ->orderBy('id_nomina')->get();
+            ->orderBy('id_nomina')
+              ->get();
         }
 
 

@@ -93,6 +93,19 @@
 
                                     <tr>
                                         <th>Junio 2020</th>
+                                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre_junio_2020.xlsx')}}">
+                                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+
+                                            </a>
+                                        </th>
+                                        <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre_junio_2020.xlsx')}}">
+                                                <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Julio 2020</th>
                                         <th class="text-center"><a href="{{URL::asset('/excel_directa_mes_anterior')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
 
@@ -102,10 +115,18 @@
                                                 <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                                             </a>
                                         </th>
+
+                                        <th class="text-center"><a href="{{URL::asset('img/indirecta/nomina_indirecta_julio.xlsx')}}">
+                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar Nomina"><i class="fa fa-download"></i></button>
+                                            </a>
+                                            <a href="{{URL::asset('img/indirecta/pdas_julio.xlsx')}}">
+                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar PDV"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
                                     </tr>
 
                                     <tr>
-                                        <th>Julio 2020</th>
+                                        <th>Agosto 2020</th>
                                         <th class="text-center"><a href="{{URL::asset('/excel')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
 

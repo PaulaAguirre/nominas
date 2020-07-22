@@ -116,6 +116,11 @@
                         <li><a href="{{url('pdvs')}}"><i class="fa fa-book"></i> PDVs</a></li>
 
                     </ul>
+
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('circuitos')}}"><i class="fa fa-book"></i> Circuitos</a></li>
+
+                    </ul>
                 </li>
 
                 @if(auth()->user()->hasRoles(['tigo_people', 'tigo_people_admin']))

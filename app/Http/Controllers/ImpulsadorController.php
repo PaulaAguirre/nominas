@@ -88,14 +88,7 @@ class ImpulsadorController extends Controller
         $nomina->detalles_consideracion = $request->get('detalles_consideracion');
         $nomina->save();
 
-        if ($impulsador->clasificacion->nombre == 'IMPULSADORES')
-        {
-            return redirect('agregar_pdv/'.$impulsador->id);
-        }
-        else
-        {
-            return redirect('nomina_indirecta');
-        }
+        return redirect('nomina_indirecta');
     }
 
     public function agregarPdvs($impulsador_id)
@@ -135,9 +128,19 @@ class ImpulsadorController extends Controller
      * @param  \App\Impulsador  $impulsador
      * @return \Illuminate\Http\Response
      */
-    public function show(Impulsador $impulsador)
+    public function show($id)
     {
-        //
+        $impulsador = Impulsador::findOrFail($id);
+        $pdvs = $impulsador->pdvs;
+
+        return \view('indirecta.impulsadores.show', ['pdvs'=>$pdvs, 'impulsador'=>$impulsador]);
+    }
+
+    public function showCircuitos($id)
+    {
+        $auditor = Impulsador::findOrFail($id);
+        $circuitos = $auditor->circuitos;
+        return \view('indirecta.impulsadores.show_circuitos', ['circuitos'=>$circuitos, 'auditor'=>$auditor]);
     }
 
     /**

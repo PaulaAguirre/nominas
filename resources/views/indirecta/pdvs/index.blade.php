@@ -2,7 +2,10 @@
 @section ('contenido')
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <h3>PDVs </h3>
+            <h3>PDVs
+                <a href="{{url('pdvs/create')}}"><button class="btn btn-microsoft">Crear PDV</button></a>
+                <a href="{{url('circuitos/create')}}"><button class="btn btn-success">Crear Circuito</button></a>
+            </h3>
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -30,6 +33,7 @@
                     <th>Impulsador</th>
                     <th class="col-lg-1">Coordinador</th>
                     <th>ZONA</th>
+                    <th>OPC</th>
                     </thead>
                     @foreach($pdvs as $pdv)
                         <tr class="text-uppercase">
@@ -41,9 +45,11 @@
                             <td>{{$pdv->impulsador ? $pdv->impulsador->nombre : ''}}</td>
                             <td>{{$pdv->impulsador ? $pdv->impulsador->coordinador->nombre : ''}}</td>
                             <td>{{$pdv->circuito ? $pdv->circuito->zona->nombre : ''}}</td>
-
-
-                            <td class="text-center"></td>
+                            <td class="text-center">
+                                <a href="{{URL::action('PdvController@edit', $pdv->id)}}">
+                                    <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </table>

@@ -43,7 +43,7 @@
                             <td>{{$asesor->mes}}</td>
                             <td>{{$asesor->asesor->ch}}</td>
                             <td>{{$asesor->asesor->nombre}}</td>
-                            <td>{{$asesor->asesor->tienda->zona->zona.' / '.$asesor->asesor->tienda->zona->representante_zonal_nombre }}</td>
+                            <td>{{$asesor->asesor->tienda ? ($asesor->asesor->tienda->zona->zona.' / '.$asesor->asesor->tienda->zona->representante_zonal_nombre) : ''}}</td>
                             <td>{{$asesor->consideracion ? $asesor->consideracion->nombre : '' }}</td>
                             <td>{{$asesor->detalles_consideracion}}</td>
                             <td>{{$asesor->regularizacion_consideracion}}</td>

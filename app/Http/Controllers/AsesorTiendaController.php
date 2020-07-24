@@ -203,7 +203,7 @@ class AsesorTiendaController extends Controller
             $asesor->especialista = 'no';
             $asesor->supervisor_retencion_id = Null;
             $asesor->tl_retencion_call_id = Null;
-            $asesor->supervisor_retencion_id = Null;
+
 
         }
         elseif ($agrupacion == 'RETENCION CALL')
@@ -222,6 +222,7 @@ class AsesorTiendaController extends Controller
             $asesor->especialista = 'si';
             $asesor->agrupacion = 'RETENCION TIENDAS';
             $asesor->supervisor_retencion_id = $supervisor_retencion->id;
+            $asesor->supervisor_guiatigo_id = NULL;
         }
 
         $asesor->ch = $request->get('ch');

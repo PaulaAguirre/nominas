@@ -61,7 +61,7 @@ class PdvController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'codigo' => 'required|unique:pdvs'
+            'codigo' => 'required|unique:pdvss'
         ]);
 
         $pdv = New Pdv();

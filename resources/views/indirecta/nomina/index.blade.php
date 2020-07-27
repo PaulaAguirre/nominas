@@ -68,7 +68,7 @@
                                 <td>{{$impulsador->porcentaje_objetivo}}</td>
                                 <td>
                                     @if(auth()->user()->hasRoles(['zonal']))
-                                        @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18))
+                                        @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(27))
                                             <a href="{{URL::action('ImpulsadorController@edit', $impulsador->impulsador->id)}}">
                                                 <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button></a>
                                             @if($impulsador->impulsador->clasificacion ? $impulsador->impulsador->clasificacion->nombre == 'IMPULSADORES' : '')

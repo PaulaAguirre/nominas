@@ -110,7 +110,7 @@
                                 <td>{{$persona->mes}}</td>
                                 <td>{{$persona->personaDirecta->ch}}</td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
-                                <td>{{$persona->agrupacion}}</td>
+                                <td>{{$persona->personaDirecta->agrupacion}}</td>
                                 <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
                                 <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                 <td>{{$persona->personaDirecta->representanteJefe->oficina ? $persona->personaDirecta->representanteJefe->oficina->nombre : ''}}</td>

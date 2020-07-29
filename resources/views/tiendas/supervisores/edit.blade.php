@@ -47,6 +47,23 @@
                             <input type="text" name="nombre" required value="{{$supervisor->nombre}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
                         </div>
 
+                        <div class="form-group">
+                            <label> GUIA TIGO</label>
+                                @if($supervisor->tipo == 'supervisor guia tigo')
+                                    <input type="checkbox" checked name="tipo_supervisor" value="supervisor guia tigo">
+                                @else
+                                    <input type="checkbox"  name="tipo_supervisor" value="supervisor guia tigo">
+                                @endif
+                        </div>
+                        <div>
+                            <label> RETENCION </label>
+                                @if($supervisor->tipo == 'supervisor retencion ')
+                                    <input type="checkbox" checked name="tipo_supervisor" value="supervisor retencion">
+                                @else
+                                    <input type="checkbox"  name="tipo_supervisor" value="supervisor retencion">
+                                @endif
+                        </div>
+
 
                         <div class="form-group text-center">
                             <br>

@@ -58,13 +58,14 @@ class AsesorTiendaController extends Controller
         $tiendas = Tienda::all();
         $cargos = ['GO1', 'GO2', 'GO3', 'GO3 PLUS', 'ASESOR DE VENTAS SMART',
             'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS', 'ASESOR CORRESPONSALIA', 'ASESOR DE VENTAS SMART 5'];
-        $supervisores = SupervisorGuiaTigo::all();
+        $supervisores = SupervisorGuiaTigo::where('tipo_supervisor', '=', 'supervisor guia tigo')->get();
+        $supervisores_retencion = SupervisorGuiaTigo::where('tipo_supervisor', '=', 'supervisor retencion')->get();
         $agrupaciones = ['ASESOR', 'RETENCION CALL', 'RETENCION TIENDA'];
         $tls_retencion_call = TLretencion::where('canal', '=', 'CALL CENTER')->get();
         $tls_retencion_tiendas = Teamleader::where('rac_retencion', '=', 'si')->get();
         return view('tiendas.asesores.create2', ['tiendas'=>$tiendas, 'cargos'=>$cargos,
             'supervisores'=>$supervisores, 'agrupaciones'=>$agrupaciones, 'tls_retencion_call'=>$tls_retencion_call,
-            'tls_retencion_tiendas'=>$tls_retencion_tiendas]);
+            'tls_retencion_tiendas'=>$tls_retencion_tiendas, 'supervisores_retencion'=>$supervisores_retencion]);
     }
 
     /**
@@ -119,8 +120,8 @@ class AsesorTiendaController extends Controller
             $asesor->id_teamleader = $racRetencion_tienda[0];
             $asesor->id_tienda = $racRetencion_tienda[1];
             $asesor->especialista = 'si';
-            $asesor->agrupacion = 'RETENCION TIENDAS';
-            $asesor->supervisor_retencion_id = $supervisor_retencion->id;
+            $asesor->agrupacion = 'RETENCION TIENDA';
+            $asesor->supervisor_guiatigo_id = $request->get('supervisor_retencion_id');
         }
 
         $asesor->ch = $request->get('ch');
@@ -130,7 +131,6 @@ class AsesorTiendaController extends Controller
         $asesor->staff = $request->get('staff');
         $asesor->user_red = $user_red;
         $asesor->cargo_go = $cargo_go;
-        $asesor->supervisor_guiatigo_id = $supervisor_id;
         $asesor->documento = $request->get('documento');
         $asesor->save();
 
@@ -169,13 +169,14 @@ class AsesorTiendaController extends Controller
         $tiendas = Tienda::all();
         $cargos = ['GO1', 'GO2', 'GO3', 'GO3 PLUS', 'ASESOR DE VENTAS SMART',
             'F&F', 'RECEPCIONISTA', 'GUIA TIGO', 'SAC VENTAS', 'ATENCIÓN EXPRESS', 'ASESOR CORRESPONSALIA', 'ASESOR DE VENTAS SMART 5'];
-        $supervisores = SupervisorGuiaTigo::all();
+        $supervisores = SupervisorGuiaTigo::where('tipo_supervisor', '=', 'supervisor guia tigo')->get();
+        $supervisores_retencion = SupervisorGuiaTigo::where('tipo_supervisor', '=', 'supervisor retencion')->get();
         $agrupaciones = ['ASESOR', 'RETENCION CALL', 'RETENCION TIENDA'];
         $tls_retencion_call = TLretencion::where('canal', '=', 'CALL CENTER')->get();
         $tls_retencion_tiendas = Teamleader::where('rac_retencion', '=', 'si')->get();
         return view('tiendas.asesores.edit', ['tiendas'=>$tiendas, 'cargos'=>$cargos, 'asesor'=>$asesor,
             'supervisores'=>$supervisores, 'agrupaciones'=>$agrupaciones, 'tls_retencion_call'=>$tls_retencion_call,
-            'tls_retencion_tiendas'=>$tls_retencion_tiendas]);
+            'tls_retencion_tiendas'=>$tls_retencion_tiendas, 'supervisores_retencion'=>$supervisores_retencion]);
     }
 
 
@@ -220,9 +221,9 @@ class AsesorTiendaController extends Controller
             $asesor->id_teamleader = $racRetencion_tienda[0];
             $asesor->id_tienda = $racRetencion_tienda[1];
             $asesor->especialista = 'si';
-            $asesor->agrupacion = 'RETENCION TIENDAS';
+            $asesor->agrupacion = 'RETENCION TIENDA';
             $asesor->supervisor_retencion_id = $supervisor_retencion->id;
-            $asesor->supervisor_guiatigo_id = NULL;
+            $asesor->supervisor_guiatigo_id = $request->get('supervisor_retencion_id');
         }
 
         $asesor->ch = $request->get('ch');
@@ -232,7 +233,6 @@ class AsesorTiendaController extends Controller
         $asesor->staff = $request->get('staff');
         $asesor->user_red = $user_red;
         $asesor->cargo_go = $cargo_go;
-        $asesor->supervisor_guiatigo_id = $supervisor_id;
         $asesor->documento = $request->get('documento');
 
         $asesor->update();

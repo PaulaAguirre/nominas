@@ -10,7 +10,7 @@ class SupervisorGuiaTigo extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        'ch', 'nombre', 'documento'
+        'ch', 'nombre', 'documento', 'tipo_supervisor'
     ];
 
     public function scopeSupervisor($query, $supervisor_id)

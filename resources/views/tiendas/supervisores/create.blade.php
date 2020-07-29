@@ -44,6 +44,15 @@
                             <input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control text-uppercase" placeholder="APELLIDOS, NOMBRES">
                         </div>
 
+                        <div class="form-check">
+                            <label>GUIA TIGO</label> <input type="checkbox" name="tipo_supervisor" value="supervisor guia tigo">
+                        </div>
+                        <div class="form-group">
+                            <label> RETENCION</label>
+                                <input type="checkbox" name="tipo_supervisor" value="supervisor retencion">
+
+                        </div>
+
 
                         <div class="form-group text-center">
                             <br>

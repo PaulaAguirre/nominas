@@ -133,6 +133,16 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Supervisor Ret</label>
+                                <select name="supervisor_retencion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
+                                    @foreach($supervisores_retencion as $supervisor)
+                                        <option value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
                         <div class="form-group col-md-4">
                             <label for="">consideración</label>

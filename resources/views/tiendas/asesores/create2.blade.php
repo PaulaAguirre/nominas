@@ -21,7 +21,7 @@
                     <div class="panel-heading text-bold"><span class="text-green">NUEVO ASESOR</span></div>
 
                     <div class="panel-body text-uppercase">
-                        {!!Form::open(array('url'=>'asesores_tienda2','method'=>'POST','autocomplete'=>'off'))!!}
+                        {!!Form::open(array('url'=>'asesores_tienda','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
@@ -130,6 +130,14 @@
                                         @foreach($tl->tiendas as $tienda)
                                             <option value="{{$tl->id}}-{{$tienda->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
                                         @endforeach
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Supervisor RET</label>
+                                <select name="supervisor_retencion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
+                                    @foreach($supervisores_retencion as $supervisor)
+                                        <option value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -33,6 +33,7 @@
                     <th>Consideración</th>
                     <th class="col-lg-2">Detalles</th>
                     <th>Regularizar</th>
+                    <th>perfil ant - actual</th>
                     <th>Aprobar</th>
                     <th class="col-lg-1">Porc%</th>
                     <th>Comentarios</th>
@@ -78,6 +79,8 @@
                                 <td>{{$persona->consideracion ? $persona->consideracion->nombre : ''}}</td>
                                 <td>{{$persona->detalles_consideracion}}</td>
                                 <td>{{$persona->regularizacion_consideracion}}</td>
+                                <td>{{$persona->personaDirecta->agrupacion_anterior.' // '.$persona->personaDirecta->agrupacion}}</td>
+
                                 <td id="tdaprobacion">
                                     <select name="aprobacion[]" class="form-control aprobacion selectpicker text-sm" id="aprobacion-{{$persona->id_nomina}}">
                                         <option value="aprobado" >aprobado</option>

@@ -35,6 +35,8 @@ class ConsideracionDirectaRPLController extends Controller
                 ->zonasZonales($zonas)->where('mes', $mes)
                 ->consideracion($id_consideracion)->representante($id_persona, $mes)->estadoConsideracion($estado_consideracion)
                 ->get();
+
+
         }
         else
         {
@@ -42,6 +44,7 @@ class ConsideracionDirectaRPLController extends Controller
                 ->where('mes', $mes)
                 ->consideracion($id_consideracion)->representante($id_persona, $mes)->estadoConsideracion($estado_consideracion)
                 ->get();
+
         }
 
         return view('directaRPL.consideraciones.index', ['personas_consideracion' => $personas_consideracion,

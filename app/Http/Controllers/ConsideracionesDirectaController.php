@@ -38,6 +38,7 @@ class ConsideracionesDirectaController extends Controller
         $personas_consideracion = NominaDirecta::where('estado_consideracion', '<>', NULL)
             ->mes($mes)->representanteDir($id_persona)->consideracion($id_consideracion)->estadoConsideracion($estado_consideracion)
             ->get();
+
         $consideraciones = Consideracion::all();
 
 

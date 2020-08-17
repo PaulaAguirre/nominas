@@ -243,6 +243,18 @@ class ImpulsadorController extends Controller
             $archivo->tipo = 'inactivacion';
             $archivo->save();
         }
+
+        if ($impulsador->impulsador->pdvs)
+        {
+
+            foreach ($impulsador->impulsador->pdvs as $pdv)
+            {
+                $pdv->impulsador_id = null;
+                $pdv->update();
+            }
+        }
+
+
         $impulsador->update();
         return redirect()->back();
     }

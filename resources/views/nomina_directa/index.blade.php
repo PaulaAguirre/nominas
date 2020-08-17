@@ -46,15 +46,15 @@
                     <th>Mes</th>
                     <th>CH</th>
                     <th>Representante</th>
-                    <th>Perfil Actual</th>
-                    <th>Perfil Anterior</th>
-                    <th>Rep Zonal - Rep Jefe</th>
+                    <th>Perfil Actual/<br>Anterior</th>
+                    <th>Rep Zonal/<br>Rep Jefe</th>
                     <th>Oficina</th>
                     <th>Region/Zona</th>
                     <th >Consideración</th>
                     <th >Inactivación</th>
                     <th>Estado</th>
                     <th>%OBJ</th>
+                    <th>Horario</th>
                     @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
                         <th class="text-center col-lg-1">Opciones</th>
                     @endif
@@ -67,9 +67,9 @@
                                     <td>{{$persona->mes}}</td>
                                     <td>{{$persona->personaDirecta->ch}}</td>
                                     <td>{{$persona->personaDirecta->nombre}}</td>
-                                    <td>{{$persona->personaDirecta->agrupacion}}</td>
-                                    <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
-                                    <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
+                                    <td>{{$persona->personaDirecta->agrupacion}}/<br>
+                                        {{$persona->personaDirecta->agrupacion_anterior}}</td>
+                                    <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}}/<br>{{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                     <td>{{$persona->personaDirecta->representanteJefe->oficina ? $persona->personaDirecta->representanteJefe->oficina->nombre : ''}}</td>
                                     <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                     <td><span class="text-info">Cons.:</span> {{$persona->porcentaje ? $persona->porcentaje->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$persona->estado_consideracion}}</td>
@@ -82,6 +82,7 @@
                                         <td class="text-success">Activo</td>
                                     @endif
                                     <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
+                                    <td>{{$persona->dias}}</td>
                                     @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
@@ -113,9 +114,9 @@
                                 <td>{{$persona->mes}}</td>
                                 <td>{{$persona->personaDirecta->ch}}</td>
                                 <td>{{$persona->personaDirecta->nombre}}</td>
-                                <td>{{$persona->personaDirecta->agrupacion}}</td>
-                                <td>{{$persona->personaDirecta->agrupacion_anterior}}</td>
-                                <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}} / {{$persona->personaDirecta->representanteJefe->nombre}}</td>
+                                <td>{{$persona->personaDirecta->agrupacion}}/<br>
+                                    {{$persona->personaDirecta->agrupacion_anterior}}</td>
+                                <td>{{$persona->personaDirecta->zona->representante_zonal_nombre}}/<br>{{$persona->personaDirecta->representanteJefe->nombre}}</td>
                                 <td>{{$persona->personaDirecta->representanteJefe->oficina ? $persona->personaDirecta->representanteJefe->oficina->nombre : ''}}</td>
                                 <td>{{$persona->personaDirecta->zona->region->region.' / '.$persona->personaDirecta->zona->zona}}</td>
                                 <td><span class="text-info">Cons.:</span> {{$persona->consideracion ? $persona->consideracion->nombre : ''}}<br>
@@ -142,6 +143,7 @@
                                     <td class="text-success">Activo</td>
                                 @endif
                                 <td>{{$persona->porcentaje ? $persona->porcentaje->porcentaje : '100%'}}</td>
+                                <td>{{$persona->dias}}<br>{{$persona->hora_entrada}} - {{$persona->hora_salida}}</td>
                                 <td>
                                     <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta->nombre)}}">
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

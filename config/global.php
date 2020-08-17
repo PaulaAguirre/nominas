@@ -4,10 +4,10 @@
  */
 
 return [
-    'mes' => 202009,
+    'mes' => 202008,
     'mes_anterior' => 202009,
 
-    'mes_tienda' => 202009,
+    'mes_tienda' => 202008,
     'mes_anterior_tienda'=>202008,
 
     'mes_anterior_indirecta'=>202008,

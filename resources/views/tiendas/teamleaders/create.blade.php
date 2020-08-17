@@ -45,8 +45,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label> Asesor Experto</label>
-                            <input type="checkbox" name="asesor_experto" value="si">
+                            <label> Asesor Experto
+                                <input type="checkbox" name="asesor_experto" value="si">
+                            </label>
+                            <br>
+                            <label> RAC Retención
+                                <input type="checkbox" name="rac_retencion" value="si">
+                            </label>
+
                         </div>
 
 

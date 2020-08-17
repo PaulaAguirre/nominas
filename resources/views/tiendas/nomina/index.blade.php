@@ -47,10 +47,10 @@
                     <th>CH</th>
                     <th>Asesor</th>
                     <th>Cargo</th>
-                    <th>Ret</th>
+                    <th>Agrupación</th>
                     <th>Zona / <br>Rep Zonal</th>
                     <th>Tienda / Jefe Tienda </th>
-                    <th>Team Leader</th>
+                    <th>Team Leader / <br> RAC Retencion </th>
                     <th>Supervisor Guia</th>
                     <th>Consideración</th>
                     <th>Inactivación</th>
@@ -65,10 +65,10 @@
                                 <td>{{$asesor->asesor ?  $asesor->asesor->ch : ''}}</td>
                                 <td>{{$asesor->asesor ? $asesor->asesor->nombre : ''}}</td>
                                 <td>{{$asesor->asesor ? $asesor->asesor->cargo_go : ''}}</td>
-                                <td>{{$asesor->asesor->especialista == 'si' ? 'si': 'no'}}</td>
-                                <td class="col-lg-1">{{$asesor->asesor->tienda->zona->zona}} / <br>{{$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>
-                                <td>{{$asesor->asesor->tienda->tienda_nombre}} / <br>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe'}}</td>
-                                <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader->nombre : ''}}</td>
+                                <td>{{$asesor->asesor->agrupacion}}</td>
+                                <td class="col-lg-1">{{$asesor->asesor->tienda ? $asesor->asesor->tienda->zona->zona : ''}} / <br>{{$asesor->asesor->tienda ? $asesor->asesor->tienda->zona->representante_zonal_nombre : ''}}</td>
+                                <td>{{$asesor->asesor->tienda ? $asesor->asesor->tienda->tienda_nombre : ''}} / <br>{{$asesor->asesor->tienda ? ($asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe') : ''}}</td>
+                                <td>{{$asesor->asesor->tl_retencion_call ? $asesor->asesor->tl_retencion_call->nombre : ($asesor->asesor->teamleader ? $asesor->asesor->teamleader->nombre : '')}}</td>
                                 <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->nombre : ''}}</td>
                                 <td><span class="text-info">Cons.:</span> {{$asesor->consideracion ? $asesor->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$asesor->estado_consideracion}}</td>
                                 @if($asesor->estado_inactivacion == 'pendiente')

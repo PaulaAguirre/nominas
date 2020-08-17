@@ -81,4 +81,14 @@ class AsesorTienda extends Model
         return $this->belongsTo('App\SupervisorGuiaTigo', 'supervisor_guiatigo_id');
     }
 
+    public function supervisorRetencion()
+    {
+        return $this->belongsTo('App\SupervisorRetencion', 'supervisor_retencion_id');
+    }
+
+    public function  tl_retencion_call()
+    {
+        return $this->belongsTo('App\TLretencion', 'tl_retencion_call_id');
+    }
+
 }

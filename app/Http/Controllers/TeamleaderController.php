@@ -54,6 +54,7 @@ class TeamleaderController extends Controller
         $teamleader->ch = $request->get('ch');
         $teamleader->documento = $request->get('documento');
         $teamleader->nombre = strtoupper($request->get('nombre'));
+        $teamleader->rac_retencion = $request->get('rac_retencion');
         if ($asesor_experto)
         {
             $teamleader->asesor_experto = $asesor_experto;
@@ -103,6 +104,7 @@ class TeamleaderController extends Controller
         $teamleader = Teamleader::findOrFail($id);
         $teamleader->ch = $request->get('ch');
         $teamleader->documento = $request->get('documento');
+        $teamleader->rac_retencion = $request->get('rac_retencion');
         if ($asesor_experto)
         {
             $teamleader->asesor_experto = $asesor_experto;

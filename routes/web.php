@@ -77,6 +77,7 @@ Route::group (['middleware'=>'auth'], function () {
         ->name('representantes_directa.regularizar_estructura');
     Route::patch('representantes_directa/regularizar_estructura/{persona}', 'PersonaDirectaController@regularizarEstructuraStore')
         ->name('representantes_directa.regularizarEstructuraStore');
+    Route::resource('horarios', 'HorarioDirectaController');
 
     /**
      * Nomina directa

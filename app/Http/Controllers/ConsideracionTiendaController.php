@@ -164,7 +164,8 @@ class ConsideracionTiendaController extends Controller
             {
                 $archivo = ArchivoTienda::where('nomina_tienda_id', $asesor->id)
                     ->where('tipo', 'consideracion')->get()->first();
-                $ruta = $request->file('archivo')->store('public');
+                $ruta = $request->file('archivo')->store('public', );
+                dd($ruta);
                 $archivo->nombre = explode('/',$ruta)[1];
                 $archivo->update();
             }

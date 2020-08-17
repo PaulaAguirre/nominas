@@ -30,7 +30,8 @@ class PersonaDirecta extends Model
         'id_consideracion',
         'detalles_consideracion',
         'id_responsable_cambio',
-        'oficina_id'
+        'oficina_id',
+
 
     ];
 

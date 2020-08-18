@@ -29,6 +29,9 @@
         <th>Obs inactivacion canales</th>
         <th>Fecha aprobación Consideración</th>
         <th>Fecha aprobación inactivación</th>
+        <th>Dias</th>
+        <th>Hora entrada</th>
+        <th>Hora salida</th>
     </tr>
     </thead>
     <tbody>
@@ -69,6 +72,9 @@
                 <td>{{$persona->motivo_inactivacion ? $persona->comentario_inactivacion : $persona->motivo_rechazo_inactivacion }}</td>
                 <td>{{$persona->fecha_aprobacion_consideracion}}</td>
                 <td>{{$persona->fecha_aprobacion_inactivacion}}</td>
+                <td>{{$persona->dias}}</td>
+                <td>{{$persona->hora_entrada}}</td>
+                <td>{{$persona->hora_salida}}</td>
             </tr>
         @endif
     @endforeach

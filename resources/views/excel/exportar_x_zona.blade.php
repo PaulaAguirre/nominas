@@ -21,6 +21,10 @@
         <th>Comentarios Canales</th>
         <th>Activo</th>
         <th>Obs inactivacion canales</th>
+        <th>Dias</th>
+        <th>Hora entrada</th>
+        <th>Hora salida</th>
+
     </tr>
     </thead>
     <tbody>
@@ -48,6 +52,9 @@
                     <td>{{$persona->estado_consideracion == 'aprobado' ? $persona->comentario_consideracion : ''}}</td>
                     <td>{{$persona->estado_inactivacion == 'aprobado' ? 'inactivo': 'activo'}}</td>
                     <td>{{$persona->comentario_inactivacion}}</td>
+                    <td>{{$persona->dias}}</td>
+                    <td>{{$persona->hora_entrada}}</td>
+                    <td>{{$persona->hora_salida}}</td>
                 </tr>
             @endif
         @endif

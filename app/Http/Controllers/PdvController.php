@@ -123,6 +123,9 @@ class PdvController extends Controller
      */
     public function destroy($id)
     {
+        $pdv = Pdv::findOrFail($id);
+        $pdv->delete();
 
+        return redirect('pdvs');
     }
 }

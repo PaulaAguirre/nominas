@@ -21,7 +21,7 @@
     {{Form::token()}}
     <div class="row text-uppercase">
         @include('indirecta.pdvs.search_index')
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
                     <thead class="text-center text-gray" style="background-color: #5d59a6">
@@ -48,9 +48,13 @@
                             <td class="text-center">
                                 <a href="{{URL::action('PdvController@edit', $pdv->id)}}">
                                     <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
+                                    <a href="" data-target="#modal-delete-{{$pdv->id}}" data-toggle="modal"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
+
                                 </a>
+
                             </td>
                         </tr>
+                        @include('indirecta.pdvs.modal')
                     @endforeach
                 </table>
                 <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">

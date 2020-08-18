@@ -32,9 +32,9 @@
                         </thead>
                         @foreach ($asesores as $asesor)
                             <tr class="text-uppercase">
-                                <td>{{$asesor->tienda->zona ? $asesor->tienda->zona->zona : ''}}</td>
-                                <td>{{$asesor->tienda->zona ? $asesor->tienda->zona->representante_zonal_nombre : ''}}</td>
-                                <td>{{$asesor->tienda->jefetienda ? $asesor->tienda->jefetienda->nombre : ''}}</td>
+                                <td>{{$asesor->tienda ? ($asesor->tienda->zona ? $asesor->tienda->zona->zona : '') : ''}}</td>
+                                <td>{{$asesor->tienda ? ($asesor->tienda->zona ? $asesor->tienda->zona->representante_zonal_nombre : '') : ''}}</td>
+                                <td>{{$asesor->tienda ? ($asesor->tienda->jefetienda ? $asesor->tienda->jefetienda->nombre : '') : ''}}</td>
                                 <td>{{$asesor->ch}}</td>
                                 <td><input type="hidden" name="id_asesor[]" value="{{$asesor->id}}">
                                     <input type="hidden" name="asesor_mes[]" id="persona_mes" value="{{$asesor->id.$mes_nomina}}">{{$asesor->nombre}}</td>

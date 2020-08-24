@@ -63,6 +63,7 @@
                                         <option value="75% nuevo">75% nuevo</option>
                                         <option value="75%">75%</option>
                                         <option value="50%">50%</option>
+                                        <option value="60%">60%</option>
                                         <option value="prorrateado">prorrateado%</option>
                                         <option value="25%">25%</option>
                                         <option value="sin objetivos">Sin objetivos</option>

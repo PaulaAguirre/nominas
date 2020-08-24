@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\ReplicarNominaDirecta',
         'App\Console\Commands\ReplicarInactivaciones',
         'App\Console\Commands\ReplicarNominaTienda',
+        'App\Console\Commands\ReplicarVacacionesDirecta',
+        'App\Console\Commands\ReplicarVacacionesIndirecta',
 
     ];
 

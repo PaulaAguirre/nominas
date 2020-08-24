@@ -17,7 +17,7 @@ class ConsideracionTiendaController extends Controller
         $id_asesor = $request->get('asesor_id');
         $consideracion_id = $request->get('consideracion_id');
         $mes_nomina=\Config::get('global.mes_tienda');
-        $porcentajes = ['50%', '75%','75% nuevo','prorrateado', '25%', 'sin objetivos'];
+        $porcentajes = ['50%','60%', '75%','75% nuevo','prorrateado', '25%', 'sin objetivos'];
         $consideraciones = Consideracion::all();
 
         if (\Auth::user()->hasRoles(['zonal']))

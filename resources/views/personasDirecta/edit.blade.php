@@ -20,10 +20,22 @@
                     <div class="panel-heading"><span class="text-bold text-info">Editar Datos del Asesor - ID: {{$persona->id_persona}}</span></div>
 
                     <div class="panel-body">
-                        {!!Form::model ($persona, ['method'=>'PATCH', 'route'=>['representantes_directa.update', $persona]])!!}
+                        {!!Form::model ($persona, ['method'=>'PATCH','files'=>true, 'route'=>['representantes_directa.update', $persona]])!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
+
+                        <div class="form-group">
+                            <div class="">
+                            <p>
+                                <img src="{{asset('storage/'.$persona->avatar)}}" width="100px">
+                                <label for="avatar">
+                                    <input type="file" name="avatar">
+                                </label>
+                            </p>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="name">CH</label>

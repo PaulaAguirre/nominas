@@ -5,7 +5,7 @@
             <h3>Representantes Canal Directa (todas las zonas)
 
                     <a href="representantes_directa/create"><button class="btn btn-success">Nuevo Asesor  <i class="fa fa-user-plus" aria-hidden="true"></i></button></a></h3>
-                
+
             @include('personasDirecta.search')
 
         </div>

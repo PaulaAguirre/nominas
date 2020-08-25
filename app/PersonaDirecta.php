@@ -31,6 +31,7 @@ class PersonaDirecta extends Model
         'detalles_consideracion',
         'id_responsable_cambio',
         'oficina_id',
+        'avatar'
 
 
     ];

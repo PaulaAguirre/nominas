@@ -20,10 +20,19 @@
                     <div class="panel-heading text-bold"><span class="text-info">NUEVO ASESOR</span></div>
 
                     <div class="panel-body text-uppercase">
-                        {!!Form::open(array('url'=>'representantes_directa','method'=>'POST','autocomplete'=>'off'))!!}
+                        {!!Form::open(array('url'=>'representantes_directa','method'=>'POST','files'=>true,'autocomplete'=>'off'))!!}
                         {{Form::token()}}
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
+                        <div class="form-group">
+                            <div class="">
+                                <p>
+                                    <label for="avatar">
+                                        <input type="file" name="avatar">
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="name">CH</label>

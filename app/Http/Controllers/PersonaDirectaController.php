@@ -66,6 +66,7 @@ class PersonaDirectaController extends Controller
         'ch' => 'required|unique:personas_directa'
          ]);
 
+
         $id_consideracion = $request->get('id_consideracion');
         $detalles_consideracion = $request->get('detalles_consideracion');
         $id_zona = PersonaDirecta::findOrFail($request->get('rep_jefe_id'))->zona->id;
@@ -77,6 +78,15 @@ class PersonaDirectaController extends Controller
         $asesor->cargo =  'representante';
         $asesor->activo='activo';
         $asesor->estado_cambio = 'aprobado';
+
+        if ($request->hasFile('avatar'))
+        {
+            $this->validate($request, [
+                'avatar' => 'mimes:jpg,jpeg,gif,png'
+            ]);
+            $ruta = $request->file('avatar')->store('public');
+            $asesor->avatar = explode('/',$ruta)[1];
+        }
 
         $asesor->save();
 
@@ -111,6 +121,7 @@ class PersonaDirectaController extends Controller
      */
     public function edit($id)
     {
+
         $persona = PersonaDirecta::findOrFail($id);
         $jefes = PersonaDirecta::where ('cargo', '=', 'representante_jefe')->get();
         $cargos_go = ['go1', 'go2', 'go3'];
@@ -128,6 +139,8 @@ class PersonaDirectaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //$ruta = $request->file('avatar')->store('public');
+        //dd($ruta);
         $asesor = PersonaDirecta::findOrFail($id);
         $id_zona_anterior = $asesor->id_zona;
         $url = $request->get('url');
@@ -156,6 +169,15 @@ class PersonaDirectaController extends Controller
             $asesor->id_responsable_cambio = auth()->user()->id;
         }
 
+        if ($request->hasFile('avatar'))
+        {
+            $this->validate($request, [
+                'avatar' => 'mimes:jpg,jpeg,gif,png'
+            ]);
+            $ruta = $request->file('avatar')->store('public');
+            $asesor->avatar = explode('/',$ruta)[1];
+        }
+
 
         $nomina = NominaDirecta::where('id_persona_directa', $asesor->id_persona)->get()->last();
         if($nomina){
@@ -175,6 +197,8 @@ class PersonaDirectaController extends Controller
                     $nomina->estado_consideracion = 'pendiente';
                 }
             }
+
+
 
             $asesor->update();
             $nomina->update();

@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <div class="">
                             <p>
-                                <img src="{{asset('storage/'.$persona->avatar)}}" width="100px">
+                                <img src="{{asset('storage/'.$persona->avatar)}}" width="150px">
                                 <label for="avatar">
                                     <input type="file" name="avatar">
                                 </label>
@@ -64,13 +64,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
                             <label class="">Nombre del Asesor</label>
                             <input type="text" name="nombre" required value="{{$persona->nombre}}" class="form-control text-uppercase" disabled="disabled">
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
                             <label for="">Representante Jefe</label>
 
                             <select name="rep_jefe_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Representante Jefe">

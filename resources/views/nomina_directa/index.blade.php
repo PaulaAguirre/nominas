@@ -54,7 +54,7 @@
                     <th >Inactivación</th>
                     <th>Estado</th>
                     <th>%OBJ</th>
-                    <th>Horario</th>
+                    <th>perfil</th>
                     @if(auth()->user()->hasRoles(['tigo_people_admin', 'zonal']))
                         <th class="text-center col-lg-1">Opciones</th>
                     @endif
@@ -82,7 +82,7 @@
                                         <td class="text-success">Activo</td>
                                     @endif
                                     <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
-                                    <td>{{$persona->dias}}</td>
+                                    <td><img src="{{asset('storage/'.$persona->avatar)}}"></td>
                                     @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
@@ -141,7 +141,7 @@
                                     <td class="text-success">Activo</td>
                                 @endif
                                 <td>{{$persona->porcentaje ? $persona->porcentaje->porcentaje : '100%'}}</td>
-                                <td>{{$persona->dias}}<br>{{$persona->hora_entrada}} - {{$persona->hora_salida}}</td>
+                                <td><img src="{{asset('storage/'.$persona->personaDirecta->avatar)}}" width="30px"></td>
                                 <td>
                                     <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">
                                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>

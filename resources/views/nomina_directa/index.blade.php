@@ -82,7 +82,7 @@
                                         <td class="text-success">Activo</td>
                                     @endif
                                     <td>{{$persona->porcentaje_objetivo ? $persona->porcentaje_objetivo : '100%'}}</td>
-                                    <td><img src="{{asset('storage/'.$persona->avatar)}}"></td>
+                                    <td><img src="{{asset('storage/'.$persona->personaDirecta->avatar)}}" width="30px"></td>
                                     @if(auth()->user()->hasRoles(['zonal']) and (\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18)))
                                         <td>
                                             <a href="{{URL::action('PersonaDirectaController@edit', $persona->personaDirecta)}}">

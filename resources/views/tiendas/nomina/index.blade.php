@@ -7,7 +7,7 @@
                     <a href="{{url('asesores_tienda/create')}}"><button class="btn btn-success">Nuevo Ingreso</button></a>
                     <a href="{{url('/excel_tienda')}}"><button class="btn btn-github">Exportar excel</button></a>
                 @else
-                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18))
+                    @if(\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(31))
                         <a href="{{url('asesores_tienda/create')}}"><button class="btn btn-facebook">Nuevo Ingreso</button></a>
                     @endif
                     <a href="{{url('/excel_tienda_x_zona')}}"><button class="btn btn-github">Exportar Nómina</button></a>
@@ -81,7 +81,7 @@
                                 <td>{{$asesor->porcentaje_objetivo}}</td>
                                 <td>
                                     @if(auth()->user()->hasRoles(['zonal']))
-                                        @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(18)))
+                                        @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(31)))
                                         <a href="{{URL::action('AsesorTiendaController@edit', $asesor->asesor->id)}}">
                                             <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                         </a>

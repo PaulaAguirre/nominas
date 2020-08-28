@@ -32,7 +32,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_asesor">
-                    <thead class="text-center" style="background-color: #2ab29b">
+                    <thead class="text-center" style="background-color: #2ab18b">
                     <th>ID</th>
                     <th>Mes</th>
                     <th>CH</th>
@@ -57,8 +57,8 @@
                                 <td>{{$asesor->asesor ? $asesor->asesor->nombre : ''}}</td>
                                 <td>{{$asesor->asesor ? $asesor->asesor->cargo_go : ''}}</td>
                                 <td>{{$asesor->asesor->especialista == 'si' ? 'si': 'no'}}</td>
-                                <td class="col-lg-1">{{$asesor->asesor->tienda->zona->zona}} / <br>{{$asesor->asesor->tienda->zona->representante_zonal_nombre}}</td>
-                                <td>{{$asesor->asesor->tienda->tienda_nombre}} / <br>{{$asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe'}}</td>
+                                <td class="col-lg-1">{{$asesor->asesor->tienda ? $asesor->asesor->tienda->zona->zona : ''}} / <br>{{$asesor->asesor->tienda ? $asesor->asesor->tienda->zona->representante_zonal_nombre: ''}}</td>
+                                <td>{{$asesor->asesor->tienda ? $asesor->asesor->tienda->tienda_nombre: ''}} / <br>{{$asesor->asesor->tienda ? ($asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe') : ''}}</td>
                                 <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader->nombre : ''}}</td>
                                 <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->nombre : ''}}</td>
                                 <td><span class="text-info">Cons.:</span> {{$asesor->consideracion ? $asesor->consideracion->nombre : ''}}<br><span class="text-danger">Estado: </span>{{$asesor->estado_consideracion}}</td>
@@ -69,7 +69,7 @@
                                 <td>{{$asesor->porcentaje_objetivo}}</td>
                                 <td>
                                     @if(auth()->user()->hasRoles(['zonal']))
-                                        @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(29)))
+                                        @if((\Carbon\Carbon::today() < (new Carbon\Carbon('first day of this month'))->addDay(0)))
                                         <a href="{{URL::action('AsesorTiendaRPLController@edit', $asesor->asesor->id)}}">
                                             <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Datos del Asesor"><i class="fa fa-pencil"></i></button>
                                         </a>

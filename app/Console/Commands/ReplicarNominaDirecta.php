@@ -69,6 +69,7 @@ class ReplicarNominaDirecta extends Command
             $personaRPL->detalles_consideracion = $persona->personaDirecta->detalles_consideracion;
             $personaRPL->id_responsable_cambio = $persona->personaDirecta->id_responsable_cambio;
             $personaRPL->agrupacion_anterior = $persona->personaDirecta->agrupacion_anterior;
+            $persona->avatar = $persona->personaDirecta->avatar;
 
             $personaRPL->save();
             $this->info($personaRPL ? 'ok' : 'not ok');

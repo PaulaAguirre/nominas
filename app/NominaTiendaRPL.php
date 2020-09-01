@@ -111,7 +111,8 @@ class NominaTiendaRPL extends Model
     {
         if ($id_consideracion)
         {
-            $query->where('id_consideracion', $id_consideracion);
+            $query->where('id_consideracion', $id_consideracion)
+            ;
         }
 
     }

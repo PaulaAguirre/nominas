@@ -1,4 +1,4 @@
-{!! Form::open(array('url'=>'aprobacion_consideraciones_tienda','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
+{!! Form::open(array('url'=>'aprobacion_consideraciones_tienda_rpl','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group form-inline">
 
     <select name="asesor_id" class="form-control selectpicker text-uppercase col-lg-4" id="asesor_id" title="Seleccione Representante" data-live-search="true">

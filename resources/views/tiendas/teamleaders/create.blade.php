@@ -26,13 +26,13 @@
 
                         <input type="hidden" name="url" value="{{URL::previous ()}}">
 
-                        <div class="form-group ">
-                                <label for="name">CH</label>
-                                <input type="number" name="ch"  value="{{old('ch')}}" class="form-control text-uppercase">
+                        <div class="form-group col-md-6">
+                            <label for="name">CH</label>
+                            <input type="number" name="ch"  value="{{old('ch')}}" class="form-control text-uppercase">
                         </div>
 
 
-                        <div class="form-group ">
+                        <div class="form-group col-md-6">
                             <div class="">
                                 <label for="name">Documento</label>
                                 <input type="number" name="documento" value="{{old('documento')}}" class="form-control text-uppercase">
@@ -48,11 +48,24 @@
                             <label> Asesor Experto
                                 <input type="checkbox" name="asesor_experto" value="si">
                             </label>
-                            <br>
-                            <label> RAC Retención
-                                <input type="checkbox" name="rac_retencion" value="si">
-                            </label>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="">TIPO</label>
+                            <select name="tipo" id="tipo" class="selectpicker form-control text-uppercase tipo" title="Seleccione clasificación" required>
+                                @foreach($tipos as $tipo)
+                                    <option value="{{$tipo}}">{{$tipo}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group retencion_call" style="display: none" class="retencion_call" id="retencion_call">
+                            <label for="">Clasificación</label>
+                            <select name="clasificacion_call_id" id="clasificacion_call_id" class="selectpicker form-control text-uppercase " title="Seleccione clasificación">
+                                @foreach($clasificaciones_call as $clasificacion)
+                                    <option value="{{$clasificacion->id}}">{{$clasificacion->nombre}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
 
@@ -67,6 +80,24 @@
             </div>
         </div>
         {!!Form::close()!!}
+
+        @push('scripts')
+            <script>
+                $('.tipo').change(function ()
+                {
+                   if ($(this).val() == 'RAC RETENCION CALL')
+                   {
+                        $('#retencion_call').show();
+                   }
+                   else
+                   {
+                       $('#retencion_call').hide();
+                   }
+
+                });
+
+            </script>
+        @endpush
     </div>
 
 

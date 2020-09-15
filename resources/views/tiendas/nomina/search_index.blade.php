@@ -13,7 +13,7 @@
             @endforeach
         </select>
 
-        <select name="teamleader_id" class="form-control selectpicker text-uppercase col-lg-4" id="id_jefe" title="TeamLeader" data-live-search="true">
+        <select name="teamleader_id" class="form-control selectpicker text-uppercase col-lg-4" id="id_jefe" title="Teamleader - RAC" data-live-search="true">
             @foreach($teamleaders as $teamleader)
                 <option value="{{$teamleader->id}}">CH: {{$teamleader->ch}} - {{$teamleader->nombre}}</option>
             @endforeach

@@ -43,6 +43,7 @@
                         <th class="col-md-1">Asesor Experto</th>
                         <th class="col-md-1">RAC Retención</th>
                         <th>Tiendas</th>
+                        <th>Clasificación<br>Call Retención</th>
                         <th class="text-center">OPC</th>
 
                     </thead>
@@ -58,6 +59,7 @@
                                     {{$tienda->tienda_nombre}} -
                                 @endforeach
                             </td>
+                            <td>{{$teamleader->clasificacion ? $teamleader->clasificacion->nombre : ''}}</td>
                             <td><a href="{{URL::action('TeamleaderController@edit', $teamleader->id)}}">
                                     <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></button></a></td>
                         </tr>

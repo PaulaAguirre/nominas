@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClasificacionRetencion;
 use App\Teamleader;
 use App\Tienda;
 use Illuminate\Http\Request;
@@ -32,7 +33,9 @@ class TeamleaderController extends Controller
      */
     public function create()
     {
-        return view('tiendas.teamleaders.create');
+        $clasificaciones_call = ClasificacionRetencion::all();
+        $tipos = ['TEAM LEADER', 'RAC RETENCION TIENDAS', 'RAC RETENCION CALL'];
+        return view('tiendas.teamleaders.create', ['clasificaciones_call'=>$clasificaciones_call, 'tipos'=>$tipos]);
     }
 
     /**
@@ -54,12 +57,16 @@ class TeamleaderController extends Controller
         $teamleader->ch = $request->get('ch');
         $teamleader->documento = $request->get('documento');
         $teamleader->nombre = strtoupper($request->get('nombre'));
-        $teamleader->rac_retencion = $request->get('rac_retencion');
+        $teamleader->rac_retencion = $request->get('tipo');
         if ($asesor_experto)
         {
             $teamleader->asesor_experto = $asesor_experto;
         }
+        if ($teamleader->rac_retencion == 'RAC RETENCION CALL')
+        {
+            $teamleader->clasificacion_id = $request->get('clasificacion_call_id');
 
+        }
         $teamleader->save();
 
         return redirect('teamleaders');
@@ -85,10 +92,11 @@ class TeamleaderController extends Controller
     public function edit($id)
     {
         $teamleader = Teamleader::findOrFail($id);
-        //$tiendas_del_tl = $teamleader->tiendas->pluck('id')->toArray();
-        //$tiendas = Tienda::whereNotIn('id', $tiendas_del_tl)->orderBy('tienda_nombre')->get();
+        $clasificaciones_call = ClasificacionRetencion::all();
         $tiendas = Tienda::all();
-        return view('tiendas.teamleaders.edit', ['teamleader'=>$teamleader, 'tiendas'=>$tiendas]);
+        $tipos = ['TEAM LEADER', 'RAC RETENCION TIENDAS', 'RAC RETENCION CALL'];
+        return view('tiendas.teamleaders.edit', ['teamleader'=>$teamleader, 'tiendas'=>$tiendas, 'tipos'=>$tipos,
+            'clasificaciones_call'=>$clasificaciones_call]);
     }
 
     /**
@@ -104,17 +112,25 @@ class TeamleaderController extends Controller
         $teamleader = Teamleader::findOrFail($id);
         $teamleader->ch = $request->get('ch');
         $teamleader->documento = $request->get('documento');
-        $teamleader->rac_retencion = $request->get('rac_retencion');
+        $teamleader->rac_retencion = $request->get('tipo');
         if ($asesor_experto)
         {
             $teamleader->asesor_experto = $asesor_experto;
         }
 
+        if ($teamleader->rac_retencion == 'RAC RETENCION CALL')
+        {
+            $teamleader->clasificacion_id = $request->get('clasificacion_call_id');
+        }
+        else
+        {
+            $tiendas_id = $request->get('tienda_id');
+            $teamleader->tiendas()->sync($tiendas_id);
+        }
+
         $teamleader->update();
 
-        $tiendas_id = $request->get('tienda_id');
 
-        $teamleader->tiendas()->sync($tiendas_id);
 
         return redirect('teamleaders');
     }

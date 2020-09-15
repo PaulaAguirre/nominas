@@ -91,4 +91,9 @@ class AsesorTienda extends Model
         return $this->belongsTo('App\TLretencion', 'tl_retencion_call_id');
     }
 
+    public function rac ()
+    {
+        return $this->belongsTo('App\Teamleader', 'rac_retencion_id');
+    }
+
 }

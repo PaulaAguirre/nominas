@@ -23,6 +23,7 @@
                         {!!Form::model ($asesor, ['method'=>'PATCH', 'route'=>['asesores_tienda.update', $asesor]])!!}
                         {{Form::token()}}
 
+                        <input type="hidden" name="url" value="{{URL::previous ()}}">
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="name">CH</label>
@@ -33,7 +34,7 @@
                         <div class="form-group col-md-3">
                             <label for="name">Fecha ingreso</label>
                             <div class="input-group">
-                                <input type="text" value="{{$asesor->fecha_ingreso}}" class="form-control text-uppercase" disabled="disabled">
+                                <input type="text" class="form-control" name="fecha_ingreso" value="{{$asesor->fecha_ingreso}}">
                             </div>
                         </div>
 
@@ -71,10 +72,10 @@
                             <label for="">Cargo GO</label>
                             <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="Cargo" required>
                                 @foreach($cargos as $cargo)
-                                    @if($cargo == $asesor->cargo_go)
-                                        <option selected  value="{{$cargo}}">{{$cargo}}</option>
+                                    @if($asesor->cargo_go == $cargo)
+                                        <option selected value="{{$cargo}}">{{$asesor->cargo}}</option>
                                     @else
-                                        <option value="{{$cargo}}">{{$cargo}}</option>
+                                        <option  value="{{$cargo}}">{{$cargo}}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -85,7 +86,7 @@
                             <select name="agrupacion" class="selectpicker form-control text-uppercase agrupacion" id="agrupacion" data-live-search="true" title="agrupacion" required>
                                 @foreach($agrupaciones as $agrupacion)
                                     @if($asesor->agrupacion == $agrupacion)
-                                        <option selected value="{{$agrupacion}}">{{$agrupacion}}</option>
+                                        <option selected value="{{$agrupacion}}">{{$asesor->agrupacion}}</option>
                                     @else
                                         <option  value="{{$agrupacion}}">{{$agrupacion}}</option>
                                     @endif
@@ -110,56 +111,87 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="">Supervisor</label>
+                                <label for="">Supervisor Guía</label>
                                 <select name="supervisor_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
                                     @foreach($supervisores as $supervisor)
                                         @if($asesor->supervisor_guiatigo_id == $supervisor->id)
-                                            <option selected value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
+                                            <option selected value="{{$supervisor->id}}">{{$asesor->supervisor->nombre}}</option>
                                         @else
-                                            <option  value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
+                                            <option  value="{{$supervisor->id}}">{{$asesor->nombre}}</option>
                                         @endif
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+<!-----------------------------------------Dede acá retencion call------------------------------------------------------------->
                         <div id="retencion_call" style="display: none" class="retencion_call">
                             <div class="form-group col-md-4">
                                 <label for="">RAC Leader</label>
                                 <select name="tl_retencion_call" class="selectpicker form-control text-uppercase " data-live-search="true" title="RAC">
-                                    @foreach($tls_retencion_call as $tl )
-                                        @if($asesor->tl_retencion_call_id == $tl->id)
-                                            <option selected value="{{$tl->id}}">{{$tl->nombre.' - '.$tl->clasificacionRetencion->nombre}}</option>
+                                    @foreach($racs_retencion_call as $rac )
+                                        @if($asesor->rac_retencion_id == $rac->id)
+                                            <option selected value="{{$rac->id}}">{{$rac->nombre}} - {{$rac->clasificacion ? $rac->clasificacion->nombre : ''}}</option>
                                         @else
-                                            <option  value="{{$tl->id}}">{{$tl->nombre.' - '.$tl->clasificacionRetencion->nombre}}</option>
+                                            <option  value="{{$rac->id}}">{{$rac->nombre}} - {{$rac->clasificacion ? $rac->clasificacion->nombre : ''}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Supervisor RET PAIS</label>
+                                <select name="supervisor_retencion_call_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
+                                    @foreach($supervisores_retencion as $supervisor)
+                                        @if($asesor->supervisor_retencion_id == $supervisor->id)
+                                            <option  selected value="{{$supervisor->id}}">{{$supervisor->nombre}}->{{$supervisor->clasificacion}}</option>
+                                        @else
+                                            <option  value="{{$supervisor->id}}">{{$supervisor->nombre}}->{{$supervisor->clasificacion}}</option>
                                         @endif
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
+
+
+<!-----------------------------------------Dede acá retencion Tiendas------------------------------------------------------------->
                         <div id="retencion_tiendas" style="display: none" class="retencion_tiendas">
                             <div class="form-group col-md-4">
-                                <label for="">RAC Leader</label>
-                                <select name="tls_retencion_tiendas" class="selectpicker form-control text-uppercase"
-                                        data-size="8" data-live-search="true" title="RAC Leader">
-                                    @foreach($tls_retencion_tiendas as $tl )
-                                        @foreach($tl->tiendas as $tienda)
-                                            @if($asesor->id_tienda == $tienda->id)
-                                                <option selected value="{{$tl->id}}-{{$tienda->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
+                                <label for="">Team Leader</label>
+                                <select name="tienda_teamleader_id_ret" class="selectpicker form-control text-uppercase " data-size="8" data-live-search="true" title="Team Leader">
+                                    @foreach($tiendas as $tienda )
+                                        @foreach($tienda->teamleaders as $teamleader)
+                                            @if($asesor->id_teamleader == $teamleader->id)
+                                                <option selected value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
                                             @else
-                                                <option  value="{{$tl->id}}-{{$tienda->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
+                                                <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
                                             @endif
                                         @endforeach
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="">Supervisor RET</label>
-                                <select name="supervisor_retencion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
+                                <label for="">RAC Retención</label>
+                                <select name="tls_retencion_tiendas" class="selectpicker form-control text-uppercase"
+                                        data-size="8" data-live-search="true" title="RAC">
+                                    @foreach($tls_retencion_tiendas as $tl )
+                                        @foreach($tl->tiendas as $tienda)
+                                            @if($asesor->rac_retencion_id == $tl->id)
+                                                <option selected value="{{$tl->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
+                                            @else
+                                                <option value="{{$tl->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">Supervisor RET PAIS</label>
+                                <select name="supervisor_retencion_tienda_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
                                     @foreach($supervisores_retencion as $supervisor)
-                                        @if($asesor->supervisor_guiatigo_id == $supervisor->id)
-                                            <option selected value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
+                                        @if($asesor->supervisor_retencion_id == $supervisor->id)
+                                            <option  selected value="{{$supervisor->id}}">{{$supervisor->nombre}}->{{$supervisor->clasificacion}}</option>
                                         @else
-                                            <option  value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
+                                            <option  value="{{$supervisor->id}}">{{$supervisor->nombre}}->{{$supervisor->clasificacion}}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -172,11 +204,13 @@
                             <button class="btn btn-primary" type="submit">Guardar</button>
                             <button class="btn btn-danger" type="reset">Cancelar</button>
                         </div>
+
                     </div>
                 </div>
+            </div>
         </div>
-        {!!Form::close()!!}
     </div>
+    {!!Form::close()!!}
 
 
     @push('scripts')
@@ -189,27 +223,27 @@
                     autoclose: true
                 });
 
-                if($('.agrupacion').val() == 'RETENCION CALL')
-                {
-                    $('#asesor').hide();
-                    $('#retencion_call').show();
-                    $('#retencion_tiendas').hide();;
-                }
-                else if($('.agrupacion').val() == 'ASESOR')
+
+                if($('.agrupacion').val() == 'ASESOR')
                 {
                     $('#asesor').show();
                     $('#retencion_call').hide();
                     $('#retencion_tiendas').hide();
                 }
-                else if($('.agrupacion').val() == 'RETENCION TIENDA')
+                else if ($('.agrupacion').val() == 'RETENCION CALL')
+                {
+                    $('#asesor').hide();
+                    $('#retencion_call').show();
+                    $('#retencion_tiendas').hide();
+
+                }
+                else if ($('.agrupacion').val() == 'RETENCION TIENDAS')
                 {
                     $('#asesor').hide();
                     $('#retencion_call').hide();
                     $('#retencion_tiendas').show();
                 }
             })
-
-
 
             $('.agrupacion').change(function ()
             {
@@ -226,7 +260,7 @@
                     $('#retencion_tiendas').hide();
 
                 }
-                else if ($(this).val() == 'RETENCION TIENDA')
+                else if ($(this).val() == 'RETENCION TIENDAS')
                 {
                     $('#asesor').hide();
                     $('#retencion_call').hide();

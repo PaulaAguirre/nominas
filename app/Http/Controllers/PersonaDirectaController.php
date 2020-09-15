@@ -63,7 +63,7 @@ class PersonaDirectaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'ch' => 'required|unique:personas_directa'
+        'ch' => 'required|unique:personas_directa',
          ]);
 
 
@@ -82,7 +82,9 @@ class PersonaDirectaController extends Controller
         if ($request->hasFile('avatar'))
         {
             $this->validate($request, [
-                'avatar' => 'mimes:jpg,jpeg,gif,png'
+                'avatar' => ['mimes:jpg,jpeg,gif,png',
+                    'max:1024']
+
             ]);
             $ruta = $request->file('avatar')->store('public');
             $asesor->avatar = explode('/',$ruta)[1];
@@ -141,6 +143,7 @@ class PersonaDirectaController extends Controller
     {
         //$ruta = $request->file('avatar')->store('public');
         //dd($ruta);
+
         $asesor = PersonaDirecta::findOrFail($id);
         $id_zona_anterior = $asesor->id_zona;
         $url = $request->get('url');
@@ -172,7 +175,9 @@ class PersonaDirectaController extends Controller
         if ($request->hasFile('avatar'))
         {
             $this->validate($request, [
-                'avatar' => 'mimes:jpg,jpeg,gif,png'
+                'avatar' => 'mimes:jpg,jpeg,gif,png|max:2000'
+               // 'avatar' => 'max:2000'
+
             ]);
             $ruta = $request->file('avatar')->store('public');
             $asesor->avatar = explode('/',$ruta)[1];

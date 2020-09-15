@@ -40,23 +40,39 @@
                                 <input type="checkbox"  name="asesor_experto" value="si">
                             @endif
                         </label>
-                        <label> RAC Retención <br>
-                            @if($teamleader->rac_retencion == 'si')
-                                <input type="checkbox" checked name="rac_retencion" value="si">
-                            @else
-                                <input type="checkbox"  name="rac_retencion" value="si">
-                            @endif
-                        </label>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="">TIPO</label>
+                        <select name="tipo" id="tipo" class="selectpicker form-control text-uppercase tipo"  title="Seleccione clasificación" required>
+                            @foreach($tipos as $tipo)
+                                @if($tipo == $teamleader->rac_retencion)
+                                    <option selected value="{{$tipo}}">{{$teamleader->rac_retencion}}</option>
+                                @else
+                                    <option  value="{{$tipo}}">{{$tipo}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
 
+                    <div class="form-group retencion_call col-lg-6" style="display: none" class="retencion_call" id="retencion_call">
+                        <label for="">Clasificación</label>
+                        <select name="clasificacion_call_id" id="clasificacion_call_id" class="selectpicker form-control text-uppercase " title="Seleccione clasificación">
+                            @foreach($clasificaciones_call as $clasificacion)
+                                @if($teamleader->clasificacion_id == $clasificacion->id)
+                                    <option selected value="{{$clasificacion->id}}">{{$teamleader->clasificacion->nombre}}</option>
+                                @else
+                                    <option  value="{{$clasificacion->id}}">{{$clasificacion->nombre}}</option>
+                                @endif
+
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
             </div>
         </div>
 
-
-
-    <div class="row text-uppercase">
+    <div class="row text-uppercase tiendas" id="tiendas" style="display: none">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_persona">
@@ -77,15 +93,56 @@
                         </tr>
                     @endforeach
                 </table>
-                <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">
-                    <div class="form-group">
-                        <input name="_token" value="{{csrf_token()}}" type="hidden">
-                        <button class="btn btn-primary" type="submit">Guardar</button>
-                        <button id="btn_cancelar" class="btn btn-danger" type="reset">Cancelar</button>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
+    <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12 text-center" id="guardar">
+        <div class="form-group">
+            <input name="_token" value="{{csrf_token()}}" type="hidden">
+            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button id="btn_cancelar" class="btn btn-danger" type="reset">Cancelar</button>
+        </div>
+    </div>
+
+
+    @push('scripts')
+        <script>
+
+            $(document).ready(function () {
+                if($('.tipo').val() == 'RAC RETENCION CALL' )
+                {
+                    $('#retencion_call').show();
+                    $('#tiendas').hide();
+                }
+                else
+                {
+                    $('#tiendas').show();
+                    $('#retencion_call').hide();
+                }
+            });
+
+                $('.tipo').change(function ()
+                {
+                    if ($(this).val() == 'RAC RETENCION CALL')
+                    {
+                        $('#retencion_call').show();
+                        $('#tiendas').hide();
+
+                    }
+                    else
+                    {
+                        $('#tiendas').show();
+                        $('#retencion_call').hide();
+                    }
+
+                });
+
+
+
+
+
+        </script>
+    @endpush
 
 @endsection

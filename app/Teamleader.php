@@ -14,6 +14,11 @@ class Teamleader extends Model
         return $this->belongsToMany('App\Tienda');
     }
 
+    public function clasificacion()
+    {
+        return $this->belongsTo('App\ClasificacionRetencion', 'clasificacion_id');
+    }
+
     public function scopeTl($query, $teamleader_id)
     {
         if($teamleader_id)

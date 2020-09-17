@@ -104,7 +104,7 @@ class AsesorTiendaController extends Controller
         {
             //$supervisor_retencion = SupervisorRetencion::where('clasificacion', '=', 'CALL CENTER')->get()->first();
             $asesor->especialista = 'si';
-            $asesor->id_tienda = 83;
+            $asesor->id_tienda = 101;
             $asesor->agrupacion = 'RETENCION CALL';
             $asesor->rac_retencion_id  = $request->get('tl_retencion_call');
             $asesor->supervisor_retencion_id = $request->get('supervisor_retencion_call_id');
@@ -203,7 +203,7 @@ class AsesorTiendaController extends Controller
         {
             //$supervisor_retencion = SupervisorRetencion::where('clasificacion', '=', 'CALL CENTER')->get()->first();
             $asesor->especialista = 'si';
-            $asesor->id_tienda = 83;
+            $asesor->id_tienda = 101;
             $asesor->agrupacion = 'RETENCION CALL';
             $asesor->rac_retencion_id  = $request->get('tl_retencion_call');
             $asesor->supervisor_retencion_id = $request->get('supervisor_retencion_call_id');

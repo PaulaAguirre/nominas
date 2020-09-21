@@ -46,7 +46,7 @@
                     <th>Mes</th>
                     <th>CH</th>
                     <th>Asesor</th>
-                    <th>Cargo</th>
+                    <th>Cargo /<br>Retención</th>
 
                     <th>Zona / <br>Rep Zonal</th>
                     <th>Tienda / Jefe Tienda </th>
@@ -64,7 +64,7 @@
                                 <td>{{$asesor->mes}}</td>
                                 <td>{{$asesor->asesor ?  $asesor->asesor->ch : ''}}</td>
                                 <td>{{$asesor->asesor ? $asesor->asesor->nombre : ''}}</td>
-                                <td>{{$asesor->asesor ? $asesor->asesor->cargo_go : ''}}</td>
+                                <td>{{$asesor->asesor ? $asesor->asesor->cargo_go : ''}} /<br>{{$asesor->asesor->agrupacion}}</td>
 
                                 <td class="col-lg-1">{{$asesor->asesor->tienda ? $asesor->asesor->tienda->zona->zona : ''}} / <br>{{$asesor->asesor->tienda ? $asesor->asesor->tienda->zona->representante_zonal_nombre : ''}}</td>
                                 <td>{{$asesor->asesor->tienda ? $asesor->asesor->tienda->tienda_nombre : ''}} / <br>{{$asesor->asesor->tienda ? ($asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : 'Sin Jefe') : ''}}</td>

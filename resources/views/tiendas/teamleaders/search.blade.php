@@ -4,7 +4,7 @@
 
         <select name="teamleader_id" class="form-control selectpicker text-uppercase col-md-offset-0" id="id_persona" title="Seleccione Teamleader" data-live-search="true">
             @foreach($teamleaders as $teamleader)
-                <option value="{{$teamleader->id}}">{{$teamleader->nombre}}</option>
+                <option value="{{$teamleader->id}}">{{$teamleader->nombre}} -> {{$teamleader->rac_retencion}}</option>
             @endforeach
         </select>
 

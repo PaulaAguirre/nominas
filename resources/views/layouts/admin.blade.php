@@ -325,6 +325,13 @@
 <script  src="{{asset('datetimepicker/js/bootstrap-datetimepicker.js')}}" charset="UTF-8"></script>
 <script  src="{{asset('datetimepicker/js/locales/bootstrap-datetimepicker.es.js')}}" charset="UTF-8"></script>
 
+<!-- FullCallendar -->
+<link href="{{asset('fullcalendar/core/main.css')}}" rel="stylesheet" >
+<link href="{{asset('fullcalendar/daygrid/main.css')}}" rel="stylesheet" >
+
+<script src="{{asset('fullcalendar/core/main.js')}}"></script>
+<script src="{{asset('fullcalendar/daygrid/main.js')}}"></script>
+
 
 </body>
 </html>

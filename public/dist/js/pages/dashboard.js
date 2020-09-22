@@ -119,7 +119,7 @@ $(function () {
   });
 
   //The Calender
-  $("#calendar").datepicker();
+  $("#fullcalendar").datepicker();
 
   //SLIMSCROLL FOR CHAT WIDGET
   $('#chat-box').slimScroll({

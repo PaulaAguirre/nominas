@@ -697,7 +697,7 @@
 					this.picker.addClass('datepicker-orient-left');
 					left -= offset.left - visualPadding;
 				} else if (left + calendarWidth > windowWidth) {
-					// the calendar passes the widow right edge. Align it to component right side
+					// the fullcalendar passes the widow right edge. Align it to component right side
 					this.picker.addClass('datepicker-orient-right');
 					left += width - calendarWidth;
 				} else {
@@ -712,7 +712,7 @@
 			}
 
 			// auto y orientation is best-situation: top or bottom, no fudging,
-			// decision based on which shows more of the calendar
+			// decision based on which shows more of the fullcalendar
 			var yorient = this.o.orientation.y,
 				top_overflow;
 			if (yorient === 'auto'){

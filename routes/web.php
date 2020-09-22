@@ -277,6 +277,9 @@ Route::group (['middleware'=>'auth'], function () {
     /**CIRCUITOS*/
     Route::resource('circuitos', 'CircuitoController');
 
+    /**calendario*/
+    Route::resource('calendario', 'CalendarioController');
+
 
 });
 

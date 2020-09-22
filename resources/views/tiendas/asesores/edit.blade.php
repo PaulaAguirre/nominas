@@ -174,13 +174,11 @@
                                 <select name="tls_retencion_tiendas" class="selectpicker form-control text-uppercase"
                                         data-size="8" data-live-search="true" title="RAC">
                                     @foreach($tls_retencion_tiendas as $tl )
-                                        @foreach($tl->tiendas as $tienda)
-                                            @if($asesor->rac_retencion_id == $tl->id)
-                                                <option selected value="{{$tl->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
+                                        @if($asesor->rac_retencion_id == $tl->id)
+                                                <option selected value="{{$tl->id}}">{{$tl->nombre}}</option>
                                             @else
-                                                <option value="{{$tl->id}}">{{$tienda->tienda_nombre}} - {{$tl->nombre}}</option>
+                                                <option value="{{$tl->id}}">{{$tl->nombre}}</option>
                                             @endif
-                                        @endforeach
                                     @endforeach
                                 </select>
                             </div>

@@ -222,6 +222,7 @@ class AsesorTiendaController extends Controller
             $asesor->agrupacion = 'RETENCION TIENDAS';
             $asesor->rac_retencion_id = $request->get('tls_retencion_tiendas');
             $asesor->supervisor_retencion_id = $request->get('supervisor_retencion_tienda_id');
+            $asesor->supervisor_guiatigo_id = NULL;
 
         }
 

@@ -173,7 +173,7 @@ class AsesorTiendaController extends Controller
         $supervisores = SupervisorGuiaTigo::where('tipo_supervisor', '=', 'supervisor guia tigo')->get();
         $agrupaciones = ['ASESOR', 'RETENCION CALL', 'RETENCION TIENDAS'];
         $racs_retencion_call = Teamleader::where('rac_retencion', '=', 'RAC RETENCION CALL')->get();
-        $tls_retencion_tiendas = Teamleader::where('rac_retencion', '=', 'RAC RETENCION TIENDAS')->get();
+        $tls_retencion_tiendas = Teamleader::all();
         $supervisores_retencion = SupervisorRetencion::all();
         return view('tiendas.asesores.edit', ['tiendas'=>$tiendas, 'cargos'=>$cargos, 'asesor'=>$asesor,
             'supervisores'=>$supervisores, 'agrupaciones'=>$agrupaciones, 'supervisores_retencion'=>$supervisores_retencion,

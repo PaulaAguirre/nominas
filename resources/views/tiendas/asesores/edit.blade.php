@@ -73,7 +73,7 @@
                             <select name="cargo_go" class="selectpicker form-control text-uppercase " data-live-search="true" title="Cargo" required>
                                 @foreach($cargos as $cargo)
                                     @if($asesor->cargo_go == $cargo)
-                                        <option selected value="{{$cargo}}">{{$asesor->cargo}}</option>
+                                        <option selected value="{{$cargo}}">{{$cargo}}</option>
                                     @else
                                         <option  value="{{$cargo}}">{{$cargo}}</option>
                                     @endif

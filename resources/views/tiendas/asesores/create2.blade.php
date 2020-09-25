@@ -93,7 +93,7 @@
                         <div id="asesor" style="display: none" class="asesor">
                             <div class="form-group col-md-4">
                                 <label for="">Team Leader</label>
-                                <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-size="8" data-live-search="true" title="Team Leader">
+                                <select name="tienda_teamleader_id" id="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-size="8" data-live-search="true" title="Team Leader">
                                     @foreach($tiendas as $tienda )
                                         @foreach($tienda->teamleaders as $teamleader)
                                             <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
@@ -215,6 +215,7 @@
                     $('#asesor').show();
                     $('#retencion_call').hide();
                     $('#retencion_tiendas').hide();
+
                 }
                 else if ($(this).val() == 'RETENCION CALL')
                 {

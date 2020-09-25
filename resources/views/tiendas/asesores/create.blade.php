@@ -93,7 +93,7 @@
                         <div id="asesor" style="display: none" class="asesor">
                             <div class="form-group col-md-4">
                                 <label for="">Team Leader</label>
-                                <select name="tienda_teamleader_id" class="selectpicker form-control text-uppercase " data-size="8" data-live-search="true" title="Team Leader">
+                                <select name="tienda_teamleader_id" id="tienda_teamleader_id" class="selectpicker form-control text-uppercase tienda_teamleader_id" data-size="8" data-live-search="true" title="Team Leader">
                                     @foreach($tiendas as $tienda )
                                         @foreach($tienda->teamleaders as $teamleader)
                                             <option value="{{$tienda->id}}-{{$teamleader->id}}">{{$tienda->tienda_nombre}} - {{$teamleader->nombre}}</option>
@@ -114,7 +114,7 @@
                         <div id="retencion_call" style="display: none" class="retencion_call">
                             <div class="form-group col-md-4">
                                 <label for="">RAC Leader</label>
-                                <select name="tl_retencion_call" class="selectpicker form-control text-uppercase " data-live-search="true" title="RAC">
+                                <select name="tl_retencion_call" id="tl_retencion_call" class="selectpicker form-control text-uppercase " data-live-search="true" title="RAC">
                                     @foreach($tls_retencion_call as $tl )
                                         <option value="{{$tl->id}}">{{$tl->nombre.' - '.$tl->clasificacionRetencion->nombre}}</option>
                                     @endforeach
@@ -124,7 +124,7 @@
                         <div id="retencion_tiendas" style="display: none" class="retencion_tiendas">
                             <div class="form-group col-md-4">
                                 <label for="">RAC Leader</label>
-                                <select name="tls_retencion_tiendas" class="selectpicker form-control text-uppercase"
+                                <select name="tls_retencion_tiendas"  id="tls_retencion_tiendas" class="selectpicker form-control text-uppercase"
                                         data-size="8" data-live-search="true" title="RAC">
                                     @foreach($tls_retencion_tiendas as $tl )
                                         @foreach($tl->tiendas as $tienda)
@@ -136,7 +136,7 @@
 
                             <div class="form-group col-md-4">
                                 <label for="">Supervisor Ret</label>
-                                <select name="supervisor_retencion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
+                                <select name="supervisor_retencion_id" id="supervisor_retencion_id" class="selectpicker form-control text-uppercase " data-live-search="true" title="Seleccione Supervisor">
                                     @foreach($supervisores_retencion as $supervisor)
                                         <option value="{{$supervisor->id}}">{{$supervisor->nombre}}</option>
                                     @endforeach
@@ -194,9 +194,11 @@
                 }
                 else if ($(this).val() == 'RETENCION CALL')
                 {
+
                     $('#asesor').hide();
                     $('#retencion_call').show();
                     $('#retencion_tiendas').hide();
+
 
                 }
                 else if ($(this).val() == 'RETENCION TIENDA')
@@ -204,6 +206,9 @@
                     $('#asesor').hide();
                     $('#retencion_call').hide();
                     $('#retencion_tiendas').show();
+                    $('#tls_retencion_tiendas').prop('required');
+                    $('#supervisor_retencion_id').prop('required');
+
                 }
 
             });

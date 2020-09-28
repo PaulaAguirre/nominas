@@ -59,12 +59,12 @@
                             <td>{{$asesor->especialista}}</td>
                             <td>{{$asesor->staff}}</td>
                             <td>{{$asesor->documento}}</td>
-                            <td>{{$asesor->zonaTienda($asesor->id)->representante_zonal_nombre}}</td>
-                            <td>{{$asesor->tienda->jefetienda ? $asesor->tienda->jefetienda->nombre : 'sin jefe'}}</td>
-                            <td>{{$asesor->teamleader->nombre}}</td>
+                            <td>{{$asesor->tienda ? $asesor->tienda->zona->representante_zonal_nombre : ''}}</td>
+                            <td>{{$asesor->tienda ? ($asesor->tienda->jefetienda ? $asesor->tienda->jefetienda->nombre : 'sin jefe') : ''}}</td>
+                            <td>{{$asesor->teamleader ? $asesor->teamleader->nombre : '' }}</td>
                             <td>{{$asesor->supervisor ? $asesor->supervisor->nombre : ''}}</td>
-                            <td>{{$asesor->zonaTienda($asesor->id)->zona}}</td>
-                            <td>{{$asesor->tienda->tienda_nombre}}</td>
+                            <td>{{$asesor->tienda ? $asesor->tienda->zona->zona : ''}}</td>
+                            <td>{{$asesor->tienda ? $asesor->tienda->tienda_nombre : ''}}</td>
                             <td>{{$asesor->user_red}}</td>
                             <td>{{$asesor->activo}}</td>
                             <td><a href="{{URL::action('AsesorTiendaController@edit', $asesor->id)}}">

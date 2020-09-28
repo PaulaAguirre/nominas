@@ -127,12 +127,12 @@
 
                                     <tr>
                                         <th>Agosto 2020</th>
-                                        <th class="text-center"><a href="{{URL::asset('/excel_directa_mes_anterior')}}">
+                                        <th class="text-center"><a href="{{URL::asset('img/directa/cierre_agosto_2020.xlsx')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
 
                                             </a>
                                         </th>
-                                        <th class="text-center"><a href="{{url('/excel_tienda_rpl')}}">
+                                        <th class="text-center"><a href="{{URL::asset('img/tiendas/cierre_agosto_tiendas_2020.xlsx')}}">
                                                 <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
                                             </a>
                                         </th>
@@ -153,6 +153,30 @@
 
                                     <tr>
                                         <th>setiembre 2020</th>
+                                        <th class="text-center"><a href="{{URL::asset('/excel_directa_mes_anterior')}}">
+                                                <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+
+                                            </a>
+                                        </th>
+                                        <th class="text-center"><a href="{{url('/excel_tienda_rpl')}}">
+                                                <button class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
+
+                                        <th class="text-center"><a href="{{url('/excel_indirecta')}}">
+                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar Nomina"><i class="fa fa-download"></i></button>
+                                            </a>
+                                            <a href="{{url('/pdas_indirecta')}}">
+                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar PDV"><i class="fa fa-download"></i></button>
+                                            </a>
+                                            <a href="{{url('/circuitos_auditores')}}">
+                                                <button class="btn btn-yahoo btn-xs" data-toggle="tooltip" data-placement="top" title="descargar Auditores"><i class="fa fa-download"></i></button>
+                                            </a>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Octubre 2020</th>
                                         <th class="text-center"><a href="{{URL::asset('/excel')}}">
                                                 <button class="btn btn-facebook btn-xs" data-toggle="tooltip" data-placement="top" title="descargar"><i class="fa fa-download"></i></button>
 

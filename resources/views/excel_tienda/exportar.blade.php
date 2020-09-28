@@ -51,7 +51,7 @@
                 <td>{{$asesor->asesor->tienda ? ($asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->nombre : '') : ''}}</td>
                 <td>{{$asesor->asesor->tienda ? ($asesor->asesor->tienda->jefetienda ? $asesor->asesor->tienda->jefetienda->cedula : '') : '' }}</td>
                 <td>{{$asesor->fecha_cambio_jefe}}</td>
-                <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader : ''  }}</td>
+                <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader->ch : ''  }}</td>
                 <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader->nombre : ''}}</td>
                 <td>{{$asesor->asesor->teamleader ? $asesor->asesor->teamleader->documento : ''}}</td>
                 <td>{{$asesor->asesor->supervisor ? $asesor->asesor->supervisor->ch : ''}}</td>

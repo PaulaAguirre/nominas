@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ArchivoDirectaRPL;
+use App\Boton;
 use App\Consideracion;
 use App\NominaDirectaRPL;
 use App\PersonaDirecta;
@@ -34,7 +35,7 @@ class NominaDirectaRPLController extends Controller
     public function index(Request $request)
     {
 
-        //dd(Carbon::now() < Carbon::now()->firstOfMonth()->addDay(14));
+        $habilitar = Boton::findOrFail(1);
         $mes = $request->get('mes');
         if(!$mes)
         {
@@ -65,7 +66,7 @@ class NominaDirectaRPLController extends Controller
 
         }
         return view('directaRPL.nomina.index', ['personas'=>$personas, 'consideraciones'=>$consideraciones,
-            'mes'=>$mes, 'jefes'=>$jefes, 'zonas'=>$zonas]);
+            'mes'=>$mes, 'jefes'=>$jefes, 'zonas'=>$zonas, 'habilitar'=>$habilitar]);
     }
 
 

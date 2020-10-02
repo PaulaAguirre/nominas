@@ -5,6 +5,7 @@
 
 namespace App\Http\Controllers;
 use App\Archivo;
+use App\Boton;
 use App\Consideracion;
 use App\NominaDirecta;
 use App\PersonaDirecta;
@@ -41,7 +42,7 @@ NominaDirectaController extends Controller
      */
     public function index(Request $request)
     {
-
+        $habilitar = Boton::findOrFail(1);
         $zonas = auth()->user()->zonas->pluck('id')->toArray();
 
         $mes = $request->get('mes');
@@ -64,6 +65,7 @@ NominaDirectaController extends Controller
         }
         else
         {
+            //dd($habilitar->habilitar_directa == 'no');
           $zonas_user = Zona::whereIn('id', $zonas)->get();
           $jefes = PersonaDirecta::where('cargo', '=', 'representante_jefe')
               ->whereIn('id_zona', $zonas)->get();
@@ -83,7 +85,8 @@ NominaDirectaController extends Controller
 
         return view('nomina_directa.index', ['personas' => $personas,
             'zonas' =>$zonas, 'zonas_user'=>$zonas_user, 'jefes'=>$jefes,
-            'fecha_inicio'=>$fecha_inicio, 'fecha_fin'=>$fecha_fin, 'today'=>$today, 'mes_en_curso'=>$mes_en_curso]);
+            'fecha_inicio'=>$fecha_inicio, 'fecha_fin'=>$fecha_fin, 'today'=>$today, 'mes_en_curso'=>$mes_en_curso,
+            'habilitar'=>$habilitar]);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Boton;
 use App\Consideracion;
 use App\NominaTiendaRPL;
 use App\Teamleader;
@@ -22,6 +23,7 @@ class NominaTiendaRPLController extends Controller
      */
     public function index(Request $request)
     {
+        $habilitar = Boton::findOrFail(1);
         $zona_id = $request->get('zona_id');
         $activo = $request->get('activo');
         $tienda_id = $request->get('tienda_id');
@@ -58,7 +60,8 @@ class NominaTiendaRPLController extends Controller
         }
 
         return view('TiendaRPL.nomina.index', ['mes_nomina'=>$mes_nomina, 'asesores'=>$asesores,
-            'consideraciones'=>$consideraciones, 'zonas_tienda'=>$zonas_tienda, 'tiendas'=>$tiendas, 'teamleaders'=>$teamleaders]);
+            'consideraciones'=>$consideraciones, 'zonas_tienda'=>$zonas_tienda, 'tiendas'=>$tiendas,
+            'teamleaders'=>$teamleaders, 'habilitar'=>$habilitar]);
 
     }
 

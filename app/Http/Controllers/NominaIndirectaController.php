@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Boton;
 use App\ClasificacionImpulsadores;
 use App\Consideracion;
 use App\Coordinador;
@@ -32,6 +33,7 @@ class NominaIndirectaController extends Controller
      */
     public function index(Request $request)
     {
+        $habiltar = Boton::findOrFail(1);
         $zona_id = $request->get('zona_id');
         $coordinador_id = $request->get('coordinador_id');
         $activo = $request->get('activo');
@@ -69,7 +71,8 @@ class NominaIndirectaController extends Controller
         }
 
         return \view('indirecta.nomina.index', ['zonas'=>$zonas, 'coordinadores'=>$coordinadores,
-            'consideraciones'=>$consideraciones, 'impulsadores'=>$impulsadores, 'clasificaciones'=>$clasificaciones]);
+            'consideraciones'=>$consideraciones, 'impulsadores'=>$impulsadores, 'clasificaciones'=>$clasificaciones,
+            'habilitar'=>$habiltar]);
 
     }
 
